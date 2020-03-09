@@ -3,6 +3,7 @@
 // sandbox api
 
 #include "ugine/application.h"
+#include "ugine/log.h"
 
 //  entry points
 #include "ugine/entry_point.h"

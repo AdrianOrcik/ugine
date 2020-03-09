@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ugine\core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\ugine\application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -27,10 +24,22 @@
     <ClInclude Include="src\ugine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ugine\application.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\log.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

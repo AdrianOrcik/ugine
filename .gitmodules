@@ -1,0 +1,3 @@
+[submodule "ugine/external_src/spdlog"]
+	path = ugine/external_src/spdlog
+	url = https://github.com/gabime/spdlog
