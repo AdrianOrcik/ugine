@@ -19,6 +19,10 @@
     <ClInclude Include="src\ugine\log.h">
       <Filter>ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\events\application_event.h" />
+    <ClInclude Include="src\ugine\events\event.h" />
+    <ClInclude Include="src\ugine\events\key_event.h" />
+    <ClInclude Include="src\ugine\events\mouse_event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ugine\application.cc">

@@ -11,4 +11,6 @@
 	//#error Ugine only supports Windows!
 
 #endif // UE_PLATFORM_WINDOWS
+
+#define BIT(x)(1<<x)
 #endif // !UE_CORE

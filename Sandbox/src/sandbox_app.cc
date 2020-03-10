@@ -17,5 +17,6 @@ public:
 // called by ugine\entry_point.h
 Ugine::Application* Ugine::CreateApplication() 
 {
+	LOG_TRACE("Sandbox Created!");
 	return new Sandbox();
 }

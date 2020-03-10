@@ -2,6 +2,7 @@
 #define UE_APPLICATION
 
 #include "core.h"
+#include "events/event.h"
 
 namespace Ugine {
 	class UE_API Application
