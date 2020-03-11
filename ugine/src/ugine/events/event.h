@@ -3,20 +3,15 @@
 
 #include "../core.h"
 
-
-#include <string>
-#include <functional>
-
 namespace Ugine
 {
-
 	enum class EventType
 	{
 		NONE = 0,
 		WINDOWS_CLOSE, WINDOWS_RESIZE, WINDOW_FOCUS, WINDOW_LOST_FOCUS, WINDOW_MOVED,
 		APP_TICK, APP_UPDATE, APP_RENDER,
 		KEY_PRESSED, KEY_RELEASED,
-		MOUSE_BUTTON_PRESSED, MOUSE_BUTTON_RELEASED, MOUSE_MOVED, MOUSE_SCROLLED
+		MOUSE_BUTTON_PRESS, MOUSE_BUTTON_RELEASE, MOUSE_MOVE, MOUSE_SCROLL
 	};
 
 	enum EventCategory
@@ -44,7 +39,7 @@ namespace Ugine
 		virtual int GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
-		// TODO: check this type of return value
+		// Definition of inline function
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() &category;

@@ -24,6 +24,9 @@ project "ugine"
 	-- objs which are not linked yet
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "uepch.h"
+	pchsource"ugine/src/uepch.cc"
+
 	-- files to be linked into dll lib
 	files
 	{
@@ -34,7 +37,7 @@ project "ugine"
 	-- external dependencies
 	includedirs
 	{
-		"%{prj.name}/src"
+		"%{prj.name}/src",
 		"%{prj.name}/external_src/spdlog/include"
 	}
 

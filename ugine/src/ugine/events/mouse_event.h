@@ -1,9 +1,7 @@
 #ifndef EVENTS_MOUSE_EVENT
-#define EVENT_MOUSE_EVENT
+#define EVENTS_MOUSE_EVENT
 
 #include "event.h"
-
-#include <sstream>
 
 namespace Ugine
 {
@@ -23,7 +21,7 @@ namespace Ugine
 			return ss.str();
 		}
 		
-		EVENT_CLASS_TYPE(MOUSE_MOVED);
+		EVENT_CLASS_TYPE(MOUSE_MOVE);
 		EVENT_CLASS_CATEGORY(MOUSE | INPUT);
 
 
@@ -47,7 +45,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(MOUSE_SCROLLED);
+		EVENT_CLASS_TYPE(MOUSE_SCROLL);
 		EVENT_CLASS_CATEGORY(MOUSE | INPUT);
 
 	private:
@@ -80,7 +78,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(MOUSE_BUTTON_PRESSED);
+		EVENT_CLASS_TYPE(MOUSE_BUTTON_PRESS);
 	};
 
 	class UE_API MouseButtonReleasedEvent : public MouseButtonEvent
@@ -96,7 +94,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(MOUSE_BUTTON_RELEASED);
+		EVENT_CLASS_TYPE(MOUSE_BUTTON_RELEASE);
 	};
 
 }

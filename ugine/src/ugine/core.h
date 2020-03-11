@@ -1,6 +1,8 @@
 #ifndef UE_CORE
 #define UE_CORE
 
+#include "uepch.h"
+
 #ifdef UE_PLATFORM_WINDOWS
 	#ifdef UE_BUILD_DLL
 		#define UE_API __declspec(dllexport)

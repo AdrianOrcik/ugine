@@ -3,8 +3,6 @@
 
 #include "event.h"
 
-#include <sstream>
-
 namespace Ugine 
 {
 	
@@ -36,7 +34,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KEY_PRESSED);
+		EVENT_CLASS_TYPE(KEY_PRESS);
 
 	private:
 		int repeatCount_;
@@ -55,7 +53,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KEY_RELEASED);
+		EVENT_CLASS_TYPE(KEY_RELEAS);
 
 	};
 }

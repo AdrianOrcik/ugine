@@ -1,8 +1,6 @@
 #ifndef UE_LOG
 #define UE_LOG
 
-#include <memory>
-
 #include "core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"

@@ -3,8 +3,6 @@
 
 #include "event.h"
 
-#include <sstream>
-
 namespace Ugine
 {
 	class UE_API WindowResizeEvent : public Event

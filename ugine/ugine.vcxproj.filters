@@ -4,8 +4,12 @@
     <Filter Include="ugine">
       <UniqueIdentifier>{5D7B7E10-C98F-A6C1-9211-4A21FEE4A2F2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ugine\events">
+      <UniqueIdentifier>{C1300B62-AD93-9A06-5619-D3BC425B6689}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\uepch.h" />
     <ClInclude Include="src\ugine.h" />
     <ClInclude Include="src\ugine\application.h">
       <Filter>ugine</Filter>
@@ -16,15 +20,24 @@
     <ClInclude Include="src\ugine\entry_point.h">
       <Filter>ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\events\application_event.h">
+      <Filter>ugine\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\events\event.h">
+      <Filter>ugine\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\events\key_event.h">
+      <Filter>ugine\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\events\mouse_event.h">
+      <Filter>ugine\events</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\log.h">
       <Filter>ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\events\application_event.h" />
-    <ClInclude Include="src\ugine\events\event.h" />
-    <ClInclude Include="src\ugine\events\key_event.h" />
-    <ClInclude Include="src\ugine\events\mouse_event.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\uepch.cc" />
     <ClCompile Include="src\ugine\application.cc">
       <Filter>ugine</Filter>
     </ClCompile>
