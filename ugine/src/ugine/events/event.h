@@ -1,6 +1,7 @@
 #ifndef EVENTS_EVENT
 #define EVENTS_EVENT
 
+#include "uepch.h"
 #include "../core.h"
 
 namespace Ugine

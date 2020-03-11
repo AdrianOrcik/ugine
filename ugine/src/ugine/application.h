@@ -3,6 +3,7 @@
 
 #include "core.h"
 #include "events/event.h"
+#include "window.h"
 
 namespace Ugine {
 	class UE_API Application
@@ -12,6 +13,10 @@ namespace Ugine {
 		virtual ~Application();
 
 		void Run();
+
+	private:
+		std::unique_ptr<Window> window_;
+		bool isRunning_ = true;
 	};
 
 	// used by client sandbox

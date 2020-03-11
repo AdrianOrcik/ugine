@@ -35,6 +35,8 @@
     <ClInclude Include="src\ugine\log.h">
       <Filter>ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\windows\windows_window.h" />
+    <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\uepch.cc" />
@@ -44,5 +46,6 @@
     <ClCompile Include="src\ugine\log.cc">
       <Filter>ugine</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\windows\windows_window.cc" />
   </ItemGroup>
 </Project>
