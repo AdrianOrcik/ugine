@@ -13,6 +13,12 @@ workspace "ugine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include dir relative to root folder 
+IncludeDir = {}
+IncludeDir["GLFW"] = "ugine/external_src/glfw/include"
+
+include "ugine/external_src/glfw"
+
 -- engine solution
 project "ugine"
 	location "ugine"
@@ -38,7 +44,14 @@ project "ugine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/external_src/spdlog/include"
+		"%{prj.name}/external_src/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
