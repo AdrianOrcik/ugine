@@ -21,7 +21,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(WINDOWS_RESIZE);
+		EVENT_CLASS_TYPE(WINDOW_RESIZE);
 		EVENT_CLASS_CATEGORY(APPLICATION);
 
 	private:
@@ -33,7 +33,7 @@ namespace Ugine
 	public:
 		WindowCloseEvent() {}
 
-		EVENT_CLASS_TYPE(WINDOWS_CLOSE);
+		EVENT_CLASS_TYPE(WINDOW_CLOSE);
 		EVENT_CLASS_CATEGORY(APPLICATION);
 	};
 

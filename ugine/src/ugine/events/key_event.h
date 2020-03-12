@@ -34,7 +34,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KEY_PRESS);
+		EVENT_CLASS_TYPE(KEY_PRESSED);
 
 	private:
 		int repeatCount_;
@@ -53,7 +53,7 @@ namespace Ugine
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KEY_RELEAS);
+		EVENT_CLASS_TYPE(KEY_RELEASED);
 
 	};
 }

@@ -8,6 +8,7 @@ namespace Ugine
 
 	class UE_API MouseMovedEvent : public Event
 	{
+	public:
 		MouseMovedEvent(float x, float y)
 			:mouseX_(x), mouseY_(y) {}
 
