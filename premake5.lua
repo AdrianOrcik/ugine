@@ -74,10 +74,12 @@ project "ugine"
 
 	filter "configurations:Debug"
 		defines "UE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "UE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 project "sandbox"
@@ -119,8 +121,10 @@ project "sandbox"
 
 	filter "configurations:Debug"
 		defines "UE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "UE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"

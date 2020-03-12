@@ -58,7 +58,6 @@ namespace Ugine
 		// set glfw callbacks
 		glfwSetWindowCloseCallback(window_, [](GLFWwindow* window)
 		{
-			// todo: check user pointer
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			WindowCloseEvent event;
 			data.EventCallback(event);
@@ -143,7 +142,6 @@ namespace Ugine
 
 	void WindowsWindow::SetVSync(bool isEnabled)
 	{
-		// todo: check swap buffers
 		if (isEnabled)
 			glfwSwapInterval(1);
 		else

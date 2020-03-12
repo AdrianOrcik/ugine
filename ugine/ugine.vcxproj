@@ -64,6 +64,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -89,6 +90,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -103,6 +105,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\platform\windows\windows_window.h" />
     <ClInclude Include="src\uepch.h" />
     <ClInclude Include="src\ugine.h" />
     <ClInclude Include="src\ugine\application.h" />
@@ -112,8 +115,9 @@
     <ClInclude Include="src\ugine\events\event.h" />
     <ClInclude Include="src\ugine\events\key_event.h" />
     <ClInclude Include="src\ugine\events\mouse_event.h" />
+    <ClInclude Include="src\ugine\layer.h" />
+    <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
-    <ClInclude Include="src\platform\windows\windows_window.h" />
     <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +126,8 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ugine\application.cc" />
+    <ClCompile Include="src\ugine\layer.cpp" />
+    <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\log.cc" />
   </ItemGroup>
   <ItemGroup>

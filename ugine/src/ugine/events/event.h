@@ -35,6 +35,9 @@ namespace Ugine
 	{
 		friend class EventDispatcher;
 	public:
+
+		bool Handled = false;
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
@@ -45,9 +48,6 @@ namespace Ugine
 		{
 			return GetCategoryFlags() &category;
 		}
-
-	protected:
-		bool handled_ = false;
 	};
 
 	class EventDispatcher
@@ -66,7 +66,7 @@ namespace Ugine
 		{
 			if (event_.GetEventType() == T::GetStaticType())
 			{
-				event_.handled_ = func(*(T*)&event_);
+				event_.Handled = func(*(T*)&event_);
 				return false;
 			}
 		}

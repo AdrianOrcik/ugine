@@ -22,7 +22,7 @@ namespace Ugine
 	class UE_API Window
 	{
 	public:
-		// todo: check functions
+		// todo: !check functions
 		using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() {}

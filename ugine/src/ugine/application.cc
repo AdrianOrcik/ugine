@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 
 namespace Ugine {
-	// todo: check std::bind function
+	// todo: !check std::bind function
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application::Application()
@@ -19,6 +19,16 @@ namespace Ugine {
 	{
 	
 	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		layerStack_.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		layerStack_.PushOverlay(layer);
+	}
 	
 	void Application::OnEvent(Event& e)
 	{
@@ -26,6 +36,13 @@ namespace Ugine {
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
 		CORE_LOG_TRACE("{0}", e);
+
+		for (auto it = layerStack_.end(); it != layerStack_.begin();)
+		{
+			(*--it)->OnEvent(e);
+			if (e.Handled)
+				break;
+		}
 	}
 
 	void Application::Run()
@@ -34,6 +51,10 @@ namespace Ugine {
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : layerStack_)
+				layer->OnUpdate();
+
 			window_->OnUpdate();
 		}
 	}
