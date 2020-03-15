@@ -13,13 +13,14 @@
 #endif // UE_PLATFORM_WINDOWS
 
 #ifndef UE_ENABLE_ASSERTS
+	#define UE_ERROR
+	#define UE_CORE_ERROR
 	#define UE_ASSERT(x, ...) { if(!(x)) { UE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define UE_CORE_ASSERT(x, ...) { if(!(x)) { UE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 	#define UE_ASSERT(x, ...)
 	#define UE_CORE_ASSERT(x, ...)
 #endif // !UE_ENABLE_ASSERTS
-
 
 
 #define BIT(x)(1<<x)
