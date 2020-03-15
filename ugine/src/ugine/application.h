@@ -10,7 +10,7 @@
 #include "ugine/layer_stack.h"
 
 namespace Ugine {
-	class UE_API Application
+	extern "C" class UE_API Application
 	{
 	public:
 		Application();

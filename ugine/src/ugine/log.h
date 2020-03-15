@@ -7,9 +7,11 @@
 
 namespace Ugine
 {
-	class UE_API Log
+	extern "C" class UE_API Log
 	{
 	public:
+		Log();
+		~Log();
 		static void Init();
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return core_logger_; }

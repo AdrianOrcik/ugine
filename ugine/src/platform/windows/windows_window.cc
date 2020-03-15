@@ -8,6 +8,8 @@
 #include "ugine/events/mouse_event.h"
 #include "ugine/events/key_event.h"
 
+#include <glad/glad.h>
+
 namespace Ugine
 {
 	static bool sGLFWInitialized = false;
@@ -52,6 +54,10 @@ namespace Ugine
 
 		window_ = glfwCreateWindow((int)properties.width, (int)properties.height, data_.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window_);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		UE_CORE_ASSERT(status, "Glad is not Init!");
+
 		glfwSetWindowUserPointer(window_, &data_);
 		SetVSync(true);
 

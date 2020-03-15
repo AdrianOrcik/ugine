@@ -5,6 +5,7 @@ namespace Ugine
 {
 	LayerStack::LayerStack()
 	{
+		layers_ = std::vector<Layer*>();
 		layerInsert_ = layers_.begin();
 	}
 
@@ -12,6 +13,8 @@ namespace Ugine
 	{
 		for (Layer* layer : layers_)
 			delete layer;
+
+		delete &layers_;
 	}
 
 	void LayerStack::PushLayer(Layer* layer)

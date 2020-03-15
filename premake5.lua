@@ -16,8 +16,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include dir relative to root folder 
 IncludeDir = {}
 IncludeDir["GLFW"] = "ugine/external_src/glfw/include"
+IncludeDir["Glad"] = "ugine/external_src/glad/include"
 
 include "ugine/external_src/glfw"
+include "ugine/external_src/glad"
 
 -- engine solution
 project "ugine"
@@ -45,12 +47,14 @@ project "ugine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/external_src/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"glad",
 		"opengl32.lib"
 	}
 
@@ -63,7 +67,8 @@ project "ugine"
 		defines
 		{
 			"UE_PLATFORM_WINDOWS",
-			"UE_BUILD_DLL"
+			"UE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		-- define what happend after build

@@ -69,6 +69,7 @@ namespace Ugine
 				event_.Handled = func(*(T*)&event_);
 				return false;
 			}
+			return true;
 		}
 
 	private:

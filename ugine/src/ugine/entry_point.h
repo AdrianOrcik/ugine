@@ -12,7 +12,7 @@
 		Ugine::Log::Init();
 		auto app = Ugine::CreateApplication();
 		app->Run();
-		delete app;
+		//delete app;
 	}
 
 #endif // UE_PLATFORM_WINDOWS

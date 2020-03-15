@@ -8,7 +8,7 @@
 
 namespace Ugine 
 {	
-	class UE_API LayerStack
+	extern "C" class UE_API LayerStack
 	{
 	public:
 		LayerStack();

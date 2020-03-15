@@ -3,7 +3,7 @@
 #include "application.h"
 #include "log.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Ugine {
 	// todo: !check std::bind function
@@ -17,7 +17,8 @@ namespace Ugine {
 
 	Application::~Application()
 	{
-	
+		delete &layerStack_;
+		delete &window_;
 	}
 
 	void Application::PushLayer(Layer* layer)

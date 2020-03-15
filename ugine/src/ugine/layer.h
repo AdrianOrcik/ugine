@@ -7,11 +7,11 @@
 namespace Ugine
 {
 
-	class UE_API Layer
+	extern "C" class UE_API Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");
-		virtual ~Layer();
+		~Layer();
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
