@@ -56,6 +56,22 @@ namespace Ugine
 		EVENT_CLASS_TYPE(KEY_RELEASED);
 
 	};
+
+	class UE_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keyCode)
+			:KeyEvent(keyCode) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << keyCode_;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KEY_TYPED);
+	};
 }
 
 #endif // !UE_EVENTS_KEY_EVENT

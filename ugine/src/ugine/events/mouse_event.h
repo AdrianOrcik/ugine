@@ -13,7 +13,7 @@ namespace Ugine
 			:mouseX_(x), mouseY_(y) {}
 
 		inline float GetX() { return mouseX_; }
-		inline float GetY() { return mouseX_; }
+		inline float GetY() { return mouseY_; }
 
 		std::string ToString() const override
 		{
@@ -24,7 +24,6 @@ namespace Ugine
 		
 		EVENT_CLASS_TYPE(MOUSE_MOVE);
 		EVENT_CLASS_CATEGORY(MOUSE | INPUT);
-
 
 	private:
 		float mouseX_, mouseY_;
