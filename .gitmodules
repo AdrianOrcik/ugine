@@ -4,3 +4,6 @@
 [submodule "ugine/external_src/glfw"]
 	path = ugine/external_src/glfw
 	url = https://github.com/AdrianOrcik/glfw
+[submodule "ugine/external_src/imgui"]
+	path = ugine/external_src/imgui
+	url = https://github.com/AdrianOrcik/imgui.git

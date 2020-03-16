@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glad", "ugine\external_src\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "ugine\external_src\glfw\glfw.vcxproj", "{9563977C-819A-980D-2A87-7E10169D140F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgui", "ugine\external_src\imgui\imgui.vcxproj", "{0098A80F-6CAC-D0C0-352E-7420A101CDF1}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandbox", "sandbox\sandbox.vcxproj", "{145A6C82-8039-EB1D-8951-76F4F5AF517F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ugine", "ugine\ugine.vcxproj", "{5D7B7E10-C98F-A6C1-9211-4A21FEE4A2F2}"
@@ -23,6 +25,10 @@ Global
 		{9563977C-819A-980D-2A87-7E10169D140F}.Debug|x64.Build.0 = Debug|x64
 		{9563977C-819A-980D-2A87-7E10169D140F}.Release|x64.ActiveCfg = Release|x64
 		{9563977C-819A-980D-2A87-7E10169D140F}.Release|x64.Build.0 = Release|x64
+		{0098A80F-6CAC-D0C0-352E-7420A101CDF1}.Debug|x64.ActiveCfg = Debug|x64
+		{0098A80F-6CAC-D0C0-352E-7420A101CDF1}.Debug|x64.Build.0 = Debug|x64
+		{0098A80F-6CAC-D0C0-352E-7420A101CDF1}.Release|x64.ActiveCfg = Release|x64
+		{0098A80F-6CAC-D0C0-352E-7420A101CDF1}.Release|x64.Build.0 = Release|x64
 		{145A6C82-8039-EB1D-8951-76F4F5AF517F}.Debug|x64.ActiveCfg = Debug|x64
 		{145A6C82-8039-EB1D-8951-76F4F5AF517F}.Debug|x64.Build.0 = Debug|x64
 		{145A6C82-8039-EB1D-8951-76F4F5AF517F}.Release|x64.ActiveCfg = Release|x64

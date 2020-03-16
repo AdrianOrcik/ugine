@@ -21,6 +21,10 @@ namespace Ugine {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+		
+		inline Window& GetWindow() { return *window_; }
+		inline static Application& Get() { return *sInstance_; }
+
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
@@ -28,6 +32,8 @@ namespace Ugine {
 		std::unique_ptr<Window> window_;
 		bool isRunning_ = true;
 		LayerStack layerStack_;
+
+		static Application* sInstance_;
 	};
 
 	// used by client sandbox

@@ -31,5 +31,4 @@ namespace Ugine {
 		client_logger_ = spdlog::stderr_color_mt("APP");
 		client_logger_->set_level(spdlog::level::trace);
 	}
-
 }

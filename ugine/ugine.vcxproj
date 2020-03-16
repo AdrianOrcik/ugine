@@ -60,7 +60,7 @@
       <PrecompiledHeaderFile>uepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>UE_PLATFORM_WINDOWS;UE_BUILD_DLL;GLFW_INCLUDE_NONE;UE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;external_src\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -83,7 +83,7 @@
       <PrecompiledHeaderFile>uepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>UE_PLATFORM_WINDOWS;UE_BUILD_DLL;GLFW_INCLUDE_NONE;UE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;external_src\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -105,6 +105,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\platform\opengl\imgui_opengl_renderer.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
     <ClInclude Include="src\uepch.h" />
     <ClInclude Include="src\ugine.h" />
@@ -115,17 +116,20 @@
     <ClInclude Include="src\ugine\events\event.h" />
     <ClInclude Include="src\ugine\events\key_event.h" />
     <ClInclude Include="src\ugine\events\mouse_event.h" />
+    <ClInclude Include="src\ugine\imgui\imgui_layout.h" />
     <ClInclude Include="src\ugine\layer.h" />
     <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
     <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\opengl\imgui_opengl_renderer.cc" />
     <ClCompile Include="src\platform\windows\windows_window.cc" />
     <ClCompile Include="src\uepch.cc">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ugine\application.cc" />
+    <ClCompile Include="src\ugine\imgui\imgui_layout.cc" />
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\log.cc" />
@@ -136,6 +140,9 @@
     </ProjectReference>
     <ProjectReference Include="external_src\glad\glad.vcxproj">
       <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="external_src\imgui\imgui.vcxproj">
+      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

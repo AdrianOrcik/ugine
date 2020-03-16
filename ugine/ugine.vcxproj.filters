@@ -4,6 +4,9 @@
     <Filter Include="platform">
       <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform\opengl">
+      <UniqueIdentifier>{9E4DBFD0-0AD9-2C95-13EA-AF897FF48895}</UniqueIdentifier>
+    </Filter>
     <Filter Include="platform\windows">
       <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
     </Filter>
@@ -13,8 +16,14 @@
     <Filter Include="ugine\events">
       <UniqueIdentifier>{C1300B62-AD93-9A06-5619-D3BC425B6689}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ugine\imgui">
+      <UniqueIdentifier>{87DA629E-F38F-DB93-7C84-D56AE838D297}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\platform\opengl\imgui_opengl_renderer.h">
+      <Filter>platform\opengl</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\windows\windows_window.h">
       <Filter>platform\windows</Filter>
     </ClInclude>
@@ -41,6 +50,9 @@
     <ClInclude Include="src\ugine\events\mouse_event.h">
       <Filter>ugine\events</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\imgui\imgui_layout.h">
+      <Filter>ugine\imgui</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\layer.h">
       <Filter>ugine</Filter>
     </ClInclude>
@@ -55,6 +67,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\opengl\imgui_opengl_renderer.cc">
+      <Filter>platform\opengl</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\windows\windows_window.cc">
       <Filter>platform\windows</Filter>
     </ClCompile>
@@ -62,10 +77,13 @@
     <ClCompile Include="src\ugine\application.cc">
       <Filter>ugine</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\imgui\imgui_layout.cc">
+      <Filter>ugine\imgui</Filter>
+    </ClCompile>
     <ClCompile Include="src\ugine\log.cc">
       <Filter>ugine</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
+    <ClCompile Include="src\ugine\layer.cpp" />
   </ItemGroup>
 </Project>

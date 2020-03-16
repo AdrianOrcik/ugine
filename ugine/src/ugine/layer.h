@@ -24,7 +24,6 @@ namespace Ugine
 		std::string debugName_;
 
 	};
-
 }
 
 #endif // !UE_LAYER

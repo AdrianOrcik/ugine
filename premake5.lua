@@ -17,9 +17,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "ugine/external_src/glfw/include"
 IncludeDir["Glad"] = "ugine/external_src/glad/include"
+IncludeDir["ImGui"] = "ugine/external_src/imgui"
 
 include "ugine/external_src/glfw"
 include "ugine/external_src/glad"
+include "ugine/external_src/imgui"
 
 -- engine solution
 project "ugine"
@@ -48,13 +50,15 @@ project "ugine"
 		"%{prj.name}/src",
 		"%{prj.name}/external_src/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"glad",
+		"imgui",
 		"opengl32.lib"
 	}
 

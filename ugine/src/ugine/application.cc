@@ -9,8 +9,13 @@ namespace Ugine {
 	// todo: !check std::bind function
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
+	Application* Application::sInstance_ = nullptr;
+
 	Application::Application()
 	{
+		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
+		sInstance_ = this;
+
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
@@ -24,11 +29,13 @@ namespace Ugine {
 	void Application::PushLayer(Layer* layer)
 	{
 		layerStack_.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
 		layerStack_.PushOverlay(layer);
+		layer->OnAttach();
 	}
 	
 	void Application::OnEvent(Event& e)

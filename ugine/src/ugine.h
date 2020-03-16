@@ -7,6 +7,8 @@
 #include "ugine/layer.h"
 #include "ugine/layer_stack.h"
 
+#include "ugine/imgui/imgui_layout.h"
+
 //  entry points
 #include "ugine/entry_point.h"
 // !entry points
