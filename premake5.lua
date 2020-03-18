@@ -19,6 +19,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "ugine/external_src/glfw/include"
 IncludeDir["Glad"] = "ugine/external_src/glad/include"
 IncludeDir["ImGui"] = "ugine/external_src/imgui"
+IncludeDir["glm"] = "ugine/external_src/glm"
 
 include "ugine/external_src/glfw"
 include "ugine/external_src/glad"
@@ -43,7 +44,9 @@ project "ugine"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cc"
+		"%{prj.name}/src/**.cc",
+		"%{prj.name}/external_src/glm/glm/**.hpp",
+		"%{prj.name}/external_src/glm/glm/**.inl",
 	}
 
 	-- external dependencies
@@ -53,7 +56,8 @@ project "ugine"
 		"%{prj.name}/external_src/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -107,11 +111,12 @@ project "sandbox"
 		"%{prj.name}/src/**.cc"
 	}
 
-	-- linked on ugine solution
+	-- linked on ugine solution 
 	includedirs
 	{
 		"ugine/external_src/spdlog/include",
-		"ugine/src"
+		"ugine/src",
+		"%{IncludeDir.glm}"
 	}
     
 	-- linked all ugine solition

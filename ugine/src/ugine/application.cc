@@ -34,7 +34,7 @@ namespace Ugine {
 		layer->OnAttach();
 	}
 
-	void Application::PushOverlay(Layer* layer)
+	void Application::PushOverlay(Layer* layer) 
 	{
 		layerStack_.PushOverlay(layer);
 		layer->OnAttach();

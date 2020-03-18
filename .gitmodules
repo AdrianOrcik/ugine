@@ -7,3 +7,6 @@
 [submodule "ugine/external_src/imgui"]
 	path = ugine/external_src/imgui
 	url = https://github.com/AdrianOrcik/imgui.git
+[submodule "ugine/external_src/glm"]
+	path = ugine/external_src/glm
+	url = https://github.com/AdrianOrcik/glm
