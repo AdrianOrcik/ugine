@@ -5,6 +5,8 @@
 
 #include <glad/glad.h>
 
+#include "input.h"
+
 namespace Ugine {
 	// todo: !check std::bind function
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -62,6 +64,9 @@ namespace Ugine {
 
 			for (Layer* layer : layerStack_)
 				layer->OnUpdate();
+
+			auto[x, y] = Input::GetMousePosition();
+			CORE_LOG_TRACE("{0},{1}", x,y);
 
 			window_->OnUpdate();
 		}

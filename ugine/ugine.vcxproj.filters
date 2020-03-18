@@ -65,6 +65,8 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\input.h" />
+    <ClInclude Include="src\platform\windows\windows_input.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\opengl\imgui_opengl_renderer.cc">
@@ -85,5 +87,6 @@
     </ClCompile>
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\layer.cpp" />
+    <ClCompile Include="src\platform\windows\windows_input.cc" />
   </ItemGroup>
 </Project>

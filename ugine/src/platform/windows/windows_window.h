@@ -22,6 +22,8 @@ namespace Ugine
 		void SetVSync(bool isEnabled) override;
 		bool IsVSync() const override;
 
+		inline virtual void* GetNativeWindow() const { return window_; }
+
 	private:
 		virtual void Init(const WindowProperties& properties);
 		virtual void ShutDown();

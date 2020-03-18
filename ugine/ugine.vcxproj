@@ -104,6 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\platform\opengl\imgui_opengl_renderer.h" />
+    <ClInclude Include="src\platform\windows\windows_input.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
     <ClInclude Include="src\uepch.h" />
     <ClInclude Include="src\ugine.h" />
@@ -115,6 +116,7 @@
     <ClInclude Include="src\ugine\events\key_event.h" />
     <ClInclude Include="src\ugine\events\mouse_event.h" />
     <ClInclude Include="src\ugine\imgui\imgui_layout.h" />
+    <ClInclude Include="src\ugine\input.h" />
     <ClInclude Include="src\ugine\layer.h" />
     <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
@@ -122,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\opengl\imgui_opengl_renderer.cc" />
+    <ClCompile Include="src\platform\windows\windows_input.cc" />
     <ClCompile Include="src\platform\windows\windows_window.cc" />
     <ClCompile Include="src\uepch.cc">
       <PrecompiledHeader>Create</PrecompiledHeader>
