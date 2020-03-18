@@ -1,15 +1,16 @@
 
 -- TODO: make build system with CMake
+-- TODO: study build systems
 
 workspace "ugine"
 	architecture "x64"
+	startproject "sandbox"
 
 	configurations
 	{
 		"Debug",
 		"Release",
 	}
-
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -28,6 +29,7 @@ project "ugine"
 	location "ugine"
 	kind "SharedLib" --dll
 	language "C++"
+	staticruntime "off"
 
 	-- build directory of engine dll
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
@@ -64,7 +66,6 @@ project "ugine"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On" 
 		systemversion "latest"
 
 		-- define solution macros
@@ -83,18 +84,19 @@ project "ugine"
 
 	filter "configurations:Debug"
 		defines "UE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "UE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "sandbox"
 	location "sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -120,7 +122,6 @@ project "sandbox"
 	
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -130,10 +131,10 @@ project "sandbox"
 
 	filter "configurations:Debug"
 		defines "UE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "UE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"

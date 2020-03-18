@@ -12,7 +12,11 @@
 
 #endif // UE_PLATFORM_WINDOWS
 
-#ifndef UE_ENABLE_ASSERTS
+#ifdef UE_DEBUG
+#define UE_ENABLE_ASSERTS
+#endif
+
+#ifdef UE_ENABLE_ASSERTS
 	#define UE_ERROR
 	#define UE_CORE_ERROR
 	#define UE_ASSERT(x, ...) { if(!(x)) { UE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
