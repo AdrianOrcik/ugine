@@ -65,8 +65,10 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\input.h" />
     <ClInclude Include="src\platform\windows\windows_input.h" />
+    <ClInclude Include="src\ugine\input\input.h" />
+    <ClInclude Include="src\ugine\input\key_codes.h" />
+    <ClInclude Include="src\ugine\input\mouse_button_codes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\opengl\imgui_opengl_renderer.cc">

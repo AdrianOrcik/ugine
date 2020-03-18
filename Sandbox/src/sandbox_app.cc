@@ -11,11 +11,14 @@ public:
 	void OnUpdate() override
 	{
 		//LOG_INFO("ExampleLayer::Update");
+
+		if (Ugine::Input::IsKeyPressed(INPUT_KEY_SPACE))
+			LOG_TRACE("Pressed");
 	}
 
 	void OnEvent(Ugine::Event& event) override
 	{
-		LOG_INFO("{0}", event);
+		//LOG_INFO("{0}", event);
 	}
 };
 

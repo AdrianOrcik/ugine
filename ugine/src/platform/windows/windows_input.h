@@ -1,7 +1,7 @@
 #ifndef WINDOWS_INPUT
 #define WINDOWS_INPUT
 
-#include "ugine/input.h"
+#include "ugine/input/input.h"
 
 namespace Ugine
 {

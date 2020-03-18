@@ -9,6 +9,10 @@
 
 #include "ugine/imgui/imgui_layout.h"
 
+#include "ugine/input/input.h"
+#include "ugine/input/key_codes.h"
+#include "ugine/input/mouse_button_codes.h"
+
 //  entry points
 #include "ugine/entry_point.h"
 // !entry points

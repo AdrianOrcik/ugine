@@ -1,7 +1,7 @@
-#ifndef UE_INPUT
-#define UE_INPUT
+#ifndef INPUT_INPUT
+#define INPUT_INPUT
 
-#include "core.h"
+#include "ugine/core.h"
 #include <iostream>
 #include <utility>
 
