@@ -9,6 +9,8 @@
 #include "ugine/layer.h"
 #include "ugine/layer_stack.h"
 
+#include "ugine/imgui/imgui_layout.h"
+
 namespace Ugine {
 	extern "C" class UE_API Application
 	{
@@ -30,6 +32,7 @@ namespace Ugine {
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> window_;
+		ImGuiLayer* imGuiLayer_;
 		bool isRunning_ = true;
 		LayerStack layerStack_;
 

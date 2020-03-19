@@ -7,7 +7,7 @@
 
 namespace Ugine
 {
-	extern "C" class UE_API Log
+	class UE_API Log
 	{
 	public:
 		Log();

@@ -5,21 +5,18 @@ namespace Ugine
 {
 	LayerStack::LayerStack()
 	{
-		layers_ = std::vector<Layer*>();
-		layerInsert_ = layers_.begin();
 	}
 
 	LayerStack::~LayerStack()
 	{
 		for (Layer* layer : layers_)
 			delete layer;
-
-		delete &layers_;
 	}
 
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		layerInsert_ = layers_.emplace(layerInsert_, layer);
+		layers_.emplace(layers_.begin() + layerIndex_, layer);
+		layerIndex_++;
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay)
@@ -33,7 +30,7 @@ namespace Ugine
 		if (it != layers_.end())
 		{
 			layers_.erase(it);
-			layerInsert_--;
+			layerIndex_--;
 		}
 	}
 

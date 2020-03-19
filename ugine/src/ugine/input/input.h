@@ -9,7 +9,7 @@ namespace Ugine
 {
 
 	/// Input API provide directly acces on processes into system for user
-	extern "C" class UE_API Input
+	class UE_API Input
 	{
 	public:
 		inline static bool IsKeyPressed(int keyCode) { return sInstance_->IsKeyPressedImpl(keyCode); }

@@ -5,8 +5,6 @@
 
 #include <glad/glad.h>
 
-#include "input/input.h"
-
 namespace Ugine {
 	// todo: !check std::bind function
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -20,6 +18,9 @@ namespace Ugine {
 
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
+		imGuiLayer_ = new ImGuiLayer();
+		PushOverlay(imGuiLayer_);
 	}
 
 	Application::~Application()
@@ -64,6 +65,12 @@ namespace Ugine {
 
 			for (Layer* layer : layerStack_)
 				layer->OnUpdate();
+
+			// application gui render
+			imGuiLayer_->Begin();
+			for (Layer* layer : layerStack_)
+				layer->OnImGuiRender();
+			imGuiLayer_->End();
 
 			window_->OnUpdate();
 		}

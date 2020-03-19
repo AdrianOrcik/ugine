@@ -8,7 +8,7 @@
 
 namespace Ugine 
 {	
-	extern "C" class UE_API LayerStack
+	class UE_API LayerStack
 	{
 	public:
 		LayerStack();
@@ -24,7 +24,7 @@ namespace Ugine
 
 	private:
 		std::vector<Layer*> layers_;
-		std::vector<Layer*>::iterator layerInsert_;
+		unsigned int layerIndex_ = 0;
 	};
 
 }
