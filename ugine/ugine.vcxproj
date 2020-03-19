@@ -71,6 +71,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Debug-windows-x86_64\ugine\ugine.lib</ImportLibrary>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Debug-windows-x86_64\ugine\ugine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\ugine\ugine.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\ugine\ugine.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
@@ -494,6 +495,7 @@
     <ClInclude Include="src\ugine\events\event.h" />
     <ClInclude Include="src\ugine\events\key_event.h" />
     <ClInclude Include="src\ugine\events\mouse_event.h" />
+    <ClInclude Include="src\ugine\imgui\imgui_build.h" />
     <ClInclude Include="src\ugine\imgui\imgui_layout.h" />
     <ClInclude Include="src\ugine\input\input.h" />
     <ClInclude Include="src\ugine\input\key_codes.h" />

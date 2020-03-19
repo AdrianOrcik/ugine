@@ -1,5 +1,5 @@
-#ifndef UE
-#define UE
+#pragma once
+
 // sandbox api
 
 #include "ugine/application.h"
@@ -17,4 +17,3 @@
 #include "ugine/entry_point.h"
 // !entry points
 
-#endif // !UE

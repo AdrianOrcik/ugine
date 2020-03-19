@@ -1,5 +1,4 @@
-#ifndef UE_PCH
-#define UE_PCH
+#pragma once
 
 #include <iostream>
 #include <memory>
@@ -17,4 +16,3 @@
 #include <Windows.h>
 #endif 
 
-#endif // !UE_PCH

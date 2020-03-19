@@ -1,5 +1,4 @@
-#ifndef UE_CORE
-#define UE_CORE
+#pragma once
 
 #ifdef UE_PLATFORM_WINDOWS
 	#ifdef UE_BUILD_DLL
@@ -31,4 +30,4 @@
 
 //todo: check how to work binds
 #define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
-#endif // !UE_CORE
+

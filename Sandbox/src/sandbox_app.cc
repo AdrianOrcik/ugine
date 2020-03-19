@@ -30,7 +30,7 @@ public:
 	Sandbox()
 	{	
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Ugine::ImGuiLayer());
+		//PushOverlay(new Ugine::ImGuiLayer());
 	}
 
 	~Sandbox()

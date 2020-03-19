@@ -1,5 +1,4 @@
-#ifndef EVENTS_MOUSE_EVENT
-#define EVENTS_MOUSE_EVENT
+#pragma once
 
 #include "event.h"
 
@@ -98,5 +97,3 @@ namespace Ugine
 	};
 
 }
-
-#endif // !EVENTS_MOUSE_EVENT

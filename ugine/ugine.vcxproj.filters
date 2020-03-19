@@ -1242,6 +1242,7 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\imgui\imgui_build.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windows_input.cc">

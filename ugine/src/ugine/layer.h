@@ -1,5 +1,4 @@
-#ifndef UE_LAYER
-#define UE_LAYER
+#pragma once
 
 #include "core.h"
 #include "events/event.h"
@@ -27,4 +26,3 @@ namespace Ugine
 	};
 }
 
-#endif // !UE_LAYER

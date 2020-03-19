@@ -1,5 +1,4 @@
-#ifndef INPUT_KEY_CODES
-#define INPUT_KEY_CODES
+#pragma once
 
 // From glfw3.h
 #define INPUT_KEY_SPACE              32
@@ -125,5 +124,4 @@
 #define INPUT_KEY_RIGHT_SUPER        347
 #define INPUT_KEY_MENU               348 
 
-#endif // !INPUT_KEY_CODES
 

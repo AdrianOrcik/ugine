@@ -1,5 +1,4 @@
-#ifndef EVENTS_KEY_EVENT
-#define EVENTS_KEY_EVENT
+#pragma once
 
 #include "event.h"
 
@@ -73,5 +72,3 @@ namespace Ugine
 		EVENT_CLASS_TYPE(KEY_TYPED);
 	};
 }
-
-#endif // !UE_EVENTS_KEY_EVENT

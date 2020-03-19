@@ -1,5 +1,4 @@
-#ifndef IMGUI_IMGUI_LAYOUT
-#define IMGUI_IMGUI_LAYOUT
+#pragma once
 
 #include "ugine/layer.h"
 
@@ -27,4 +26,3 @@ namespace Ugine
 		float mTime_ = 0.0f;
 	};
 }
-#endif // !IMGUI_IMGGUI_LAYOUT

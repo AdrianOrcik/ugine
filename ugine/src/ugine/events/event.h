@@ -1,5 +1,4 @@
-#ifndef EVENTS_EVENT
-#define EVENTS_EVENT
+#pragma once
 
 #include "uepch.h"
 #include "../core.h"
@@ -82,5 +81,3 @@ namespace Ugine
 		return os << e.ToString();
 	}
 }
-
-#endif // !UE_EVENTS_EVENT

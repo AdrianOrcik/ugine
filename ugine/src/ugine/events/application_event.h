@@ -1,5 +1,4 @@
-#ifndef EVENTS_APPLICATION_EVENT
-#define EVENTS_APPLICATION_EVENT
+#pragma once
 
 #include "event.h"
 
@@ -65,5 +64,3 @@ namespace Ugine
 	};
 
 }
-
-#endif // !EVENTS_APPLICATION_EVENT

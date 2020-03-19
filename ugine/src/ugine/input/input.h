@@ -1,5 +1,4 @@
-#ifndef INPUT_INPUT
-#define INPUT_INPUT
+#pragma once
 
 #include "ugine/core.h"
 #include <iostream>
@@ -30,5 +29,3 @@ namespace Ugine
 	};
 
 }
-
-#endif // !UE_INPUT

@@ -1,5 +1,4 @@
-#ifndef WINDOWS_INPUT
-#define WINDOWS_INPUT
+#pragma once
 
 #include "ugine/input/input.h"
 
@@ -17,5 +16,3 @@ namespace Ugine
 	};
 
 }
-
-#endif // !WINDOWS_INPUT

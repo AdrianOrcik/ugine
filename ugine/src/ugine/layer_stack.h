@@ -1,5 +1,4 @@
-#ifndef UE_LAYER_STACK
-#define UE_LAYER_STACK
+#pragma once
 
 #include "core.h"
 #include "layer.h"
@@ -29,4 +28,3 @@ namespace Ugine
 
 }
 
-#endif // !UE_LAYER_STACK

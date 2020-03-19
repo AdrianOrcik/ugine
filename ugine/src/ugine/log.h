@@ -1,5 +1,4 @@
-#ifndef UE_LOG
-#define UE_LOG
+#pragma once
 
 #include "core.h"
 #include "spdlog/spdlog.h"
@@ -36,4 +35,5 @@ namespace Ugine
 #define LOG_ERROR(...)	::Ugine::Log::GetClientLogger()->error(__VA_ARGS__)
 #define LOG_FATAL(...)	::Ugine::Log::GetClientLogger()->fatal(__VA_ARGS__)
 
-#endif // !UE_LOG
+#pragma once
+

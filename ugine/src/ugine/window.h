@@ -1,5 +1,4 @@
-#ifndef UE_WINDOW
-#define UE_WINDOW
+#pragma once
 
 #include "core.h"
 #include "events/event.h"
@@ -42,5 +41,3 @@ namespace Ugine
 		static Window* Create(const WindowProperties& properties = WindowProperties());
 	};
 }
-
-#endif // !UE_WINDOW

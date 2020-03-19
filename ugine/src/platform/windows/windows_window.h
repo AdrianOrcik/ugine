@@ -1,5 +1,4 @@
-#ifndef PLATFORM_WINDOWS_WINDOW
-#define PLATFORM_WINDOWS_WINDOW
+#pragma once
 
 #include "ugine/window.h"
 #include <GLFW/glfw3.h>
@@ -42,5 +41,3 @@ namespace Ugine
 		WindowData data_;
 	};
 }
-
-#endif // !PLATFORM_WINDOWS_WINDOW

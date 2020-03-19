@@ -1,5 +1,4 @@
-#ifndef UE_APPLICATION
-#define UE_APPLICATION
+#pragma once
 
 #include "core.h"
 #include "events/event.h"
@@ -11,7 +10,8 @@
 
 #include "ugine/imgui/imgui_layout.h"
 
-namespace Ugine {
+namespace Ugine 
+{
 	extern "C" class UE_API Application
 	{
 	public:
@@ -44,4 +44,3 @@ namespace Ugine {
 	Application* CreateApplication();
 }
 
-#endif // !UE_APPLICATION
