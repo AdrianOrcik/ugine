@@ -71,7 +71,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Debug-windows-x86_64\ugine\ugine.lib</ImportLibrary>
-      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Debug-windows-x86_64\ugine\ugine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\ugine\ugine.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\ugine\ugine.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>

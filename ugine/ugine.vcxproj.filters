@@ -1218,6 +1218,9 @@
     <ClInclude Include="src\ugine\events\mouse_event.h">
       <Filter>src\ugine\events</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\imgui\imgui_build.h">
+      <Filter>src\ugine\imgui</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\imgui\imgui_layout.h">
       <Filter>src\ugine\imgui</Filter>
     </ClInclude>
@@ -1242,7 +1245,6 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\imgui\imgui_build.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windows_input.cc">
@@ -1257,6 +1259,9 @@
     <ClCompile Include="src\ugine\application.cc">
       <Filter>src\ugine</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\imgui\imgui_build.cc">
+      <Filter>src\ugine\imgui</Filter>
+    </ClCompile>
     <ClCompile Include="src\ugine\imgui\imgui_layout.cc">
       <Filter>src\ugine\imgui</Filter>
     </ClCompile>
@@ -1265,6 +1270,5 @@
     </ClCompile>
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
-    <ClCompile Include="src\ugine\imgui\imgui_build.cc" />
   </ItemGroup>
 </Project>
