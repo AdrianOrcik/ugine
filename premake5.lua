@@ -28,9 +28,10 @@ include "ugine/external_src/imgui"
 -- engine solution
 project "ugine"
 	location "ugine"
-	kind "SharedLib" --dll
+	kind "staticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	-- build directory of engine dll
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
@@ -47,6 +48,11 @@ project "ugine"
 		"%{prj.name}/src/**.cc",
 		"%{prj.name}/external_src/glm/glm/**.hpp",
 		"%{prj.name}/external_src/glm/glm/**.inl",
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	-- external dependencies
@@ -80,27 +86,22 @@ project "ugine"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		-- define what happend after build
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
 	filter "configurations:Debug"
 		defines "UE_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "UE_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "sandbox"
 	location "sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -137,9 +138,9 @@ project "sandbox"
 	filter "configurations:Debug"
 		defines "UE_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "UE_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

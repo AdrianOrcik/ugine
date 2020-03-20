@@ -6,8 +6,6 @@
 #include <glad/glad.h>
 
 namespace Ugine {
-	// todo: !check std::bind function
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application* Application::sInstance_ = nullptr;
 
@@ -17,7 +15,7 @@ namespace Ugine {
 		sInstance_ = this;
 
 		window_ = std::unique_ptr<Window>(Window::Create());
-		window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		window_->SetEventCallback(BIND_EVENT_APPLICATION(OnEvent));
 
 		imGuiLayer_ = new ImGuiLayer();
 		PushOverlay(imGuiLayer_);
@@ -44,7 +42,7 @@ namespace Ugine {
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_APPLICATION(OnWindowClose));
 
 		CORE_LOG_TRACE("{0}", e);
 

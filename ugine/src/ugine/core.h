@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef UE_PLATFORM_WINDOWS
+#if UE_DLL
 	#ifdef UE_BUILD_DLL
 		#define UE_API __declspec(dllexport)
 	#else
 		#define UE_API __declspec(dllimport)
 	#endif // UE_BUILD_DLL
+#else
+	#define UE_API 
+#endif
 #else
 	//#error Ugine only supports Windows!
 
@@ -28,6 +32,5 @@
 
 #define BIT(x)(1<<x)
 
-//todo: check how to work binds
 #define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
-
+#define BIND_EVENT_APPLICATION(x) std::bind(&Application::x, this, std::placeholders::_1)

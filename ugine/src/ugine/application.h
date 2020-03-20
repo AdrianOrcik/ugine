@@ -12,6 +12,7 @@
 
 namespace Ugine 
 {
+
 	extern "C" class UE_API Application
 	{
 	public:
