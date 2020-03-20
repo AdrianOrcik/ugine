@@ -8,7 +8,7 @@
 #include "ugine/events/mouse_event.h"
 #include "ugine/events/key_event.h"
 
-#include <glad/glad.h>
+#include "platform/opengl/opengl_context.h"
 
 namespace Ugine
 {
@@ -52,12 +52,14 @@ namespace Ugine
 			sGLFWInitialized = true;
 		}
 
+		// window definition 
 		window_ = glfwCreateWindow((int)properties.width, (int)properties.height, data_.title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(window_);
 
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		UE_CORE_ASSERT(status, "Glad is not Init!");
+		// renderer definition
+		context_ = new OpenGLContext(window_);
+		context_->Init();
 
+		// user window handler definition
 		glfwSetWindowUserPointer(window_, &data_);
 		SetVSync(true);
 

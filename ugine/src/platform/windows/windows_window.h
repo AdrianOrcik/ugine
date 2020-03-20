@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ugine/window.h"
+#include "ugine/renderer/graphic_context.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Ugine
@@ -28,6 +30,7 @@ namespace Ugine
 		virtual void ShutDown();
 
 		GLFWwindow* window_;
+		GraphicContext* context_;
 
 		struct WindowData
 		{

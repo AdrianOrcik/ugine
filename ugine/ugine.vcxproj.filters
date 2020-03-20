@@ -1245,6 +1245,8 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_context.h" />
+    <ClInclude Include="src\ugine\renderer\graphic_context.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windows_input.cc">
@@ -1270,5 +1272,6 @@
     </ClCompile>
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
+    <ClCompile Include="src\platform\opengl\opengl_context.cc" />
   </ItemGroup>
 </Project>
