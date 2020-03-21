@@ -1248,6 +1248,9 @@
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\shader.h" />
+    <ClInclude Include="src\ugine\renderer\buffer.h" />
+    <ClInclude Include="src\ugine\renderer\renderer.h" />
+    <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windows_input.cc">
@@ -1275,5 +1278,8 @@
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\platform\opengl\opengl_context.cc" />
     <ClCompile Include="src\ugine\renderer\shader.cc" />
+    <ClCompile Include="src\ugine\renderer\buffer.cc" />
+    <ClCompile Include="src\ugine\renderer\renderer.cc" />
+    <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
   </ItemGroup>
 </Project>

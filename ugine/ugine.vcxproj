@@ -477,6 +477,7 @@
     <ClInclude Include="external_src\glm\glm\vec3.hpp" />
     <ClInclude Include="external_src\glm\glm\vec4.hpp" />
     <ClInclude Include="external_src\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
     <ClInclude Include="src\platform\windows\windows_input.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
@@ -497,11 +498,14 @@
     <ClInclude Include="src\ugine\layer.h" />
     <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
+    <ClInclude Include="src\ugine\renderer\buffer.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
+    <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\shader.h" />
     <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
     <ClCompile Include="src\platform\opengl\opengl_context.cc" />
     <ClCompile Include="src\platform\windows\windows_input.cc" />
     <ClCompile Include="src\platform\windows\windows_window.cc" />
@@ -514,6 +518,8 @@
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\log.cc" />
+    <ClCompile Include="src\ugine\renderer\buffer.cc" />
+    <ClCompile Include="src\ugine\renderer\renderer.cc" />
     <ClCompile Include="src\ugine\renderer\shader.cc" />
   </ItemGroup>
   <ItemGroup>

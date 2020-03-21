@@ -9,7 +9,7 @@
 #include "ugine/layer_stack.h"
 
 #include "ugine/renderer/shader.h"
-
+#include "ugine/renderer/buffer.h"
 #include "ugine/imgui/imgui_layout.h"
 
 namespace Ugine 
@@ -30,8 +30,10 @@ namespace Ugine
 		inline Window& GetWindow() { return *window_; }
 		inline static Application& Get() { return *sInstance_; }
 
-		unsigned int VertexArray_, VertexBuffer_, IndexBuffer_;
+		unsigned int VertexArray_;
 		std::unique_ptr<Shader> Shader_;
+		std::unique_ptr<VertexBuffer> VertexBuffer_;
+		std::unique_ptr<IndexBuffer> IndexBuffer_;
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
