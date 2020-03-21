@@ -28,6 +28,7 @@ namespace Ugine
 		inline Window& GetWindow() { return *window_; }
 		inline static Application& Get() { return *sInstance_; }
 
+		unsigned int VertexArray_, VertexBuffer_, IndexBuffer_;
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
