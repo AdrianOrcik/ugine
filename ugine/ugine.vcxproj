@@ -498,6 +498,7 @@
     <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
+    <ClInclude Include="src\ugine\renderer\shader.h" />
     <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -513,6 +514,7 @@
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\log.cc" />
+    <ClCompile Include="src\ugine\renderer\shader.cc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="external_src\glfw\glfw.vcxproj">
