@@ -479,6 +479,7 @@
     <ClInclude Include="external_src\glm\glm\vector_relational.hpp" />
     <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
+    <ClInclude Include="src\platform\opengl\opengl_vertex_array.h" />
     <ClInclude Include="src\platform\windows\windows_input.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
     <ClInclude Include="src\uepch.h" />
@@ -502,11 +503,13 @@
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\shader.h" />
+    <ClInclude Include="src\ugine\renderer\vertex_array.h" />
     <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
     <ClCompile Include="src\platform\opengl\opengl_context.cc" />
+    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cpp" />
     <ClCompile Include="src\platform\windows\windows_input.cc" />
     <ClCompile Include="src\platform\windows\windows_window.cc" />
     <ClCompile Include="src\uepch.cc">
@@ -521,6 +524,7 @@
     <ClCompile Include="src\ugine\renderer\buffer.cc" />
     <ClCompile Include="src\ugine\renderer\renderer.cc" />
     <ClCompile Include="src\ugine\renderer\shader.cc" />
+    <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="external_src\glfw\glfw.vcxproj">
