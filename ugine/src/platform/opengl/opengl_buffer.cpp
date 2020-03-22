@@ -5,7 +5,6 @@
 
 // vertex buffer
 // -------------
-
 Ugine::OpenGLVertexBuffer::OpenGLVertexBuffer(float * vertices, uint32_t size)
 {
 	glCreateBuffers(1, &rendererID_);
@@ -28,9 +27,10 @@ void Ugine::OpenGLVertexBuffer::Unbind() const
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+
+
 // index buffer
 // ------------
-
 Ugine::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t * indices, uint32_t count)
 	:count_(count)
 {

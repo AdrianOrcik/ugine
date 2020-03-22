@@ -15,9 +15,12 @@ namespace Ugine
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		virtual const BufferLayout & GetLayout() const override { return layout_; }
+		virtual void SetLayout(const BufferLayout & layout) override { layout_ = layout; };
+
 	private: 
 		uint32_t rendererID_;
-
+		BufferLayout layout_;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer
