@@ -77,9 +77,6 @@ namespace Ugine
 	class BufferLayout
 	{
 	public:
-		// todo: initializer_list
-		//		iterator vs const iterator
-
 		BufferLayout(){}
 		BufferLayout(const std::initializer_list<BufferElement>& elements)
 			:elements_(elements)
@@ -90,6 +87,7 @@ namespace Ugine
 		inline uint32_t GetStride() const { return stride_; }
 		inline const std::vector<BufferElement>& GetElements() const { return elements_; }
 
+		// create operators
 		std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
 		std::vector<BufferElement>::iterator end() { return elements_.end(); }
 		std::vector<BufferElement>::const_iterator const begin() const { return elements_.begin(); }
