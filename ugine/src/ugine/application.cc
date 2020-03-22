@@ -20,74 +20,137 @@ namespace Ugine {
 		imGuiLayer_ = new ImGuiLayer();
 		PushOverlay(imGuiLayer_);
 
-		// create vertex buffer
-		VertexArray_.reset(VertexArray::Create());
-
-		float vertices[3 * 7] = {
-			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
-		};
-		
-		// allocate vertex buffer memory
-		std::shared_ptr<VertexBuffer> vertexBuffer;
-		// create vertex buffer obj
-		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-		
-		// create buffer layout
-		BufferLayout layout = 
+		// RENDER TRIANGLE
 		{
-			{ ShaderDataType::Float3, "a_Position"},
-			{ ShaderDataType::Float4, "a_Color" }
-		};
-		
-		// set layout
-		vertexBuffer->SetLayout(layout);
-		// add buffer into vertex array
-		VertexArray_->AddVertexBuffer(vertexBuffer);
+			// create vertex buffer
+			VertexArray_.reset(VertexArray::Create());
 
-		// define indices
-		unsigned int indices[3] = { 0,1,2 };
-		// allocate index buffer
-		std::shared_ptr<IndexBuffer> indexBuffer;
-		// create index buffer object
-		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-		// set index buffer for vertex array
-		VertexArray_->SetIndexBuffer(indexBuffer);
-		
-		std::string vertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
+			float vertices[3 * 7] = {
+				-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+				 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+				 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
+			};
 
-			out vec3 v_Position;
-			out vec4 v_Color;
+			// allocate vertex buffer memory
+			std::shared_ptr<VertexBuffer> vertexBuffer;
+			// create vertex buffer obj
+			vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
-			void main()
+			// create buffer layout
+			BufferLayout layout =
 			{
-				v_Position = a_Position;
-				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);	
-			}
-		)";
+				{ ShaderDataType::Float3, "a_Position"},
+				{ ShaderDataType::Float4, "a_Color" }
+			};
 
-		std::string fragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
+			// set layout
+			vertexBuffer->SetLayout(layout);
+			// add buffer into vertex array
+			VertexArray_->AddVertexBuffer(vertexBuffer);
 
-			in vec3 v_Position;
-			in vec4 v_Color;
+			// define indices
+			unsigned int indices[3] = { 0,1,2 };
+			// allocate index buffer
+			std::shared_ptr<IndexBuffer> indexBuffer;
+			// create index buffer object
+			indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+			// set index buffer for vertex array
+			VertexArray_->SetIndexBuffer(indexBuffer);
+
+			std::string vertexSrc = R"(
+					#version 330 core
 			
-			void main()
+					layout(location = 0) in vec3 a_Position;
+					layout(location = 1) in vec4 a_Color;
+
+					out vec3 v_Position;
+					out vec4 v_Color;
+
+					void main()
+					{
+						v_Position = a_Position;
+						v_Color = a_Color;
+						gl_Position = vec4(a_Position, 1.0);	
+					}
+				)";
+
+			std::string fragmentSrc = R"(
+					#version 330 core
+			
+					layout(location = 0) out vec4 color;
+
+					in vec3 v_Position;
+					in vec4 v_Color;
+			
+					void main()
+					{
+						color = vec4(v_Position * 0.5 + 0.5, 1.0);
+						color = v_Color;
+					}
+				)";
+
+			Shader_.reset(new Shader(vertexSrc, fragmentSrc));
+		}
+
+		// RENDER BLUE SQUARE
+		{
+			SquareVA_.reset(VertexArray::Create());
+
+			float squareVertices[3 * 4] = {
+				-0.75f, -0.75f, 0.0f,
+				 0.75f, -0.75f, 0.0f,
+				 0.75f,  0.75f, 0.0f,
+				-0.75f,  0.75f, 0.0f
+			};
+
+			std::shared_ptr<VertexBuffer> squareVB;
+			squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+			BufferLayout squareLayout = 
 			{
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
-			}
-		)";
+				{ShaderDataType::Float3, "a_Position"}
+			};
 
-		Shader_.reset(new Shader(vertexSrc, fragmentSrc));
+			squareVB->SetLayout(squareLayout);
+			SquareVA_->AddVertexBuffer(squareVB);
+
+			unsigned int squareIndices[6] = { 0,1,2, 2,3,0 };
+
+			std::shared_ptr<IndexBuffer> squareIB;
+			squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+
+			SquareVA_->SetIndexBuffer(squareIB);
+
+			std::string BluevertexSrc = R"(
+				#version 330 core
+			
+				layout(location = 0) in vec3 a_Position;
+
+				out vec3 v_Position;
+
+				void main()
+				{
+					v_Position = a_Position;
+					gl_Position = vec4(a_Position, 1.0);	
+				}
+			)";
+				
+			std::string BluefragmentSrc = R"(
+				#version 330 core
+			
+				layout(location = 0) out vec4 color;
+
+				in vec3 v_Position;
+			
+				void main()
+				{
+					color = vec4(0.0, 0.0, 1.0, 1.0);
+				}
+			)";
+
+			BlueShader_.reset(new Shader(BluevertexSrc, BluefragmentSrc));
+		}
+
 	}
 
 	Application::~Application()
@@ -112,7 +175,7 @@ namespace Ugine {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_APPLICATION(OnWindowClose));
-
+		
 		//CORE_LOG_TRACE("{0}", e);
 
 		for (auto it = layerStack_.end(); it != layerStack_.begin();)
@@ -129,6 +192,11 @@ namespace Ugine {
 		{
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+
+			BlueShader_->Bind();
+			SquareVA_->Bind();
+			glDrawElements(GL_TRIANGLES, SquareVA_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			Shader_->Bind();
 			VertexArray_->Bind();

@@ -34,6 +34,10 @@ namespace Ugine
 
 		std::shared_ptr<Shader> Shader_;
 		std::shared_ptr<VertexArray> VertexArray_;
+
+
+		std::shared_ptr<Shader> BlueShader_;
+		std::shared_ptr<VertexArray> SquareVA_;
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
