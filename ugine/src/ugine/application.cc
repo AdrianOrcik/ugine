@@ -3,7 +3,7 @@
 #include "application.h"
 #include "log.h"
 
-#include <glad/glad.h>
+#include "ugine/renderer/renderer.h"
 
 namespace Ugine {
 
@@ -190,17 +190,26 @@ namespace Ugine {
 	{
 		while (isRunning_)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+			//glClear(GL_COLOR_BUFFER_BIT);
 
+
+
+
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0 });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			BlueShader_->Bind();
 			SquareVA_->Bind();
-			glDrawElements(GL_TRIANGLES, SquareVA_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-
+			Renderer::Submit(SquareVA_);
+			
 			Shader_->Bind();
 			VertexArray_->Bind();
-			glDrawElements(GL_TRIANGLES, VertexArray_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(VertexArray_);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : layerStack_)
 				layer->OnUpdate();

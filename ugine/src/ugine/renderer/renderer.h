@@ -1,18 +1,17 @@
 #pragma once
 
+#include "render_command.h"
+
 namespace Ugine
 {
-	enum class RendererAPI
-	{
-		None = 0, OpenGL = 1
-	};
-
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetAPI() { return sRendererAPI_; }
+		static void BeginScene();
+		static void EndScene();
 
-	private:
-		static RendererAPI sRendererAPI_;
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	};
 }
