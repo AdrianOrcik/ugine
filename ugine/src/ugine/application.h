@@ -14,6 +14,8 @@
 
 #include "ugine/imgui/imgui_layout.h"
 
+#include "ugine/renderer/orthographic_camera.h"
+
 namespace Ugine 
 {
 
@@ -38,6 +40,8 @@ namespace Ugine
 
 		std::shared_ptr<Shader> BlueShader_;
 		std::shared_ptr<VertexArray> SquareVA_;
+
+		OrthographicCamera Camera_;
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);

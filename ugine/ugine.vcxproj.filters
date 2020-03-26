@@ -1256,6 +1256,7 @@
     <ClInclude Include="src\ugine\renderer\renderer_api.h" />
     <ClInclude Include="src\ugine\renderer\render_command.h" />
     <ClInclude Include="src\platform\opengl\opengl_renderer_api.h" />
+    <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windows_input.cc">
@@ -1291,5 +1292,6 @@
     <ClCompile Include="src\ugine\renderer\renderer_api.cc" />
     <ClCompile Include="src\platform\opengl\opengl_renderer_api.cc" />
     <ClCompile Include="src\ugine\renderer\render_command.cc" />
+    <ClCompile Include="src\ugine\renderer\orthographic_camera.cc" />
   </ItemGroup>
 </Project>

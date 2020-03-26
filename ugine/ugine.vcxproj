@@ -502,6 +502,7 @@
     <ClInclude Include="src\ugine\log.h" />
     <ClInclude Include="src\ugine\renderer\buffer.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
+    <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
     <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\renderer_api.h" />
     <ClInclude Include="src\ugine\renderer\render_command.h" />
@@ -526,6 +527,7 @@
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\log.cc" />
     <ClCompile Include="src\ugine\renderer\buffer.cc" />
+    <ClCompile Include="src\ugine\renderer\orthographic_camera.cc" />
     <ClCompile Include="src\ugine\renderer\renderer.cc" />
     <ClCompile Include="src\ugine\renderer\renderer_api.cc" />
     <ClCompile Include="src\ugine\renderer\render_command.cc" />

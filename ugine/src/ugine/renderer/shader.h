@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <glm/glm.hpp>
+
 namespace Ugine
 {
 
@@ -13,6 +15,8 @@ namespace Ugine
 
 		void Bind() const;
 		void Unbind() const;
+
+		void SetUniformMat4(const std::string& name, const glm::mat4& matrix);
 	private:
 		unsigned int renderID_;
 	};

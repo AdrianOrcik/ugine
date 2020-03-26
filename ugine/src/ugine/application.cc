@@ -10,6 +10,7 @@ namespace Ugine {
 	Application* Application::sInstance_ = nullptr;
 
 	Application::Application()
+		: Camera_(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
 		sInstance_ = this;
@@ -63,6 +64,8 @@ namespace Ugine {
 					layout(location = 0) in vec3 a_Position;
 					layout(location = 1) in vec4 a_Color;
 
+					uniform mat4 uViewProjection;
+
 					out vec3 v_Position;
 					out vec4 v_Color;
 
@@ -70,7 +73,7 @@ namespace Ugine {
 					{
 						v_Position = a_Position;
 						v_Color = a_Color;
-						gl_Position = vec4(a_Position, 1.0);	
+						gl_Position = uViewProjection * vec4(a_Position, 1.0);	
 					}
 				)";
 
@@ -126,12 +129,14 @@ namespace Ugine {
 			
 				layout(location = 0) in vec3 a_Position;
 
+				uniform mat4 uViewProjection;
+
 				out vec3 v_Position;
 
 				void main()
 				{
 					v_Position = a_Position;
-					gl_Position = vec4(a_Position, 1.0);	
+					gl_Position = uViewProjection * vec4(a_Position, 1.0);	
 				}
 			)";
 				
@@ -190,25 +195,18 @@ namespace Ugine {
 	{
 		while (isRunning_)
 		{
-			//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			//glClear(GL_COLOR_BUFFER_BIT);
-
-
-
 
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0 });
 			RenderCommand::Clear();
 
-			Renderer::BeginScene();
+			Camera_.SetPosition({ 0.0f, 0.0f, 0.0f });
+			Camera_.SetRotation(0.0f);
 
-			BlueShader_->Bind();
-			SquareVA_->Bind();
-			Renderer::Submit(SquareVA_);
+			Renderer::BeginScene(Camera_);
 			
-			Shader_->Bind();
-			VertexArray_->Bind();
-			Renderer::Submit(VertexArray_);
-
+			Renderer::Submit(BlueShader_, SquareVA_);
+			Renderer::Submit(Shader_, VertexArray_);
+			
 			Renderer::EndScene();
 
 			for (Layer* layer : layerStack_)
