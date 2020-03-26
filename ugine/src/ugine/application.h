@@ -14,7 +14,10 @@
 
 #include "ugine/imgui/imgui_layout.h"
 
-#include "ugine/renderer/orthographic_camera.h"
+#include "ugine/core/timestep.h"
+
+//todo: this
+//#include "ugine/imgui/imgui_layer.h"
 
 namespace Ugine 
 {
@@ -34,14 +37,6 @@ namespace Ugine
 		inline Window& GetWindow() { return *window_; }
 		inline static Application& Get() { return *sInstance_; }
 
-		std::shared_ptr<Shader> Shader_;
-		std::shared_ptr<VertexArray> VertexArray_;
-
-
-		std::shared_ptr<Shader> BlueShader_;
-		std::shared_ptr<VertexArray> SquareVA_;
-
-		OrthographicCamera Camera_;
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
@@ -50,7 +45,9 @@ namespace Ugine
 		ImGuiLayer* imGuiLayer_;
 		bool isRunning_ = true;
 		LayerStack layerStack_;
+		float lastFrameTime_ = 0.0f;
 
+	private:
 		static Application* sInstance_;
 	};
 

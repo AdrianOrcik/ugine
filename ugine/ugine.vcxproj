@@ -480,6 +480,7 @@
     <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
     <ClInclude Include="src\platform\opengl\opengl_renderer_api.h" />
+    <ClInclude Include="src\platform\opengl\opengl_shader.h" />
     <ClInclude Include="src\platform\opengl\opengl_vertex_array.h" />
     <ClInclude Include="src\platform\windows\windows_input.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
@@ -487,6 +488,7 @@
     <ClInclude Include="src\ugine.h" />
     <ClInclude Include="src\ugine\application.h" />
     <ClInclude Include="src\ugine\core.h" />
+    <ClInclude Include="src\ugine\core\timestep.h" />
     <ClInclude Include="src\ugine\entry_point.h" />
     <ClInclude Include="src\ugine\events\application_event.h" />
     <ClInclude Include="src\ugine\events\event.h" />
@@ -514,6 +516,7 @@
     <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
     <ClCompile Include="src\platform\opengl\opengl_context.cc" />
     <ClCompile Include="src\platform\opengl\opengl_renderer_api.cc" />
+    <ClCompile Include="src\platform\opengl\opengl_shader.cc" />
     <ClCompile Include="src\platform\opengl\opengl_vertex_array.cpp" />
     <ClCompile Include="src\platform\windows\windows_input.cc" />
     <ClCompile Include="src\platform\windows\windows_window.cc" />

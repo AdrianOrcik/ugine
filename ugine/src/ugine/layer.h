@@ -2,6 +2,7 @@
 
 #include "core.h"
 #include "events/event.h"
+#include "ugine/core/timestep.h"
 
 namespace Ugine
 {
@@ -14,7 +15,7 @@ namespace Ugine
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

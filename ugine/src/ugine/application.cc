@@ -2,7 +2,7 @@
 
 #include "application.h"
 #include "log.h"
-
+#include <GLFW/glfw3.h>
 #include "ugine/renderer/renderer.h"
 
 namespace Ugine {
@@ -10,7 +10,6 @@ namespace Ugine {
 	Application* Application::sInstance_ = nullptr;
 
 	Application::Application()
-		: Camera_(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
 		sInstance_ = this;
@@ -20,142 +19,6 @@ namespace Ugine {
 
 		imGuiLayer_ = new ImGuiLayer();
 		PushOverlay(imGuiLayer_);
-
-		// RENDER TRIANGLE
-		{
-			// create vertex buffer
-			VertexArray_.reset(VertexArray::Create());
-
-			float vertices[3 * 7] = {
-				-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-				 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-				 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
-			};
-
-			// allocate vertex buffer memory
-			std::shared_ptr<VertexBuffer> vertexBuffer;
-			// create vertex buffer obj
-			vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-			// create buffer layout
-			BufferLayout layout =
-			{
-				{ ShaderDataType::Float3, "a_Position"},
-				{ ShaderDataType::Float4, "a_Color" }
-			};
-
-			// set layout
-			vertexBuffer->SetLayout(layout);
-			// add buffer into vertex array
-			VertexArray_->AddVertexBuffer(vertexBuffer);
-
-			// define indices
-			unsigned int indices[3] = { 0,1,2 };
-			// allocate index buffer
-			std::shared_ptr<IndexBuffer> indexBuffer;
-			// create index buffer object
-			indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-			// set index buffer for vertex array
-			VertexArray_->SetIndexBuffer(indexBuffer);
-
-			std::string vertexSrc = R"(
-					#version 330 core
-			
-					layout(location = 0) in vec3 a_Position;
-					layout(location = 1) in vec4 a_Color;
-
-					uniform mat4 uViewProjection;
-
-					out vec3 v_Position;
-					out vec4 v_Color;
-
-					void main()
-					{
-						v_Position = a_Position;
-						v_Color = a_Color;
-						gl_Position = uViewProjection * vec4(a_Position, 1.0);	
-					}
-				)";
-
-			std::string fragmentSrc = R"(
-					#version 330 core
-			
-					layout(location = 0) out vec4 color;
-
-					in vec3 v_Position;
-					in vec4 v_Color;
-			
-					void main()
-					{
-						color = vec4(v_Position * 0.5 + 0.5, 1.0);
-						color = v_Color;
-					}
-				)";
-
-			Shader_.reset(new Shader(vertexSrc, fragmentSrc));
-		}
-
-		// RENDER BLUE SQUARE
-		{
-			SquareVA_.reset(VertexArray::Create());
-
-			float squareVertices[3 * 4] = {
-				-0.75f, -0.75f, 0.0f,
-				 0.75f, -0.75f, 0.0f,
-				 0.75f,  0.75f, 0.0f,
-				-0.75f,  0.75f, 0.0f
-			};
-
-			std::shared_ptr<VertexBuffer> squareVB;
-			squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-
-			BufferLayout squareLayout = 
-			{
-				{ShaderDataType::Float3, "a_Position"}
-			};
-
-			squareVB->SetLayout(squareLayout);
-			SquareVA_->AddVertexBuffer(squareVB);
-
-			unsigned int squareIndices[6] = { 0,1,2, 2,3,0 };
-
-			std::shared_ptr<IndexBuffer> squareIB;
-			squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
-
-			SquareVA_->SetIndexBuffer(squareIB);
-
-			std::string BluevertexSrc = R"(
-				#version 330 core
-			
-				layout(location = 0) in vec3 a_Position;
-
-				uniform mat4 uViewProjection;
-
-				out vec3 v_Position;
-
-				void main()
-				{
-					v_Position = a_Position;
-					gl_Position = uViewProjection * vec4(a_Position, 1.0);	
-				}
-			)";
-				
-			std::string BluefragmentSrc = R"(
-				#version 330 core
-			
-				layout(location = 0) out vec4 color;
-
-				in vec3 v_Position;
-			
-				void main()
-				{
-					color = vec4(0.0, 0.0, 1.0, 1.0);
-				}
-			)";
-
-			BlueShader_.reset(new Shader(BluevertexSrc, BluefragmentSrc));
-		}
-
 	}
 
 	Application::~Application()
@@ -195,22 +58,13 @@ namespace Ugine {
 	{
 		while (isRunning_)
 		{
-
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0 });
-			RenderCommand::Clear();
-
-			Camera_.SetPosition({ 0.0f, 0.0f, 0.0f });
-			Camera_.SetRotation(0.0f);
-
-			Renderer::BeginScene(Camera_);
-			
-			Renderer::Submit(BlueShader_, SquareVA_);
-			Renderer::Submit(Shader_, VertexArray_);
-			
-			Renderer::EndScene();
+		
+			float time = (float)glfwGetTime();
+			Timestep timestep = time - lastFrameTime_;
+			lastFrameTime_ = time;
 
 			for (Layer* layer : layerStack_)
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 
 			// application gui render
 			imGuiLayer_->Begin();
