@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef UE_PLATFORM_WINDOWS
 #if UE_DLL
 	#ifdef UE_BUILD_DLL
@@ -34,3 +36,12 @@
 
 #define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 #define BIND_EVENT_APPLICATION(x) std::bind(&Application::x, this, std::placeholders::_1)
+
+namespace Ugine
+{
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}
