@@ -1,4 +1,5 @@
 #include <ugine.h>
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Ugine::Layer
 {
@@ -185,9 +186,9 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		//ImGui::Begin("Test");
-		//ImGui::Text("Hello World");
-		//ImGui::End();
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 private:

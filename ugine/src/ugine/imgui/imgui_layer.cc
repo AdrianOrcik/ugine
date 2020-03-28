@@ -1,5 +1,5 @@
 #include "uepch.h"
-#include "imgui_layout.h"
+#include "imgui_layer.h"
 
 #include "imgui.h"
 
@@ -95,8 +95,8 @@ namespace Ugine
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		//static bool show = false;
+		//ImGui::ShowDemoWindow(&show);
 	}
 
 

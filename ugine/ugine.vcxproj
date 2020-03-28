@@ -495,7 +495,7 @@
     <ClInclude Include="src\ugine\events\key_event.h" />
     <ClInclude Include="src\ugine\events\mouse_event.h" />
     <ClInclude Include="src\ugine\imgui\imgui_build.h" />
-    <ClInclude Include="src\ugine\imgui\imgui_layout.h" />
+    <ClInclude Include="src\ugine\imgui\imgui_layer.h" />
     <ClInclude Include="src\ugine\input\input.h" />
     <ClInclude Include="src\ugine\input\key_codes.h" />
     <ClInclude Include="src\ugine\input\mouse_button_codes.h" />
@@ -505,9 +505,9 @@
     <ClInclude Include="src\ugine\renderer\buffer.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
+    <ClInclude Include="src\ugine\renderer\render_command.h" />
     <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\renderer_api.h" />
-    <ClInclude Include="src\ugine\renderer\render_command.h" />
     <ClInclude Include="src\ugine\renderer\shader.h" />
     <ClInclude Include="src\ugine\renderer\vertex_array.h" />
     <ClInclude Include="src\ugine\window.h" />
@@ -525,15 +525,15 @@
     </ClCompile>
     <ClCompile Include="src\ugine\application.cc" />
     <ClCompile Include="src\ugine\imgui\imgui_build.cc" />
-    <ClCompile Include="src\ugine\imgui\imgui_layout.cc" />
+    <ClCompile Include="src\ugine\imgui\imgui_layer.cc" />
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\log.cc" />
     <ClCompile Include="src\ugine\renderer\buffer.cc" />
     <ClCompile Include="src\ugine\renderer\orthographic_camera.cc" />
+    <ClCompile Include="src\ugine\renderer\render_command.cc" />
     <ClCompile Include="src\ugine\renderer\renderer.cc" />
     <ClCompile Include="src\ugine\renderer\renderer_api.cc" />
-    <ClCompile Include="src\ugine\renderer\render_command.cc" />
     <ClCompile Include="src\ugine\renderer\shader.cc" />
     <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
   </ItemGroup>

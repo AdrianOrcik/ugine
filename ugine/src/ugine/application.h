@@ -12,7 +12,7 @@
 #include "ugine/renderer/buffer.h"
 #include "ugine/renderer/vertex_array.h"
 
-#include "ugine/imgui/imgui_layout.h"
+#include "ugine/imgui/imgui_layer.h"
 
 #include "ugine/core/timestep.h"
 

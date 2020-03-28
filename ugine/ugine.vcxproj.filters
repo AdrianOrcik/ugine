@@ -28,11 +28,17 @@
     <Filter Include="src\platform">
       <UniqueIdentifier>{41663D6D-2DC9-CC11-D64E-05C8C2909894}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\platform\opengl">
+      <UniqueIdentifier>{B57427EB-21D6-04F9-AA43-4BAB16A43BB8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\platform\windows">
       <UniqueIdentifier>{9B5931A8-87E8-BA71-3007-CF6C1C75CB17}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\ugine">
       <UniqueIdentifier>{B4893BB6-20F4-EF2C-6932-A1D2D5DBCD81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ugine\core">
+      <UniqueIdentifier>{AC6A440D-9838-3813-81CC-A8396D391478}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\ugine\events">
       <UniqueIdentifier>{38D72B75-24D0-4AC7-4D02-304C395A2AD3}</UniqueIdentifier>
@@ -42,6 +48,9 @@
     </Filter>
     <Filter Include="src\ugine\input">
       <UniqueIdentifier>{D3C03DB6-3F4C-AB7A-485D-2E6FB467077B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ugine\renderer">
+      <UniqueIdentifier>{FA937966-E677-3ABC-4FD8-340F3BDB243E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1185,6 +1194,21 @@
     <ClInclude Include="external_src\glm\glm\vector_relational.hpp">
       <Filter>external_src\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_buffer.h">
+      <Filter>src\platform\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_context.h">
+      <Filter>src\platform\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_renderer_api.h">
+      <Filter>src\platform\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_shader.h">
+      <Filter>src\platform\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_vertex_array.h">
+      <Filter>src\platform\opengl</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\windows\windows_input.h">
       <Filter>src\platform\windows</Filter>
     </ClInclude>
@@ -1203,6 +1227,9 @@
     <ClInclude Include="src\ugine\core.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\core\timestep.h">
+      <Filter>src\ugine\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\entry_point.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
@@ -1219,9 +1246,6 @@
       <Filter>src\ugine\events</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\imgui\imgui_build.h">
-      <Filter>src\ugine\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ugine\imgui\imgui_layout.h">
       <Filter>src\ugine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\input\input.h">
@@ -1242,25 +1266,47 @@
     <ClInclude Include="src\ugine\log.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\renderer\buffer.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\graphic_context.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\orthographic_camera.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\render_command.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\renderer.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\renderer_api.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\shader.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\vertex_array.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\opengl\opengl_context.h" />
-    <ClInclude Include="src\ugine\renderer\graphic_context.h" />
-    <ClInclude Include="src\ugine\renderer\shader.h" />
-    <ClInclude Include="src\ugine\renderer\buffer.h" />
-    <ClInclude Include="src\ugine\renderer\renderer.h" />
-    <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
-    <ClInclude Include="src\ugine\renderer\vertex_array.h" />
-    <ClInclude Include="src\platform\opengl\opengl_vertex_array.h" />
-    <ClInclude Include="src\ugine\renderer\renderer_api.h" />
-    <ClInclude Include="src\ugine\renderer\render_command.h" />
-    <ClInclude Include="src\platform\opengl\opengl_renderer_api.h" />
-    <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
-    <ClInclude Include="src\ugine\core\timestep.h" />
-    <ClInclude Include="src\platform\opengl\opengl_shader.h" />
+    <ClInclude Include="src\ugine\imgui\imgui_layer.h">
+      <Filter>src\ugine\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\opengl\opengl_context.cc">
+      <Filter>src\platform\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\opengl\opengl_renderer_api.cc">
+      <Filter>src\platform\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\opengl\opengl_shader.cc">
+      <Filter>src\platform\opengl</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\windows\windows_input.cc">
       <Filter>src\platform\windows</Filter>
     </ClCompile>
@@ -1276,25 +1322,34 @@
     <ClCompile Include="src\ugine\imgui\imgui_build.cc">
       <Filter>src\ugine\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\imgui\imgui_layout.cc">
-      <Filter>src\ugine\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="src\ugine\log.cc">
       <Filter>src\ugine</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\renderer\buffer.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\renderer\orthographic_camera.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\renderer\render_command.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\renderer\renderer.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\renderer\renderer_api.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\renderer\shader.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cpp" />
+    <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
-    <ClCompile Include="src\platform\opengl\opengl_context.cc" />
-    <ClCompile Include="src\ugine\renderer\shader.cc" />
-    <ClCompile Include="src\ugine\renderer\buffer.cc" />
-    <ClCompile Include="src\ugine\renderer\renderer.cc" />
-    <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
     <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
-    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cpp" />
-    <ClCompile Include="src\ugine\renderer\renderer_api.cc" />
-    <ClCompile Include="src\platform\opengl\opengl_renderer_api.cc" />
-    <ClCompile Include="src\ugine\renderer\render_command.cc" />
-    <ClCompile Include="src\ugine\renderer\orthographic_camera.cc" />
-    <ClCompile Include="src\platform\opengl\opengl_shader.cc" />
+    <ClCompile Include="src\ugine\imgui\imgui_layer.cc">
+      <Filter>src\ugine\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

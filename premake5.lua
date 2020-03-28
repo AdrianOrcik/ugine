@@ -117,6 +117,7 @@ project "sandbox"
 	{
 		"ugine/external_src/spdlog/include",
 		"ugine/src",
+		"ugine/external_src",
 		"%{IncludeDir.glm}"
 	}
     
