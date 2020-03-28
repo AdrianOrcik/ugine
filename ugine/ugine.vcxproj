@@ -58,7 +58,7 @@
       <PrecompiledHeaderFile>uepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UE_PLATFORM_WINDOWS;UE_BUILD_DLL;GLFW_INCLUDE_NONE;UE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;external_src\imgui;external_src\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;external_src\imgui;external_src\glm;external_src\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -78,7 +78,7 @@
       <PrecompiledHeaderFile>uepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UE_PLATFORM_WINDOWS;UE_BUILD_DLL;GLFW_INCLUDE_NONE;UE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;external_src\imgui;external_src\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;external_src\spdlog\include;external_src\glfw\include;external_src\glad\include;external_src\imgui;external_src\glm;external_src\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -477,10 +477,12 @@
     <ClInclude Include="external_src\glm\glm\vec3.hpp" />
     <ClInclude Include="external_src\glm\glm\vec4.hpp" />
     <ClInclude Include="external_src\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="external_src\stb_image\stb_image.h" />
     <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
     <ClInclude Include="src\platform\opengl\opengl_renderer_api.h" />
     <ClInclude Include="src\platform\opengl\opengl_shader.h" />
+    <ClInclude Include="src\platform\opengl\opengl_texture.h" />
     <ClInclude Include="src\platform\opengl\opengl_vertex_array.h" />
     <ClInclude Include="src\platform\windows\windows_input.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
@@ -509,15 +511,17 @@
     <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\renderer_api.h" />
     <ClInclude Include="src\ugine\renderer\shader.h" />
+    <ClInclude Include="src\ugine\renderer\texture.h" />
     <ClInclude Include="src\ugine\renderer\vertex_array.h" />
     <ClInclude Include="src\ugine\window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
+    <ClCompile Include="src\platform\opengl\opengl_buffer.cc" />
     <ClCompile Include="src\platform\opengl\opengl_context.cc" />
     <ClCompile Include="src\platform\opengl\opengl_renderer_api.cc" />
     <ClCompile Include="src\platform\opengl\opengl_shader.cc" />
-    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cpp" />
+    <ClCompile Include="src\platform\opengl\opengl_texture.cc" />
+    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cc" />
     <ClCompile Include="src\platform\windows\windows_input.cc" />
     <ClCompile Include="src\platform\windows\windows_window.cc" />
     <ClCompile Include="src\uepch.cc">
@@ -535,6 +539,7 @@
     <ClCompile Include="src\ugine\renderer\renderer.cc" />
     <ClCompile Include="src\ugine\renderer\renderer_api.cc" />
     <ClCompile Include="src\ugine\renderer\shader.cc" />
+    <ClCompile Include="src\ugine\renderer\texture.cc" />
     <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
   </ItemGroup>
   <ItemGroup>

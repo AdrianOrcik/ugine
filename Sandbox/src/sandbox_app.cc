@@ -19,7 +19,7 @@ public:
 			};
 
 			// allocate vertex buffer memory
-			std::shared_ptr<Ugine::VertexBuffer> vertexBuffer;
+			Ugine::Ref<Ugine::VertexBuffer> vertexBuffer;
 			// create vertex buffer obj
 			vertexBuffer.reset(Ugine::VertexBuffer::Create(vertices, sizeof(vertices)));
 
@@ -38,7 +38,7 @@ public:
 			// define indices
 			unsigned int indices[3] = { 0,1,2 };
 			// allocate index buffer
-			std::shared_ptr<Ugine::IndexBuffer> indexBuffer;
+			Ugine::Ref<Ugine::IndexBuffer> indexBuffer;
 			// create index buffer object
 			indexBuffer.reset(Ugine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 			// set index buffer for vertex array
@@ -92,7 +92,7 @@ public:
 				-0.75f,  0.75f, 0.0f
 			};
 
-			std::shared_ptr<Ugine::VertexBuffer> squareVB;
+			Ugine::Ref<Ugine::VertexBuffer> squareVB;
 			squareVB.reset(Ugine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 			Ugine::BufferLayout squareLayout =
@@ -105,7 +105,7 @@ public:
 
 			unsigned int squareIndices[6] = { 0,1,2, 2,3,0 };
 
-			std::shared_ptr<Ugine::IndexBuffer> squareIB;
+			Ugine::Ref<Ugine::IndexBuffer> squareIB;
 			squareIB.reset(Ugine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 
 			blueVertexArray_->SetIndexBuffer(squareIB);
@@ -192,11 +192,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Ugine::Shader> triangleShader_;
-	std::shared_ptr<Ugine::VertexArray> triangleVertexArray_;
+	Ugine::Ref<Ugine::Shader> triangleShader_;
+	Ugine::Ref<Ugine::VertexArray> triangleVertexArray_;
 
-	std::shared_ptr<Ugine::Shader> blueShader_;
-	std::shared_ptr<Ugine::VertexArray> blueVertexArray_;
+	Ugine::Ref<Ugine::Shader> blueShader_;
+	Ugine::Ref<Ugine::VertexArray> blueVertexArray_;
 
 	Ugine::OrthographicCamera camera_;
 	glm::vec3 cameraPosition_;

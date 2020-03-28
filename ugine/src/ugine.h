@@ -20,6 +20,7 @@
 
 #include "ugine/renderer/buffer.h"
 #include "ugine/renderer/shader.h"
+#include "ugine/renderer/texture.h"
 #include "ugine/renderer/vertex_array.h"
 
 #include "ugine/renderer/orthographic_camera.h"

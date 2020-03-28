@@ -20,6 +20,7 @@ IncludeDir["GLFW"] = "ugine/external_src/glfw/include"
 IncludeDir["Glad"] = "ugine/external_src/glad/include"
 IncludeDir["ImGui"] = "ugine/external_src/imgui"
 IncludeDir["glm"] = "ugine/external_src/glm"
+IncludeDir["stb_image"] = "ugine/external_src/stb_image"
 
 include "ugine/external_src/glfw"
 include "ugine/external_src/glad"
@@ -46,6 +47,8 @@ project "ugine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cc",
+		"%{prj.name}/external_src/stb_image/**.h",
+		"%{prj.name}/external_src/stb_image/**.cpp",
 		"%{prj.name}/external_src/glm/glm/**.hpp",
 		"%{prj.name}/external_src/glm/glm/**.inl",
 	}
@@ -63,7 +66,8 @@ project "ugine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links

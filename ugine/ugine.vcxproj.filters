@@ -22,6 +22,9 @@
     <Filter Include="external_src\glm\glm\gtx">
       <UniqueIdentifier>{6F4A681C-5B6F-B79C-84BA-9C2C703EB6BA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external_src\stb_image">
+      <UniqueIdentifier>{C92447F5-B51E-7047-9E8B-06588A24D6B3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
@@ -1194,6 +1197,9 @@
     <ClInclude Include="external_src\glm\glm\vector_relational.hpp">
       <Filter>external_src\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="external_src\stb_image\stb_image.h">
+      <Filter>external_src\stb_image</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\opengl\opengl_buffer.h">
       <Filter>src\platform\opengl</Filter>
     </ClInclude>
@@ -1204,6 +1210,9 @@
       <Filter>src\platform\opengl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\opengl\opengl_shader.h">
+      <Filter>src\platform\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\opengl\opengl_texture.h">
       <Filter>src\platform\opengl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\opengl\opengl_vertex_array.h">
@@ -1248,6 +1257,9 @@
     <ClInclude Include="src\ugine\imgui\imgui_build.h">
       <Filter>src\ugine\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\imgui\imgui_layer.h">
+      <Filter>src\ugine\imgui</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\input\input.h">
       <Filter>src\ugine\input</Filter>
     </ClInclude>
@@ -1287,17 +1299,20 @@
     <ClInclude Include="src\ugine\renderer\shader.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\renderer\texture.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\renderer\vertex_array.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\imgui\imgui_layer.h">
-      <Filter>src\ugine\imgui</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\opengl\opengl_buffer.cc">
+      <Filter>src\platform\opengl</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\opengl\opengl_context.cc">
       <Filter>src\platform\opengl</Filter>
     </ClCompile>
@@ -1305,6 +1320,12 @@
       <Filter>src\platform\opengl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\opengl\opengl_shader.cc">
+      <Filter>src\platform\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\opengl\opengl_texture.cc">
+      <Filter>src\platform\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cc">
       <Filter>src\platform\opengl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\windows\windows_input.cc">
@@ -1320,6 +1341,9 @@
       <Filter>src\ugine</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\imgui\imgui_build.cc">
+      <Filter>src\ugine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\imgui\imgui_layer.cc">
       <Filter>src\ugine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\log.cc">
@@ -1343,13 +1367,11 @@
     <ClCompile Include="src\ugine\renderer\shader.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\opengl\opengl_vertex_array.cpp" />
-    <ClCompile Include="src\platform\opengl\opengl_buffer.cpp" />
+    <ClCompile Include="src\ugine\renderer\texture.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
-    <ClCompile Include="src\ugine\imgui\imgui_layer.cc">
-      <Filter>src\ugine\imgui</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
