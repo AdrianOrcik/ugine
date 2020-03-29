@@ -1,13 +1,15 @@
 #include <ugine.h>
 #include "imgui/imgui.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 class ExampleLayer : public Ugine::Layer
 {
 public:
 	ExampleLayer()
 		:Layer("Example"), camera_(-1.6f, 1.6f, -0.9f, 0.9f), cameraPosition_(0.0f)
 	{
-		// RENDER TRIANGLE
+	/*	// RENDER TRIANGLE
 		{
 			// create vertex buffer
 			triangleVertexArray_.reset(Ugine::VertexArray::Create());
@@ -79,17 +81,17 @@ public:
 				)";
 
 			triangleShader_.reset(new Ugine::Shader(vertexSrc, fragmentSrc));
-		}
+		}*/
 
 		// RENDER BLUE SQUARE
 		{
 			blueVertexArray_.reset(Ugine::VertexArray::Create());
 
 			float squareVertices[3 * 4] = {
-				-0.75f, -0.75f, 0.0f,
-				 0.75f, -0.75f, 0.0f,
-				 0.75f,  0.75f, 0.0f,
-				-0.75f,  0.75f, 0.0f
+				-0.5f, -0.5f, 0.0f,
+				 0.5f, -0.5f, 0.0f,
+				 0.5f,  0.5f, 0.0f,
+				-0.5f,  0.5f, 0.0f
 			};
 
 			Ugine::Ref<Ugine::VertexBuffer> squareVB;
@@ -116,13 +118,14 @@ public:
 				layout(location = 0) in vec3 a_Position;
 
 				uniform mat4 uViewProjection;
+				uniform mat4 uTransform;
 
 				out vec3 v_Position;
 
 				void main()
 				{
 					v_Position = a_Position;
-					gl_Position = uViewProjection * vec4(a_Position, 1.0);
+					gl_Position = uViewProjection * uTransform * vec4(a_Position, 1.0);
 				}
 			)";
 
@@ -173,8 +176,13 @@ public:
 
 		Ugine::Renderer::BeginScene(camera_);
 			
-		Ugine::Renderer::Submit(blueShader_, blueVertexArray_);
-		Ugine::Renderer::Submit(triangleShader_, triangleVertexArray_);
+		glm::mat4 transformMatrix = glm::mat4(1.0f);
+		glm::vec3 position(1.0f, 0.0f, 0.0f);
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		transformMatrix = glm::translate(glm::mat4(1.0f), position) * scale;
+
+		Ugine::Renderer::Submit(blueShader_, blueVertexArray_, transformMatrix);
+		//Ugine::Renderer::Submit(triangleShader_, triangleVertexArray_);
 			
 		Ugine::Renderer::EndScene();
 	}
