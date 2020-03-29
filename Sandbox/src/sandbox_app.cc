@@ -1,7 +1,11 @@
 #include <ugine.h>
+
+#include "platform/opengl/opengl_shader.h"
+
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Ugine::Layer
 {
@@ -85,7 +89,7 @@ public:
 
 		// RENDER BLUE SQUARE
 		{
-			blueVertexArray_.reset(Ugine::VertexArray::Create());
+			squareVA_.reset(Ugine::VertexArray::Create());
 
 			float squareVertices[3 * 4] = {
 				-0.5f, -0.5f, 0.0f,
@@ -103,46 +107,48 @@ public:
 			};
 
 			squareVB->SetLayout(squareLayout);
-			blueVertexArray_->AddVertexBuffer(squareVB);
+			squareVA_->AddVertexBuffer(squareVB);
 
 			unsigned int squareIndices[6] = { 0,1,2, 2,3,0 };
 
 			Ugine::Ref<Ugine::IndexBuffer> squareIB;
 			squareIB.reset(Ugine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 
-			blueVertexArray_->SetIndexBuffer(squareIB);
+			squareVA_->SetIndexBuffer(squareIB);
 
-			std::string BluevertexSrc = R"(
+			std::string squareVertexSrc = R"(
 				#version 330 core
 
-				layout(location = 0) in vec3 a_Position;
+				layout(location = 0) in vec3 aPosition;
 
 				uniform mat4 uViewProjection;
 				uniform mat4 uTransform;
 
-				out vec3 v_Position;
+				out vec3 vPosition;
 
 				void main()
 				{
-					v_Position = a_Position;
-					gl_Position = uViewProjection * uTransform * vec4(a_Position, 1.0);
+					vPosition = aPosition;
+					gl_Position = uViewProjection * uTransform * vec4(aPosition, 1.0);
 				}
 			)";
 
-			std::string BluefragmentSrc = R"(
+			std::string squareFragmentSrc = R"(
 				#version 330 core
 
 				layout(location = 0) out vec4 color;
 
-				in vec3 v_Position;
+				in vec3 vPosition;
+
+				uniform vec3 uColor;
 
 				void main()
 				{
-					color = vec4(0.0, 0.0, 1.0, 1.0);
+					color = vec4(uColor, 1.0);
 				}
 			)";
 
-			blueShader_.reset(new Ugine::Shader(BluevertexSrc, BluefragmentSrc));
+			squareShader.reset(Ugine::Shader::Create(squareVertexSrc, squareFragmentSrc));
 		}
 	}
 
@@ -176,12 +182,16 @@ public:
 
 		Ugine::Renderer::BeginScene(camera_);
 			
+		// assign and setup uniform
+		std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader)->Bind();
+		std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader)->SetUniformFloat3("uColor", squareColor_);
+
 		glm::mat4 transformMatrix = glm::mat4(1.0f);
 		glm::vec3 position(1.0f, 0.0f, 0.0f);
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 		transformMatrix = glm::translate(glm::mat4(1.0f), position) * scale;
 
-		Ugine::Renderer::Submit(blueShader_, blueVertexArray_, transformMatrix);
+		Ugine::Renderer::Submit(squareShader, squareVA_, transformMatrix);
 		//Ugine::Renderer::Submit(triangleShader_, triangleVertexArray_);
 			
 		Ugine::Renderer::EndScene();
@@ -197,14 +207,18 @@ public:
 		ImGui::Begin("Test");
 		ImGui::Text("Hello World");
 		ImGui::End();
+
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(squareColor_));
+		ImGui::End();
 	}
 
 private:
-	Ugine::Ref<Ugine::Shader> triangleShader_;
-	Ugine::Ref<Ugine::VertexArray> triangleVertexArray_;
+	//Ugine::Ref<Ugine::Shader> triangleShader_;
+	//Ugine::Ref<Ugine::VertexArray> triangleVertexArray_;
 
-	Ugine::Ref<Ugine::Shader> blueShader_;
-	Ugine::Ref<Ugine::VertexArray> blueVertexArray_;
+	Ugine::Ref<Ugine::Shader> squareShader;
+	Ugine::Ref<Ugine::VertexArray> squareVA_;
 
 	Ugine::OrthographicCamera camera_;
 	glm::vec3 cameraPosition_;
@@ -212,6 +226,8 @@ private:
 
 	float cameraRotation_ = 0.0f;
 	float cameraRotationSpeed_ = 180.0f;
+
+	glm::vec3 squareColor_ = { 0.2f, 0.3f, 0.8f };
 };
 
 

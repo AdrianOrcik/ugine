@@ -5,6 +5,7 @@
 #include "orthographic_camera.h"
 #include "shader.h"
 
+
 namespace Ugine
 {
 	class Renderer

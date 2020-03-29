@@ -11,9 +11,9 @@ namespace Ugine
 		OpenGLShader(const std::string& vertexSrc, const std::string fragmentSrc);
 		virtual ~OpenGLShader();
 
-		//// Inherited via Shader
-		//virtual void Bind() const override;
-		//virtual void Unbind() const override;
+		// Inherited via Shader
+		virtual void Bind() const override;
+		virtual void Unbind() const override;
 
 		void SetUniformInt(const std::string& name, int value);
 		

@@ -1,6 +1,8 @@
 #include "uepch.h"
 #include "renderer.h"
 
+#include "platform/opengl/opengl_shader.h"
+
 namespace Ugine
 {
 		
@@ -19,8 +21,8 @@ namespace Ugine
 	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		shader->SetUniformMat4("uViewProjection", sSceneData_->ViewProjectionMatrix);
-		shader->SetUniformMat4("uTransform", transform);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->SetUniformMat4("uViewProjection", sSceneData_->ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->SetUniformMat4("uTransform", transform);
 
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
