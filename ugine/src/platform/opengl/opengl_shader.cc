@@ -59,8 +59,8 @@ namespace Ugine
 		}
 
 		// bind vertex & fragment shaders into shader program
-		rendererID_ = glCreateProgram();
-		GLuint program = rendererID_;
+		GLuint program = glCreateProgram();
+		rendererID_ = program;
 
 		glAttachShader(program, vertexShader);
 		glAttachShader(program, fragmentShader);
@@ -89,7 +89,6 @@ namespace Ugine
 
 		glDetachShader(program, vertexShader);
 		glDetachShader(program, fragmentShader);
-
 	}
 
 	Ugine::OpenGLShader::~OpenGLShader()

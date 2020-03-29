@@ -16,13 +16,16 @@ Ugine::OpenGLTexture2D::OpenGLTexture2D(const std::string & path)
 	heigth_ = height;
 
 	glCreateTextures(GL_TEXTURE_2D, 1, &rendererID_);
-
-	glTextureStorage2D(rendererID_, 1, GL_RGB8, width_, heigth_);
+	glTextureStorage2D(rendererID_, 1, GL_RGB, width_, heigth_);
 
 	glTextureParameteri(rendererID_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(rendererID_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glTextureSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, GL_RGB, GL_UNSIGNED_BYTE, data);
+	// note: use for texture update
+	//glTextureSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 	stbi_image_free(data);
 }

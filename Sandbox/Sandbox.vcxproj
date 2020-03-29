@@ -99,6 +99,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\textures\ball.png" />
     <Image Include="assets\textures\checkBoard.png" />
     <Image Include="assets\textures\container.jpg" />
   </ItemGroup>

@@ -88,7 +88,7 @@ public:
 		}*/
 
 		// RENDER BLUE SQUARE
-		{
+		/*{
 			squareVA_.reset(Ugine::VertexArray::Create());
 
 			float squareVertices[3 * 4] = {
@@ -149,10 +149,10 @@ public:
 			)";
 
 			squareShader_.reset(Ugine::Shader::Create(squareVertexSrc, squareFragmentSrc));
-		}
+		}*/
 
 		// RENDER TEXTURE SQUARE	
-		/*{
+		{
 			textureVA_.reset(Ugine::VertexArray::Create());
 
 			float textureSquareVertices[5 * 4] = {
@@ -190,12 +190,10 @@ public:
 				uniform mat4 uViewProjection;
 				uniform mat4 uTransform;
 
-				out vec3 vPosition;
 				out vec2 vTexCoord;
 
 				void main()
 				{
-					vPosition = aPosition;
 					vTexCoord = aTexCoord;
 					gl_Position = uViewProjection * uTransform * vec4(aPosition, 1.0);
 				}
@@ -206,23 +204,25 @@ public:
 
 				layout(location = 0) out vec4 color;
 
-				in vec3 vPosition;
 				in vec2 vTexCoord;
 
 				uniform sampler2D uTexture;
+				uniform vec3 uColor;
 				
 				void main()
 				{
-					color = texture(uTexture,vTexCoord);
+					color = texture(uTexture,vTexCoord) * vec4(uColor,1.0f);
 				}
 			)";
 
 			textureShader_.reset(Ugine::Shader::Create(textureVertexSrc, textureFragmentSrc));
+
 			texture_ = Ugine::Texture2D::Create("assets/textures/container.jpg");
 
 			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->Bind();
 			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->SetUniformInt("uTexture", 0);
-		}*/
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->SetUniformFloat3("uColor", squareColor_);
+		}
 	}
 
 	void OnUpdate(Ugine::Timestep ts) override
@@ -265,18 +265,18 @@ public:
 		//transformMatrix = glm::translate(glm::mat4(1.0f), position) * scale;
 			
 		//solid square
-		{
-			std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->Bind();
-			std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->SetUniformFloat3("uColor", squareColor_);
+		//{
+		//	std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->Bind();
+		//	std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->SetUniformFloat3("uColor", squareColor_);
 
-			Ugine::Renderer::Submit(squareShader_, squareVA_, transformMatrix);
-		}
+		//	Ugine::Renderer::Submit(squareShader_, squareVA_, transformMatrix);
+		//}
 
 		//texture square
-		//{
-		//	texture_->Bind();
-		//	Ugine::Renderer::Submit(textureShader_, textureVA_, transformMatrix);
-		//}
+		{
+			texture_->Bind(0);
+			Ugine::Renderer::Submit(textureShader_, textureVA_, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		}
 
 		Ugine::Renderer::EndScene();
 	}
@@ -288,9 +288,9 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World");
-		ImGui::End();
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello World");
+		//ImGui::End();
 
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(squareColor_));
@@ -316,9 +316,8 @@ private:
 	float cameraRotation_ = 0.0f;
 	float cameraRotationSpeed_ = 180.0f;
 
-	glm::vec3 squareColor_ = { 0.2f, 0.3f, 0.8f };
+	glm::vec3 squareColor_ = { 1.0f, 1.0f, 1.0f };
 };
-
 
 class Sandbox : public Ugine::Application
 {
