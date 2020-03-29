@@ -103,7 +103,7 @@ public:
 
 			Ugine::BufferLayout squareLayout =
 			{
-				{Ugine::ShaderDataType::Float3, "a_Position"}
+				{Ugine::ShaderDataType::Float3, "aPosition"}
 			};
 
 			squareVB->SetLayout(squareLayout);
@@ -148,8 +148,81 @@ public:
 				}
 			)";
 
-			squareShader.reset(Ugine::Shader::Create(squareVertexSrc, squareFragmentSrc));
+			squareShader_.reset(Ugine::Shader::Create(squareVertexSrc, squareFragmentSrc));
 		}
+
+		// RENDER TEXTURE SQUARE	
+		/*{
+			textureVA_.reset(Ugine::VertexArray::Create());
+
+			float textureSquareVertices[5 * 4] = {
+				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+			};
+
+			Ugine::Ref<Ugine::VertexBuffer> textureVB;
+			textureVB.reset(Ugine::VertexBuffer::Create(textureSquareVertices, sizeof(textureSquareVertices)));
+
+			Ugine::BufferLayout textureLayout =
+			{
+				{Ugine::ShaderDataType::Float3, "aPosition"},
+				{Ugine::ShaderDataType::Float2, "aTexCoord"}
+			};
+
+			textureVB->SetLayout(textureLayout);
+			textureVA_->AddVertexBuffer(textureVB);
+
+			unsigned int texIndices[6] = { 0,1,2, 2,3,0 };
+
+			Ugine::Ref<Ugine::IndexBuffer> textureIB;
+			textureIB.reset(Ugine::IndexBuffer::Create(texIndices, sizeof(texIndices) / sizeof(uint32_t)));
+
+			textureVA_->SetIndexBuffer(textureIB);
+
+			std::string textureVertexSrc = R"(
+				#version 330 core
+
+				layout(location = 0) in vec3 aPosition;
+				layout(location = 1) in vec2 aTexCoord;
+
+				uniform mat4 uViewProjection;
+				uniform mat4 uTransform;
+
+				out vec3 vPosition;
+				out vec2 vTexCoord;
+
+				void main()
+				{
+					vPosition = aPosition;
+					vTexCoord = aTexCoord;
+					gl_Position = uViewProjection * uTransform * vec4(aPosition, 1.0);
+				}
+			)";
+
+			std::string textureFragmentSrc = R"(
+				#version 330 core
+
+				layout(location = 0) out vec4 color;
+
+				in vec3 vPosition;
+				in vec2 vTexCoord;
+
+				uniform sampler2D uTexture;
+				
+				void main()
+				{
+					color = texture(uTexture,vTexCoord);
+				}
+			)";
+
+			textureShader_.reset(Ugine::Shader::Create(textureVertexSrc, textureFragmentSrc));
+			texture_ = Ugine::Texture2D::Create("assets/textures/container.jpg");
+
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->Bind();
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->SetUniformInt("uTexture", 0);
+		}*/
 	}
 
 	void OnUpdate(Ugine::Timestep ts) override
@@ -183,17 +256,28 @@ public:
 		Ugine::Renderer::BeginScene(camera_);
 			
 		// assign and setup uniform
-		std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader)->Bind();
-		std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader)->SetUniformFloat3("uColor", squareColor_);
+		//std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->Bind();
+		//std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->SetUniformFloat3("uColor", squareColor_);
 
 		glm::mat4 transformMatrix = glm::mat4(1.0f);
-		glm::vec3 position(1.0f, 0.0f, 0.0f);
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-		transformMatrix = glm::translate(glm::mat4(1.0f), position) * scale;
-
-		Ugine::Renderer::Submit(squareShader, squareVA_, transformMatrix);
-		//Ugine::Renderer::Submit(triangleShader_, triangleVertexArray_);
+		//glm::vec3 position(1.0f, 0.0f, 0.0f);
+		//glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		//transformMatrix = glm::translate(glm::mat4(1.0f), position) * scale;
 			
+		//solid square
+		{
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->Bind();
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->SetUniformFloat3("uColor", squareColor_);
+
+			Ugine::Renderer::Submit(squareShader_, squareVA_, transformMatrix);
+		}
+
+		//texture square
+		//{
+		//	texture_->Bind();
+		//	Ugine::Renderer::Submit(textureShader_, textureVA_, transformMatrix);
+		//}
+
 		Ugine::Renderer::EndScene();
 	}
 
@@ -217,8 +301,13 @@ private:
 	//Ugine::Ref<Ugine::Shader> triangleShader_;
 	//Ugine::Ref<Ugine::VertexArray> triangleVertexArray_;
 
-	Ugine::Ref<Ugine::Shader> squareShader;
+	Ugine::Ref<Ugine::Shader> squareShader_;
 	Ugine::Ref<Ugine::VertexArray> squareVA_;
+
+	Ugine::Ref<Ugine::Shader> textureShader_;
+	Ugine::Ref<Ugine::VertexArray> textureVA_;
+
+	Ugine::Ref<Ugine::Texture2D> texture_;
 
 	Ugine::OrthographicCamera camera_;
 	glm::vec3 cameraPosition_;

@@ -98,6 +98,10 @@
       <Project>{5D7B7E10-C98F-A6C1-9211-4A21FEE4A2F2}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\checkBoard.png" />
+    <Image Include="assets\textures\container.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

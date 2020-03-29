@@ -1370,8 +1370,9 @@
     <ClCompile Include="src\ugine\renderer\texture.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\layer.cpp" />
-    <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
+    <ClCompile Include="src\ugine\layer_stack.cpp" />
+    <ClCompile Include="src\ugine\layer.cpp" />
+    <ClCompile Include="external_src\stb_image\stb_image.cc" />
   </ItemGroup>
 </Project>
