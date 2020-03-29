@@ -34,9 +34,11 @@ namespace Ugine
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 		
-		inline Window& GetWindow() { return *window_; }
-		inline static Application& Get() { return *sInstance_; }
+		inline void SetRunning(bool isRunning) { isRunning_ = isRunning; }
+		inline bool IsRunning() { return isRunning_; }
 
+		inline Window& GetWindow() { return *window_; }
+		inline static Application& Get() { return *sInstance; }
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
@@ -47,8 +49,8 @@ namespace Ugine
 		LayerStack layerStack_;
 		float lastFrameTime_ = 0.0f;
 
-	private:
-		static Application* sInstance_;
+	public:
+		static Application* sInstance;
 	};
 
 	// used by client sandbox

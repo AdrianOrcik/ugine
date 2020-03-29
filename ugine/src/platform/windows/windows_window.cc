@@ -8,6 +8,11 @@
 #include "ugine/events/mouse_event.h"
 #include "ugine/events/key_event.h"
 
+#include "ugine/input/input.h"
+#include "ugine/input/key_codes.h"
+
+#include "ugine/application.h"
+
 #include "platform/opengl/opengl_context.h"
 
 namespace Ugine
@@ -155,6 +160,11 @@ namespace Ugine
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(window_);
+
+		// todo: later add layer with basic function 
+		if (Input::IsKeyPressed(INPUT_KEY_ESCAPE)) {
+			Application::sInstance->SetRunning(false);
+		}
 	}
 
 	void WindowsWindow::SetVSync(bool isEnabled)

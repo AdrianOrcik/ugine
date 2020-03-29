@@ -7,12 +7,12 @@
 
 namespace Ugine {
 
-	Application* Application::sInstance_ = nullptr;
+	Application* Application::sInstance = nullptr;
 
 	Application::Application()
 	{
-		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
-		sInstance_ = this;
+		UE_CORE_ASSERT(!sInstance, "Application already exist!");
+		sInstance = this;
 
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_APPLICATION(OnEvent));
