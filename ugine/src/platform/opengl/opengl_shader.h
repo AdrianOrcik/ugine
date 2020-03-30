@@ -27,6 +27,7 @@ namespace Ugine
 		void SetUniformMat4(const std::string& name, const glm::mat4& matrix);
 	
 	private:
+		// todo: refactor -> currently case sensitive as fuck 
 		std::string ReadFile(const std::string& filePath);
 		std::unordered_map<unsigned int, std::string> PreProcess(const std::string& source);
 		void Compile(const std::unordered_map<unsigned int, std::string>& shaderSource);
