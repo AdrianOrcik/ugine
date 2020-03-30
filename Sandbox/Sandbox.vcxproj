@@ -103,6 +103,9 @@
     <Image Include="assets\textures\checkBoard.png" />
     <Image Include="assets\textures\container.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\texture.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

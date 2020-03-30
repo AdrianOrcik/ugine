@@ -181,7 +181,7 @@ public:
 
 			textureVA_->SetIndexBuffer(textureIB);
 
-			std::string textureVertexSrc = R"(
+		/*	std::string textureVertexSrc = R"(
 				#version 330 core
 
 				layout(location = 0) in vec3 aPosition;
@@ -213,9 +213,10 @@ public:
 				{
 					color = texture(uTexture,vTexCoord) * vec4(uColor,1.0f);
 				}
-			)";
+			)";*/
 
-			textureShader_.reset(Ugine::Shader::Create(textureVertexSrc, textureFragmentSrc));
+			//textureShader_.reset(Ugine::Shader::Create(textureVertexSrc, textureFragmentSrc));
+			textureShader_.reset(Ugine::Shader::Create("assets/shaders/texture.glsl"));
 
 			texture_ = Ugine::Texture2D::Create("assets/textures/container.jpg");
 
