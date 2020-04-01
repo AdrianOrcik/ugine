@@ -9,12 +9,14 @@ namespace Ugine
 	{
 	public:
 		OpenGLShader(const std::string& filePath);
-		OpenGLShader(const std::string& vertexSrc, const std::string fragmentSrc);
+		OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string fragmentSrc);
 		virtual ~OpenGLShader();
 
 		// Inherited via Shader
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+
+		virtual const std::string & GetName() const override { return name_; };
 
 		void SetUniformInt(const std::string& name, int value);
 		
@@ -34,5 +36,6 @@ namespace Ugine
 
 	private:
 		uint32_t rendererID_;
+		std::string name_;
 	};
 }

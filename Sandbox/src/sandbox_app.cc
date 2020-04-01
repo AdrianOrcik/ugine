@@ -216,13 +216,14 @@ public:
 			)";*/
 
 			//textureShader_.reset(Ugine::Shader::Create(textureVertexSrc, textureFragmentSrc));
-			textureShader_.reset(Ugine::Shader::Create("assets/shaders/texture.glsl"));
+			//textureShader_.reset(Ugine::Shader::Create("assets/shaders/texture.glsl"));
+			auto textureShader = sharedLibrary_.Load("assets/shaders/texture.glsl");
 
 			texture_ = Ugine::Texture2D::Create("assets/textures/container.jpg");
 
-			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->Bind();
-			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->SetUniformInt("uTexture", 0);
-			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader_)->SetUniformFloat3("uColor", squareColor_);
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader)->Bind();
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader)->SetUniformInt("uTexture", 0);
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader)->SetUniformFloat3("uColor", squareColor_);
 		}
 	}
 
@@ -275,8 +276,10 @@ public:
 
 		//texture square
 		{
+			auto textureShader = sharedLibrary_.Get("texture");
 			texture_->Bind(0);
-			Ugine::Renderer::Submit(textureShader_, textureVA_, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+			std::dynamic_pointer_cast<Ugine::OpenGLShader>(textureShader)->SetUniformFloat3("uColor", squareColor_);
+			Ugine::Renderer::Submit(textureShader, textureVA_, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		}
 
 		Ugine::Renderer::EndScene();
@@ -302,10 +305,12 @@ private:
 	//Ugine::Ref<Ugine::Shader> triangleShader_;
 	//Ugine::Ref<Ugine::VertexArray> triangleVertexArray_;
 
-	Ugine::Ref<Ugine::Shader> squareShader_;
+	Ugine::ShaderLibrary sharedLibrary_;
+
+	//Ugine::Ref<Ugine::Shader> squareShader_;
 	Ugine::Ref<Ugine::VertexArray> squareVA_;
 
-	Ugine::Ref<Ugine::Shader> textureShader_;
+	//Ugine::Ref<Ugine::Shader> textureShader_;
 	Ugine::Ref<Ugine::VertexArray> textureVA_;
 
 	Ugine::Ref<Ugine::Texture2D> texture_;

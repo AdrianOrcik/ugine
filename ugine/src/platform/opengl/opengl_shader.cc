@@ -25,10 +25,18 @@ namespace Ugine
 		std::string source = ReadFile(filePath);
 		auto shaderSource = PreProcess(source);
 		Compile(shaderSource);
+
+		// Extract name from filepath
+		auto lastSlash = filePath.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = filePath.rfind('.');
+		auto count = lastDot == std::string::npos ? filePath.size() - lastSlash : lastDot - lastSlash;
+		name_ = filePath.substr(lastSlash, count);
 	}
 
-	Ugine::OpenGLShader::OpenGLShader(const std::string & vertexSrc, const std::string fragmentSrc)
-	{
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string & vertexSrc, const std::string fragmentSrc)
+		:name_(name)
+	{		
 		std::unordered_map<unsigned int, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -44,7 +52,7 @@ namespace Ugine
 	{
 		std::string result;
 		// todo: check this
-		std::ifstream in(filePath, std::ios::in, std::ios::binary);
+		std::ifstream in(filePath, std::ios::in | std::ios::binary);
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
@@ -85,11 +93,14 @@ namespace Ugine
 		return shaderSources;
 	}
 
-	void OpenGLShader::Compile(const std::unordered_map<unsigned int, std::string>& shaderSource)
+	void OpenGLShader::Compile(const std::unordered_map<unsigned int, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<unsigned int> glShaderIds(shaderSource.size());
-		for (auto& kv : shaderSource)
+		UE_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
+		std::array<GLenum, 2> glShaderIDs;
+
+		int glShaderIDIndex = 0;
+		for (auto& kv : shaderSources)
 		{
 			GLenum type = kv.first;
 			const std::string& source = kv.second;
@@ -117,7 +128,7 @@ namespace Ugine
 			}
 
 			glAttachShader(program, shader);
-			glShaderIds.push_back(shader);
+			glShaderIDs[glShaderIDIndex++] = shader;
 		}
 
 		rendererID_ = program;
@@ -135,7 +146,7 @@ namespace Ugine
 
 			glDeleteProgram(program);
 
-			for (auto id : glShaderIds)
+			for (auto id : glShaderIDs)
 				glDeleteShader(id);
 
 
@@ -144,7 +155,7 @@ namespace Ugine
 			return;
 		}
 
-		for (auto id : glShaderIds)
+		for (auto id : glShaderIDs)
 			glDetachShader(program, id);
 
 	}
