@@ -1,6 +1,9 @@
 #include "uepch.h"
 #include "windows_input.h"
 
+#include "ugine/input/input.h"
+#include "ugine/input/key_codes.h"
+
 #include "ugine/application.h"
 #include "GLFW/glfw3.h"
 
@@ -43,6 +46,11 @@ namespace Ugine
 	{
 		auto[x, y] = GetMousePositionImpl();
 		return y;
+	}
+
+	bool WindowsInput::IsExitButtonPressedImpl()
+	{
+		return Input::IsKeyPressed(INPUT_KEY_ESCAPE);
 	}
 
 }

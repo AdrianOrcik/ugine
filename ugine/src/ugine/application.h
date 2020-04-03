@@ -34,23 +34,21 @@ namespace Ugine
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 		
-		inline void SetRunning(bool isRunning) { isRunning_ = isRunning; }
 		inline bool IsRunning() { return isRunning_; }
 
 		inline Window& GetWindow() { return *window_; }
-		inline static Application& Get() { return *sInstance; }
+		inline static Application& Get() { return *sInstance_; }
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
+		void AppPoolInput();
 
 		std::unique_ptr<Window> window_;
 		ImGuiLayer* imGuiLayer_;
 		bool isRunning_ = true;
 		LayerStack layerStack_;
 		float lastFrameTime_ = 0.0f;
-
-	public:
-		static Application* sInstance;
+		static Application* sInstance_;
 	};
 
 	// used by client sandbox

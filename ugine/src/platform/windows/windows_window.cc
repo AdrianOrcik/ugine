@@ -160,11 +160,6 @@ namespace Ugine
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(window_);
-
-		// todo: later add layer with basic function 
-		if (Input::IsKeyPressed(INPUT_KEY_ESCAPE)) {
-			Application::sInstance->SetRunning(false);
-		}
 	}
 
 	void WindowsWindow::SetVSync(bool isEnabled)

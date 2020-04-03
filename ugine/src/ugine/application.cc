@@ -4,15 +4,16 @@
 #include "log.h"
 #include <GLFW/glfw3.h>
 #include "ugine/renderer/renderer.h"
+#include "ugine/input/input.h"
 
 namespace Ugine {
 
-	Application* Application::sInstance = nullptr;
+	Application* Application::sInstance_ = nullptr;
 
 	Application::Application()
 	{
-		UE_CORE_ASSERT(!sInstance, "Application already exist!");
-		sInstance = this;
+		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
+		sInstance_ = this;
 
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_APPLICATION(OnEvent));
@@ -73,6 +74,7 @@ namespace Ugine {
 			imGuiLayer_->End();
 
 			window_->OnUpdate();
+			AppPoolInput();
 		}
 	}
 
@@ -80,6 +82,12 @@ namespace Ugine {
 	{
 		isRunning_ = false;
 		return true;
+	}
+
+	void Application::AppPoolInput()
+	{
+		if (Input::IsExitButtonPressed())
+			isRunning_ = false;
 	}
 
 }
