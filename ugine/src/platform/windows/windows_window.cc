@@ -8,9 +8,6 @@
 #include "ugine/events/mouse_event.h"
 #include "ugine/events/key_event.h"
 
-#include "ugine/input/input.h"
-#include "ugine/input/key_codes.h"
-
 #include "ugine/application.h"
 
 #include "platform/opengl/opengl_context.h"
