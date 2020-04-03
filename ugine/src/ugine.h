@@ -11,6 +11,7 @@
 #include "ugine/input/input.h"
 #include "ugine/input/key_codes.h"
 #include "ugine/input/mouse_button_codes.h"
+#include "ugine/camera/ortho_camera_controller.h"
 
 #include "ugine/imgui/imgui_layer.h"
 

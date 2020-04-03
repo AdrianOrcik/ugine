@@ -11,7 +11,7 @@ class ExampleLayer : public Ugine::Layer
 {
 public:
 	ExampleLayer()
-		:Layer("Example"), camera_(-1.6f, 1.6f, -0.9f, 0.9f), cameraPosition_(0.0f)
+		:Layer("Example"), cameraController_(1280.0f / 720.0f)
 	{
 	/*	// RENDER TRIANGLE
 		{
@@ -234,28 +234,32 @@ public:
 		//if (Ugine::Input::IsKeyPressed(INPUT_KEY_SPACE))
 		//	LOG_TRACE("Pressed");
 
-		if (Ugine::Input::IsKeyPressed(INPUT_KEY_LEFT))
-			cameraPosition_.x -= cameraMoveSpeed_ * ts;
-		else if (Ugine::Input::IsKeyPressed(INPUT_KEY_RIGHT))
-			cameraPosition_.x += cameraMoveSpeed_ * ts;
+		//if (Ugine::Input::IsKeyPressed(INPUT_KEY_LEFT))
+		//	cameraPosition_.x -= cameraMoveSpeed_ * ts;
+		//else if (Ugine::Input::IsKeyPressed(INPUT_KEY_RIGHT))
+		//	cameraPosition_.x += cameraMoveSpeed_ * ts;
 
-		if (Ugine::Input::IsKeyPressed(INPUT_KEY_UP))
-			cameraPosition_.y += cameraMoveSpeed_ * ts;
-		else if (Ugine::Input::IsKeyPressed(INPUT_KEY_DOWN))
-			cameraPosition_.y -= cameraMoveSpeed_ * ts;
+		//if (Ugine::Input::IsKeyPressed(INPUT_KEY_UP))
+		//	cameraPosition_.y += cameraMoveSpeed_ * ts;
+		//else if (Ugine::Input::IsKeyPressed(INPUT_KEY_DOWN))
+		//	cameraPosition_.y -= cameraMoveSpeed_ * ts;
 
-		if (Ugine::Input::IsKeyPressed(INPUT_KEY_A))
-			cameraRotation_ += cameraRotationSpeed_ * ts;
-		if (Ugine::Input::IsKeyPressed(INPUT_KEY_D))
-			cameraRotation_ -= cameraRotationSpeed_ * ts;
-		
+		//if (Ugine::Input::IsKeyPressed(INPUT_KEY_A))
+		//	cameraRotation_ += cameraRotationSpeed_ * ts;
+		//if (Ugine::Input::IsKeyPressed(INPUT_KEY_D))
+		//	cameraRotation_ -= cameraRotationSpeed_ * ts;
+
+		// camera update
+		cameraController_.OnUpdate(ts);
+
+		// render
 		Ugine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0 });
 		Ugine::RenderCommand::Clear();
 
-		camera_.SetPosition(cameraPosition_);
-		camera_.SetRotation(cameraRotation_);
+		//camera_.SetPosition(cameraPosition_);
+		//camera_.SetRotation(cameraRotation_);
 
-		Ugine::Renderer::BeginScene(camera_);
+		Ugine::Renderer::BeginScene(cameraController_.GetCamera());
 			
 		// assign and setup uniform
 		//std::dynamic_pointer_cast<Ugine::OpenGLShader>(squareShader_)->Bind();
@@ -285,9 +289,10 @@ public:
 		Ugine::Renderer::EndScene();
 	}
 
-	void OnEvent(Ugine::Event& event) override
+	void OnEvent(Ugine::Event& e) override
 	{
-		LOG_INFO("{0}", event);
+		cameraController_.OnEvent(e);
+		LOG_INFO("{0}", e);
 	}
 
 	virtual void OnImGuiRender() override
@@ -315,13 +320,14 @@ private:
 
 	Ugine::Ref<Ugine::Texture2D> texture_;
 
-	Ugine::OrthographicCamera camera_;
+	//Ugine::OrthographicCamera camera_;
 	glm::vec3 cameraPosition_;
 	float cameraMoveSpeed_ = 5.0f;
 
 	float cameraRotation_ = 0.0f;
 	float cameraRotationSpeed_ = 180.0f;
 
+	Ugine::OrthographicCameraController cameraController_;
 	glm::vec3 squareColor_ = { 1.0f, 1.0f, 1.0f };
 };
 
