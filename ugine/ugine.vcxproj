@@ -489,6 +489,7 @@
     <ClInclude Include="src\uepch.h" />
     <ClInclude Include="src\ugine.h" />
     <ClInclude Include="src\ugine\application.h" />
+    <ClInclude Include="src\ugine\camera\ortho_camera_controller.h" />
     <ClInclude Include="src\ugine\core.h" />
     <ClInclude Include="src\ugine\core\timestep.h" />
     <ClInclude Include="src\ugine\entry_point.h" />
@@ -529,6 +530,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\ugine\application.cc" />
+    <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc" />
     <ClCompile Include="src\ugine\imgui\imgui_build.cc" />
     <ClCompile Include="src\ugine\imgui\imgui_layer.cc" />
     <ClCompile Include="src\ugine\layer.cpp" />

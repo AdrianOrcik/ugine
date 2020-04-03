@@ -1308,6 +1308,7 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\camera\ortho_camera_controller.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\opengl\opengl_buffer.cc">
@@ -1374,5 +1375,6 @@
     <ClCompile Include="src\ugine\layer_stack.cpp" />
     <ClCompile Include="src\ugine\layer.cpp" />
     <ClCompile Include="external_src\stb_image\stb_image.cc" />
+    <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc" />
   </ItemGroup>
 </Project>
