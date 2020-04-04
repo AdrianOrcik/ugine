@@ -41,11 +41,13 @@ namespace Ugine
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 		void AppPoolInput();
 
 		std::unique_ptr<Window> window_;
 		ImGuiLayer* imGuiLayer_;
 		bool isRunning_ = true;
+		bool isMinimized_ = false;
 		LayerStack layerStack_;
 		float lastFrameTime_ = 0.0f;
 		static Application* sInstance_;

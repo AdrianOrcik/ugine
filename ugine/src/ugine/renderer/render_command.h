@@ -28,6 +28,11 @@ namespace Ugine
 			sRendererAPI->DrawIndexed(vertexArray);
 		}
 
+		inline static void SetViewport(uint32_t width, uint32_t height)
+		{
+			sRendererAPI->SetViewport(0, 0, width, height);
+		}
+
 	private:
 		static RendererAPI* sRendererAPI;
 	};

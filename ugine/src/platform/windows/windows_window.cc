@@ -73,6 +73,16 @@ namespace Ugine
 			data.EventCallback(event);
 		});
 
+		glfwSetWindowSizeCallback(window_, [](GLFWwindow* window, int width, int height)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			data.width = width;
+			data.height = height;
+
+			WindowResizeEvent event(width, height);
+			data.EventCallback(event);
+		});
+
 		glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);

@@ -19,6 +19,9 @@ namespace Ugine {
 		OrthographicCamera& GetCamera() { return camera_; }
 		const OrthographicCamera& GetCamera() const { return camera_; }
 
+		float GetZoomLevel() const { return zoomLevel_; }
+		void SetZoomLevel(float level) { zoomLevel_ = level; }
+
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);

@@ -44,7 +44,8 @@ namespace Ugine {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_APPLICATION(OnWindowClose));
-		
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_APPLICATION(OnWindowResize));
+
 		//CORE_LOG_TRACE("{0}", e);
 
 		for (auto it = layerStack_.end(); it != layerStack_.begin();)
@@ -59,13 +60,14 @@ namespace Ugine {
 	{
 		while (isRunning_)
 		{
-		
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - lastFrameTime_;
 			lastFrameTime_ = time;
 
-			for (Layer* layer : layerStack_)
-				layer->OnUpdate(timestep);
+			if(!isMinimized_){
+				for (Layer* layer : layerStack_)
+					layer->OnUpdate(timestep);
+			}
 
 			// application gui render
 			imGuiLayer_->Begin();
@@ -82,6 +84,20 @@ namespace Ugine {
 	{
 		isRunning_ = false;
 		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent & e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			isMinimized_ = true;
+			return false;
+		}
+
+		isMinimized_ = false;
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 
 	void Application::AppPoolInput()

@@ -13,6 +13,11 @@ namespace Ugine
 		RenderCommand::Init();
 	}
 
+	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
+	{
+		RenderCommand::SetViewport(width, height);
+	}
+
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
 		sSceneData_->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
