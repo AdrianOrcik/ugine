@@ -104,7 +104,8 @@
     <Image Include="assets\textures\container.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\texture.glsl" />
+    <None Include="assets\shaders\FlatColor.glsl" />
+    <None Include="assets\shaders\Texture.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
