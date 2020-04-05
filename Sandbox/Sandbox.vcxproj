@@ -91,6 +91,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\layers\example_layer.h" />
+    <ClInclude Include="src\layers\sandbox_2d.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc" />
     <ClCompile Include="src\layers\sandbox_2d.cc" />
     <ClCompile Include="src\sandbox_app.cc" />
@@ -101,17 +105,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\textures\ball.png" />
-    <Image Include="assets\textures\checkBoard.png" />
     <Image Include="assets\textures\container.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\FlatColor.glsl" />
     <None Include="assets\shaders\Texture.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\layers\example_layer.h" />
-    <ClInclude Include="src\layers\sandbox_2d.h" />
+    <None Include="imgui.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
