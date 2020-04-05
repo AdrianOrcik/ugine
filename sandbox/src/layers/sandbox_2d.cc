@@ -39,6 +39,7 @@ void Sandbox2D::OnAttach()
 
 void Sandbox2D::OnDetach()
 {
+
 }
 
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
@@ -50,7 +51,7 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 	Ugine::Renderer::BeginScene(cameraController_.GetCamera());
 
 	std::dynamic_pointer_cast<Ugine::OpenGLShader>(flatColorShader_)->Bind();
-	std::dynamic_pointer_cast<Ugine::OpenGLShader>(flatColorShader_)->SetUniformFloat3("uColor", squareColor_);
+	std::dynamic_pointer_cast<Ugine::OpenGLShader>(flatColorShader_)->SetUniformFloat4("uColor", squareColor_);
 
 	Ugine::Renderer::Submit(flatColorShader_, squareVA_, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 	Ugine::Renderer::EndScene();

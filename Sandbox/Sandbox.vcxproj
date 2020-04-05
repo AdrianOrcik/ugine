@@ -91,6 +91,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\layers\example_layer.cc" />
+    <ClCompile Include="src\layers\sandbox_2d.cc" />
     <ClCompile Include="src\sandbox_app.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,10 @@
   <ItemGroup>
     <None Include="assets\shaders\FlatColor.glsl" />
     <None Include="assets\shaders\Texture.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\layers\example_layer.h" />
+    <ClInclude Include="src\layers\sandbox_2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

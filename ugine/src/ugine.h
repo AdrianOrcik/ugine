@@ -29,6 +29,4 @@
 #include "ugine/layer.h"
 #include "ugine/layer_stack.h"
 
-//  entry points
-#include "ugine/entry_point.h"
 
