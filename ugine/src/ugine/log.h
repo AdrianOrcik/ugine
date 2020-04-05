@@ -5,6 +5,8 @@
 #include "spdlog/fmt/ostr.h"
 #include <fstream>
 
+// todo: add more specific macros
+// todo: implement realtime logging errors into files
 namespace Ugine
 {
 	class UE_API Log
@@ -28,8 +30,6 @@ namespace Ugine
 	};
 }
 
-// todo: add more specific macros
-
 // core log macros
 #define CORE_LOG_TRACE(...){ ::Ugine::Log::GetCoreLogger()->trace(__VA_ARGS__);			\
 							 ::Ugine::Log::GetCoreExportLogger()->trace(__VA_ARGS__);	\
@@ -47,9 +47,6 @@ namespace Ugine
 								::Ugine::Log::GetCoreExportLogger()->error(__VA_ARGS__);	\
 }
 
-#define CORE_LOG_FATAL(...){	::Ugine::Log::GetCoreLogger()->fatal(__VA_ARGS__);			\
-								::Ugine::Log::GetCoreExportLogger()->error(__VA_ARGS__);	\
-}
 
 // client log macros
 #define LOG_TRACE(...){ ::Ugine::Log::GetClientLogger()->trace(__VA_ARGS__);			\
@@ -65,9 +62,5 @@ namespace Ugine
 }
 
 #define LOG_ERROR(...){	::Ugine::Log::GetClientLogger()->error(__VA_ARGS__);		\
-						::Ugine::Log::GetClientExportLogger()->error(__VA_ARGS__);	\
-}
-
-#define LOG_FATAL(...){	::Ugine::Log::GetClientLogger()->fatal(__VA_ARGS__);			\
 						::Ugine::Log::GetClientExportLogger()->error(__VA_ARGS__);	\
 }

@@ -2,6 +2,7 @@
 
 #include "application.h"
 #include "log.h"
+
 #include <GLFW/glfw3.h>
 #include "ugine/renderer/renderer.h"
 #include "ugine/input/input.h"

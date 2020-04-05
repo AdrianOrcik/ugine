@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ugine/core.h"
+#include "ugine/log.h"
 
 #include <cstdint>
 

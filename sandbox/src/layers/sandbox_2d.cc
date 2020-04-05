@@ -6,6 +6,9 @@
 
 #include "platform/opengl/opengl_shader.h"
 
+//todo: root assets structure copy to bin build folder during building process
+//		or somehow make references
+
 Sandbox2D::Sandbox2D()
 	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f)
 {

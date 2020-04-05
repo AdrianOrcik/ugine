@@ -63,7 +63,7 @@ namespace Ugine
 		}
 		else
 		{
-			UE_CORE_ERROR("Could not open file '{0}'", filePath);
+			UE_CORE_ASSERT("Could not open file '{0}'", filePath);
 		}
 
 		return result;
@@ -122,7 +122,7 @@ namespace Ugine
 				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
 				glDeleteShader(shader);
 
-				UE_CORE_ERROR("{0}", infoLog.data());
+				CORE_LOG_ERROR("{0}", infoLog.data());
 				UE_CORE_ASSERT(false, "Shader compilation failure!");
 				break;
 			}
@@ -150,7 +150,7 @@ namespace Ugine
 				glDeleteShader(id);
 
 
-			UE_CORE_ERROR("{0}", infoLog.data());
+			CORE_LOG_ERROR("{0}", infoLog.data());
 			UE_CORE_ASSERT(false, "Shader link failure!");
 			return;
 		}

@@ -1,5 +1,7 @@
 #include "uepch.h"
+
 #include "opengl_vertex_array.h"
+#include "ugine/log.h"
 
 #include <glad/glad.h>
 

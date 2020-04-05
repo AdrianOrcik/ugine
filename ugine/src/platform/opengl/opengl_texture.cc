@@ -2,6 +2,7 @@
 #include "opengl_texture.h"
 
 #include "stb_image.h"
+#include "ugine/log.h"
 
 #include <glad/glad.h>
 

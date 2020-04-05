@@ -1,6 +1,7 @@
 #include "uepch.h"
-#include "texture.h"
 
+#include "texture.h"
+#include "ugine/log.h"
 #include "renderer.h"
 #include "platform/opengl/opengl_texture.h"
 

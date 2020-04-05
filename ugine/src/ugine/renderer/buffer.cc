@@ -2,6 +2,7 @@
 #include "buffer.h"
 
 #include "renderer.h"
+#include "ugine/log.h"
 
 #include "platform/opengl/opengl_buffer.h"
 #include "ugine/core.h"
