@@ -4,6 +4,7 @@
 #include<glm/gtc/matrix_transform.hpp>
 #include<glm/gtc/type_ptr.hpp>
 
+#include "ugine/ecs/entity_manager.h"
 #include "platform/opengl/opengl_shader.h"
 
 //todo: root assets structure copy to bin build folder during building process
@@ -12,6 +13,7 @@
 Sandbox2D::Sandbox2D()
 	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f)
 {
+
 }
 
 void Sandbox2D::OnAttach()
@@ -38,6 +40,11 @@ void Sandbox2D::OnAttach()
 	squareVA_->SetIndexBuffer(squareIB);
 
 	flatColorShader_ = Ugine::Shader::Create("assets/shaders/FlatColor.glsl");
+
+	
+	Ugine::Entity& gameObject(entityManager_.AddEntity("gameobject"));
+	gameObject.AddComponent<Ugine::Transform>(5, 1);
+	
 }
 
 void Sandbox2D::OnDetach()
@@ -47,6 +54,12 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 {
+	// entities Update
+	entityManager_.OnUpdate(ts);
+
+	// camera update
+	cameraController_.OnUpdate(ts);
+
 	// camera update
 	Ugine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Ugine::RenderCommand::Clear();

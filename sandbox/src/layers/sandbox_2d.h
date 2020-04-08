@@ -16,6 +16,7 @@ public:
 
 private:
 	Ugine::OrthographicCameraController cameraController_;
+	Ugine::EntityManager entityManager_;
 
 	// tmp
 	Ugine::Ref<Ugine::VertexArray> squareVA_;
