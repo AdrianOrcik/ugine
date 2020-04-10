@@ -3,36 +3,52 @@
 #include <vector>
 #include "ugine/log.h"
 
-class Entity;
-void Ugine::EntityManager::ClearData()
+//class Entity;
+//void Ugine::EntityManager::ClearData()
+//{
+//	for (auto& entity : entities_) 
+//	{
+//		entity->Destroy();
+//	}
+//}
+//
+//void Ugine::EntityManager::OnUpdate(Timestep dt)
+//{
+//	for(auto& entity: entities_)
+//	{
+//		entity->OnUpdate(dt);
+//	}
+//}
+//
+//bool Ugine::EntityManager::HasEntities() const
+//{
+//	return entities_.size() > 0;
+//}
+//
+//Ugine::Entity& Ugine::EntityManager::AddEntity(std::string entityName)
+//{
+//	Entity *entity = new Entity(*this, entityName);
+//	entities_.emplace_back(entity);
+//	return *entity;
+//}
+//
+//unsigned int Ugine::EntityManager::GetEntityCount()
+//{
+//	return 0;
+//}
+
+namespace Ugine
 {
-	for (auto& entity : entities_) 
+	void Ugine::EntityManager::OnUpdate(Timestep dt)
 	{
-		entity->Destroy();
+		for(auto& entity: entities_)
+		{
+			entity->OnUpdate(dt);
+		}
 	}
-}
 
-void Ugine::EntityManager::OnUpdate(Timestep dt)
-{
-	for(auto& entity: entities_)
+	void Ugine::EntityManager::AddEntity(Entity* entity)
 	{
-		entity->OnUpdate(dt);
+		entities_.emplace_back(entity);
 	}
-}
-
-bool Ugine::EntityManager::HasEntities() const
-{
-	return entities_.size() > 0;
-}
-
-Ugine::Entity& Ugine::EntityManager::AddEntity(std::string entityName)
-{
-	Entity *entity = new Entity(*this, entityName);
-	entities_.emplace_back(entity);
-	return *entity;
-}
-
-unsigned int Ugine::EntityManager::GetEntityCount()
-{
-	return 0;
 }

@@ -7,21 +7,35 @@
 
 namespace Ugine
 {
+	//class EntityManager
+	//{
+	//public:
+	//	EntityManager() = default;
+	//	virtual ~EntityManager() = default;
+
+	//	void ClearData();
+	//	void OnUpdate(Timestep dt);
+	//	bool HasEntities() const;
+
+	//	Entity& AddEntity(std::string entityName);
+	//	std::vector<Entity*> GetEntities() const { return entities_; }
+	//	unsigned int GetEntityCount();
+
+	//	//void Render(); todo: implement
+	//private:
+	//	std::vector<Entity*> entities_;
+	//};
+
+	class Entity;
 	class EntityManager
 	{
 	public:
 		EntityManager() = default;
 		virtual ~EntityManager() = default;
 
-		void ClearData();
 		void OnUpdate(Timestep dt);
-		bool HasEntities() const;
+		void AddEntity(Entity* entity);
 
-		Entity& AddEntity(std::string entityName);
-		std::vector<Entity*> GetEntities() const { return entities_; }
-		unsigned int GetEntityCount();
-
-		//void Render(); todo: implement
 	private:
 		std::vector<Entity*> entities_;
 	};
