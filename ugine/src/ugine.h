@@ -30,8 +30,10 @@
 #include "ugine/layer_stack.h"
 
 // ecs
+#include "ugine/ecs/ecs.h"
 #include "ugine/ecs/entity_manager.h"
 #include "ugine/ecs/entity.h"
 #include "ugine/ecs/component.h"
 #include "ugine/ecs/components/transform.h"
+
 

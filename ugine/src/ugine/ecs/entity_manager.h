@@ -35,6 +35,7 @@ namespace Ugine
 
 		void OnUpdate(Timestep dt);
 		void AddEntity(Entity* entity);
+		Entity* GetEntity(const std::string name);
 
 	private:
 		std::vector<Entity*> entities_;

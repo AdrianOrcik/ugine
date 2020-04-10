@@ -47,6 +47,7 @@
 namespace Ugine
 {
 	class Component;
+
 	class Entity
 	{
 	public:

@@ -4,8 +4,6 @@
 #include<glm/gtc/matrix_transform.hpp>
 #include<glm/gtc/type_ptr.hpp>
 
-#include "ugine/ecs/entity_manager.h"
-#include "ugine/ecs/entity.h"
 #include "platform/opengl/opengl_shader.h"
 
 //todo: root assets structure copy to bin build folder during building process
@@ -42,17 +40,9 @@ void Sandbox2D::OnAttach()
 
 	flatColorShader_ = Ugine::Shader::Create("assets/shaders/FlatColor.glsl");
 
-	//todo: ECS vytvori Entity a vrati smernik a zaroven ju zaradi do stacku
-	Ugine::Entity* gameObject = new Ugine::Entity("GO");
-	gameObject->AddComponent<Ugine::Transform>(5, 1);
-	gameObject->OnUpdate(0);
-	LOG_TRACE("Obj: {0}", gameObject->GetName());
-	
-	entityManager_.AddEntity(gameObject);
+	Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
+	gameObject->AddComponent<Ugine::Transform>(5, 5);
 
-	//Ugine::Entity& gameObject(entityManager_.AddEntity("gameobject"));
-	//gameObject.AddComponent<Ugine::Transform>(5, 1);
-	
 }
 
 void Sandbox2D::OnDetach()
@@ -63,8 +53,9 @@ void Sandbox2D::OnDetach()
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 {
 	// entities Update
-	entityManager_.OnUpdate(ts);
-
+	//entityManager_.OnUpdate(ts);
+	Ugine::ECS::Update(ts);
+	
 	// camera update
 	cameraController_.OnUpdate(ts);
 

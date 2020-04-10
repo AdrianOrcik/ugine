@@ -39,6 +39,7 @@
 
 namespace Ugine
 {
+
 	void Ugine::EntityManager::OnUpdate(Timestep dt)
 	{
 		for(auto& entity: entities_)
@@ -50,5 +51,18 @@ namespace Ugine
 	void Ugine::EntityManager::AddEntity(Entity* entity)
 	{
 		entities_.emplace_back(entity);
+	}
+
+	Entity * EntityManager::GetEntity(const std::string name)
+	{
+		for (auto& entity : entities_)
+		{
+			if (entity->GetName().compare(name))
+				return entity;
+		}
+
+		LOG_ERROR("EntityManager::GetEntity::EntityIsNULL");
+		LOG_ERROR("name '{0}' does not exist!");
+		return nullptr;
 	}
 }
