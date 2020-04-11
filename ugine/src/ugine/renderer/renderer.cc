@@ -2,6 +2,7 @@
 #include "renderer.h"
 
 #include "platform/opengl/opengl_shader.h"
+#include "renderer_2d.h"
 
 namespace Ugine
 {
@@ -11,6 +12,7 @@ namespace Ugine
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)

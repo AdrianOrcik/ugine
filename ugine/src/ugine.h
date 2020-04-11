@@ -17,6 +17,7 @@
 
 // renderer
 #include "ugine/renderer/renderer.h"
+#include "ugine/renderer/renderer_2d.h"
 #include "ugine/renderer/render_command.h"
 
 #include "ugine/renderer/buffer.h"

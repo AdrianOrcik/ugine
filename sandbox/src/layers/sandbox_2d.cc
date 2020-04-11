@@ -17,31 +17,9 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-	squareVA_ = Ugine::VertexArray::Create();
-	float squareVertices[5 * 4] = {
-	-0.5f, -0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
-	 0.5f,  0.5f, 0.0f,
-	-0.5f,  0.5f, 0.0f
-	};
-
-	Ugine::Ref<Ugine::VertexBuffer> squareVB;
-	squareVB.reset(Ugine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-	squareVB->SetLayout({
-		{Ugine::ShaderDataType::Float3, "aPosition"}
-	});
-	squareVA_->AddVertexBuffer(squareVB);
-
-	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-	Ugine::Ref<Ugine::IndexBuffer> squareIB;
-	//todo: implement square indices count formula into index buffer
-	squareIB.reset(Ugine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
-	squareVA_->SetIndexBuffer(squareIB);
-
-	flatColorShader_ = Ugine::Shader::Create("assets/shaders/FlatColor.glsl");
-
-	Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
-	gameObject->AddComponent<Ugine::Transform>(5, 5);
+	//ECS implementation
+	//Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
+	//gameObject->AddComponent<Ugine::Transform>(5, 5);
 
 }
 
@@ -53,23 +31,18 @@ void Sandbox2D::OnDetach()
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 {
 	// entities Update
-	//entityManager_.OnUpdate(ts);
-	Ugine::ECS::Update(ts);
-	
+	//Ugine::ECS::Update(ts);
+
 	// camera update
 	cameraController_.OnUpdate(ts);
 
-	// camera update
-	Ugine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+	// render
+	Ugine::RenderCommand::SetClearColor({ 0.1f,0.1f,0.1f,1 });
 	Ugine::RenderCommand::Clear();
 
-	Ugine::Renderer::BeginScene(cameraController_.GetCamera());
-
-	std::dynamic_pointer_cast<Ugine::OpenGLShader>(flatColorShader_)->Bind();
-	std::dynamic_pointer_cast<Ugine::OpenGLShader>(flatColorShader_)->SetUniformFloat4("uColor", squareColor_);
-
-	Ugine::Renderer::Submit(flatColorShader_, squareVA_, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-	Ugine::Renderer::EndScene();
+	Ugine::Renderer2D::BegineScene(cameraController_.GetCamera());
+	Ugine::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Ugine::Renderer2D::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender()

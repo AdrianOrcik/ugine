@@ -19,6 +19,8 @@ namespace Ugine {
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_APPLICATION(OnEvent));
 
+		Renderer::Init();
+
 		imGuiLayer_ = new ImGuiLayer();
 		PushOverlay(imGuiLayer_);
 	}
