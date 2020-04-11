@@ -4,8 +4,6 @@
 #include<glm/gtc/matrix_transform.hpp>
 #include<glm/gtc/type_ptr.hpp>
 
-#include "platform/opengl/opengl_shader.h"
-
 //todo: root assets structure copy to bin build folder during building process
 //		or somehow make references
 
@@ -21,6 +19,8 @@ void Sandbox2D::OnAttach()
 	//Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
 	//gameObject->AddComponent<Ugine::Transform>(5, 5);
 
+	texture_ = Ugine::Texture2D::Create("assets/textures/container.jpg");
+
 }
 
 void Sandbox2D::OnDetach()
@@ -29,7 +29,7 @@ void Sandbox2D::OnDetach()
 }
 
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
-{
+{\
 	// entities Update
 	//Ugine::ECS::Update(ts);
 
@@ -41,7 +41,9 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 	Ugine::RenderCommand::Clear();
 
 	Ugine::Renderer2D::BegineScene(cameraController_.GetCamera());
-	Ugine::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Ugine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Ugine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
+	Ugine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, texture_);
 	Ugine::Renderer2D::EndScene();
 }
 

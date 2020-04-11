@@ -35,6 +35,9 @@ Ugine::OpenGLTexture2D::OpenGLTexture2D(const std::string & path)
 	glTextureParameteri(rendererID_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(rendererID_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+	glTextureParameteri(rendererID_, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTextureParameteri(rendererID_, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	// note: use for texture update
 	//glTextureSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, GL_RGB, GL_UNSIGNED_BYTE, data);
 

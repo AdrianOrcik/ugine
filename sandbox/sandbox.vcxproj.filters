@@ -6,17 +6,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\layers\example_layer.h">
-      <Filter>layers</Filter>
-    </ClInclude>
     <ClInclude Include="src\layers\sandbox_2d.h">
       <Filter>layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\layers\example_layer.cc">
-      <Filter>layers</Filter>
-    </ClCompile>
     <ClCompile Include="src\layers\sandbox_2d.cc">
       <Filter>layers</Filter>
     </ClCompile>

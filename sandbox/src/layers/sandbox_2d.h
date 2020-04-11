@@ -16,6 +16,7 @@ public:
 
 private:
 	Ugine::OrthographicCameraController cameraController_;
+	Ugine::Ref<Ugine::Texture2D> texture_;
 
 	// tmp
 	Ugine::Ref<Ugine::VertexArray> squareVA_;

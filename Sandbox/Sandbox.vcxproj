@@ -91,11 +91,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\layers\example_layer.h" />
     <ClInclude Include="src\layers\sandbox_2d.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\layers\example_layer.cc" />
     <ClCompile Include="src\layers\sandbox_2d.cc" />
     <ClCompile Include="src\sandbox_app.cc" />
   </ItemGroup>
