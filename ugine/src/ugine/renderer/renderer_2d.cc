@@ -13,8 +13,8 @@ namespace Ugine
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> VertexArray;
-		Ref<Shader> ColorShader;
 		Ref<Shader> TextureShader;
+		Ref<Texture2D> WhiteTexture;
 	};
 
 	static Renderer2DStorage* data_;
@@ -45,11 +45,13 @@ namespace Ugine
 		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		data_->VertexArray->SetIndexBuffer(squareIB);
 
-		data_->ColorShader = Shader::Create("assets/shaders/FlatColor.glsl");
+		data_->WhiteTexture = Texture2D::Create(1, 1);
+		uint32_t whiteTextureData = 0xffffffff;
+		data_->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
 		data_->TextureShader = Shader::Create("assets/shaders/Texture.glsl");
 		data_->TextureShader->Bind();
-		data_->TextureShader->SetInt("uTexture", 0);
+		data_->TextureShader->SetInt("uTexture", 2);
 	}
 
 	void Renderer2D::Shutdown()
@@ -59,11 +61,8 @@ namespace Ugine
 
 	void Renderer2D::BegineScene(const OrthographicCamera & camera)
 	{
-		std::dynamic_pointer_cast<OpenGLShader>(data_->ColorShader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(data_->ColorShader)->UploadUniformMat4("uViewProjection", camera.GetViewProjectionMatrix());
-
-		std::dynamic_pointer_cast<OpenGLShader>(data_->TextureShader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(data_->TextureShader)->UploadUniformMat4("uViewProjection", camera.GetViewProjectionMatrix());
+		data_->TextureShader->Bind();
+		data_->TextureShader->SetMat4("uViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
@@ -77,14 +76,11 @@ namespace Ugine
 
 	void Renderer2D::DrawQuad(const glm::vec3 & position, const glm::vec2 & size, const glm::vec4 & color)
 	{
-		std::dynamic_pointer_cast<OpenGLShader>(data_->ColorShader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(data_->ColorShader)->UploadUniformFloat4("uColor", color);
-
-		data_->ColorShader->Bind();
-		data_->ColorShader->SetFloat4("uColor", color);
-
+		data_->TextureShader->SetFloat4("uColor", color);
+		data_->WhiteTexture->Bind();
+	
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-		data_->ColorShader->SetMat4("uTransform", transform);
+		data_->TextureShader->SetMat4("uTransform", transform);
 
 		data_->VertexArray->Bind();
 		RenderCommand::DrawIndexed(data_->VertexArray);
@@ -97,12 +93,11 @@ namespace Ugine
 
 	void Renderer2D::DrawQuad(const glm::vec3 & position, const glm::vec2 & size, const Ref<Texture2D> texture)
 	{
-		data_->TextureShader->Bind();
+		data_->TextureShader->SetFloat4("uColor", glm::vec4(1.0f));
+		texture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		data_->TextureShader->SetMat4("uTransform", transform);
-
-		texture->Bind();
 
 		data_->VertexArray->Bind();
 		RenderCommand::DrawIndexed(data_->VertexArray);

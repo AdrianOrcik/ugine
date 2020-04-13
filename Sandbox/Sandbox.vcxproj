@@ -103,10 +103,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\textures\box.jpg" />
     <Image Include="assets\textures\container.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\FlatColor.glsl" />
+    <None Include="assets\shaders\old_FlatColor.glsl" />
     <None Include="assets\shaders\Texture.glsl" />
     <None Include="imgui.ini" />
   </ItemGroup>

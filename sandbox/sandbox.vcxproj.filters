@@ -18,10 +18,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\container.jpg" />
+    <Image Include="assets\textures\box.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\Texture.glsl" />
-    <None Include="assets\shaders\FlatColor.glsl" />
     <None Include="imgui.ini" />
+    <None Include="assets\shaders\old_FlatColor.glsl" />
   </ItemGroup>
 </Project>
