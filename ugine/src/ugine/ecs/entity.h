@@ -6,7 +6,7 @@
 #include "component.h"
 #include "entity_manager.h"
 #include "ugine/core/timestep.h"
-
+#include "ugine/ecs/components/transform.h"
 //namespace Ugine
 //{
 //	//class EntityManager;
@@ -47,7 +47,7 @@
 namespace Ugine
 {
 	class Component;
-
+	class Transform;
 	class Entity
 	{
 	public:
@@ -61,14 +61,25 @@ namespace Ugine
 
 	public:
        template <typename T, typename... TArgs>
-        T& AddComponent(TArgs&&... args) 
+	   Component* AddComponent(TArgs&&... args)
 		{
             T* newComponent(new T(std::forward<TArgs>(args)...));
             newComponent->owner = this;
 			components_.emplace_back(newComponent);
             newComponent->Init();
-            return *newComponent;
+            return newComponent;
         }
+
+		template <typename T>
+		Component* GetComponent()
+		{
+			for (auto& component : components_)
+			{
+				T* t = dynamic_cast<T*>(component);
+				if (t != nullptr)
+					return t;
+			}
+		}
 
 	private:
 		std::vector<Component*> components_;

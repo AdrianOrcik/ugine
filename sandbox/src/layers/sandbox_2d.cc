@@ -16,9 +16,10 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	//ECS implementation
-	//Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
-	//gameObject->AddComponent<Ugine::Transform>(5, 5);
-
+	Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
+	Ugine::Transform* transform = (Ugine::Transform*)gameObject->AddComponent<Ugine::Transform>();
+	transform->SetPosition(glm::vec2(5.0f, 3.0f));
+	
 	//box_ = Ugine::Texture2D::Create("assets/textures/box.jpg");
 	//container_ = Ugine::Texture2D::Create("assets/textures/container.jpg");
 }
@@ -31,7 +32,7 @@ void Sandbox2D::OnDetach()
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 {\
 	// entities Update
-	//Ugine::ECS::Update(ts);
+	Ugine::ECS::Update(ts);
 
 	// camera update
 	cameraController_.OnUpdate(ts);
