@@ -9,10 +9,10 @@
 
 namespace Ugine
 {
-	class Transform : public Ugine::Component
+	class TransformComponent : public Component
 	{
 	public:
-		Transform()
+		TransformComponent()
 			:position_(glm::vec2(0.0f,0.0f)), rotation_(glm::vec2(0.0f, 0.0f)), scale_(glm::vec2(1.0f, 1.0f))
 		{}
 

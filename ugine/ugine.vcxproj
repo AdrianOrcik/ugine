@@ -493,7 +493,8 @@
     <ClInclude Include="src\ugine\core.h" />
     <ClInclude Include="src\ugine\core\timestep.h" />
     <ClInclude Include="src\ugine\ecs\component.h" />
-    <ClInclude Include="src\ugine\ecs\components\transform.h" />
+    <ClInclude Include="src\ugine\ecs\components\renderer_component.h" />
+    <ClInclude Include="src\ugine\ecs\components\transform_component.h" />
     <ClInclude Include="src\ugine\ecs\ecs.h" />
     <ClInclude Include="src\ugine\ecs\entity.h" />
     <ClInclude Include="src\ugine\ecs\entity_manager.h" />
@@ -513,6 +514,7 @@
     <ClInclude Include="src\ugine\renderer\buffer.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
+    <ClInclude Include="src\ugine\renderer\primitives.h" />
     <ClInclude Include="src\ugine\renderer\renderer_2d.h" />
     <ClInclude Include="src\ugine\renderer\render_command.h" />
     <ClInclude Include="src\ugine\renderer\renderer.h" />

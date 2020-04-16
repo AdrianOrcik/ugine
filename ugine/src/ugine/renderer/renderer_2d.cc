@@ -19,7 +19,7 @@ namespace Ugine
 
 	static Renderer2DStorage* data_;
 
-	void Renderer2D::Init()
+	void Renderer2D::Init(RendererStaticData* rendererStaticData)
 	{
 		data_ = new Renderer2DStorage();
 		data_->VertexArray = VertexArray::Create();

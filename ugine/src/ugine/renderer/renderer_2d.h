@@ -4,13 +4,27 @@
 #include "orthographic_camera.h"
 
 #include "texture.h"
+#include "ugine/renderer/primitives.h"
 
 namespace Ugine
 {
+	struct RendererStaticData
+	{
+		std::string shaderPath;
+		std::string texturePath;
+		struct PrimitiveData* primitiveData;
+	};
+
+	struct RendererDynamicData
+	{
+		glm::vec4 color;
+		const OrthographicCamera* camera;
+	};
+
 	class Renderer2D
 	{
 	public:
-		static void Init();
+		static void Init(RendererStaticData* rendererStaticData);
 		static void Shutdown();
 
 		static void BegineScene(const OrthographicCamera& camera);

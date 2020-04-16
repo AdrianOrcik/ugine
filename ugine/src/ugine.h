@@ -35,6 +35,6 @@
 #include "ugine/ecs/entity_manager.h"
 #include "ugine/ecs/entity.h"
 #include "ugine/ecs/component.h"
-#include "ugine/ecs/components/transform.h"
-
+#include "ugine/ecs/components/transform_component.h"
+#include "ugine/ecs/components/renderer_component.h"
 

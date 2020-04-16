@@ -6,7 +6,7 @@
 #include "component.h"
 #include "entity_manager.h"
 #include "ugine/core/timestep.h"
-#include "ugine/ecs/components/transform.h"
+#include "ugine/ecs/components/transform_component.h"
 //namespace Ugine
 //{
 //	//class EntityManager;
@@ -47,7 +47,7 @@
 namespace Ugine
 {
 	class Component;
-	class Transform;
+	class TransformComponent;
 	class Entity
 	{
 	public:
