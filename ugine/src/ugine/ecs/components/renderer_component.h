@@ -61,8 +61,8 @@ namespace Ugine
 		virtual void Update(float Timestep) override
 		{
 			LOG_INFO("Renderer");
-			Renderer2D::BegineScene(*rendererDynamicData_->camera);
-			Ugine::Renderer2D::DrawQuad(transformComponent_->GetPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
+			Renderer2D::OnBegin(*rendererDynamicData_->camera);
+			Ugine::Renderer2D::Draw(transformComponent_->GetPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}
 	private:
 		RendererStaticData* rendererStaticData_;

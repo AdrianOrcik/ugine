@@ -85,7 +85,7 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 	//Ugine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 	//Ugine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
 	////Ugine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, container_);
-	Ugine::Renderer2D::EndScene();
+	Ugine::Renderer2D::OnEnd();
 }
 
 void Sandbox2D::OnImGuiRender()

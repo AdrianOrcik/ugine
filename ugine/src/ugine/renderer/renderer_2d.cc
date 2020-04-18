@@ -54,22 +54,22 @@ namespace Ugine
 		delete data_;
 	}
 
-	void Renderer2D::BegineScene(const OrthographicCamera & camera)
+	void Renderer2D::OnBegin(const OrthographicCamera & camera)
 	{
 		data_->TextureShader->Bind();
 		data_->TextureShader->SetMat4("uViewProjection", camera.GetViewProjectionMatrix());
 	}
 
-	void Renderer2D::EndScene()
+	void Renderer2D::OnEnd()
 	{
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2 & position, const glm::vec2 & size, const glm::vec4 & color)
+	void Renderer2D::Draw(const glm::vec2 & position, const glm::vec2 & size, const glm::vec4 & color)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, color);
+		Draw({ position.x, position.y, 0.0f }, size, color);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3 & position, const glm::vec2 & size, const glm::vec4 & color)
+	void Renderer2D::Draw(const glm::vec3 & position, const glm::vec2 & size, const glm::vec4 & color)
 	{
 		data_->TextureShader->SetFloat4("uColor", color);
 		data_->WhiteTexture->Bind();
@@ -81,12 +81,12 @@ namespace Ugine
 		RenderCommand::DrawIndexed(data_->VertexArray);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2 & position, const glm::vec2 & size, const Ref<Texture2D> texture)
+	void Renderer2D::Draw(const glm::vec2 & position, const glm::vec2 & size, const Ref<Texture2D> texture)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
+		Draw({ position.x, position.y, 0.0f }, size, texture);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3 & position, const glm::vec2 & size, const Ref<Texture2D> texture)
+	void Renderer2D::Draw(const glm::vec3 & position, const glm::vec2 & size, const Ref<Texture2D> texture)
 	{
 		data_->TextureShader->SetFloat4("uColor", glm::vec4(1.0f));
 		texture->Bind();
