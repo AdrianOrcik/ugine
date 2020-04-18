@@ -38,3 +38,4 @@
 #include "ugine/ecs/components/transform_component.h"
 #include "ugine/ecs/components/renderer_component.h"
 
+#include "tweeny/tweeny.h"

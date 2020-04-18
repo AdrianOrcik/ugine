@@ -60,7 +60,7 @@ namespace Ugine
 
 		virtual void Update(float Timestep) override
 		{
-			LOG_INFO("Renderer");
+			//LOG_INFO("Renderer");
 			Renderer2D::OnBegin(*rendererDynamicData_->camera);
 			Ugine::Renderer2D::Draw(transformComponent_->GetPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}

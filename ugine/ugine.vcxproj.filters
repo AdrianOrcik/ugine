@@ -25,6 +25,15 @@
     <Filter Include="external_src\stb_image">
       <UniqueIdentifier>{C92447F5-B51E-7047-9E8B-06588A24D6B3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external_src\tweeny">
+      <UniqueIdentifier>{7A5D1499-E6BE-F1A6-6F2C-3859DB8C2866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external_src\tweeny\include">
+      <UniqueIdentifier>{ED5EFC1F-596C-2A06-E252-26F14E5FF6BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external_src\tweeny\include\tweeny">
+      <UniqueIdentifier>{38C5C2EA-2401-C654-8D13-DE4B796E6E6F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
@@ -40,8 +49,17 @@
     <Filter Include="src\ugine">
       <UniqueIdentifier>{B4893BB6-20F4-EF2C-6932-A1D2D5DBCD81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ugine\camera">
+      <UniqueIdentifier>{CCBF096F-B8B8-28C1-E1EA-0D46CD4208CD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\ugine\core">
       <UniqueIdentifier>{AC6A440D-9838-3813-81CC-A8396D391478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ugine\ecs">
+      <UniqueIdentifier>{5EC4AC17-CA84-284E-93BF-71CBFF3E6D2A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ugine\ecs\components">
+      <UniqueIdentifier>{D396859F-BFBB-D41F-E806-BAAFD48AD33D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\ugine\events">
       <UniqueIdentifier>{38D72B75-24D0-4AC7-4D02-304C395A2AD3}</UniqueIdentifier>
@@ -1200,6 +1218,30 @@
     <ClInclude Include="external_src\stb_image\stb_image.h">
       <Filter>external_src\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\dispatcher.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\easing.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\easingresolve.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\int2type.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\tween.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\tweenpoint.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\tweentraits.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="external_src\tweeny\include\tweeny\tweeny.h">
+      <Filter>external_src\tweeny\include\tweeny</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\opengl\opengl_buffer.h">
       <Filter>src\platform\opengl</Filter>
     </ClInclude>
@@ -1233,11 +1275,32 @@
     <ClInclude Include="src\ugine\application.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\camera\ortho_camera_controller.h">
+      <Filter>src\ugine\camera</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\core.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\core\timestep.h">
       <Filter>src\ugine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\component.h">
+      <Filter>src\ugine\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\components\renderer_component.h">
+      <Filter>src\ugine\ecs\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\components\transform_component.h">
+      <Filter>src\ugine\ecs\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\ecs.h">
+      <Filter>src\ugine\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\entity.h">
+      <Filter>src\ugine\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\entity_manager.h">
+      <Filter>src\ugine\ecs</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\entry_point.h">
       <Filter>src\ugine</Filter>
@@ -1287,10 +1350,16 @@
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\renderer\primitives.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\renderer\render_command.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\renderer\renderer.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\renderer_2d.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\renderer\renderer_api.h">
@@ -1308,17 +1377,11 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\camera\ortho_camera_controller.h" />
-    <ClInclude Include="src\ugine\ecs\component.h" />
-    <ClInclude Include="src\ugine\ecs\entity.h" />
-    <ClInclude Include="src\ugine\ecs\entity_manager.h" />
-    <ClInclude Include="src\ugine\ecs\ecs.h" />
-    <ClInclude Include="src\ugine\renderer\renderer_2d.h" />
-    <ClInclude Include="src\ugine\renderer\primitives.h" />
-    <ClInclude Include="src\ugine\ecs\components\renderer_component.h" />
-    <ClInclude Include="src\ugine\ecs\components\transform_component.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="external_src\stb_image\stb_image.cc">
+      <Filter>external_src\stb_image</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\opengl\opengl_buffer.cc">
       <Filter>src\platform\opengl</Filter>
     </ClCompile>
@@ -1349,11 +1412,29 @@
     <ClCompile Include="src\ugine\application.cc">
       <Filter>src\ugine</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc">
+      <Filter>src\ugine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\ecs\ecs.cc">
+      <Filter>src\ugine\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\ecs\entity.cc">
+      <Filter>src\ugine\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\ecs\entity_manager.cc">
+      <Filter>src\ugine\ecs</Filter>
+    </ClCompile>
     <ClCompile Include="src\ugine\imgui\imgui_build.cc">
       <Filter>src\ugine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\imgui\imgui_layer.cc">
       <Filter>src\ugine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\layer.cc">
+      <Filter>src\ugine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\layer_stack.cc">
+      <Filter>src\ugine</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\log.cc">
       <Filter>src\ugine</Filter>
@@ -1370,6 +1451,9 @@
     <ClCompile Include="src\ugine\renderer\renderer.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\renderer\renderer_2d.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\ugine\renderer\renderer_api.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
@@ -1379,14 +1463,8 @@
     <ClCompile Include="src\ugine\renderer\texture.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\renderer\vertex_array.cpp" />
-    <ClCompile Include="src\ugine\layer_stack.cpp" />
-    <ClCompile Include="src\ugine\layer.cpp" />
-    <ClCompile Include="external_src\stb_image\stb_image.cc" />
-    <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc" />
-    <ClCompile Include="src\ugine\ecs\entity.cc" />
-    <ClCompile Include="src\ugine\ecs\entity_manager.cc" />
-    <ClCompile Include="src\ugine\ecs\ecs.cc" />
-    <ClCompile Include="src\ugine\renderer\renderer_2d.cc" />
+    <ClCompile Include="src\ugine\renderer\vertex_array.cc">
+      <Filter>src\ugine\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

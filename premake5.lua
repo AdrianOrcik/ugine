@@ -21,6 +21,7 @@ IncludeDir["Glad"] = "ugine/external_src/glad/include"
 IncludeDir["ImGui"] = "ugine/external_src/imgui"
 IncludeDir["glm"] = "ugine/external_src/glm"
 IncludeDir["stb_image"] = "ugine/external_src/stb_image"
+IncludeDir["tweeny"] = "ugine/external_src/tweeny/include"
 
 include "ugine/external_src/glfw"
 include "ugine/external_src/glad"
@@ -48,7 +49,8 @@ project "ugine"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cc",
 		"%{prj.name}/external_src/stb_image/**.h",
-		"%{prj.name}/external_src/stb_image/**.cpp",
+		"%{prj.name}/external_src/stb_image/**.cc",
+		"%{prj.name}/external_src/tweeny/include/**.h",
 		"%{prj.name}/external_src/glm/glm/**.hpp",
 		"%{prj.name}/external_src/glm/glm/**.inl",
 	}
@@ -67,7 +69,8 @@ project "ugine"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.tweeny}"
 	}
 
 	links
@@ -120,6 +123,7 @@ project "sandbox"
 	includedirs
 	{
 		"ugine/external_src/spdlog/include",
+		"ugine/external_src/tweeny/include",
 		"ugine/src",
 		"ugine/external_src",
 		"%{IncludeDir.glm}"

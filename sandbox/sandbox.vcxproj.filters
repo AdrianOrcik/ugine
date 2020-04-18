@@ -6,23 +6,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\layers\example_layer.h">
+      <Filter>layers</Filter>
+    </ClInclude>
     <ClInclude Include="src\layers\sandbox_2d.h">
       <Filter>layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\layers\example_layer.cc">
+      <Filter>layers</Filter>
+    </ClCompile>
     <ClCompile Include="src\layers\sandbox_2d.cc">
       <Filter>layers</Filter>
     </ClCompile>
     <ClCompile Include="src\sandbox_app.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="assets\textures\container.jpg" />
-    <Image Include="assets\textures\box.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\Texture.glsl" />
-    <None Include="imgui.ini" />
-    <None Include="assets\shaders\old_FlatColor.glsl" />
   </ItemGroup>
 </Project>
