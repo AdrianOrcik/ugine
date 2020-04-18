@@ -2,6 +2,8 @@
 #include "../component.h"
 #include "ugine/renderer/primitives.h"
 #include "ugine/renderer/renderer_2d.h"
+#include "ugine/ecs/components/transform_component.h"
+
 namespace Ugine 
 {	
 
@@ -53,17 +55,20 @@ namespace Ugine
 		// Inherited via Component
 		virtual void Init() override
 		{
-			//Renderer2D::Init(rendererStaticData_);
+			transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
+			Renderer2D::Init(rendererStaticData_);
 		}
 
 		virtual void Update(float Timestep) override
 		{
 			LOG_INFO("Renderer");
-			//Renderer2D::BegineScene(rendererDynamicData_->camera);
-			//Ugine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+			Renderer2D::BegineScene(*rendererDynamicData_->camera);
+			Ugine::Renderer2D::DrawQuad(transformComponent_->GetPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}
 	private:
 		RendererStaticData* rendererStaticData_;
 		RendererDynamicData* rendererDynamicData_;
+		TransformComponent* transformComponent_;
+
 	};
 }
