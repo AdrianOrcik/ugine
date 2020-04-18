@@ -21,15 +21,14 @@ namespace Ugine
 		}
 
 		~RendererComponent() {
+			delete rendererStaticData_->primitiveData;
 			delete rendererStaticData_;
 			delete rendererDynamicData_;
 		}
 
-		void SetPrimitive(PrimitiveType type) {
-			if (type == PrimitiveType::Square)
-			{
-				rendererStaticData_->primitiveData = &Primitives::GenerateSquare();
-			}
+		void SetPrimitive(PrimitiveType type) 
+		{
+			rendererStaticData_->primitiveData = Primitives::Generate(type);
 		}
 
 		void SetShader(const std::string path)				

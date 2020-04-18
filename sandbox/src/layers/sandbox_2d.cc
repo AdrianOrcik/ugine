@@ -16,21 +16,48 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	//ECS implementation
-	Ugine::Entity* gameObject = Ugine::ECS::CreateEntity("GameObject");
-	Ugine::TransformComponent* transform = (Ugine::TransformComponent*)gameObject->AddComponent<Ugine::TransformComponent>();
-	transform->SetPosition(glm::vec2(1.0f, 0.0f));
-	transform->SetScale(glm::vec2(0.5f, 0.5f));
-	Ugine::RendererComponent* renderer = (Ugine::RendererComponent*)gameObject->AddComponent<Ugine::RendererComponent>();
-	renderer->SetColor({ 0.0f,0.0f,1.0f,1.0f });
-	renderer->SetCamera(&cameraController_.GetCamera());
 
-	Ugine::Entity* gameManager = Ugine::ECS::CreateEntity("GameManager");
-	Ugine::TransformComponent* t = (Ugine::TransformComponent*)gameManager->AddComponent<Ugine::TransformComponent>();
-	t->SetPosition(glm::vec2(-1.0f, 0.0f));
-	t->SetScale(glm::vec2(0.5f, 0.5f));
-	Ugine::RendererComponent* r = (Ugine::RendererComponent*)gameManager->AddComponent<Ugine::RendererComponent>();
-	r->SetColor({ 1.0f,0.0f,1.0f,1.0f });
-	r->SetCamera(&cameraController_.GetCamera());
+	// GameObject 1
+	// ------------
+	Ugine::Entity* GO_1 = Ugine::ECS::CreateEntity("GameObject_1");
+	
+	Ugine::TransformComponent* transform_GO_1 = 
+		(Ugine::TransformComponent*)GO_1->AddComponent<Ugine::TransformComponent>();
+	transform_GO_1->SetPosition(glm::vec2(1.0f, 0.0f));
+	transform_GO_1->SetScale(glm::vec2(0.5f, 0.5f));
+	
+	Ugine::RendererComponent* renderer_GO_1 = 
+		(Ugine::RendererComponent*)GO_1->AddComponent<Ugine::RendererComponent>();
+	renderer_GO_1->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+	renderer_GO_1->SetCamera(&cameraController_.GetCamera());
+
+	// GameObject 2
+	// ------------
+	Ugine::Entity* GO_2 = Ugine::ECS::CreateEntity("GameObject_2");
+
+	Ugine::TransformComponent* transform_GO_2 =
+		(Ugine::TransformComponent*)GO_2->AddComponent<Ugine::TransformComponent>();
+	transform_GO_2->SetPosition(glm::vec2(-1.0f, 0.0f));
+	transform_GO_2->SetScale(glm::vec2(0.5f, 0.5f));
+	
+	Ugine::RendererComponent* renderer_GO_2 =
+		(Ugine::RendererComponent*)GO_2->AddComponent<Ugine::RendererComponent>();
+	renderer_GO_2->SetColor({ 1.0f,0.0f,1.0f,1.0f });
+	renderer_GO_2->SetCamera(&cameraController_.GetCamera());
+
+	// GameObject 3
+	// ------------
+	Ugine::Entity* GO_3 = Ugine::ECS::CreateEntity("GameObject_3");
+
+	Ugine::TransformComponent* transform_GO_3 =
+		(Ugine::TransformComponent*)GO_3->AddComponent<Ugine::TransformComponent>();
+	transform_GO_3->SetPosition(glm::vec2(0.0f, -0.5f));
+	transform_GO_3->SetScale(glm::vec2(0.5f, 0.5f));
+	
+	Ugine::RendererComponent* renderer_GO_3 =
+		(Ugine::RendererComponent*)GO_3->AddComponent<Ugine::RendererComponent>();
+	renderer_GO_3->SetColor({ 0.0f,1.0f,1.0f,1.0f });
+	renderer_GO_3->SetCamera(&cameraController_.GetCamera());
 	
 	//box_ = Ugine::Texture2D::Create("assets/textures/box.jpg");
 	//container_ = Ugine::Texture2D::Create("assets/textures/container.jpg");

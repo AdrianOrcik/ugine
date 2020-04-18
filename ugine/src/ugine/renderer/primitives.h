@@ -3,32 +3,54 @@
 
 namespace Ugine
 {
-	//todo: refactor on more universal way
 	struct PrimitiveData
 	{
-		float *vertices;
-		uint32_t *indices;
+		float *Vertices;
+		uint32_t *Indices;
+		uint32_t VerticesSize;
+		uint32_t IndicesSize;
+
+		PrimitiveData(float *vertices, uint32_t verticesSize, uint32_t *indices, uint32_t indicesSize) 
+			:Vertices(vertices), VerticesSize(verticesSize), Indices(indices), IndicesSize(indicesSize)
+		{}
+
+		~PrimitiveData()
+		{
+			delete Vertices;
+			delete Indices;
+		}
 	};
 
 	enum PrimitiveType { Square };
 	class Primitives
 	{
 	public:
-		static PrimitiveData GenerateSquare()
+		static PrimitiveData* Generate(PrimitiveType type)
 		{
-			float squareVertices[5 * 4] = {
+			PrimitiveData *data;
+			switch (type)
+			{
+			case Ugine::Square:
+				data = GenerateSquare();
+				break;
+			default:
+				break;
+			}
+
+			return data;
+		}
+	private:
+		static PrimitiveData* GenerateSquare()
+		{
+			float *squareVertices = new float[5 * 4]{
 				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 			};
 
-			uint32_t squareIndices[6] = { 0,1,2,2,3,0 };
-
-			return{
-				squareVertices,
-				squareIndices
-			};
+			uint32_t *squareIndices = new uint32_t[6]{ 0,1,2,2,3,0 };
+			return new PrimitiveData(squareVertices, 20, squareIndices, 6);
 		}
 	};
 }

@@ -60,8 +60,8 @@ namespace Ugine
 		void Destroy();
 
 	public:
-       template <typename T, typename... TArgs>
-	   Component* AddComponent(TArgs&&... args)
+        template <typename T, typename... TArgs>
+	    Component* AddComponent(TArgs&&... args)
 		{
             T* newComponent(new T(std::forward<TArgs>(args)...));
             newComponent->owner = this;

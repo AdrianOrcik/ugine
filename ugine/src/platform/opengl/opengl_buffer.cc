@@ -27,8 +27,6 @@ void Ugine::OpenGLVertexBuffer::Unbind() const
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-
-
 // index buffer
 // ------------
 Ugine::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t * indices, uint32_t count)

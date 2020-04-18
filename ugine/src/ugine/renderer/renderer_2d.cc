@@ -24,15 +24,10 @@ namespace Ugine
 		data_ = new Renderer2DStorage();
 		data_->VertexArray = VertexArray::Create();
 
-		float squareVertices[5 * 4] = {
-			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
-		};
-
 		Ref<VertexBuffer> squareVB;
-		squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB.reset(VertexBuffer::Create(rendererStaticData->primitiveData->Vertices, 
+			sizeof(rendererStaticData->primitiveData->Vertices) * rendererStaticData->primitiveData->VerticesSize));
+
 		squareVB->SetLayout({
 			{ShaderDataType::Float3, "aPosition"},
 			{ShaderDataType::Float2, "aTexCoord"},
@@ -40,16 +35,16 @@ namespace Ugine
 
 		data_->VertexArray->AddVertexBuffer(squareVB);
 
-		uint32_t squareIndices[6] = { 0,1,2,2,3,0 };
 		Ref<IndexBuffer> squareIB;
-		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIB.reset(IndexBuffer::Create(rendererStaticData->primitiveData->Indices, 
+			(sizeof(rendererStaticData->primitiveData->Indices) * rendererStaticData->primitiveData->IndicesSize) / sizeof(uint32_t)));
 		data_->VertexArray->SetIndexBuffer(squareIB);
 
 		data_->WhiteTexture = Texture2D::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
 		data_->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
-		data_->TextureShader = Shader::Create("assets/shaders/Texture.glsl");
+		data_->TextureShader = Shader::Create(rendererStaticData->shaderPath);
 		data_->TextureShader->Bind();
 		data_->TextureShader->SetInt("uTexture", 2);
 	}
