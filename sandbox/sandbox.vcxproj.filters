@@ -12,6 +12,7 @@
     <ClInclude Include="src\layers\sandbox_2d.h">
       <Filter>layers</Filter>
     </ClInclude>
+    <ClInclude Include="src\scripts\sorting_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">

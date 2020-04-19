@@ -502,6 +502,7 @@
     <ClInclude Include="src\ugine\core\timestep.h" />
     <ClInclude Include="src\ugine\ecs\component.h" />
     <ClInclude Include="src\ugine\ecs\components\renderer_component.h" />
+    <ClInclude Include="src\ugine\ecs\components\script_component.h" />
     <ClInclude Include="src\ugine\ecs\components\transform_component.h" />
     <ClInclude Include="src\ugine\ecs\ecs.h" />
     <ClInclude Include="src\ugine\ecs\entity.h" />

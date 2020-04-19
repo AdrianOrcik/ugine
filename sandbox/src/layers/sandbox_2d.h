@@ -1,6 +1,5 @@
 #pragma once
 #include "ugine.h"
-
 class Sandbox2D : public Ugine::Layer
 {
 public:
@@ -14,14 +13,11 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Ugine::Event& e) override;
 
-private:
+public:
 	Ugine::OrthographicCameraController cameraController_;
-	Ugine::Ref<Ugine::Texture2D> container_;
-	Ugine::Ref<Ugine::Texture2D> box_;
 
-	// tmp
-	Ugine::Ref<Ugine::VertexArray> squareVA_;
-	Ugine::Ref<Ugine::Shader> flatColorShader_;
+private:
 
+	std::vector<Ugine::TransformComponent*> elements_;
 	glm::vec4 squareColor_ = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

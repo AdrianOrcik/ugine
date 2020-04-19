@@ -1377,6 +1377,7 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\ecs\components\script_component.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">

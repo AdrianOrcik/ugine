@@ -18,6 +18,7 @@ namespace Ugine
 			SetPrimitive(PrimitiveType::Square);
 			SetShader("assets/shaders/Texture.glsl");
 			SetTexture("");
+			SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		~RendererComponent() {
