@@ -1,5 +1,7 @@
 #pragma once
 #include "ugine.h"
+#include "../scripts/sorting_element.h"
+
 class Sandbox2D : public Ugine::Layer
 {
 public:
@@ -18,6 +20,6 @@ public:
 
 private:
 
-	std::vector<Ugine::TransformComponent*> elements_;
+	std::vector<SortingElement*> elements_;
 	glm::vec4 squareColor_ = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

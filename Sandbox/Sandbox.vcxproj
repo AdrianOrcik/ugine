@@ -93,6 +93,7 @@
   <ItemGroup>
     <ClInclude Include="src\layers\example_layer.h" />
     <ClInclude Include="src\layers\sandbox_2d.h" />
+    <ClInclude Include="src\scripts\sorting_element.h" />
     <ClInclude Include="src\scripts\sorting_manager.h" />
   </ItemGroup>
   <ItemGroup>

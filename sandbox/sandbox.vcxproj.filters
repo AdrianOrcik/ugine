@@ -13,6 +13,7 @@
       <Filter>layers</Filter>
     </ClInclude>
     <ClInclude Include="src\scripts\sorting_manager.h" />
+    <ClInclude Include="src\scripts\sorting_element.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
