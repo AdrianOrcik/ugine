@@ -17,6 +17,7 @@ namespace Ugine
 		static Entity* GetEntity(const std::string name);
 		static void Update(Timestep dt);
 	
+		static void DestroyEntities();
 	private:
 		static EntityManager entityManager_;
 	};

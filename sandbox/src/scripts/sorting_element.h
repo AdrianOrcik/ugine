@@ -11,6 +11,11 @@ public:
 	SortingElement()
 	{}
 
+	~SortingElement()
+	{
+		LOG_INFO("Delete SortingElement - ScriptComponent");
+	}
+
 	// Inherited via ScriptComponent
 	virtual void OnInit() override
 	{

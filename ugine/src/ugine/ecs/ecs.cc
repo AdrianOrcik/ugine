@@ -22,5 +22,15 @@ namespace Ugine
 		entityManager_.OnUpdate(dt);
 	}
 
+	void ECS::DestroyEntities()
+	{
+		auto entities = entityManager_.GetEntities();
+		for (auto entity : entities)
+		{
+			entity->DestroyComponents();
+			delete entity;
+		}
+	}
+
 
 }

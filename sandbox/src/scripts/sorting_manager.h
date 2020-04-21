@@ -12,6 +12,11 @@ public:
 	SortingManager()
 	{}
 
+	~SortingManager()
+	{
+		LOG_INFO("Delete SortingManager - ScriptComponent");
+	}
+
 	std::vector<SortingElement*> Elemets;
 
 	void BubbleSort()

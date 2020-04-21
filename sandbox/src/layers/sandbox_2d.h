@@ -2,6 +2,7 @@
 #include "ugine.h"
 #include "../scripts/sorting_element.h"
 
+class Entity;
 class Sandbox2D : public Ugine::Layer
 {
 public:
@@ -15,11 +16,14 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Ugine::Event& e) override;
 
+private:
+	void CreateObject(int index, int generatedValue);
+	void GenerateObjects();
 public:
 	Ugine::OrthographicCameraController cameraController_;
 
 private:
 
 	std::vector<SortingElement*> elements_;
-	glm::vec4 squareColor_ = { 0.2f, 0.3f, 0.8f, 1.0f };
+	int elementCount_ = 2;
 };

@@ -25,6 +25,7 @@ namespace Ugine
 			delete rendererStaticData_->primitiveData;
 			delete rendererStaticData_;
 			delete rendererDynamicData_;
+			LOG_INFO("Delete RendererComponent");
 		}
 
 		void SetPrimitive(PrimitiveType type) 

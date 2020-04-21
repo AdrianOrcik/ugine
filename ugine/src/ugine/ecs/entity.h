@@ -7,42 +7,6 @@
 #include "entity_manager.h"
 #include "ugine/core/timestep.h"
 #include "ugine/ecs/components/transform_component.h"
-//namespace Ugine
-//{
-//	//class EntityManager;
-//	//class Component;
-//	//class Entity
-//	//{
-//	//public:
-//	//	Entity(EntityManager& entityManager);
-//	//	Entity(EntityManager& entityManager, std::string name);
-//	//	
-//	//	std::string GetName() const { return name_; }
-//	//	bool IsActive() const { return isActive_; }
-//
-//	//	void OnUpdate(Timestep dt);
-//	//	void Destroy();
-//
-//	//	//void Render(); todo: implemented
-//	//public:
-// //      template <typename T, typename... TArgs>
-// //       T& AddComponent(TArgs&&... args) 
-//	//	{
-// //           T* newComponent(new T(std::forward<TArgs>(args)...));
-// //           newComponent->owner = this;
-//	//		components_.emplace_back(newComponent);
-// //           newComponent->Init();
-// //           return *newComponent;
-// //       }
-//
-//	//private:
-//	//	EntityManager& entityManager_;
-//	//	std::vector<Component*> components_;
-//
-//	//	std::string name_;
-//	//	bool isActive_;
-//	//};
-//}
 
 namespace Ugine
 {
@@ -52,12 +16,13 @@ namespace Ugine
 	{
 	public:
 		Entity(const std::string name);
-		virtual ~Entity() = default;
+		virtual ~Entity();
 		std::string GetName() const { return name_; }
 		bool IsActive() const { return isActive_; }
 
 		void OnUpdate(Timestep dt);
-		void Destroy();
+		void Deactivate();
+		void DestroyComponents();
 
 	public:
         template <typename T, typename... TArgs>

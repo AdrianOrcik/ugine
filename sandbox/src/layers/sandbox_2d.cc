@@ -33,27 +33,8 @@ void Sandbox2D::OnAttach()
 
 	// gameobjects
 	// ------------
-	for(int i = 0; i < 5; i++)
-	{
-		int generatedValue = rand() % 5 + 1;
-		//todo: add random regenerator
-
-		Ugine::Entity* GO = Ugine::ECS::CreateEntity("GameObject_" + std::to_string(i));
-	
-		Ugine::TransformComponent* transform =
-			(Ugine::TransformComponent*)GO->AddComponent<Ugine::TransformComponent>();
-		transform->SetPosition(glm::vec2((float)i /10.0f, 0));
-		transform->SetScale(glm::vec2(0.05f, ((float)generatedValue / 10.0f)));
-
-		Ugine::RendererComponent* renderer =
-			(Ugine::RendererComponent*)GO->AddComponent<Ugine::RendererComponent>();
-		renderer->SetCamera(&cameraController_.GetCamera());
-
-		SortingElement* element =
-			(SortingElement*)GO->AddComponent<SortingElement>();
-		element->Value = generatedValue;
-		elements_.push_back(element);
-	}
+	CreateObject(0, 1);
+	CreateObject(1, 2);
 
 	LOG_INFO("Count: {0}", elements_.size());
 	sortingManager->Elemets = elements_;
@@ -79,11 +60,15 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 
 void Sandbox2D::OnImGuiRender()
 {
-	ImGui::Begin("Settings");
-	ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor_));
+	ImGui::Begin("Generation panel");
+	ImGui::SliderInt("Count", &elementCount_, 1, 10);
+	if (ImGui::Button("Generate"))
+	{
+		GenerateObjects();
+	}
 	if(ImGui::Button("Sort"))
 	{
-		sortingManager->BubbleSort();
+		//sortingManager->BubbleSort();
 	}
 	ImGui::End();
 }
@@ -91,4 +76,37 @@ void Sandbox2D::OnImGuiRender()
 void Sandbox2D::OnEvent(Ugine::Event & e)
 {
 	cameraController_.OnEvent(e);
+}
+
+void Sandbox2D::CreateObject(int index, int generatedValue)
+{
+	Ugine::Entity* GO = Ugine::ECS::CreateEntity("GameObject_" + std::to_string(index));
+
+	Ugine::TransformComponent* transform =
+		(Ugine::TransformComponent*)GO->AddComponent<Ugine::TransformComponent>();
+	transform->SetPosition(glm::vec2((float)index / 10.0f, 0));
+	transform->SetScale(glm::vec2(0.05f, ((float)generatedValue / 10.0f)));
+
+	Ugine::RendererComponent* renderer =
+		(Ugine::RendererComponent*)GO->AddComponent<Ugine::RendererComponent>();
+	renderer->SetCamera(&cameraController_.GetCamera());
+
+	SortingElement* element =
+		(SortingElement*)GO->AddComponent<SortingElement>();
+	element->Value = generatedValue;
+	elements_.push_back(element);
+}
+
+void Sandbox2D::GenerateObjects()
+{
+	//todo: remove only game entities
+	Ugine::ECS::DestroyEntities();
+	elements_.clear();
+
+	////generation of new vector of objects
+	//for (int i = 0; i < elementCount_; i++)
+	//{
+	//	int generatedValue = rand() % elementCount_ + 1;
+	//	CreateObject(i, generatedValue);
+	//}
 }
