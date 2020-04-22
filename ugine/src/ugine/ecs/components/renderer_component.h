@@ -64,7 +64,7 @@ namespace Ugine
 		{
 			//LOG_INFO("Renderer");
 			Renderer2D::OnBegin(*rendererDynamicData_->camera);
-			Ugine::Renderer2D::Draw(transformComponent_->GetPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
+			Ugine::Renderer2D::Draw(transformComponent_->GetWorldPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}
 	private:
 		RendererStaticData* rendererStaticData_;

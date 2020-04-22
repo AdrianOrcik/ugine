@@ -84,7 +84,8 @@ void Sandbox2D::CreateObject(int index, int generatedValue)
 
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)GO->AddComponent<Ugine::TransformComponent>();
-	transform->SetPosition(glm::vec2((float)index / 10.0f, 0));
+	transform->SetLocalPosition(glm::vec2((float)index / 10.0f, 0));
+	transform->SetOffsetPosition(glm::vec2(0,-0.5f));
 	transform->SetScale(glm::vec2(0.05f, ((float)generatedValue / 10.0f)));
 
 	Ugine::RendererComponent* renderer =
@@ -111,7 +112,7 @@ void Sandbox2D::GenerateObjects()
 	//generation of new vector of objects
 	for (int i = 0; i < elementCount_; i++)
 	{
-		int generatedValue = rand() % elementCount_ + 1;
+		int generatedValue = rand() % elementCount_ * 2 + 1;
 		CreateObject(i, generatedValue);
 	}
 

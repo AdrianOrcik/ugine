@@ -53,7 +53,7 @@ private:
 		{
 			Ugine::TransformComponent* transform =
 				(Ugine::TransformComponent*)Elemets[i]->GetEntity()->GetComponent<Ugine::TransformComponent>();
-			transform->SetPosition({ (float)i / 10,0.0f });
+			transform->SetLocalPosition({ (float)i / 10,0.0f });
 		}
 	}
 
