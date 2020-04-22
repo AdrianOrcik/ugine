@@ -33,11 +33,10 @@ void Sandbox2D::OnAttach()
 
 	// gameobjects
 	// ------------
-	CreateObject(0, 1);
-	CreateObject(1, 2);
+	GenerateObjects();
 
 	LOG_INFO("Count: {0}", elements_.size());
-	sortingManager->Elemets = elements_;
+
 }
 
 void Sandbox2D::OnDetach()
@@ -68,7 +67,7 @@ void Sandbox2D::OnImGuiRender()
 	}
 	if(ImGui::Button("Sort"))
 	{
-		//sortingManager->BubbleSort();
+		sortingManager->BubbleSort();
 	}
 	ImGui::End();
 }
@@ -81,6 +80,7 @@ void Sandbox2D::OnEvent(Ugine::Event & e)
 void Sandbox2D::CreateObject(int index, int generatedValue)
 {
 	Ugine::Entity* GO = Ugine::ECS::CreateEntity("GameObject_" + std::to_string(index));
+	gameObjects_.push_back(GO);
 
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)GO->AddComponent<Ugine::TransformComponent>();
@@ -99,14 +99,22 @@ void Sandbox2D::CreateObject(int index, int generatedValue)
 
 void Sandbox2D::GenerateObjects()
 {
-	//todo: remove only game entities
-	Ugine::ECS::DestroyEntities();
-	elements_.clear();
+	//remove old game elements if exist
+	if(gameObjects_.size() > 0){
+		for (auto gameObject : gameObjects_)
+			gameObject->Destroy();
+		
+		gameObjects_.clear();
+		elements_.clear();
+	}
 
-	////generation of new vector of objects
-	//for (int i = 0; i < elementCount_; i++)
-	//{
-	//	int generatedValue = rand() % elementCount_ + 1;
-	//	CreateObject(i, generatedValue);
-	//}
+	//generation of new vector of objects
+	for (int i = 0; i < elementCount_; i++)
+	{
+		int generatedValue = rand() % elementCount_ + 1;
+		CreateObject(i, generatedValue);
+	}
+
+	//update new elements for sort
+	sortingManager->Elemets = elements_;
 }

@@ -12,16 +12,21 @@ namespace Ugine
 {
 	class Component;
 	class TransformComponent;
+	class EntityManager;
 	class Entity
 	{
 	public:
-		Entity(const std::string name);
+		Entity(EntityManager* entityManager_, const std::string name);
 		virtual ~Entity();
 		std::string GetName() const { return name_; }
+
+		void SetActive(bool isActive);
 		bool IsActive() const { return isActive_; }
 
 		void OnUpdate(Timestep dt);
-		void Deactivate();
+		void Destroy();
+
+	private:
 		void DestroyComponents();
 
 	public:
@@ -48,8 +53,8 @@ namespace Ugine
 
 	private:
 		std::vector<Component*> components_;
-
 		std::string name_;
 		bool isActive_;
+		EntityManager* entityManager_;
 	};
 }

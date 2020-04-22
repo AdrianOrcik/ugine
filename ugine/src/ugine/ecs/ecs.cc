@@ -7,7 +7,7 @@ namespace Ugine
 	EntityManager ECS::entityManager_;
 	Entity* ECS::CreateEntity(const std::string name)
 	{
-		Entity* entity = new Ugine::Entity(name);
+		Entity* entity = new Ugine::Entity(&entityManager_, name);
 		entityManager_.AddEntity(entity);
 		return entity;
 	}
@@ -27,10 +27,7 @@ namespace Ugine
 		auto entities = entityManager_.GetEntities();
 		for (auto entity : entities)
 		{
-			entity->DestroyComponents();
-			delete entity;
+			entity->Destroy();
 		}
 	}
-
-
 }

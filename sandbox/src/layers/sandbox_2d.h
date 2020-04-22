@@ -2,7 +2,6 @@
 #include "ugine.h"
 #include "../scripts/sorting_element.h"
 
-class Entity;
 class Sandbox2D : public Ugine::Layer
 {
 public:
@@ -24,6 +23,7 @@ public:
 
 private:
 
+	std::vector<Ugine::Entity*> gameObjects_;
 	std::vector<SortingElement*> elements_;
 	int elementCount_ = 2;
 };

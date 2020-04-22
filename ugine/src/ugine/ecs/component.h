@@ -12,7 +12,5 @@ namespace Ugine
 		virtual ~Component() = default;
 		virtual void Init() = 0;
 		virtual void Update(float Timestep) = 0;
-
-		//todo: implement renderer
 	};
 }

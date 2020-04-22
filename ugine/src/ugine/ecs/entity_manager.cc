@@ -1,50 +1,18 @@
 #include "uepch.h"
 #include "entity_manager.h"
+
 #include <vector>
+#include <iterator>  
+
 #include "ugine/log.h"
-
-//class Entity;
-//void Ugine::EntityManager::ClearData()
-//{
-//	for (auto& entity : entities_) 
-//	{
-//		entity->Destroy();
-//	}
-//}
-//
-//void Ugine::EntityManager::OnUpdate(Timestep dt)
-//{
-//	for(auto& entity: entities_)
-//	{
-//		entity->OnUpdate(dt);
-//	}
-//}
-//
-//bool Ugine::EntityManager::HasEntities() const
-//{
-//	return entities_.size() > 0;
-//}
-//
-//Ugine::Entity& Ugine::EntityManager::AddEntity(std::string entityName)
-//{
-//	Entity *entity = new Entity(*this, entityName);
-//	entities_.emplace_back(entity);
-//	return *entity;
-//}
-//
-//unsigned int Ugine::EntityManager::GetEntityCount()
-//{
-//	return 0;
-//}
-
 namespace Ugine
 {
-
 	void Ugine::EntityManager::OnUpdate(Timestep dt)
 	{
 		for(auto& entity: entities_)
 		{
-			entity->OnUpdate(dt);
+			if(entity->IsActive())
+				entity->OnUpdate(dt);
 		}
 	}
 
@@ -64,5 +32,13 @@ namespace Ugine
 		LOG_ERROR("EntityManager::GetEntity::EntityIsNULL");
 		LOG_ERROR("name '{0}' does not exist!");
 		return nullptr;
+	}
+
+	void Ugine::EntityManager::DestroyEntity(Entity * entity)
+	{
+		std::vector<Entity*>::iterator it = std::find(entities_.begin(), entities_.end(), entity);
+		std::vector<Entity*>::iterator first = entities_.begin();
+		int index = std::distance(first, it);
+		entities_.erase(entities_.begin() + index);
 	}
 }
