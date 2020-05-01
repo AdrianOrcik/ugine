@@ -8,6 +8,9 @@
 #include <glm/glm.hpp>
 #include "tweeny/tweeny.h"
 
+#include <future>
+#include <thread>
+
 namespace Ugine
 {
 	enum TransformPivot
@@ -22,7 +25,9 @@ namespace Ugine
 	public:
 		TransformComponent()
 			:position_(glm::vec2(0.0f,0.0f)), rotation_(glm::vec2(0.0f, 0.0f)), scale_(glm::vec2(1.0f, 1.0f)), pivot_(TransformPivot::Bottom)
-		{}
+		{
+			currentTime = 99;
+		}
 
 		~TransformComponent()
 		{
@@ -45,7 +50,41 @@ namespace Ugine
 
 		virtual void Update(float Timestep) override
 		{
+			//LOG_INFO(GetWorldPosition().x);
 			PivotCalculation();
+			Movement(Timestep);
+		}
+
+		void Movement(float Timestep)
+		{
+
+			if(currentTime < 1.0f){
+				glm::vec2 tmp;
+				position_.x = GetInterpolation2((float)startPos.x, (float)finalPos.x, (float)currentTime);
+				//tmp.y = GetInterpolation2((float)startPos.y, (float)finalPos.y, (float)currentTime);
+				currentTime += Timestep * t_ * 5.0f;
+			}
+
+			if (currentTime >= 1.0f)
+			{
+				MovementStatus = 0;
+			}
+		}
+
+		std::function<void()> OnMoveCompleted;
+
+		glm::vec2 finalPos;
+		glm::vec2 startPos;
+		float t_;
+		float currentTime;
+		int MovementStatus = 0; // 0 - ready , 1 - inProgress
+		void SetMovement(glm::vec2 value, float t)
+		{
+			startPos = GetWorldPosition();
+			finalPos = value;
+			t_ = t;
+			currentTime = 0;
+			MovementStatus = 1;
 		}
 
 	private:

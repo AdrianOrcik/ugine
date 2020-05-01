@@ -57,6 +57,7 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 	Ugine::ECS::Update(ts);
 }
 
+int index = 0;
 void Sandbox2D::OnImGuiRender()
 {
 	ImGui::Begin("Generation panel");
@@ -69,6 +70,21 @@ void Sandbox2D::OnImGuiRender()
 	{
 		sortingManager->BubbleSort();
 	}
+
+	if (ImGui::Button("Move"))
+	{
+		if(index < sortingManager->BubbleElements.size()){
+			SortingElementData* data = sortingManager->BubbleElements[index];
+			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0);
+			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0);
+			index++;
+		}
+		else {
+			LOG_ERROR("No More Steps!");
+			index = 0;
+		}
+	}
+
 	ImGui::End();
 }
 
@@ -91,6 +107,7 @@ void Sandbox2D::CreateObject(int index, int generatedValue)
 	Ugine::RendererComponent* renderer =
 		(Ugine::RendererComponent*)GO->AddComponent<Ugine::RendererComponent>();
 	renderer->SetCamera(&cameraController_.GetCamera());
+	renderer->SetColor({ index,1.0,1.0,1.0 });
 
 	SortingElement* element =
 		(SortingElement*)GO->AddComponent<SortingElement>();

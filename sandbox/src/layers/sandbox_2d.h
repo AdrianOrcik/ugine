@@ -20,7 +20,7 @@ private:
 	void GenerateObjects();
 public:
 	Ugine::OrthographicCameraController cameraController_;
-
+	static bool OnNext;
 private:
 
 	std::vector<Ugine::Entity*> gameObjects_;

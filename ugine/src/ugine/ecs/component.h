@@ -12,5 +12,10 @@ namespace Ugine
 		virtual ~Component() = default;
 		virtual void Init() = 0;
 		virtual void Update(float Timestep) = 0;
+
+		float GetInterpolation2(float a, float b, float t)
+		{
+			return a + (b - a) * t;
+		}
 	};
 }
