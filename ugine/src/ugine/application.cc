@@ -7,6 +7,8 @@
 #include "ugine/renderer/renderer.h"
 #include "ugine/input/input.h"
 
+#include "ugine/ecs/ecs.h"
+
 namespace Ugine {
 
 	Application* Application::sInstance_ = nullptr;
@@ -70,6 +72,8 @@ namespace Ugine {
 			if(!isMinimized_){
 				for (Layer* layer : layerStack_)
 					layer->OnUpdate(timestep);
+				
+				ECS::Update(timestep);
 			}
 
 			// application gui render

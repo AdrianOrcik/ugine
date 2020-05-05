@@ -53,8 +53,6 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 	Ugine::RenderCommand::SetClearColor({ 0.1f,0.1f,0.1f,1 });
 	Ugine::RenderCommand::Clear();
 
-	// entities Update
-	Ugine::ECS::Update(ts);
 }
 
 int index = 0;
