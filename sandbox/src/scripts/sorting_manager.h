@@ -80,13 +80,15 @@ public:
 		if (!doMovement)return;
 		if (index < BubbleElements.size()) 
 		{
-			if(data == nullptr || data->ElementA->MovementStatus == 0 && data->ElementB->MovementStatus == 0)
-			{
-				data = BubbleElements[index];
-				data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0);
-				data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0);
-				index++;
-			}
+			//if(data == nullptr || data->ElementA->MovementStatus == 0 && data->ElementB->MovementStatus == 0)
+			//{
+
+			//}
+
+			data = BubbleElements[index];
+			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0);
+			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0);
+			index++;
 		}
 		else {
 			LOG_ERROR("No More Steps!");

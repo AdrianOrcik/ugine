@@ -9,14 +9,13 @@ namespace Ugine
 	class Entity;
 	class Component;
 	class EntityManager;
-
 	class ECS
 	{
 	public:
 		static Entity* CreateEntity(const std::string name);
 		static Entity* GetEntity(const std::string name);
 
-		static EntityManager GetEntityManager() { return entityManager_; }
+		//static EntityManager GetEntityManager() { return entityManager_; }
 		
 		static void Update(Timestep dt);
 		

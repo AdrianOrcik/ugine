@@ -1378,6 +1378,9 @@
       <Filter>src\ugine</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\ecs\components\script_component.h" />
+    <ClInclude Include="src\ugine\coroutines\coroutines.h" />
+    <ClInclude Include="src\ugine\coroutines\routine_manager.h" />
+    <ClInclude Include="src\ugine\coroutines\routines\movement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">
@@ -1467,5 +1470,6 @@
     <ClCompile Include="src\ugine\renderer\vertex_array.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\ugine\coroutines\routine_manager.cc" />
   </ItemGroup>
 </Project>

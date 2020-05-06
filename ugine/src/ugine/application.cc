@@ -8,11 +8,14 @@
 #include "ugine/input/input.h"
 
 #include "ugine/ecs/ecs.h"
+#include "ugine/coroutines/routine_manager.h"
+
+#include <functional>
+#include <iostream>
 
 namespace Ugine {
 
 	Application* Application::sInstance_ = nullptr;
-
 	Application::Application()
 	{
 		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
@@ -74,6 +77,7 @@ namespace Ugine {
 					layer->OnUpdate(timestep);
 				
 				ECS::Update(timestep);
+				RoutineManager::Update(timestep);
 			}
 
 			// application gui render

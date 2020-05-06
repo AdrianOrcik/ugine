@@ -40,3 +40,7 @@
 #include "ugine/ecs/components/script_component.h"
 
 #include "tweeny/tweeny.h"
+
+#include "ugine/coroutines/coroutines.h"
+#include "ugine/coroutines/routine_manager.h"
+#include "ugine/coroutines/routines/movement.h"
