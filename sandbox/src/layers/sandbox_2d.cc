@@ -72,8 +72,8 @@ void Sandbox2D::OnImGuiRender()
 	{
 		if(index < sortingManager->BubbleElements.size()){
 			SortingElementData* data = sortingManager->BubbleElements[index];
-			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0);
-			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0);
+			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0f);
+			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0f);
 			index++;
 		}
 		else {

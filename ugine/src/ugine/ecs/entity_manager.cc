@@ -36,6 +36,7 @@ namespace Ugine
 
 	void Ugine::EntityManager::DestroyEntity(Entity * entity)
 	{
+		//todo: make template erase function
 		std::vector<Entity*>::iterator it = std::find(entities_.begin(), entities_.end(), entity);
 		std::vector<Entity*>::iterator first = entities_.begin();
 		int index = std::distance(first, it);

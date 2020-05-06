@@ -19,34 +19,11 @@ namespace Ugine
 		float currentTime_ = 0;
 
 		Movement(TransformComponent* transformComponent, glm::vec2 endValue, float time);
-		//	: transform_(transformComponent), endValue_(endValue), time_(time)
-		//{
-		//	startValue_ = transform_->GetLocalPosition();
-		//}
-
-		//Movement(glm::vec2 endValue, float time);
-		//	: endValue_(endValue), time_(time)
-		//{
-		//	//startValue_ = transform->GetLocalPosition();
-		//}
-
+		~Movement();
 		float GetInterpolation2(float a, float b, float t);
-		//{
-		//	return a + (b - a) * t;
-		//}
 
 		// Inherited via IEnumerator
 		virtual bool HasMore() override;
-		//{
-		//	return currentTime_ < time_;
-		//}
-
-		virtual void next(float Timestep) override;
-		//{
-		//	LOG_INFO("Next");
-		//	//float x = GetInterpolation2(startValue_.x, endValue_.x, (float)currentTime_);
-		//	//transform_->SetLocalX(x);
-		//	//currentTime_ += 0.1f;
-		//}
+		virtual void Next(float Timestep) override;
 	};
 }

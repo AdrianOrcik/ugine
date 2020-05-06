@@ -12,8 +12,8 @@ namespace Ugine
 	class IEnumerator
 	{
 	public:
+		virtual T Next(float Timestep) = 0;
 		virtual bool HasMore() = 0;
-		virtual T next(float Timestep) = 0;
 	};
 
 	class RoutineManager

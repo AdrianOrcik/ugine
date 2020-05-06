@@ -9,13 +9,14 @@ namespace Ugine
 		startValue_ = transform_->GetLocalPosition();
 	}
 
-	//Movement::Movement(glm::vec2 endValue, float time)
-	//	: endValue_(endValue), time_(time)
-	//{
-	//}
+	Movement::~Movement()
+	{
+		delete this;
+	}
 
 	float Movement::GetInterpolation2(float a, float b, float t)
 	{
+		//todo: Interpolation class or tween class
 		return a + (b - a) * t;
 	}
 
@@ -24,11 +25,11 @@ namespace Ugine
 		return currentTime_ < time_;
 	}
 
-	void Movement::next(float Timestep)
+	void Movement::Next(float Timestep)
 	{
 		LOG_INFO("Next");
 		float x = GetInterpolation2(startValue_.x, endValue_.x, (float)currentTime_);
 		transform_->SetLocalX(x);
-		currentTime_ += 0.1f;
+		currentTime_ += Timestep * 1.0f;
 	}
 }

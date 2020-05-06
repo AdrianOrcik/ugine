@@ -31,14 +31,10 @@ namespace Ugine
 		TransformComponent()
 			:position_(glm::vec2(0.0f,0.0f)), rotation_(glm::vec2(0.0f, 0.0f)), scale_(glm::vec2(1.0f, 1.0f)), pivot_(TransformPivot::Bottom)
 		{
-			//currentTime = 99;
 		}
 
 		~TransformComponent()
 		{
-			//delete by routine garbage collector
-			//delete move;
-
 			LOG_INFO("Delete Transform");
 		}
 
@@ -54,81 +50,18 @@ namespace Ugine
 		glm::vec2 GetRotation() { return rotation_; }
 		glm::vec2 GetScale() { return scale_; }
 		Movement* move;
-		//Coro c;
-		//ccrContext z = 0;
+
 		
 		// Inherited via Component
 		virtual void Init() override
-		{
-			//r.add(myfunctor());
-			//RoutineManager::StartCoroutine(macro_routine);
-		}
+		{}
 
 		virtual void Update(float Timestep) override
 		{
-			//c.macro_routine(&z);
-
-			//LOG_INFO(GetWorldPosition().x);
 			PivotCalculation();
-			//Movement(Timestep);
 		}
 
 		void SetMovement(glm::vec2 value, float t);
-		//{
-		//	//Movement* move = new Movement(value, t);
-		//	//RoutineManager::StartCoroutine((IEnumerator<void>*)move);
-		//}
-
-		//void macro_routine(ccrContParam)
-		//{
-		//	ccrBeginContext;
-		//	int i;
-		//	ccrEndContext(foo);
-
-		//	ccrBegin(foo);
-		//	for (foo->i = 0; foo->i < 5; foo->i++) {
-		//		LOG_INFO("Routine: {0}", foo->i);
-		//		ccrReturnV;
-		//	}
-		//	ccrFinishV;
-		//}
-
-
-
-		// -- comment
-		//void Movement(float Timestep)
-		//{
-
-		//	if(currentTime < 1.0f){
-		//		glm::vec2 tmp;
-		//		position_.x = GetInterpolation2((float)startPos.x, (float)finalPos.x, (float)currentTime);
-		//		//tmp.y = GetInterpolation2((float)startPos.y, (float)finalPos.y, (float)currentTime);
-		//		currentTime += Timestep * t_ * 5.0f;
-		//	}
-
-		//	if (currentTime >= 1.0f)
-		//	{
-		//		MovementStatus = 0;
-		//	}
-		//}
-
-		//std::function<void()> OnMoveCompleted;
-
-		//glm::vec2 finalPos;
-		//glm::vec2 startPos;
-		//float t_;
-		//float currentTime;
-		//int MovementStatus = 0; // 0 - ready , 1 - inProgress
-		//void SetMovement(glm::vec2 value, float t)
-		//{
-		//	startPos = GetWorldPosition();
-		//	finalPos = value;
-		//	t_ = t;
-		//	currentTime = 0;
-		//	MovementStatus = 1;
-		//}
-
-		// -- comment
 
 	private:
 		void PivotCalculation()

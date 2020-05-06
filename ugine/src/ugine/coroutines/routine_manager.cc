@@ -11,9 +11,25 @@ namespace Ugine
 
 	void RoutineManager::Update(float Timestep)
 	{
+		std::vector<IEnumerator<void>*> obsoleteRoutines;
 		for (auto routine : routines_) {
-			if(routine->HasMore()){
-				routine->next(Timestep);
+			if (routine->HasMore()) 
+			{
+				routine->Next(Timestep);
+			}
+			else
+			{
+				obsoleteRoutines.push_back(routine);
+			}
+		}
+
+		if (obsoleteRoutines.size() > 1)
+		{
+			for (auto routine : obsoleteRoutines) {
+				std::vector<IEnumerator<void>*>::iterator it = std::find(routines_.begin(), routines_.end(), routine);
+				std::vector<IEnumerator<void>*>::iterator first = routines_.begin();
+				int index = std::distance(first, it);
+				routines_.erase(routines_.begin() + index);
 			}
 		}
 	}

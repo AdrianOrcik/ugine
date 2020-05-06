@@ -75,9 +75,9 @@ namespace Ugine {
 			if(!isMinimized_){
 				for (Layer* layer : layerStack_)
 					layer->OnUpdate(timestep);
-				
-				ECS::Update(timestep);
+
 				RoutineManager::Update(timestep);
+				ECS::Update(timestep);
 			}
 
 			// application gui render
