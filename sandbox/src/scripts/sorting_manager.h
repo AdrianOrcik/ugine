@@ -16,7 +16,7 @@ struct SortingElementData
 	{}
 };
 
-class Sandbox2D;
+//class Sandbox2D;
 class SortingManager : public Ugine::ScriptComponent
 {
 

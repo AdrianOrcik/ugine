@@ -55,6 +55,12 @@
     <Filter Include="src\ugine\core">
       <UniqueIdentifier>{AC6A440D-9838-3813-81CC-A8396D391478}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ugine\coroutines">
+      <UniqueIdentifier>{6E3CAD60-5ACB-362A-03EA-4A25EF5747D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ugine\coroutines\routines">
+      <UniqueIdentifier>{761CDFBB-E234-C6E5-ABE1-557F17B95A7F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\ugine\ecs">
       <UniqueIdentifier>{5EC4AC17-CA84-284E-93BF-71CBFF3E6D2A}</UniqueIdentifier>
     </Filter>
@@ -1284,10 +1290,22 @@
     <ClInclude Include="src\ugine\core\timestep.h">
       <Filter>src\ugine\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\coroutines.h">
+      <Filter>src\ugine\coroutines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\routine_manager.h">
+      <Filter>src\ugine\coroutines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\routines\movement.h">
+      <Filter>src\ugine\coroutines\routines</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\ecs\component.h">
       <Filter>src\ugine\ecs</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\ecs\components\renderer_component.h">
+      <Filter>src\ugine\ecs\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\ecs\components\script_component.h">
       <Filter>src\ugine\ecs\components</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\ecs\components\transform_component.h">
@@ -1377,10 +1395,6 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\ecs\components\script_component.h" />
-    <ClInclude Include="src\ugine\coroutines\coroutines.h" />
-    <ClInclude Include="src\ugine\coroutines\routine_manager.h" />
-    <ClInclude Include="src\ugine\coroutines\routines\movement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">
@@ -1418,6 +1432,12 @@
     </ClCompile>
     <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc">
       <Filter>src\ugine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\coroutines\routine_manager.cc">
+      <Filter>src\ugine\coroutines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\coroutines\routines\movement.cc">
+      <Filter>src\ugine\coroutines\routines</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\ecs\ecs.cc">
       <Filter>src\ugine\ecs</Filter>
@@ -1470,6 +1490,6 @@
     <ClCompile Include="src\ugine\renderer\vertex_array.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\coroutines\routine_manager.cc" />
+    <ClCompile Include="src\ugine\ecs\components\transform_component.cc" />
   </ItemGroup>
 </Project>

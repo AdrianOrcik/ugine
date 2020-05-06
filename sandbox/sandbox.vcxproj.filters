@@ -4,6 +4,9 @@
     <Filter Include="layers">
       <UniqueIdentifier>{3588EB0A-212A-16E1-0AE5-2935F6259D31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{6D076287-D9E6-E022-E2FE-6BF94E5D4784}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\layers\example_layer.h">
@@ -12,8 +15,12 @@
     <ClInclude Include="src\layers\sandbox_2d.h">
       <Filter>layers</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\sorting_manager.h" />
-    <ClInclude Include="src\scripts\sorting_element.h" />
+    <ClInclude Include="src\scripts\sorting_element.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\sorting_manager.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">

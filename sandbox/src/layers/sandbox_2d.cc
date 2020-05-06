@@ -36,7 +36,6 @@ void Sandbox2D::OnAttach()
 	GenerateObjects();
 
 	LOG_INFO("Count: {0}", elements_.size());
-
 }
 
 void Sandbox2D::OnDetach()

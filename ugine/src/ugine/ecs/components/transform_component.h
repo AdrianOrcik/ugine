@@ -8,12 +8,12 @@
 #include <glm/glm.hpp>
 //#include "tweeny/tweeny.h"
 
-#include "ugine/coroutines/coroutines.h"
+//#include "ugine/coroutines/coroutines.h"
 #include "ugine/coroutines/routine_manager.h"
 #include "ugine/coroutines/routines/movement.h"
 
-#include <future>
-#include <thread>
+//#include <future>
+//#include <thread>
 
 namespace Ugine
 {
@@ -24,6 +24,7 @@ namespace Ugine
 		Bottom
 	};
 
+	class Movement;
 	class TransformComponent : public Component
 	{
 	public:
@@ -35,6 +36,9 @@ namespace Ugine
 
 		~TransformComponent()
 		{
+			//delete by routine garbage collector
+			//delete move;
+
 			LOG_INFO("Delete Transform");
 		}
 
@@ -49,6 +53,7 @@ namespace Ugine
 		glm::vec2 GetWorldPosition() { return (position_ + pivotOffset_ + positionOffset_); }
 		glm::vec2 GetRotation() { return rotation_; }
 		glm::vec2 GetScale() { return scale_; }
+		Movement* move;
 		//Coro c;
 		//ccrContext z = 0;
 		
@@ -68,11 +73,11 @@ namespace Ugine
 			//Movement(Timestep);
 		}
 
-		void SetMovement(glm::vec2 value, float t)
-		{
-			Movement* move = new Movement(value, t);
-			RoutineManager::StartCoroutine((IEnumerator<void>*)move);
-		}
+		void SetMovement(glm::vec2 value, float t);
+		//{
+		//	//Movement* move = new Movement(value, t);
+		//	//RoutineManager::StartCoroutine((IEnumerator<void>*)move);
+		//}
 
 		//void macro_routine(ccrContParam)
 		//{
