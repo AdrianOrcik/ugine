@@ -70,16 +70,7 @@ void Sandbox2D::OnImGuiRender()
 
 	if (ImGui::Button("Move"))
 	{
-		if(index < sortingManager->BubbleElements.size()){
-			SortingElementData* data = sortingManager->BubbleElements[index];
-			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0f);
-			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0f);
-			index++;
-		}
-		else {
-			LOG_ERROR("No More Steps!");
-			index = 0;
-		}
+		sortingManager->StepMove();
 	}
 
 	ImGui::End();

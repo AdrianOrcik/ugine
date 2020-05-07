@@ -4,6 +4,7 @@
 #include "../layers/sandbox_2d.h"
 #include "../scripts/sorting_element.h"
 
+#include <functional>
 #include <map>
 
 struct SortingElementData
@@ -34,7 +35,6 @@ public:
 
 	void BubbleSort()
 	{
-		doMovement = false;
 		BubbleElements.clear();
 
 		for (int i = 0; i < Elemets.size(); i++)
@@ -54,64 +54,33 @@ public:
 				}
 			}
 		}
-
-		//RefreshTransform();
-
-		doMovement = true;
 	}
 
 	// Inherited via ScriptComponent
 	virtual void OnInit() override
-	{
-		//LOG_INFO("INIT");
-	}
+	{}
 
 	virtual void OnUpdate(float Timestep) override
-	{
-		//LOG_INFO("update");
-		Movements();
-	}
+	{}
 
 	int index = 0;
-	SortingElementData* data = nullptr;
-	bool doMovement = false;
-	void Movements()
+	void StepMove()
 	{
-		if (!doMovement)return;
-		if (index < BubbleElements.size()) 
-		{
-			//if(data == nullptr || data->ElementA->MovementStatus == 0 && data->ElementB->MovementStatus == 0)
-			//{
-
-			//}
-
-			data = BubbleElements[index];
-			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0);
-			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0);
+		if (index < BubbleElements.size()) {
+			SortingElementData* data = BubbleElements[index];
+			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0f);
+			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0f);
 			index++;
 		}
 		else {
 			LOG_ERROR("No More Steps!");
 			index = 0;
-			doMovement = false;
-			data = nullptr;
 		}
 	}
 
+
+
 private:
-	void RefreshTransform()
-	{
-		//for (int i = 0; i < Elemets.size(); i++)
-		//{
-		//	Ugine::TransformComponent* transform =
-		//		(Ugine::TransformComponent*)Elemets[i]->GetEntity()->GetComponent<Ugine::TransformComponent>();
-		//	transform->SetLocalPosition({ (float)i / 10,0.0f });
-		//}
-
-		LOG_INFO(" BubbleElements: {0}", BubbleElements.size());
-
-	}
-
 	void Swap(SortingElement * elementA, SortingElement * elementB)
 	{
 		//BubbleElements.insert(std::make_pair(
