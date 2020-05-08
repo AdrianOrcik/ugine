@@ -4,6 +4,7 @@
 
 #include "ugine/log.h"
 #include "ugine/ecs/components/transform_component.h"
+#include "ugine/coroutines/routine_manager.h"
 
 namespace Ugine
 {

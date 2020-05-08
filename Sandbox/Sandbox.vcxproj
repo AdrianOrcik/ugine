@@ -100,6 +100,7 @@
     <ClCompile Include="src\layers\example_layer.cc" />
     <ClCompile Include="src\layers\sandbox_2d.cc" />
     <ClCompile Include="src\sandbox_app.cc" />
+    <ClCompile Include="src\scripts\sorting_manager.cc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ugine\ugine.vcxproj">
@@ -109,4 +110,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project> 
+</Project>

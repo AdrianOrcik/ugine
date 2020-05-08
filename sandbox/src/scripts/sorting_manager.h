@@ -4,6 +4,9 @@
 #include "../layers/sandbox_2d.h"
 #include "../scripts/sorting_element.h"
 
+#include "ugine/coroutines/routine_manager.h"
+#include "ugine/coroutines/routines/swap_routine.h"
+
 #include <functional>
 #include <map>
 
@@ -17,7 +20,7 @@ struct SortingElementData
 	{}
 };
 
-//class Sandbox2D;
+class SwapRoutine;
 class SortingManager : public Ugine::ScriptComponent
 {
 
@@ -63,31 +66,18 @@ public:
 	virtual void OnUpdate(float Timestep) override
 	{}
 
-	int index = 0;
-	void StepMove()
-	{
-		if (index < BubbleElements.size()) {
-			SortingElementData* data = BubbleElements[index];
-			data->ElementA->SetMovement(data->ElementB->GetWorldPosition(), 1.0f);
-			data->ElementB->SetMovement(data->ElementA->GetWorldPosition(), 1.0f);
-			index++;
-		}
-		else {
-			LOG_ERROR("No More Steps!");
-			index = 0;
-		}
-	}
+	void StepMove();
 
-
+private:
+	Ugine::SwapRoutine* swapRoutine;
+	int index_ = 0;
 
 private:
 	void Swap(SortingElement * elementA, SortingElement * elementB)
 	{
-		//BubbleElements.insert(std::make_pair(
-		//	(Ugine::TransformComponent*)elementA->GetEntity()->GetComponent<Ugine::TransformComponent>(),
-		//	(Ugine::TransformComponent*)elementA->GetEntity()->GetComponent<Ugine::TransformComponent>()));
-
-		BubbleElements.push_back(new SortingElementData((Ugine::TransformComponent*)elementA->GetEntity()->GetComponent<Ugine::TransformComponent>(), (Ugine::TransformComponent*)elementB->GetEntity()->GetComponent<Ugine::TransformComponent>()));
+		BubbleElements.push_back(new SortingElementData(
+			(Ugine::TransformComponent*)elementA->GetEntity()->GetComponent<Ugine::TransformComponent>(), 
+			(Ugine::TransformComponent*)elementB->GetEntity()->GetComponent<Ugine::TransformComponent>()));
 
 		SortingElement temp = *elementA;
 		*elementA = *elementB;

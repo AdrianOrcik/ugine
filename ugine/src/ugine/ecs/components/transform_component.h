@@ -8,13 +8,6 @@
 #include <glm/glm.hpp>
 //#include "tweeny/tweeny.h"
 
-//#include "ugine/coroutines/coroutines.h"
-#include "ugine/coroutines/routine_manager.h"
-#include "ugine/coroutines/routines/movement.h"
-
-//#include <future>
-//#include <thread>
-
 namespace Ugine
 {
 	enum TransformPivot
@@ -60,8 +53,6 @@ namespace Ugine
 		{
 			PivotCalculation();
 		}
-
-		void SetMovement(glm::vec2 value, float t);
 
 	private:
 		void PivotCalculation()

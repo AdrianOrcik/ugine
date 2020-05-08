@@ -1395,6 +1395,7 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">
@@ -1490,6 +1491,6 @@
     <ClCompile Include="src\ugine\renderer\vertex_array.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\ecs\components\transform_component.cc" />
+    <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc" />
   </ItemGroup>
 </Project>

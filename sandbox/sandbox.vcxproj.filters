@@ -30,5 +30,6 @@
       <Filter>layers</Filter>
     </ClCompile>
     <ClCompile Include="src\sandbox_app.cc" />
+    <ClCompile Include="src\scripts\sorting_manager.cc" />
   </ItemGroup>
 </Project>
