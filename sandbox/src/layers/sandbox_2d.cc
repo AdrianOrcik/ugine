@@ -95,7 +95,6 @@ void Sandbox2D::CreateObject(int index, int generatedValue)
 	Ugine::RendererComponent* renderer =
 		(Ugine::RendererComponent*)GO->AddComponent<Ugine::RendererComponent>();
 	renderer->SetCamera(&cameraController_.GetCamera());
-	renderer->SetColor({ index,1.0,1.0,1.0 });
 
 	SortingElement* element =
 		(SortingElement*)GO->AddComponent<SortingElement>();
@@ -122,5 +121,5 @@ void Sandbox2D::GenerateObjects()
 	}
 
 	//update new elements for sort
-	sortingManager->Elemets = elements_;
+	sortingManager->Elements = elements_;
 }

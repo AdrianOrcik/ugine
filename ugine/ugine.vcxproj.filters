@@ -1394,6 +1394,7 @@
     </ClInclude>
     <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h" />
     <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h" />
+    <ClInclude Include="src\ugine\renderer\color.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">

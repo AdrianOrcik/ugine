@@ -9,6 +9,7 @@ class SortingElement : public Ugine::ScriptComponent
 
 public:
 	SortingElement()
+		:Value(-1), CurrentPosition(-1), SortedPosition(-1)
 	{}
 
 	~SortingElement()
@@ -16,21 +17,19 @@ public:
 		LOG_INFO("Delete SortingElement - ScriptComponent");
 	}
 
+	Ugine::TransformComponent* GetTransform() { return (Ugine::TransformComponent*)GetEntity()->GetComponent<Ugine::TransformComponent>(); }
+	Ugine::RendererComponent* GetRenderer() { return (Ugine::RendererComponent*)GetEntity()->GetComponent<Ugine::RendererComponent>(); }
+
 	// Inherited via ScriptComponent
 	virtual void OnInit() override
-	{
-		//LOG_INFO("INIT");
-	}
+	{}
 
 	virtual void OnUpdate(float Timestep) override
-	{
-		//LOG_INFO("update");
-	}
+	{}
 
 public:
 	int Value;
-
-private:
-
+	int CurrentPosition;
+	int SortedPosition;
 
 };

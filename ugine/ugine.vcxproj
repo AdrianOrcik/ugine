@@ -525,6 +525,7 @@
     <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
     <ClInclude Include="src\ugine\renderer\buffer.h" />
+    <ClInclude Include="src\ugine\renderer\color.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
     <ClInclude Include="src\ugine\renderer\primitives.h" />
