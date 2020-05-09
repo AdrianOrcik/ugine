@@ -65,12 +65,7 @@ void Sandbox2D::OnImGuiRender()
 	}
 	if(ImGui::Button("Sort"))
 	{
-		sortingManager->BubbleSort();
-	}
-
-	if (ImGui::Button("Move"))
-	{
-		sortingManager->StepMove();
+		sortingManager->SortBy();
 	}
 
 	ImGui::End();
@@ -121,5 +116,5 @@ void Sandbox2D::GenerateObjects()
 	}
 
 	//update new elements for sort
-	sortingManager->Elements = elements_;
+	sortingManager->SetElements(elements_);
 }

@@ -2,6 +2,7 @@
 #include "ugine.h"
 #include "../scripts/sorting_element.h"
 
+class SortingElement;
 class Sandbox2D : public Ugine::Layer
 {
 public:

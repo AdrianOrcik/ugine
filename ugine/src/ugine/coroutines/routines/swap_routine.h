@@ -28,6 +28,7 @@ namespace Ugine
 
 	private:
 		float GetInterpolation2(float a, float b, float t);
+		float MapValue(float x, float in_min, float in_max, float out_min, float out_max);
 
 	private:
 		TransformComponent* transformA_ = nullptr;
@@ -38,7 +39,8 @@ namespace Ugine
 		glm::vec2 startValueB_ = { 0.0f,0.0f };
 		glm::vec2 endValueB_ = { 0.0f,0.0f };
 		
-		float time_ = 0;
+		///speed is from 1 to infinity
+		float speed_ = 0;
 		float currentTime_ = 0;
 
 		std::function<void()> onCompleted = NULL;
