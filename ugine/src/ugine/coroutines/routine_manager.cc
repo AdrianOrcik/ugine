@@ -23,7 +23,7 @@ namespace Ugine
 			}
 		}
 
-		if (obsoleteRoutines.size() > 1)
+		if (obsoleteRoutines.size() > 0)
 		{
 			for (auto routine : obsoleteRoutines) {
 				std::vector<IEnumerator<void>*>::iterator it = std::find(routines_.begin(), routines_.end(), routine);

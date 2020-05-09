@@ -1296,9 +1296,6 @@
     <ClInclude Include="src\ugine\coroutines\routine_manager.h">
       <Filter>src\ugine\coroutines</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\coroutines\routines\movement.h">
-      <Filter>src\ugine\coroutines\routines</Filter>
-    </ClInclude>
     <ClInclude Include="src\ugine\ecs\component.h">
       <Filter>src\ugine\ecs</Filter>
     </ClInclude>
@@ -1396,6 +1393,7 @@
       <Filter>src\ugine</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h" />
+    <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">
@@ -1436,9 +1434,6 @@
     </ClCompile>
     <ClCompile Include="src\ugine\coroutines\routine_manager.cc">
       <Filter>src\ugine\coroutines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ugine\coroutines\routines\movement.cc">
-      <Filter>src\ugine\coroutines\routines</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\ecs\ecs.cc">
       <Filter>src\ugine\ecs</Filter>
@@ -1492,5 +1487,6 @@
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc" />
+    <ClCompile Include="src\ugine\coroutines\routines\wait_seconds.cc" />
   </ItemGroup>
 </Project>

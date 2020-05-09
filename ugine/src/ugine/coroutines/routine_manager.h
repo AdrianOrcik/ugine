@@ -14,6 +14,7 @@ namespace Ugine
 	public:
 		virtual T Next(float Timestep) = 0;
 		virtual bool HasMore() = 0;
+		virtual void OnCompleted() = 0;
 	};
 
 	class RoutineManager

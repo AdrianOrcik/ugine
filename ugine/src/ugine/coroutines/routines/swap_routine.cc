@@ -23,19 +23,26 @@ namespace Ugine
 
 	bool SwapRoutine::HasMore()
 	{
-		return currentTime_ < time_;
+		bool hasTime = currentTime_ < time_;
+		if (!hasTime)OnCompleted();
+		return hasTime;
 	}
 
 	void SwapRoutine::Next(float Timestep)
 	{
-		LOG_INFO("Next");
 		float xA = GetInterpolation2(startValueA_.x, endValueA_.x, (float)currentTime_);
 		transformA_->SetLocalX(xA);
 
 		float xB = GetInterpolation2(startValueB_.x, endValueB_.x, (float)currentTime_);
 		transformB_->SetLocalX(xB);
 
-		currentTime_ += Timestep * 1.0f;
+		currentTime_ += Timestep;
+	}
+
+	void SwapRoutine::OnCompleted()
+	{
+		onCompleted();
+		onCompleted = NULL;
 	}
 
 }

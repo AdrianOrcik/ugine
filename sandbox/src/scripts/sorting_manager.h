@@ -6,6 +6,7 @@
 
 #include "ugine/coroutines/routine_manager.h"
 #include "ugine/coroutines/routines/swap_routine.h"
+#include "ugine/coroutines/routines/wait_seconds.h"
 
 #include <functional>
 #include <map>
@@ -69,10 +70,11 @@ public:
 	void StepMove();
 
 private:
-	Ugine::SwapRoutine* swapRoutine;
 	int index_ = 0;
 
 private:
+	void SwapRoutineCompleted();
+
 	void Swap(SortingElement * elementA, SortingElement * elementB)
 	{
 		BubbleElements.push_back(new SortingElementData(
