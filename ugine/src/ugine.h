@@ -16,6 +16,8 @@
 #include "ugine/imgui/imgui_layer.h"
 
 // renderer
+#include "ugine/renderer/color.h"
+
 #include "ugine/renderer/renderer.h"
 #include "ugine/renderer/renderer_2d.h"
 #include "ugine/renderer/render_command.h"
