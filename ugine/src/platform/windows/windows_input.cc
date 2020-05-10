@@ -10,7 +10,7 @@
 namespace Ugine 
 {
 
-	Input* Input::sInstance_ = new WindowsInput();
+	Input* Input::sInstance_ = DBG_NEW WindowsInput();
 	
 	bool Ugine::WindowsInput::IsKeyPressedImpl(int keycode)
 	{

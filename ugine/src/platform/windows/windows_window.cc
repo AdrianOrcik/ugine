@@ -23,7 +23,7 @@ namespace Ugine
 
 	Window* Window::Create(const WindowProperties& properties)
 	{
-		return new WindowsWindow(properties);
+		return DBG_NEW WindowsWindow(properties);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProperties& properties)
@@ -58,7 +58,7 @@ namespace Ugine
 		window_ = glfwCreateWindow((int)properties.width, (int)properties.height, data_.title.c_str(), nullptr, nullptr);
 
 		// renderer definition
-		context_ = new OpenGLContext(window_);
+		context_ = DBG_NEW OpenGLContext(window_);
 		context_->Init();
 
 		// user window handler definition

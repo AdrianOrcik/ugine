@@ -7,7 +7,7 @@ namespace Ugine
 	EntityManager ECS::entityManager_;
 	Entity* ECS::CreateEntity(const std::string name)
 	{
-		Entity* entity = new Ugine::Entity(&entityManager_, name);
+		Entity* entity = DBG_NEW Ugine::Entity(&entityManager_, name);
 		entityManager_.AddEntity(entity);
 		return entity;
 	}

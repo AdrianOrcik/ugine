@@ -14,7 +14,7 @@ namespace Ugine
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    UE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
+		case RendererAPI::API::OpenGL:  return DBG_NEW OpenGLVertexBuffer(vertices, size);
 		}
 
 		UE_ASSERT(false, "Unknown RendererAPI!");
@@ -26,7 +26,7 @@ namespace Ugine
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    UE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::OpenGL:  return DBG_NEW OpenGLIndexBuffer(indices, size);
 		}
 
 		UE_ASSERT(false, "Unknown RendererAPI!");

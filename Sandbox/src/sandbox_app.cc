@@ -11,7 +11,7 @@ public:
 	Sandbox()
 	{	
 		//PushLayer(new ExampleLayer());
-		PushLayer(new Sandbox2D);
+		PushLayer(DBG_NEW Sandbox2D);
 	}
 
 	~Sandbox()
@@ -24,5 +24,5 @@ public:
 Ugine::Application* Ugine::CreateApplication() 
 {
 	LOG_TRACE("Sandbox Created!");
-	return new Sandbox();
+	return DBG_NEW Sandbox();
 }

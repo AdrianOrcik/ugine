@@ -31,7 +31,7 @@ public:
 
 	void SortBy()
 	{
-		sort = new BubbleSort(elements_);
+		sort = DBG_NEW BubbleSort(elements_);
 		sort->Sort();
 	}
 

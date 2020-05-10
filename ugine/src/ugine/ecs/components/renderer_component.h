@@ -12,8 +12,8 @@ namespace Ugine
 	public:
 		RendererComponent( )
 		{
-			rendererStaticData_ = new RendererStaticData();
-			rendererDynamicData_ = new RendererDynamicData();
+			rendererStaticData_ = DBG_NEW RendererStaticData();
+			rendererDynamicData_ = DBG_NEW RendererDynamicData();
 
 			SetPrimitive(PrimitiveType::Square);
 			SetShader("assets/shaders/Texture.glsl");

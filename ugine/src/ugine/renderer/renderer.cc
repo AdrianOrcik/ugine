@@ -7,7 +7,7 @@
 namespace Ugine
 {
 		
-	Renderer::SceneData* Renderer::sSceneData_ = new Renderer::SceneData;
+	Renderer::SceneData* Renderer::sSceneData_ = DBG_NEW Renderer::SceneData;
 
 	void Renderer::Init()
 	{

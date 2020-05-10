@@ -33,7 +33,7 @@ namespace Ugine
         template <typename T, typename... TArgs>
 	    Component* AddComponent(TArgs&&... args)
 		{
-            T* newComponent(new T(std::forward<TArgs>(args)...));
+            T* newComponent(DBG_NEW T(std::forward<TArgs>(args)...));
             newComponent->owner = this;
 			components_.emplace_back(newComponent);
             newComponent->Init();

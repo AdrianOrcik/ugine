@@ -53,7 +53,7 @@ void BubbleSort::SelectElements()
 	data->GetRenderA()->SetColor(Ugine::Color::Blue());
 	data->GetRenderB()->SetColor(Ugine::Color::Blue());
 
-	Ugine::WaitSeconds* waitfor = new Ugine::WaitSeconds(0.2f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 
 	if (data->IsSwaped)
@@ -77,7 +77,7 @@ void BubbleSort::SwapElements()
 		data->GetSortingElementA()->CurrentPosition = currentB;
 		data->GetSortingElementB()->CurrentPosition = currentA;
 
-		Ugine::SwapRoutine* swapRoutine = new Ugine::SwapRoutine(data->GetTransformA(), data->GetTransformB(), 10.0f);
+		Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data->GetTransformA(), data->GetTransformB(), 10.0f);
 		std::function<void(void)> function = std::bind(&BubbleSort::UnselectElements, this);
 		swapRoutine->SetOnCompleted(function);
 
@@ -125,7 +125,7 @@ void BubbleSort::UnselectElements()
 	//	data->GetRenderB()->SetColor(Ugine::Color::Yellow());
 
 	ElementIndex++;
-	Ugine::WaitSeconds* waitfor = new Ugine::WaitSeconds(0.2f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 	waitfor->SetOnCompleted(std::bind(&BubbleSort::SelectElements, this));
 }

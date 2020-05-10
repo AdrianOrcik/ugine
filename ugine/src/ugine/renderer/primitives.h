@@ -42,14 +42,14 @@ namespace Ugine
 	private:
 		static PrimitiveData* GenerateSquare()
 		{
-			float *squareVertices = new float[5 * 4]{
+			float *squareVertices = DBG_NEW float[5 * 4]{
 				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 			};
 
-			uint32_t *squareIndices = new uint32_t[6]{ 0,1,2,2,3,0 };
+			uint32_t *squareIndices = DBG_NEW uint32_t[6]{ 0,1,2,2,3,0 };
 			return new PrimitiveData(squareVertices, 20, squareIndices, 6);
 		}
 	};

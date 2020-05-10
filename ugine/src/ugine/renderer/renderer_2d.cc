@@ -21,7 +21,7 @@ namespace Ugine
 
 	void Renderer2D::Init(RendererStaticData* rendererStaticData)
 	{
-		data_ = new Renderer2DStorage();
+		data_ = DBG_NEW Renderer2DStorage();
 		data_->VertexArray = VertexArray::Create();
 
 		Ref<VertexBuffer> squareVB;

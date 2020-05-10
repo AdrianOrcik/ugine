@@ -5,5 +5,5 @@
 
 namespace Ugine
 {
-	RendererAPI* RenderCommand::sRendererAPI = new OpenGLRendererAPI;
+	RendererAPI* RenderCommand::sRendererAPI = DBG_NEW OpenGLRendererAPI;
 }

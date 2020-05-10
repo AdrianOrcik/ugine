@@ -18,7 +18,7 @@ public:
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{
-		BubbleElements.push_back(new SortingElementData(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
+		BubbleElements.push_back(DBG_NEW SortingElementData(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
 
 		if (isSwaped) {
 			SortingElement temp = *elementA;
