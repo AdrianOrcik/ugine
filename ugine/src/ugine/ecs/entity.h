@@ -33,6 +33,7 @@ namespace Ugine
         template <typename T, typename... TArgs>
 	    Component* AddComponent(TArgs&&... args)
 		{
+			//todo: memory leak
             T* newComponent(DBG_NEW T(std::forward<TArgs>(args)...));
             newComponent->owner = this;
 			components_.emplace_back(newComponent);

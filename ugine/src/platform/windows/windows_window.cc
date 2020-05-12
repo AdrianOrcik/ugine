@@ -23,6 +23,7 @@ namespace Ugine
 
 	Window* Window::Create(const WindowProperties& properties)
 	{
+		//todo: memory leak
 		return DBG_NEW WindowsWindow(properties);
 	}
 
@@ -58,7 +59,7 @@ namespace Ugine
 		window_ = glfwCreateWindow((int)properties.width, (int)properties.height, data_.title.c_str(), nullptr, nullptr);
 
 		// renderer definition
-		context_ = DBG_NEW OpenGLContext(window_);
+		context_ = DBG_NEW OpenGLContext(window_); //TODO: Memory leak
 		context_->Init();
 
 		// user window handler definition

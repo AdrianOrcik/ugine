@@ -1296,6 +1296,15 @@
     <ClInclude Include="src\ugine\coroutines\routine_manager.h">
       <Filter>src\ugine\coroutines</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\routines\movement.h">
+      <Filter>src\ugine\coroutines\routines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h">
+      <Filter>src\ugine\coroutines\routines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h">
+      <Filter>src\ugine\coroutines\routines</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\ecs\component.h">
       <Filter>src\ugine\ecs</Filter>
     </ClInclude>
@@ -1359,6 +1368,9 @@
     <ClInclude Include="src\ugine\renderer\buffer.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\renderer\color.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\renderer\graphic_context.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
@@ -1392,9 +1404,6 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h" />
-    <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h" />
-    <ClInclude Include="src\ugine\renderer\color.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">
@@ -1435,6 +1444,15 @@
     </ClCompile>
     <ClCompile Include="src\ugine\coroutines\routine_manager.cc">
       <Filter>src\ugine\coroutines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\coroutines\routines\movement.cc">
+      <Filter>src\ugine\coroutines\routines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc">
+      <Filter>src\ugine\coroutines\routines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ugine\coroutines\routines\wait_seconds.cc">
+      <Filter>src\ugine\coroutines\routines</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\ecs\ecs.cc">
       <Filter>src\ugine\ecs</Filter>
@@ -1487,7 +1505,5 @@
     <ClCompile Include="src\ugine\renderer\vertex_array.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc" />
-    <ClCompile Include="src\ugine\coroutines\routines\wait_seconds.cc" />
   </ItemGroup>
 </Project>

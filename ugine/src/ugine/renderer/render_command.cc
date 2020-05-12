@@ -5,5 +5,6 @@
 
 namespace Ugine
 {
+	//TODO: memory leak
 	RendererAPI* RenderCommand::sRendererAPI = DBG_NEW OpenGLRendererAPI;
 }

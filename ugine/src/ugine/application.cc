@@ -18,8 +18,6 @@ namespace Ugine {
 	Application* Application::sInstance_ = nullptr;
 	Application::Application()
 	{
-		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 		UE_CORE_ASSERT(!sInstance_, "Application already exist!");
 		sInstance_ = this;
@@ -29,15 +27,14 @@ namespace Ugine {
 
 		Renderer::Init();
 
+		//TODO: memory leak
 		imGuiLayer_ = DBG_NEW ImGuiLayer();
 		PushOverlay(imGuiLayer_);
 	}
 
 	Application::~Application()
 	{
-		delete &layerStack_;
-		delete &window_;
-		_CrtDumpMemoryLeaks();
+	
 	}
 
 	void Application::PushLayer(Layer* layer)

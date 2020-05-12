@@ -10,6 +10,7 @@
 namespace Ugine 
 {
 
+	//TODO: memory leak
 	Input* Input::sInstance_ = DBG_NEW WindowsInput();
 	
 	bool Ugine::WindowsInput::IsKeyPressedImpl(int keycode)

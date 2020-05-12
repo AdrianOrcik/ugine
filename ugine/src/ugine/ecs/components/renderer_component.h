@@ -12,8 +12,8 @@ namespace Ugine
 	public:
 		RendererComponent( )
 		{
-			rendererStaticData_ = DBG_NEW RendererStaticData();
-			rendererDynamicData_ = DBG_NEW RendererDynamicData();
+			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
+			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
 
 			SetPrimitive(PrimitiveType::Square);
 			SetShader("assets/shaders/Texture.glsl");

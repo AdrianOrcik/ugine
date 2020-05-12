@@ -22,7 +22,7 @@
 namespace Ugine 
 {
 
-	extern "C" class UE_API Application
+	class UE_API Application
 	{
 	public:
 		Application();

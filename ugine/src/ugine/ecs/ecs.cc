@@ -7,6 +7,7 @@ namespace Ugine
 	EntityManager ECS::entityManager_;
 	Entity* ECS::CreateEntity(const std::string name)
 	{
+		//TODO: memory leak
 		Entity* entity = DBG_NEW Ugine::Entity(&entityManager_, name);
 		entityManager_.AddEntity(entity);
 		return entity;

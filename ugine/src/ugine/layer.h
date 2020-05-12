@@ -11,7 +11,7 @@ namespace Ugine
 	{
 	public:
 		Layer(const std::string& name = "Layer");
-		~Layer();
+		virtual ~Layer();
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}

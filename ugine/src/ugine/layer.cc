@@ -12,6 +12,5 @@ namespace Ugine
 
 	Layer::~Layer()
 	{
-		delete &debugName_;
 	}
 }

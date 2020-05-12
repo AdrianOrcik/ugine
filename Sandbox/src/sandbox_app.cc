@@ -11,6 +11,8 @@ public:
 	Sandbox()
 	{	
 		//PushLayer(new ExampleLayer());
+
+		//TODO: memory leak
 		PushLayer(DBG_NEW Sandbox2D);
 	}
 
@@ -24,5 +26,6 @@ public:
 Ugine::Application* Ugine::CreateApplication() 
 {
 	LOG_TRACE("Sandbox Created!");
+	//todo: memory leak
 	return DBG_NEW Sandbox();
 }

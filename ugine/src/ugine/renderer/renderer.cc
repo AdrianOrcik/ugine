@@ -7,6 +7,7 @@
 namespace Ugine
 {
 		
+	//TODO: memory leak
 	Renderer::SceneData* Renderer::sSceneData_ = DBG_NEW Renderer::SceneData;
 
 	void Renderer::Init()

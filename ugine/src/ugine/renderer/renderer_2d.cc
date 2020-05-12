@@ -21,6 +21,7 @@ namespace Ugine
 
 	void Renderer2D::Init(RendererStaticData* rendererStaticData)
 	{
+		//TODO: memory leak
 		data_ = DBG_NEW Renderer2DStorage();
 		data_->VertexArray = VertexArray::Create();
 

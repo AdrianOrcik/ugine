@@ -15,7 +15,7 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ugine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -501,9 +501,10 @@
     <ClInclude Include="src\ugine\core.h" />
     <ClInclude Include="src\ugine\core\timestep.h" />
     <ClInclude Include="src\ugine\coroutines\coroutines.h" />
+    <ClInclude Include="src\ugine\coroutines\routine_manager.h" />
+    <ClInclude Include="src\ugine\coroutines\routines\movement.h" />
     <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h" />
     <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h" />
-    <ClInclude Include="src\ugine\coroutines\routine_manager.h" />
     <ClInclude Include="src\ugine\ecs\component.h" />
     <ClInclude Include="src\ugine\ecs\components\renderer_component.h" />
     <ClInclude Include="src\ugine\ecs\components\script_component.h" />
@@ -553,9 +554,10 @@
     </ClCompile>
     <ClCompile Include="src\ugine\application.cc" />
     <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc" />
+    <ClCompile Include="src\ugine\coroutines\routine_manager.cc" />
+    <ClCompile Include="src\ugine\coroutines\routines\movement.cc" />
     <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc" />
     <ClCompile Include="src\ugine\coroutines\routines\wait_seconds.cc" />
-    <ClCompile Include="src\ugine\coroutines\routine_manager.cc" />
     <ClCompile Include="src\ugine\ecs\ecs.cc" />
     <ClCompile Include="src\ugine\ecs\entity.cc" />
     <ClCompile Include="src\ugine\ecs\entity_manager.cc" />
@@ -581,8 +583,8 @@
     <ProjectReference Include="external_src\glad\glad.vcxproj">
       <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
     </ProjectReference>
-    <ProjectReference Include="external_src\imgui\imgui.vcxproj">
-      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
+    <ProjectReference Include="external_src\imgui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -7,6 +7,9 @@
     <Filter Include="scripts">
       <UniqueIdentifier>{6D076287-D9E6-E022-E2FE-6BF94E5D4784}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scripts\algos">
+      <UniqueIdentifier>{72E1D11B-DEA1-4D52-A7DC-96CF135C922E}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\layers\example_layer.h">
@@ -15,15 +18,21 @@
     <ClInclude Include="src\layers\sandbox_2d.h">
       <Filter>layers</Filter>
     </ClInclude>
+    <ClInclude Include="src\scripts\algos\bubble_sort.h">
+      <Filter>scripts\algos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\algos\sorting_algo.h">
+      <Filter>scripts\algos</Filter>
+    </ClInclude>
     <ClInclude Include="src\scripts\sorting_element.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\sorting_element_data.h">
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="src\scripts\sorting_manager.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\sorting_element_data.h" />
-    <ClInclude Include="src\scripts\algos\sorting_algo.h" />
-    <ClInclude Include="src\scripts\algos\bubble_sort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -33,6 +42,8 @@
       <Filter>layers</Filter>
     </ClCompile>
     <ClCompile Include="src\sandbox_app.cc" />
-    <ClCompile Include="src\scripts\algos\bubble_sort.cc" />
+    <ClCompile Include="src\scripts\algos\bubble_sort.cc">
+      <Filter>scripts\algos</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
