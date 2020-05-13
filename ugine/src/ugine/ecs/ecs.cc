@@ -4,31 +4,58 @@
 
 namespace Ugine
 {
-	EntityManager ECS::entityManager_;
+	EntityManager* ECS::entityManager_ = DBG_NEW EntityManager();
 	Entity* ECS::CreateEntity(const std::string name)
 	{
 		//TODO: memory leak
-		Entity* entity = DBG_NEW Ugine::Entity(&entityManager_, name);
-		entityManager_.AddEntity(entity);
+		LOG_INFO("Entity - Create entity obj");
+		Entity* entity = DBG_NEW Ugine::Entity(name);
+		entityManager_->AddEntity(entity);
+		return entity;
+	}
+
+	Entity* ECS::CreateCopy(Entity& entity)
+	{
+		//TODO: memory leak?
+		LOG_INFO("Entity - Create copy");
+		Entity* copiedEntity = DBG_NEW Ugine::Entity(entity);
+		entityManager_->AddEntity(copiedEntity);
+		return copiedEntity;
+	}
+
+	Entity * ECS::CreatePrefab(const std::string name)
+	{
+		//TODO: memory leak?
+		LOG_INFO("Entity - Create prefab obj");
+		Entity* entity = DBG_NEW Ugine::Entity(name);
 		return entity;
 	}
 
 	Entity * ECS::GetEntity(const std::string name)
 	{
-		return entityManager_.GetEntity(name);
+		return entityManager_->GetEntity(name);
 	}
 
 	void ECS::Update(Timestep dt)
 	{
-		entityManager_.OnUpdate(dt);
+		entityManager_->OnUpdate(dt);
 	}
 
 	void ECS::DestroyEntities()
 	{
-		auto entities = entityManager_.GetEntities();
-		for (auto entity : entities)
+		auto entities = entityManager_->GetEntities();
+		for (auto entity : *entities)
 		{
-			entity->Destroy();
+			delete entity;
 		}
+
+		entities->clear();
+	}
+
+	void ECS::DestroyEntity(Entity * entity)
+	{
+		std::vector<Entity*>* entities = entityManager_->GetEntities();
+		entities->erase(std::remove(entities->begin(), entities->end(), entity), entities->end());
+		delete entity;
 	}
 }

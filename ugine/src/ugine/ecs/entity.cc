@@ -2,16 +2,26 @@
 #include "entity.h"
 #include "ecs.h"
 
-Ugine::Entity::Entity(EntityManager* entityManager, const std::string name)
-	:entityManager_(entityManager), name_(name), isActive_(true)
+Ugine::Entity::Entity( const std::string name)
+	: name_(name), isActive_(false)
 {
 	LOG_INFO("Entity Created - {0}", name_);
+}
+
+Ugine::Entity::Entity(Entity & entity)
+{
+	name_ = entity.GetName() + "_copy";
+	isActive_ = entity.isActive_;
+
+	//TODO: copy components 
+	//get component and create copy
+
+	LOG_INFO("Entity Copied - {0}", name_);
 }
 
 Ugine::Entity::~Entity()
 {
 	DestroyComponents();
-	SetActive(false);
 	LOG_INFO("Entity Delete - {0}", name_);
 }
 
@@ -38,6 +48,5 @@ void Ugine::Entity::DestroyComponents()
 
 void Ugine::Entity::Destroy()
 {
-	entityManager_->DestroyEntity(this);
-	delete this;
+	ECS::DestroyEntity(this);
 }

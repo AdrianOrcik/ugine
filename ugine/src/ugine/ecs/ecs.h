@@ -13,6 +13,9 @@ namespace Ugine
 	{
 	public:
 		static Entity* CreateEntity(const std::string name);
+		static Entity* CreateCopy(Entity& entity);
+		
+		static Entity* CreatePrefab(const std::string name);
 		static Entity* GetEntity(const std::string name);
 
 		//static EntityManager GetEntityManager() { return entityManager_; }
@@ -20,7 +23,8 @@ namespace Ugine
 		static void Update(Timestep dt);
 		
 		static void DestroyEntities();
+		static void DestroyEntity(Entity* entity);
 	private:
-		static EntityManager entityManager_;
+		static EntityManager* entityManager_;
 	};
 }

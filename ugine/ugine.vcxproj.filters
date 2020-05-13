@@ -79,6 +79,9 @@
     <Filter Include="src\ugine\renderer">
       <UniqueIdentifier>{FA937966-E677-3ABC-4FD8-340F3BDB243E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ugine\pooler">
+      <UniqueIdentifier>{f288a4dc-a71b-4234-b470-feb250ca2000}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external_src\glm\glm\common.hpp">
@@ -1403,6 +1406,9 @@
     </ClInclude>
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\pooling\object_pooling.h">
+      <Filter>src\ugine\pooler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

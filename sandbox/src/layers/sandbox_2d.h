@@ -7,7 +7,7 @@ class Sandbox2D : public Ugine::Layer
 {
 public:
 	Sandbox2D();
-	virtual ~Sandbox2D() = default;
+	virtual ~Sandbox2D();
 
 	virtual void OnAttach() override;
 	virtual void OnDetach() override;
@@ -26,5 +26,5 @@ private:
 
 	std::vector<Ugine::Entity*> gameObjects_;
 	std::vector<SortingElement*> elements_;
-	int elementCount_ = 2;
+	int elementCount_ = 3;
 };

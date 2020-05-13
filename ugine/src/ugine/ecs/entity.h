@@ -16,7 +16,9 @@ namespace Ugine
 	class Entity
 	{
 	public:
-		Entity(EntityManager* entityManager_, const std::string name);
+		Entity(const std::string name);
+		Entity(Entity& entity);
+
 		virtual ~Entity();
 		std::string GetName() const { return name_; }
 

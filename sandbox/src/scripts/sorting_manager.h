@@ -21,6 +21,7 @@ public:
 	~SortingManager()
 	{
 		LOG_INFO("Delete SortingManager - ScriptComponent");
+		delete sort;
 	}
 
 	SortingAlgo* sort;

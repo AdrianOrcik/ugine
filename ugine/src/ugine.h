@@ -43,6 +43,10 @@
 
 #include "tweeny/tweeny.h"
 
+// coroutines
 #include "ugine/coroutines/coroutines.h"
 #include "ugine/coroutines/routine_manager.h"
 #include "ugine/coroutines/routines/movement.h"
+
+// object pooling
+#include "ugine/pooling/object_pooling.h"

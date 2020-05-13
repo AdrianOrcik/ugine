@@ -18,7 +18,7 @@ namespace Ugine
 		void AddEntity(Entity* entity);
 
 		Entity* GetEntity(const std::string name);
-		std::vector<Entity*> GetEntities() { return entities_; }
+		std::vector<Entity*>* GetEntities() { return &entities_; }
 
 		void DestroyEntity(Entity* entity);
 	private:
