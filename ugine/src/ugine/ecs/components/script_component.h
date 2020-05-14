@@ -23,6 +23,8 @@ namespace Ugine
 
 		virtual void OnInit() = 0;
 		virtual void OnUpdate(float Timestep) = 0;
+		virtual void OnActive() = 0;
+		virtual void OnDeactive()  = 0;
 
 	public:
 		Entity* GetEntity() { return owner; }

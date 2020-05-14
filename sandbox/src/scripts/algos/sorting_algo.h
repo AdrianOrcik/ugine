@@ -15,6 +15,7 @@ public:
 	int ElementIndex = 0;
 
 	bool HasElements() { return ElementIndex < BubbleElements.size(); }
+	void SetElements(std::vector<SortingElement*> elements) { Elements = elements; }
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{

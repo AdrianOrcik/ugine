@@ -18,7 +18,6 @@ namespace Ugine
 
 		~ObjectPooler()
 		{
-			ECS::DestroyEntities();
 			pool.clear();
 		}
 
@@ -42,6 +41,5 @@ namespace Ugine
 			pool[poolName].push(obj);
 			return obj;
 		}
-		
 	};
 }

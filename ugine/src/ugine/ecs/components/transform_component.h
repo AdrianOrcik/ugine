@@ -26,6 +26,11 @@ namespace Ugine
 		{
 		}
 
+		TransformComponent(TransformComponent& transform)
+			:position_(glm::vec2(0.0f, 0.0f)), rotation_(glm::vec2(0.0f, 0.0f)), scale_(glm::vec2(1.0f, 1.0f)), pivot_(TransformPivot::Bottom)
+		{
+		}
+
 		~TransformComponent()
 		{
 			LOG_INFO("Delete Transform");
@@ -44,6 +49,13 @@ namespace Ugine
 		glm::vec2 GetScale() { return scale_; }
 		Movement* move;
 
+		void Default()
+		{
+			position_ = glm::vec2(0.0f, 0.0f);
+			rotation_ = glm::vec2(0.0f, 0.0f);
+			scale_ = glm::vec2(1.0f, 1.0f);
+			pivot_ = TransformPivot::Bottom;
+		}
 		
 		// Inherited via Component
 		virtual void Init() override
@@ -53,6 +65,12 @@ namespace Ugine
 		{
 			PivotCalculation();
 		}
+
+		virtual void OnActive() override
+		{}
+
+		virtual void OnDeactive() override
+		{}
 
 	private:
 		void PivotCalculation()

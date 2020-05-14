@@ -11,20 +11,24 @@
 #include <map>
 
 class SwapRoutine;
+class SortingAlgo;
 class SortingManager : public Ugine::ScriptComponent
 {
 
 public:
+
 	SortingManager()
-	{}
+	{
+		bubbleSort_ = DBG_NEW BubbleSort();
+	}
 
 	~SortingManager()
 	{
 		LOG_INFO("Delete SortingManager - ScriptComponent");
-		delete sort;
+		delete bubbleSort_;
 	}
 
-	SortingAlgo* sort;
+
 	void SetElements(std::vector<SortingElement*> elements)
 	{
 		elements_ = elements;
@@ -32,8 +36,9 @@ public:
 
 	void SortBy()
 	{
-		sort = DBG_NEW BubbleSort(elements_);
-		sort->Sort();
+		LOG_INFO("Soon sorting ... HEY");
+		bubbleSort_->SetElements(elements_);
+		bubbleSort_->Sort();
 	}
 
 	// Inherited via ScriptComponent
@@ -43,7 +48,15 @@ public:
 	virtual void OnUpdate(float Timestep) override
 	{}
 
+	virtual void OnActive() override
+	{}
+
+	virtual void OnDeactive() override
+	{}
+
 private:
 	std::vector<SortingElement*> elements_;
+	SortingAlgo* bubbleSort_ = nullptr;
+
 
 };

@@ -14,7 +14,6 @@ public:
 
 	~SortingElement()
 	{
-		LOG_INFO("Delete SortingElement - ScriptComponent");
 	}
 
 	Ugine::TransformComponent* GetTransform() { return (Ugine::TransformComponent*)GetEntity()->GetComponent<Ugine::TransformComponent>(); }
@@ -25,6 +24,12 @@ public:
 	{}
 
 	virtual void OnUpdate(float Timestep) override
+	{}
+
+	virtual void OnActive() override
+	{}
+
+	virtual void OnDeactive() override
 	{}
 
 public:

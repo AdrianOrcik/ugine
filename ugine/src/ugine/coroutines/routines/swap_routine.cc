@@ -14,7 +14,7 @@ namespace Ugine
 	}
 	SwapRoutine::~SwapRoutine()
 	{
-		delete this;
+		LOG_INFO("Routine Delete");
 	}
 
 	//todo: define as utility (math)
@@ -55,6 +55,7 @@ namespace Ugine
 	{
 		onCompleted();
 		onCompleted = NULL;
+		delete this;
 	}
 
 }

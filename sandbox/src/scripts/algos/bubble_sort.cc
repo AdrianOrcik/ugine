@@ -1,15 +1,10 @@
 #include "bubble_sort.h"
 
-BubbleSort::BubbleSort(std::vector<SortingElement*> elements)
-{
-	Elements = elements;
-	ElementIndex = 0;
-}
+BubbleSort::BubbleSort()
+{}
 
 BubbleSort::~BubbleSort()
-{
-	delete this;
-}
+{}
 
 void BubbleSort::Sort()
 {
@@ -32,6 +27,18 @@ void BubbleSort::Sort()
 	SetElementSortedPosition();
 	SelectElements();
 }
+
+
+void BubbleSort::SetElementsColor()
+{
+	for (int i = 0; i < Elements.size(); i++)
+	{
+		Ugine::RendererComponent* renderer = 
+			(Ugine::RendererComponent*)Elements[i]->owner->GetComponent<Ugine::RendererComponent>();
+		renderer->SetColor(Ugine::Color::White());
+	}
+}
+
 
 void BubbleSort::SelectElements()
 {

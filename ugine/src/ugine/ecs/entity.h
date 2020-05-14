@@ -6,12 +6,11 @@
 #include "component.h"
 #include "entity_manager.h"
 #include "ugine/core/timestep.h"
-#include "ugine/ecs/components/transform_component.h"
+#include "ugine/log.h"
 
 namespace Ugine
 {
 	class Component;
-	class TransformComponent;
 	class EntityManager;
 	class Entity
 	{
@@ -27,6 +26,8 @@ namespace Ugine
 
 		void OnUpdate(Timestep dt);
 		void Destroy();
+		void OnActive();
+		void OnDeactive();
 
 	private:
 		void DestroyComponents();
@@ -36,11 +37,11 @@ namespace Ugine
 	    Component* AddComponent(TArgs&&... args)
 		{
 			//todo: memory leak
-            T* newComponent(DBG_NEW T(std::forward<TArgs>(args)...));
-            newComponent->owner = this;
+			T* newComponent(DBG_NEW T(std::forward<TArgs>(args)...));
+			newComponent->owner = this;
 			components_.emplace_back(newComponent);
-            newComponent->Init();
-            return newComponent;
+			newComponent->Init();
+			return newComponent;
         }
 
 		template <typename T>
@@ -52,6 +53,18 @@ namespace Ugine
 				if (t != nullptr)
 					return t;
 			}
+		}
+
+		template <typename T>
+		bool HasComponent()
+		{
+			for (auto& component : components_)
+			{
+				T* t = dynamic_cast<T*>(component);
+				if (t != nullptr)
+					return true;
+			}
+			return false;
 		}
 
 	private:

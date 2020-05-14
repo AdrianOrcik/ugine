@@ -8,13 +8,16 @@
 class BubbleSort : public SortingAlgo
 {
 public:
-	BubbleSort(std::vector<SortingElement*> elements);
+	BubbleSort();
 	~BubbleSort();
 
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
+
 private:
 	void SelectElements();
 	void SwapElements();
 	void UnselectElements();
+
+	void SetElementsColor();
 };

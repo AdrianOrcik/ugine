@@ -9,9 +9,7 @@ namespace Ugine
 	{}
 
 	WaitSeconds::~WaitSeconds()
-	{
-		delete this;
-	}
+	{}
 
 	bool WaitSeconds::HasMore()
 	{
@@ -29,6 +27,7 @@ namespace Ugine
 	{
 		onCompleted();
 		onCompleted = NULL;
+		delete this;
 	}
 
 }

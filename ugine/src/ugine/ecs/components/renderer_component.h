@@ -14,11 +14,17 @@ namespace Ugine
 		{
 			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
 			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
+			Default();
+		}
 
-			SetPrimitive(PrimitiveType::Square);
-			SetShader("assets/shaders/Texture.glsl");
-			SetTexture("");
-			SetColor({ 1.0,1.0,1.0,1.0 });
+		RendererComponent(RendererComponent& renderer)
+		{
+			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
+			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
+			Default();
+
+			transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
+			Renderer2D::Init(rendererStaticData_);
 		}
 
 		~RendererComponent() {
@@ -26,6 +32,14 @@ namespace Ugine
 			delete rendererStaticData_;
 			delete rendererDynamicData_;
 			LOG_INFO("Delete RendererComponent");
+		}
+
+		void Default()
+		{
+			SetPrimitive(PrimitiveType::Square);
+			SetShader("assets/shaders/Texture.glsl");
+			SetTexture("");
+			SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		void SetPrimitive(PrimitiveType type) 
@@ -66,6 +80,13 @@ namespace Ugine
 			Renderer2D::OnBegin(*rendererDynamicData_->camera);
 			Ugine::Renderer2D::Draw(transformComponent_->GetWorldPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}
+
+		virtual void OnActive() override
+		{}
+
+		virtual void OnDeactive() override
+		{}
+
 	private:
 		RendererStaticData* rendererStaticData_;
 		RendererDynamicData* rendererDynamicData_;
