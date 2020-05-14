@@ -28,7 +28,6 @@ namespace Ugine
 		}
 
 		~RendererComponent() {
-			delete rendererStaticData_->primitiveData;
 			delete rendererStaticData_;
 			delete rendererDynamicData_;
 			LOG_INFO("Delete RendererComponent");
@@ -40,6 +39,11 @@ namespace Ugine
 			SetShader("assets/shaders/Texture.glsl");
 			SetTexture("");
 			SetColor({ 1.0,1.0,1.0,1.0 });
+
+			if(transformComponent_ == nullptr)
+				transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
+
+			Renderer2D::Init(rendererStaticData_);
 		}
 
 		void SetPrimitive(PrimitiveType type) 
@@ -77,8 +81,8 @@ namespace Ugine
 		virtual void Update(float Timestep) override
 		{
 			//LOG_INFO("Renderer");
-			Renderer2D::OnBegin(*rendererDynamicData_->camera);
-			Ugine::Renderer2D::Draw(transformComponent_->GetWorldPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
+			Renderer2D::OnBegin(rendererStaticData_->renderer2DStorage, *rendererDynamicData_->camera);
+			Ugine::Renderer2D::Draw(rendererStaticData_->renderer2DStorage, transformComponent_->GetWorldPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}
 
 		virtual void OnActive() override
@@ -91,6 +95,5 @@ namespace Ugine
 		RendererStaticData* rendererStaticData_;
 		RendererDynamicData* rendererDynamicData_;
 		TransformComponent* transformComponent_;
-
 	};
 }

@@ -6,6 +6,7 @@ BubbleSort::BubbleSort()
 BubbleSort::~BubbleSort()
 {}
 
+//TODO: some of the elements are disable in next rounds of simulation
 void BubbleSort::Sort()
 {
 	SetElementTransform();

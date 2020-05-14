@@ -80,10 +80,16 @@ void Ugine::Entity::SetActive(bool isActive)
 {
 	isActive_ = isActive;
 
-	if (isActive_)
+	if (isActive_) 
+	{
+		LOG_INFO("OnActive");
 		OnActive();
+	}
 	else
+	{
+		LOG_INFO("OnDeactive");
 		OnDeactive();
+	}
 }
 
 void Ugine::Entity::Destroy()
