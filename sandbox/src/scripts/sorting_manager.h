@@ -28,16 +28,15 @@ public:
 		delete bubbleSort_;
 	}
 
-
 	void SetElements(std::vector<SortingElement*> elements)
 	{
-		elements_ = elements;
+		//elements_ = elements;
+		bubbleSort_->BubbleElements.clear();
+		bubbleSort_->SetElements(elements);
 	}
 
 	void SortBy()
 	{
-		LOG_INFO("Soon sorting ... HEY");
-		bubbleSort_->SetElements(elements_);
 		bubbleSort_->Sort();
 	}
 
@@ -55,7 +54,7 @@ public:
 	{}
 
 private:
-	std::vector<SortingElement*> elements_;
+	//std::vector<SortingElement*> elements_;
 	SortingAlgo* bubbleSort_ = nullptr;
 
 

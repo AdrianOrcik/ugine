@@ -14,36 +14,28 @@ namespace Ugine
 		{
 			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
 			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
-			Default();
+			
+			SetPrimitive(PrimitiveType::Square);
+			SetShader("assets/shaders/Texture.glsl");
+			SetTexture("");
+			SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		RendererComponent(RendererComponent& renderer)
 		{
 			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
 			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
-			Default();
-
-			transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
-			Renderer2D::Init(rendererStaticData_);
+			
+			SetPrimitive(PrimitiveType::Square);
+			SetShader("assets/shaders/Texture.glsl");
+			SetTexture("");
+			SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		~RendererComponent() {
 			delete rendererStaticData_;
 			delete rendererDynamicData_;
 			LOG_INFO("Delete RendererComponent");
-		}
-
-		void Default()
-		{
-			SetPrimitive(PrimitiveType::Square);
-			SetShader("assets/shaders/Texture.glsl");
-			SetTexture("");
-			SetColor({ 1.0,1.0,1.0,1.0 });
-
-			if(transformComponent_ == nullptr)
-				transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
-
-			Renderer2D::Init(rendererStaticData_);
 		}
 
 		void SetPrimitive(PrimitiveType type) 
@@ -92,8 +84,8 @@ namespace Ugine
 		{}
 
 	private:
-		RendererStaticData* rendererStaticData_;
-		RendererDynamicData* rendererDynamicData_;
-		TransformComponent* transformComponent_;
+		RendererStaticData* rendererStaticData_	= nullptr;
+		RendererDynamicData* rendererDynamicData_	= nullptr;
+		TransformComponent* transformComponent_	= nullptr;
 	};
 }

@@ -22,12 +22,12 @@ Ugine::Entity::Entity(Entity & entity)
 	//get component and create copy
 	if (entity.HasComponent<TransformComponent>())
 	{
-		AddComponent<TransformComponent>();
+		this->AddComponent<TransformComponent>();
 	}
 
 	if (entity.HasComponent<RendererComponent>())
 	{
-		AddComponent<RendererComponent>();
+		this->AddComponent<RendererComponent>();
 	}
 
 	//if (entity.HasComponent<ScriptComponent>())

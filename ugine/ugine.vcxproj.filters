@@ -1511,6 +1511,5 @@
     <ClCompile Include="src\ugine\renderer\vertex_array.cc">
       <Filter>src\ugine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ugine\ecs\components\script_component.cpp" />
   </ItemGroup>
 </Project>

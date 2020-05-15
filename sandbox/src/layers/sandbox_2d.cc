@@ -83,11 +83,19 @@ void Sandbox2D::OnImGuiRender()
 	{
 		GenerateObjects();
 	}
+
 	if(ImGui::Button("Sort"))
 	{
-		//Ugine::Entity* entity = pooler->GetPooledObj("entities");
-		//entity->Destroy();
 		sortingManager->SortBy();
+	}
+
+	if (ImGui::Button("Delete Elements"))
+	{
+		for (auto gameObject : gameObjects_)
+			gameObject->SetActive(false);
+		
+		gameObjects_.clear();
+		elements_.clear();
 	}
 
 	ImGui::End();
@@ -100,16 +108,16 @@ void Sandbox2D::OnEvent(Ugine::Event & e)
 
 void Sandbox2D::CreateObject(Ugine::Entity* entity, int index, int generatedValue)
 {
+	entity->SetActive(true);
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)entity->GetComponent<Ugine::TransformComponent>();
-	transform->Default();
 	transform->SetLocalPosition(glm::vec2((float)index / 10.0f, 0));
-	transform->SetOffsetPosition(glm::vec2(0,-0.5f));
+	transform->SetOffsetPosition(glm::vec2(0, -0.5f));
 	transform->SetScale(glm::vec2(0.05f, ((float)generatedValue / 10.0f)));
 
 	Ugine::RendererComponent* renderer =
 		(Ugine::RendererComponent*)entity->GetComponent<Ugine::RendererComponent>();
-	renderer->Default();
+	renderer->SetColor(Ugine::Color::White());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
 	SortingElement* element;
@@ -121,9 +129,11 @@ void Sandbox2D::CreateObject(Ugine::Entity* entity, int index, int generatedValu
 	{
 		element = (SortingElement*)entity->GetComponent<SortingElement>();
 	}
+
 	element->Value = generatedValue;
-	
-	entity->SetActive(true);
+	element->CurrentPosition = 0;
+	element->SortedPosition = 0;
+
 	gameObjects_.push_back(entity);
 	elements_.push_back(element);
 }
@@ -131,10 +141,8 @@ void Sandbox2D::CreateObject(Ugine::Entity* entity, int index, int generatedValu
 void Sandbox2D::GenerateObjects()
 {
 	//remove old game elements if exist
-	if(gameObjects_.size() > 0){
-		for (auto gameObject : gameObjects_)
-			gameObject->SetActive(false);
-	}
+	for (auto gameObject : gameObjects_)
+		gameObject->SetActive(false);
 
 	gameObjects_.clear();
 	elements_.clear();

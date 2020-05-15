@@ -35,15 +35,10 @@ public:
 		}
 	}
 
-	void SetElementTransform()
+	void SetElementCurrentPosition()
 	{
-		//todo: constant values in one file
 		for (int i = 0; i < Elements.size(); i++)
 		{
-			Ugine::TransformComponent* transform =
-				(Ugine::TransformComponent*)Elements[i]->GetEntity()->GetComponent<Ugine::TransformComponent>();
-			transform->SetLocalPosition({ (float)i / 10.0f, 0.0f });
-
 			Elements[i]->CurrentPosition = i;
 		}
 	}
