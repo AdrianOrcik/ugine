@@ -11,7 +11,6 @@
 namespace Ugine
 {
 	class Component;
-	class EntityManager;
 	class Entity
 	{
 	public:
@@ -102,6 +101,5 @@ namespace Ugine
 		std::vector<Component*> components_;
 		std::string name_;
 		bool isActive_;
-		EntityManager* entityManager_;
 	};
 }
