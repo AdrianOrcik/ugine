@@ -2,19 +2,15 @@
 #include "ugine.h"
 #include "../scripts/sorting_element.h"
 
-struct SortingElementData
+struct SortingPairElement
 {
 	Ugine::Entity* ElementA;
 	Ugine::Entity* ElementB;
 	bool IsSwaped;
 
-	SortingElementData(Ugine::Entity* elementA, Ugine::Entity* elementB, bool isSwaped)
+	SortingPairElement(Ugine::Entity* elementA, Ugine::Entity* elementB, bool isSwaped)
 		:ElementA(elementA), ElementB(elementB), IsSwaped(isSwaped)
 	{}
-
-	~SortingElementData()
-	{
-	}
 
 	Ugine::TransformComponent* GetTransformA() { return (Ugine::TransformComponent*)ElementA->GetComponent<Ugine::TransformComponent>(); }
 	Ugine::TransformComponent* GetTransformB() { return (Ugine::TransformComponent*)ElementB->GetComponent<Ugine::TransformComponent>(); }
@@ -24,4 +20,18 @@ struct SortingElementData
 
 	SortingElement* GetSortingElementA() { return (SortingElement*)ElementA->GetComponent<SortingElement>(); }
 	SortingElement* GetSortingElementB() { return (SortingElement*)ElementB->GetComponent<SortingElement>(); }
+};
+
+struct SortingSingleElement
+{
+	Ugine::Entity* Element;
+	bool IsSelected;
+
+	SortingSingleElement(Ugine::Entity* element, bool isSelected)
+		:Element(element), IsSelected(isSelected)
+	{}
+
+	Ugine::TransformComponent* GetTransform() { return (Ugine::TransformComponent*)Element->GetComponent<Ugine::TransformComponent>(); }
+	Ugine::RendererComponent* GetRender() { return (Ugine::RendererComponent*)Element->GetComponent<Ugine::RendererComponent>(); }
+	SortingElement* GetSortingElement() { return (SortingElement*)Element->GetComponent<SortingElement>(); }
 };

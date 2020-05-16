@@ -11,11 +11,15 @@ public:
 	virtual void Sort() = 0;
 
 	std::vector<SortingElement*> Elements;
-	std::vector<SortingElementData*> StepElements;
-	int ElementIndex = 0;
-
-	bool HasElements() { return ElementIndex < StepElements.size(); }
 	void SetElements(std::vector<SortingElement*> elements) { Elements = elements; }
+
+	int PairIndex = 0;
+	std::vector<SortingPairElement*> SwapPair;
+	bool HasMorePair() { return PairIndex < SwapPair.size(); }
+	
+	int SingleIndex = 0;
+	std::vector<SortingSingleElement*> SelectSingle;
+	bool HasMoreSingle() { return PairIndex < SwapPair.size(); }
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{
@@ -25,7 +29,7 @@ public:
 			*elementB = temp;
 		}
 
-		StepElements.push_back(DBG_NEW SortingElementData(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
+		SwapPair.push_back(DBG_NEW SortingPairElement(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
 	}
 
 	void SetElementSortedPosition()
@@ -46,12 +50,12 @@ public:
 
 	void StepElementsClear()
 	{
-		for (auto bubble : StepElements)
+		for (auto bubble : SwapPair)
 		{
 			delete bubble;
 		}
 
-		StepElements.clear();
+		SwapPair.clear();
 	}
 
 	void SetElementsColor()

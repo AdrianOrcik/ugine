@@ -32,7 +32,7 @@ void BubbleSort::Sort()
 
 void BubbleSort::SelectElements()
 {
-	if (!HasElements())
+	if (!HasMorePair())
 	{
 		LOG_ERROR("Select - No More Steps!");
 
@@ -41,11 +41,11 @@ void BubbleSort::SelectElements()
 			Elements[i]->GetRenderer()->SetColor(Ugine::Color::Yellow());
 		}
 
-		ElementIndex = 0;
+		PairIndex = 0;
 		return;
 	}
 
-	SortingElementData* data = StepElements[ElementIndex];
+	SortingPairElement* data = SwapPair[PairIndex];
 
 	data->GetRenderA()->SetColor(Ugine::Color::Blue());
 	data->GetRenderB()->SetColor(Ugine::Color::Blue());
@@ -61,7 +61,7 @@ void BubbleSort::SelectElements()
 
 void BubbleSort::SwapElements()
 {
-	SortingElementData* data = StepElements[ElementIndex];
+	SortingPairElement* data = SwapPair[PairIndex];
 
 	data->GetRenderA()->SetColor(Ugine::Color::Red());
 	data->GetRenderB()->SetColor(Ugine::Color::Red());
@@ -82,11 +82,11 @@ void BubbleSort::SwapElements()
 
 void BubbleSort::UnselectElements()
 {
-	SortingElementData* data = StepElements[ElementIndex];
+	SortingPairElement* data = SwapPair[PairIndex];
 	data->GetRenderA()->SetColor(Ugine::Color::White());
 	data->GetRenderB()->SetColor(Ugine::Color::White());
 
-	ElementIndex++;
+	PairIndex++;
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 	waitfor->SetOnCompleted(std::bind(&BubbleSort::SelectElements, this));
