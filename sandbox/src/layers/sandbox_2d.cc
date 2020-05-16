@@ -86,7 +86,12 @@ void Sandbox2D::OnImGuiRender()
 
 	if(ImGui::Button("Bubble Sort"))
 	{
-		sortingManager->SortBy();
+		sortingManager->SortBy(SortingManager::SortingType::Bubble);
+	}
+
+	if (ImGui::Button("Selection Sort"))
+	{
+		sortingManager->SortBy(SortingManager::SortingType::Selection);
 	}
 
 	ImGui::End();

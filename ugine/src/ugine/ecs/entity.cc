@@ -9,7 +9,7 @@
 Ugine::Entity::Entity( const std::string name)
 	: name_(name), isActive_(false)
 {
-	LOG_INFO("Entity Created - {0}", name_);
+	//LOG_INFO("Entity Created - {0}", name_);
 }
 
 Ugine::Entity::Entity(Entity & entity)
@@ -35,13 +35,13 @@ Ugine::Entity::Entity(Entity & entity)
 	//	//AddComponent<ScriptComponent>();
 	//}
 
-	LOG_INFO("Entity Copied - {0}", name_);
+	//LOG_INFO("Entity Copied - {0}", name_);
 }
 
 Ugine::Entity::~Entity()
 {
 	DestroyComponents();
-	LOG_INFO("Entity Delete - {0}", name_);
+	//LOG_INFO("Entity Delete - {0}", name_);
 }
 
 void Ugine::Entity::OnUpdate(Timestep dt)

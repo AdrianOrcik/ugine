@@ -5,6 +5,7 @@
 #include "../scripts/sorting_element.h"
 
 #include "../scripts/algos/bubble_sort.h"
+#include "../scripts/algos/selection_sort.h"
 #include "../scripts/algos/sorting_algo.h"
 
 #include <functional>
@@ -16,26 +17,38 @@ class SortingManager : public Ugine::ScriptComponent
 {
 
 public:
+	enum SortingType{Bubble, Selection};
 
 	SortingManager()
 	{
 		bubbleSort_ = DBG_NEW BubbleSort();
+		selectionSort_ = DBG_NEW Selectionsort();
 	}
 
 	~SortingManager()
 	{
 		LOG_INFO("Delete SortingManager - ScriptComponent");
 		delete bubbleSort_;
+		delete selectionSort_;
 	}
 
 	void SetElements(std::vector<SortingElement*> elements)
 	{
 		bubbleSort_->SetElements(elements);
+		selectionSort_->SetElements(elements);
 	}
 
-	void SortBy()
+	void SortBy(SortingType type)
 	{
-		bubbleSort_->Sort();
+		switch (type)
+		{
+			case SortingType::Bubble:
+				bubbleSort_->Sort();
+				break;
+			case SortingType::Selection:
+				selectionSort_->Sort();
+				break;
+		}
 	}
 
 	// Inherited via ScriptComponent
@@ -53,6 +66,7 @@ public:
 
 private:
 	SortingAlgo* bubbleSort_ = nullptr;
+	SortingAlgo* selectionSort_ = nullptr;
 
 
 };

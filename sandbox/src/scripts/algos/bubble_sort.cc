@@ -30,16 +30,6 @@ void BubbleSort::Sort()
 	SelectElements();
 }
 
-void BubbleSort::SetElementsColor()
-{
-	for (int i = 0; i < Elements.size(); i++)
-	{
-		Ugine::RendererComponent* renderer = 
-			(Ugine::RendererComponent*)Elements[i]->owner->GetComponent<Ugine::RendererComponent>();
-		renderer->SetColor(Ugine::Color::White());
-	}
-}
-
 void BubbleSort::SelectElements()
 {
 	if (!HasElements())

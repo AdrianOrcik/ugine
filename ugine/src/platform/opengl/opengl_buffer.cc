@@ -39,6 +39,7 @@ Ugine::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t * indices, uint32_t count)
 
 Ugine::OpenGLIndexBuffer::~OpenGLIndexBuffer()
 {
+	//TODO: sometimes trying to free null buffer
 	glDeleteBuffers(GL_ELEMENT_ARRAY_BUFFER, &rendererID_);
 }
 

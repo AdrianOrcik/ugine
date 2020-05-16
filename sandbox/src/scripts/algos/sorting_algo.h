@@ -54,4 +54,14 @@ public:
 		StepElements.clear();
 	}
 
+	void SetElementsColor()
+	{
+		for (int i = 0; i < Elements.size(); i++)
+		{
+			Ugine::RendererComponent* renderer =
+				(Ugine::RendererComponent*)Elements[i]->owner->GetComponent<Ugine::RendererComponent>();
+			renderer->SetColor(Ugine::Color::White());
+		}
+	}
+
 };

@@ -33,6 +33,7 @@
     <ClInclude Include="src\scripts\sorting_manager.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="src\scripts\algos\selection_sort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -45,5 +46,6 @@
     <ClCompile Include="src\scripts\algos\bubble_sort.cc">
       <Filter>scripts\algos</Filter>
     </ClCompile>
+    <ClCompile Include="src\scripts\algos\selection_sort.cc" />
   </ItemGroup>
 </Project>

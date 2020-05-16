@@ -5,17 +5,12 @@
 #include "ugine/coroutines/routines/swap_routine.h"
 #include "ugine/coroutines/routines/wait_seconds.h"
 
-class BubbleSort : public SortingAlgo
+class Selectionsort : public SortingAlgo
 {
 public:
-	BubbleSort();
-	~BubbleSort();
+	Selectionsort();
+	~Selectionsort();
 
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
-
-private:
-	void SelectElements();
-	void SwapElements();
-	void UnselectElements();
 };
