@@ -48,7 +48,7 @@ public:
 		}
 	}
 
-	void StepElementsClear()
+	void SwapPairClear()
 	{
 		for (auto bubble : SwapPair)
 		{
@@ -65,6 +65,16 @@ public:
 			Ugine::RendererComponent* renderer =
 				(Ugine::RendererComponent*)Elements[i]->owner->GetComponent<Ugine::RendererComponent>();
 			renderer->SetColor(Ugine::Color::White());
+		}
+	}
+
+	void SetElementsTransform()
+	{
+		for (int i = 0; i < Elements.size(); i++)
+		{
+			Ugine::TransformComponent* transform =
+				(Ugine::TransformComponent*)Elements[i]->owner->GetComponent<Ugine::TransformComponent>();
+			transform->SetLocalPosition(glm::vec2((float)i / 10.0f , 0.0f));
 		}
 	}
 

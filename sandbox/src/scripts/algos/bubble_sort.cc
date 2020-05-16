@@ -9,12 +9,13 @@ BubbleSort::~BubbleSort()
 //TODO: some of the elements are deactivated in next rounds of simulation -- whyyyy??
 void BubbleSort::Sort()
 {
-	StepElementsClear();
+	SwapPairClear();
 	SetElementCurrentPosition();
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
 		for (int j = 0; j < Elements.size() - i - 1; j++)
 		{
+			//current > current + 1
 			if (Elements[j]->Value > Elements[j + 1]->Value)
 			{
 				Swap(Elements[j], Elements[j + 1], true);
