@@ -53,7 +53,7 @@ void Sandbox2D::OnAttach()
 
 	// gameobjects
 	// ------------
-	GenerateObjects();
+	GeneratePooledObjects();
 
 	LOG_INFO("gameObjects_ Count: {0}", gameObjects_.size());
 	LOG_INFO("elements_ Count: {0}", elements_.size());
@@ -81,21 +81,12 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::SliderInt("Count", &elementCount_, 1, 10);
 	if (ImGui::Button("Generate"))
 	{
-		GenerateObjects();
+		GeneratePooledObjects();
 	}
 
-	if(ImGui::Button("Sort"))
+	if(ImGui::Button("Bubble Sort"))
 	{
 		sortingManager->SortBy();
-	}
-
-	if (ImGui::Button("Delete Elements"))
-	{
-		for (auto gameObject : gameObjects_)
-			gameObject->SetActive(false);
-		
-		gameObjects_.clear();
-		elements_.clear();
 	}
 
 	ImGui::End();
@@ -106,12 +97,12 @@ void Sandbox2D::OnEvent(Ugine::Event & e)
 	cameraController_.OnEvent(e);
 }
 
-void Sandbox2D::CreateObject(Ugine::Entity* entity, int index, int generatedValue)
+void Sandbox2D::SetObject(Ugine::Entity* entity, int index, int generatedValue)
 {
 	entity->SetActive(true);
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)entity->GetComponent<Ugine::TransformComponent>();
-	transform->SetLocalPosition(glm::vec2((float)index / 10.0f, 0));
+	transform->SetLocalPosition(glm::vec2((float)index / 10.0f, 0.0f));
 	transform->SetOffsetPosition(glm::vec2(0, -0.5f));
 	transform->SetScale(glm::vec2(0.05f, ((float)generatedValue / 10.0f)));
 
@@ -121,24 +112,17 @@ void Sandbox2D::CreateObject(Ugine::Entity* entity, int index, int generatedValu
 	renderer->SetCamera(&cameraController_.GetCamera());
 
 	SortingElement* element;
-	if (!entity->HasComponent<SortingElement>())
-	{
-		element = (SortingElement*)entity->AddComponent<SortingElement>();
-	}
-	else 
-	{
-		element = (SortingElement*)entity->GetComponent<SortingElement>();
-	}
+	if(entity->HasComponent<SortingElement>())
+		entity->DestroyComponent<SortingElement>();
 
+	element = (SortingElement*)entity->AddComponent<SortingElement>();
 	element->Value = generatedValue;
-	element->CurrentPosition = 0;
-	element->SortedPosition = 0;
-
+	
 	gameObjects_.push_back(entity);
 	elements_.push_back(element);
 }
 
-void Sandbox2D::GenerateObjects()
+void Sandbox2D::GeneratePooledObjects()
 {
 	//remove old game elements if exist
 	for (auto gameObject : gameObjects_)
@@ -151,9 +135,15 @@ void Sandbox2D::GenerateObjects()
 	for (int i = 0; i < elementCount_; i++)
 	{
 		int generatedValue = rand() % elementCount_ * 2 + 1;
-		CreateObject(pooler->GetPooledObj("entities"),i, generatedValue);
+		SetObject(pooler->GetPooledObj("entities"),i, generatedValue);
 	}
 
 	//update new elements for sort
+	for (auto e : elements_)
+	{
+		if (!e->owner->IsActive())
+			LOG_ERROR("Sandbox: DISABLED!");
+	}
+
 	sortingManager->SetElements(elements_);
 }

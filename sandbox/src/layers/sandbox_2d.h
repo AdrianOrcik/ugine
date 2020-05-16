@@ -17,8 +17,8 @@ public:
 	void OnEvent(Ugine::Event& e) override;
 
 private:
-	void CreateObject(Ugine::Entity* entity, int index, int generatedValue);
-	void GenerateObjects();
+	void SetObject(Ugine::Entity* entity, int index, int generatedValue);
+	void GeneratePooledObjects();
 public:
 	Ugine::OrthographicCameraController cameraController_;
 	static bool OnNext;

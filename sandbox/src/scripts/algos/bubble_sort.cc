@@ -9,6 +9,7 @@ BubbleSort::~BubbleSort()
 //TODO: some of the elements are deactivated in next rounds of simulation -- whyyyy??
 void BubbleSort::Sort()
 {
+	StepElementsClear();
 	SetElementCurrentPosition();
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
@@ -54,7 +55,7 @@ void BubbleSort::SelectElements()
 		return;
 	}
 
-	SortingElementData* data = BubbleElements[ElementIndex];
+	SortingElementData* data = StepElements[ElementIndex];
 
 	data->GetRenderA()->SetColor(Ugine::Color::Blue());
 	data->GetRenderB()->SetColor(Ugine::Color::Blue());
@@ -70,7 +71,7 @@ void BubbleSort::SelectElements()
 
 void BubbleSort::SwapElements()
 {
-	SortingElementData* data = BubbleElements[ElementIndex];
+	SortingElementData* data = StepElements[ElementIndex];
 
 	data->GetRenderA()->SetColor(Ugine::Color::Red());
 	data->GetRenderB()->SetColor(Ugine::Color::Red());
@@ -91,7 +92,7 @@ void BubbleSort::SwapElements()
 
 void BubbleSort::UnselectElements()
 {
-	SortingElementData* data = BubbleElements[ElementIndex];
+	SortingElementData* data = StepElements[ElementIndex];
 	data->GetRenderA()->SetColor(Ugine::Color::White());
 	data->GetRenderB()->SetColor(Ugine::Color::White());
 

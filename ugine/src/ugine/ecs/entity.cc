@@ -82,12 +82,10 @@ void Ugine::Entity::SetActive(bool isActive)
 
 	if (isActive_) 
 	{
-		LOG_INFO("OnActive");
 		OnActive();
 	}
 	else
 	{
-		LOG_INFO("OnDeactive");
 		OnDeactive();
 	}
 }

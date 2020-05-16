@@ -45,6 +45,37 @@ namespace Ugine
         }
 
 		template <typename T>
+		void DestroyComponent()
+		{
+			////Version 1
+			//int componentID = 0;
+			//for (int i = 0; i < components_.size(); i++)
+			//{
+			//	T* t = dynamic_cast<T*>(components_[i]);
+			//	if (t != nullptr) 
+			//	{
+			//		delete t;
+			//		components_.erase(components_.begin() + i);
+			//		return;
+			//	}
+			//}
+
+			//Version 2
+			int componentID = 0;
+			for (auto& component : components_)
+			{
+				T* t = dynamic_cast<T*>(component);
+				if (t != nullptr){
+					delete t;
+					break;
+				}
+				componentID++;
+			}
+
+			components_.erase(components_.begin() + componentID);
+		}
+
+		template <typename T>
 		Component* GetComponent()
 		{
 			for (auto& component : components_)

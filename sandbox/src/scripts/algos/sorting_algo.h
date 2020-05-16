@@ -11,22 +11,23 @@ public:
 	virtual void Sort() = 0;
 
 	std::vector<SortingElement*> Elements;
-	std::vector<SortingElementData*> BubbleElements;
+	std::vector<SortingElementData*> StepElements;
 	int ElementIndex = 0;
 
-	bool HasElements() { return ElementIndex < BubbleElements.size(); }
+	bool HasElements() { return ElementIndex < StepElements.size(); }
 	void SetElements(std::vector<SortingElement*> elements) { Elements = elements; }
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{
-		BubbleElements.push_back(DBG_NEW SortingElementData(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
-
 		if (isSwaped) {
 			SortingElement temp = *elementA;
 			*elementA = *elementB;
 			*elementB = temp;
 		}
+
+		StepElements.push_back(DBG_NEW SortingElementData(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
 	}
+
 	void SetElementSortedPosition()
 	{
 		for (int i = 0; i < Elements.size(); i++)
@@ -41,6 +42,16 @@ public:
 		{
 			Elements[i]->CurrentPosition = i;
 		}
+	}
+
+	void StepElementsClear()
+	{
+		for (auto bubble : StepElements)
+		{
+			delete bubble;
+		}
+
+		StepElements.clear();
 	}
 
 };

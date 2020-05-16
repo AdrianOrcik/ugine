@@ -30,8 +30,6 @@ public:
 
 	void SetElements(std::vector<SortingElement*> elements)
 	{
-		//elements_ = elements;
-		bubbleSort_->BubbleElements.clear();
 		bubbleSort_->SetElements(elements);
 	}
 
@@ -54,7 +52,6 @@ public:
 	{}
 
 private:
-	//std::vector<SortingElement*> elements_;
 	SortingAlgo* bubbleSort_ = nullptr;
 
 

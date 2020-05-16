@@ -12,6 +12,10 @@ struct SortingElementData
 		:ElementA(elementA), ElementB(elementB), IsSwaped(isSwaped)
 	{}
 
+	~SortingElementData()
+	{
+	}
+
 	Ugine::TransformComponent* GetTransformA() { return (Ugine::TransformComponent*)ElementA->GetComponent<Ugine::TransformComponent>(); }
 	Ugine::TransformComponent* GetTransformB() { return (Ugine::TransformComponent*)ElementB->GetComponent<Ugine::TransformComponent>(); }
 
