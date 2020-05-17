@@ -13,4 +13,11 @@ public:
 
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
+
+private:
+	void SelectElements();
+	void BeforeFindNewSelection();
+	void SwapElements();
+	void AfterSwapElements();
+	int firstElementIndex_ = 0;
 };

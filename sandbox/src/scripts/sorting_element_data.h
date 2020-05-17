@@ -7,10 +7,15 @@ struct SortingPairElement
 	Ugine::Entity* ElementA;
 	Ugine::Entity* ElementB;
 	bool IsSwaped;
+	bool ValueA;
+	bool ValueB;
 
 	SortingPairElement(Ugine::Entity* elementA, Ugine::Entity* elementB, bool isSwaped)
 		:ElementA(elementA), ElementB(elementB), IsSwaped(isSwaped)
-	{}
+	{
+		ValueA = GetSortingElementA()->Value;
+		ValueB = GetSortingElementB()->Value;
+	}
 
 	Ugine::TransformComponent* GetTransformA() { return (Ugine::TransformComponent*)ElementA->GetComponent<Ugine::TransformComponent>(); }
 	Ugine::TransformComponent* GetTransformB() { return (Ugine::TransformComponent*)ElementB->GetComponent<Ugine::TransformComponent>(); }
@@ -26,10 +31,14 @@ struct SortingSingleElement
 {
 	Ugine::Entity* Element;
 	bool IsSelected;
+	bool IsLast;
+	int Value;
 
-	SortingSingleElement(Ugine::Entity* element, bool isSelected)
-		:Element(element), IsSelected(isSelected)
-	{}
+	SortingSingleElement(Ugine::Entity* element, bool isSelected, bool isLast)
+		:Element(element), IsSelected(isSelected), IsLast(isLast)
+	{
+		Value = GetSortingElement()->Value;
+	}
 
 	Ugine::TransformComponent* GetTransform() { return (Ugine::TransformComponent*)Element->GetComponent<Ugine::TransformComponent>(); }
 	Ugine::RendererComponent* GetRender() { return (Ugine::RendererComponent*)Element->GetComponent<Ugine::RendererComponent>(); }

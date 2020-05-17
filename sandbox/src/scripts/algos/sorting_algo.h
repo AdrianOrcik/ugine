@@ -1,8 +1,11 @@
 #pragma once
 #include <vector>
+#include <glm/glm.hpp>
+
 #include "../sorting_element.h"
 #include "../sorting_element_data.h"
 #include "ugine/ecs/components/transform_component.h"
+
 
 //todo: check factory pattern for algos building
 class SortingAlgo
@@ -32,6 +35,11 @@ public:
 		SwapPair.push_back(DBG_NEW SortingPairElement(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
 	}
 
+	void Select(SortingElement * element, bool isSelected, bool isLastElement)
+	{
+		SelectSingle.push_back(DBG_NEW SortingSingleElement(element->GetEntity(), isSelected, isLastElement));
+	}
+
 	void SetElementSortedPosition()
 	{
 		for (int i = 0; i < Elements.size(); i++)
@@ -50,22 +58,39 @@ public:
 
 	void SwapPairClear()
 	{
-		for (auto bubble : SwapPair)
+		for (auto pair : SwapPair)
 		{
-			delete bubble;
+			delete pair;
 		}
 
 		SwapPair.clear();
 	}
 
-	void SetElementsColor()
+	void SelectSingleClear()
+	{
+		for (auto single : SelectSingle)
+		{
+			delete single;
+		}
+
+		SelectSingle.clear();
+	}
+
+	void SetElementsColor(glm::vec4 color)
 	{
 		for (int i = 0; i < Elements.size(); i++)
 		{
 			Ugine::RendererComponent* renderer =
 				(Ugine::RendererComponent*)Elements[i]->owner->GetComponent<Ugine::RendererComponent>();
-			renderer->SetColor(Ugine::Color::White());
+			renderer->SetColor(color);
 		}
+	}
+
+	void SetElementColor(int index, glm::vec4 color)
+	{
+		Ugine::RendererComponent* renderer =
+			(Ugine::RendererComponent*)Elements[index]->owner->GetComponent<Ugine::RendererComponent>();
+		renderer->SetColor(color);
 	}
 
 	void SetElementsTransform()

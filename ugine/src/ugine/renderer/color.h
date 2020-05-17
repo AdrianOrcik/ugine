@@ -11,5 +11,6 @@ namespace Ugine
 		static glm::vec4 Red() { return { 1.0f, 0.0f, 0.0f, 1.0f }; }
 		static glm::vec4 Blue() { return { 0.0f, 0.0f, 1.0f, 1.0f }; }
 		static glm::vec4 Yellow() { return { 0.9f, 1.0f, 0.2f, 1.0f }; }
+		static glm::vec4 Purple() { return { 1.0f, 0.121f, 0.917f, 1.0f }; }
 	};
 }

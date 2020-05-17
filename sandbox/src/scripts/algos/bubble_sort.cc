@@ -37,11 +37,8 @@ void BubbleSort::SelectElements()
 	{
 		LOG_ERROR("Select - No More Steps!");
 
-		for (int i = 0; i < Elements.size(); i++)
-		{
-			Elements[i]->GetRenderer()->SetColor(Ugine::Color::Yellow());
-		}
-
+		SetElementsColor(Ugine::Color::Yellow());
+		//todo: reset values on beginning
 		PairIndex = 0;
 		return;
 	}
