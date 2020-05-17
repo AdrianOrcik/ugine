@@ -20,8 +20,10 @@ namespace Ugine
 	class RoutineManager
 	{
 		//todo: implement routine garbage collector
+		//todo: implement keys for routines management
 	public:
 		static void StartCoroutine(IEnumerator<void>* routine);
+		static void DeleteRoutines();
 		static void Update(float Timestep);
 	private:
 		static std::vector<IEnumerator<void>*> routines_;

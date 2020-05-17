@@ -59,17 +59,19 @@ void Selectionsort::SelectElements()
 	}
 
 	SortingSingleElement* data = SelectSingle[SingleIndex];
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(1.0f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 
 	if (data->IsLast)
 	{
-		if (!data->IsSelected) {
+		//TODO: ked mam oznacit poslednu tak to nejde modra -> cervena ale rovno skoci na cervenu
+		if (!data->IsSelected) 
+		{
 			data->GetRender()->SetColor(Ugine::Color::Blue());
 		}
-		else {
-			SetElementsColor(Ugine::Color::White());
-			data->GetRender()->SetColor(Ugine::Color::Red());
+		else 
+		{
+			data->GetRender()->SetColor(Ugine::Color::Blue());
 		}
 		waitfor->SetOnCompleted(std::bind(&Selectionsort::BeforeFindNewSelection, this));
 	}
@@ -113,7 +115,6 @@ void Selectionsort::BeforeFindNewSelection()
 	SingleIndex++;
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
-	//data->GetRender()->SetColor(Ugine::Color::Red());
 	waitfor->SetOnCompleted(std::bind(&Selectionsort::SwapElements, this));
 }
 

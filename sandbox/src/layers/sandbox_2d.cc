@@ -49,10 +49,12 @@ void Sandbox2D::OnAttach()
 	//prefab->AddComponent<SortingElement>();
 
 	pooler = new Ugine::ObjectPooler();
-	pooler->CreatePool("entities", *prefab, 10);
+	pooler->CreatePool("entities", *prefab, 20);
 
 	// gameobjects
 	// ------------
+	cameraController_.SetCameraPosition({ 0.0f, 1.0f,0.0f });
+	cameraController_.SetZoomLevel(1.0f);
 	GeneratePooledObjects();
 
 	LOG_INFO("gameObjects_ Count: {0}", gameObjects_.size());
@@ -66,6 +68,9 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 {
+	LOG_INFO("CameraY: {0}", cameraController_.GetCameraPosition().y);
+	LOG_INFO("ZoomLevel: {0}", cameraController_.GetZoomLevel());
+
 	// camera update
 	cameraController_.OnUpdate(ts);
 
@@ -78,22 +83,49 @@ int index = 0;
 void Sandbox2D::OnImGuiRender()
 {
 	ImGui::Begin("Generation panel");
-	ImGui::SliderInt("Count", &elementCount_, 1, 10);
-	if (ImGui::Button("Generate"))
+	if(true)
 	{
-		GeneratePooledObjects();
-	}
+		int tmpCount = elementCount_;
+		ImGui::SliderInt("Count", &elementCount_, 4, 20);
+		if (tmpCount != elementCount_)
+		{
+			if (elementCount_ <= 10)
+			{
+				cameraController_.SetCameraPosition({ 0.0f, 1.0f,0.0f });
+				cameraController_.SetZoomLevel(1.0f);
+			}
+			else if (elementCount_ <= 15)
+			{
+				cameraController_.SetCameraPosition({ 0.0f, 1.5f,0.0f });
+				cameraController_.SetZoomLevel(1.5f);
+			}
+			else if (elementCount_ <= 20)
+			{
+				cameraController_.SetCameraPosition({ 0.0f, 2.0f,0.0f });
+				cameraController_.SetZoomLevel(2.0f);
+			}
 
-	if(ImGui::Button("Bubble Sort"))
+			GeneratePooledObjects();
+		}
+
+		if(ImGui::Button("Bubble Sort"))
+		{
+			sortingManager->SortBy(SortingManager::SortingType::Bubble);
+		}
+
+		if (ImGui::Button("Selection Sort"))
+		{
+			sortingManager->SortBy(SortingManager::SortingType::Selection);
+		}
+	}
+	else 
 	{
-		sortingManager->SortBy(SortingManager::SortingType::Bubble);
+		if (ImGui::Button("Reset Simulation"))
+		{
+			Ugine::RoutineManager::DeleteRoutines();
+			GeneratePooledObjects();
+		}
 	}
-
-	if (ImGui::Button("Selection Sort"))
-	{
-		sortingManager->SortBy(SortingManager::SortingType::Selection);
-	}
-
 	ImGui::End();
 }
 
@@ -102,13 +134,13 @@ void Sandbox2D::OnEvent(Ugine::Event & e)
 	cameraController_.OnEvent(e);
 }
 
-void Sandbox2D::SetObject(Ugine::Entity* entity, int index, int generatedValue)
+void Sandbox2D::SetObject(Ugine::Entity* entity, int spawnPosition, int generatedValue)
 {
 	entity->SetActive(true);
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)entity->GetComponent<Ugine::TransformComponent>();
-	transform->SetLocalPosition(glm::vec2((float)index / 10.0f, 0.0f));
-	transform->SetOffsetPosition(glm::vec2(0, -0.5f));
+	transform->SetLocalPosition(glm::vec2((float)spawnPosition / 10.0f, 0.0f));
+	transform->SetOffsetPosition(glm::vec2(0.0f, 0.0f));
 	transform->SetScale(glm::vec2(0.05f, ((float)generatedValue / 10.0f)));
 
 	Ugine::RendererComponent* renderer =
@@ -140,7 +172,8 @@ void Sandbox2D::GeneratePooledObjects()
 	for (int i = 0; i < elementCount_; i++)
 	{
 		int generatedValue = rand() % elementCount_ * 2 + 1;
-		SetObject(pooler->GetPooledObj("entities"),i, generatedValue);
+		//int spawnPosition = i - (elementCount_ / 2.0f);
+		SetObject(pooler->GetPooledObj("entities"), i, generatedValue);
 	}
 
 	//update new elements for sort

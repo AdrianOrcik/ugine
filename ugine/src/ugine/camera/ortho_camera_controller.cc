@@ -6,23 +6,27 @@
 
 namespace Ugine
 {
-	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-		: aspectRatio_(aspectRatio), camera_(-aspectRatio_ * zoomLevel_, aspectRatio_ * zoomLevel_, -zoomLevel_, zoomLevel_), isRotationEnabled_(rotation)
+	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool movement, bool zoom, bool rotation)
+		: aspectRatio_(aspectRatio), camera_(-aspectRatio_ * zoomLevel_, aspectRatio_ * zoomLevel_, -zoomLevel_, zoomLevel_),
+		isMovementEnabled_(movement), isZoomEnabled_(zoom), isRotationEnabled_(rotation)
 	{
 
 	}
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
-		if (Input::IsKeyPressed(INPUT_KEY_A))
-			cameraPosition_.x -= cameraTranslationSpeed_ * ts;
-		else if (Input::IsKeyPressed(INPUT_KEY_D))
-			cameraPosition_.x += cameraTranslationSpeed_ * ts;
+		if(isMovementEnabled_)
+		{
+			if (Input::IsKeyPressed(INPUT_KEY_A))
+				cameraPosition_.x -= cameraTranslationSpeed_ * ts;
+			else if (Input::IsKeyPressed(INPUT_KEY_D))
+				cameraPosition_.x += cameraTranslationSpeed_ * ts;
 
-		if (Input::IsKeyPressed(INPUT_KEY_W))
-			cameraPosition_.y += cameraTranslationSpeed_ * ts;
-		else if (Input::IsKeyPressed(INPUT_KEY_S))
-			cameraPosition_.y -= cameraTranslationSpeed_ * ts;
+			if (Input::IsKeyPressed(INPUT_KEY_W))
+				cameraPosition_.y += cameraTranslationSpeed_ * ts;
+			else if (Input::IsKeyPressed(INPUT_KEY_S))
+				cameraPosition_.y -= cameraTranslationSpeed_ * ts;
+		}
 
 		if(isRotationEnabled_) 
 		{
@@ -45,8 +49,15 @@ namespace Ugine
 		dispather.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
+	void OrthographicCameraController::SetZoomLevel(float level) 
+	{
+		zoomLevel_ = level;
+		camera_.SetProjection(-aspectRatio_ * zoomLevel_, aspectRatio_ * zoomLevel_, -zoomLevel_, zoomLevel_);
+	}
+
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent & e)
 	{
+		if (!isZoomEnabled_)return false;
 		zoomLevel_ -= e.GetYOffset() * 0.25f;
 		zoomLevel_ = std::max(zoomLevel_, 0.25f);
 		camera_.SetProjection(-aspectRatio_ * zoomLevel_, aspectRatio_ * zoomLevel_, -zoomLevel_, zoomLevel_);
