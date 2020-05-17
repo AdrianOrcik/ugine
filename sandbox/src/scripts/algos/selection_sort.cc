@@ -64,7 +64,6 @@ void Selectionsort::SelectElements()
 
 	if (data->IsLast)
 	{
-		//SetElementsColor(Ugine::Color::White());
 		if (!data->IsSelected) {
 			data->GetRender()->SetColor(Ugine::Color::Blue());
 		}
@@ -76,29 +75,43 @@ void Selectionsort::SelectElements()
 	}
 	else if(data->IsSelected)
 	{
-		SingleIndex++;
-		SetElementsColor(Ugine::Color::White());
-		data->GetRender()->SetColor(Ugine::Color::Red());
-		waitfor->SetOnCompleted(std::bind(&Selectionsort::SelectElements, this));
+		if(SingleIndex == 0 || newIteration){
+			newIteration = false;
+			SingleIndex++;
+			SetElementsColor(Ugine::Color::White());
+			data->GetRender()->SetColor(Ugine::Color::Red());
+			waitfor->SetOnCompleted(std::bind(&Selectionsort::SelectElements, this));
+		}
+		else
+		{
+			data->GetRender()->SetColor(Ugine::Color::Blue());
+			waitfor->SetOnCompleted(std::bind(&Selectionsort::DelaySelection, this));
+		}
 	}
 	else
 	{
-		//if(SingleIndex == 0)
-		//	data->GetRender()->SetColor(Ugine::Color::Red());
-		//else
-		//	data->GetRender()->SetColor(Ugine::Color::Blue());
-
 		SingleIndex++;
 		data->GetRender()->SetColor(Ugine::Color::Blue());
 		waitfor->SetOnCompleted(std::bind(&Selectionsort::SelectElements, this));
 	}
 }
 
+void Selectionsort::DelaySelection()
+{
+	SortingSingleElement* data = SelectSingle[SingleIndex];
+	SingleIndex++;
+	SetElementsColor(Ugine::Color::White());
+	data->GetRender()->SetColor(Ugine::Color::Red());
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
+	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
+	waitfor->SetOnCompleted(std::bind(&Selectionsort::SelectElements, this));
+}
+
 void Selectionsort::BeforeFindNewSelection()
 {
 	SortingSingleElement* data = SelectSingle[SingleIndex];
 	SingleIndex++;
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(1.0f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 	//data->GetRender()->SetColor(Ugine::Color::Red());
 	waitfor->SetOnCompleted(std::bind(&Selectionsort::SwapElements, this));
@@ -114,7 +127,6 @@ void Selectionsort::SwapElements()
 
 	SortingPairElement* data = SwapPair[PairIndex];
 
-
 	data->GetRenderA()->SetColor(Ugine::Color::Purple());
 	data->GetRenderB()->SetColor(Ugine::Color::Purple());
 
@@ -125,7 +137,7 @@ void Selectionsort::SwapElements()
 	data->GetSortingElementA()->CurrentPosition = currentB;
 	data->GetSortingElementB()->CurrentPosition = currentA;
 
-	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data->GetTransformA(), data->GetTransformB(), 5.0f);
+	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data->GetTransformA(), data->GetTransformB(), 10.0f);
 	std::function<void(void)> function = std::bind(&Selectionsort::AfterSwapElements, this);
 	swapRoutine->SetOnCompleted(function);
 
@@ -134,14 +146,13 @@ void Selectionsort::SwapElements()
 
 void Selectionsort::AfterSwapElements()
 {
-	//SortingPairElement* data = SwapPair[PairIndex];
-	//data->GetRenderA()->SetColor(Ugine::Color::White());
-	//data->GetRenderB()->SetColor(Ugine::Color::White());
 	SetElementsColor(Ugine::Color::White());
 	PairIndex++;
 	firstElementIndex_++;
 
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(1.0f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 	waitfor->SetOnCompleted(std::bind(&Selectionsort::SelectElements, this));
+	newIteration = true;
 }
+

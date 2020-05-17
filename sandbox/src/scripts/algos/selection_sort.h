@@ -19,5 +19,9 @@ private:
 	void BeforeFindNewSelection();
 	void SwapElements();
 	void AfterSwapElements();
+	void DelaySelection();
+
+	//TODO: refactor
 	int firstElementIndex_ = 0;
+	bool newIteration = false;
 };
