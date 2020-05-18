@@ -6,7 +6,6 @@ BubbleSort::BubbleSort()
 BubbleSort::~BubbleSort()
 {}
 
-//TODO: some of the elements are deactivated in next rounds of simulation -- whyyyy??
 void BubbleSort::Sort()
 {
 	OnSimulationStart();
