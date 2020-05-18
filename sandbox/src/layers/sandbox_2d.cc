@@ -68,9 +68,6 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 {
-	LOG_INFO("CameraY: {0}", cameraController_.GetCameraPosition().y);
-	LOG_INFO("ZoomLevel: {0}", cameraController_.GetZoomLevel());
-
 	// camera update
 	cameraController_.OnUpdate(ts);
 
@@ -83,7 +80,7 @@ int index = 0;
 void Sandbox2D::OnImGuiRender()
 {
 	ImGui::Begin("Generation panel");
-	if(true)
+	if(!sortingManager->IsRunning())
 	{
 		int tmpCount = elementCount_;
 		ImGui::SliderInt("Count", &elementCount_, 4, 20);
@@ -124,6 +121,7 @@ void Sandbox2D::OnImGuiRender()
 		{
 			Ugine::RoutineManager::DeleteRoutines();
 			GeneratePooledObjects();
+			sortingManager->StopSimulation();
 		}
 	}
 	ImGui::End();

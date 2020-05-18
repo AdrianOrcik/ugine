@@ -17,38 +17,52 @@ class SortingManager : public Ugine::ScriptComponent
 {
 
 public:
-	enum SortingType{Bubble, Selection};
+	enum SortingType {Unset, Bubble, Selection };
 
 	SortingManager()
+		:isRunning(false)
 	{
-		bubbleSort_ = DBG_NEW BubbleSort();
-		selectionSort_ = DBG_NEW Selectionsort();
 	}
 
 	~SortingManager()
 	{
 		LOG_INFO("Delete SortingManager - ScriptComponent");
-		delete bubbleSort_;
-		delete selectionSort_;
+		StopSimulation();
 	}
+
+	bool IsRunning() { return isRunning; }
 
 	void SetElements(std::vector<SortingElement*> elements)
 	{
-		bubbleSort_->SetElements(elements);
-		selectionSort_->SetElements(elements);
+		Elements = elements;
+	}
+
+	void StopSimulation()
+	{
+		isRunning = false;
+		if (sortAlgorhitm_ != nullptr) {
+			delete sortAlgorhitm_;
+			sortAlgorhitm_ = nullptr;
+		}
 	}
 
 	void SortBy(SortingType type)
 	{
 		switch (type)
 		{
-			case SortingType::Bubble:
-				bubbleSort_->Sort();
-				break;
-			case SortingType::Selection:
-				selectionSort_->Sort();
-				break;
+		case SortingType::Bubble:
+			sortAlgorhitm_ = DBG_NEW BubbleSort();
+			break;
+		case SortingType::Selection:
+			sortAlgorhitm_ = DBG_NEW Selectionsort();
+			break;
 		}
+
+		sortAlgorhitmType_ = type;
+		sortAlgorhitm_->SetElements(Elements);
+		sortAlgorhitm_->OnSimulationStart = std::bind(&SortingManager::SetStartRunning, this);
+		sortAlgorhitm_->OnSimulationDone = std::bind(&SortingManager::SetStopRunning, this);
+		sortAlgorhitm_->Sort();
 	}
 
 	// Inherited via ScriptComponent
@@ -63,10 +77,14 @@ public:
 
 	virtual void OnDeactive() override
 	{}
+private:
+	void SetStartRunning() {isRunning = true;}
+	void SetStopRunning() { StopSimulation(); }
 
 private:
-	SortingAlgo* bubbleSort_ = nullptr;
-	SortingAlgo* selectionSort_ = nullptr;
-
+	SortingAlgo* sortAlgorhitm_ = nullptr;
+	SortingType sortAlgorhitmType_ = SortingType::Unset;
+	std::vector<SortingElement*> Elements;
+	bool isRunning = false;
 
 };

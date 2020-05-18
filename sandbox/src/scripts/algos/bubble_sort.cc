@@ -9,6 +9,8 @@ BubbleSort::~BubbleSort()
 //TODO: some of the elements are deactivated in next rounds of simulation -- whyyyy??
 void BubbleSort::Sort()
 {
+	OnSimulationStart();
+
 	SwapPairClear();
 	SetElementCurrentPosition();
 	for (int i = 0; i < Elements.size() - 1; i++)
@@ -40,6 +42,7 @@ void BubbleSort::SelectElements()
 		SetElementsColor(Ugine::Color::Yellow());
 		//todo: reset values on beginning
 		PairIndex = 0;
+		OnSimulationDone();
 		return;
 	}
 

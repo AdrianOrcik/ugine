@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 #include <glm/glm.hpp>
 
 #include "../sorting_element.h"
@@ -23,6 +24,10 @@ public:
 	int SingleIndex = 0;
 	std::vector<SortingSingleElement*> SelectSingle;
 	bool HasMoreSingle() { return PairIndex < SwapPair.size(); }
+
+	std::function<void()> OnSimulationStart;
+	std::function<void()> OnSimulationDone;
+	std::function<void()> OnSimulationInterrupt;
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{

@@ -12,7 +12,8 @@ Selectionsort::~Selectionsort()
 
 void Selectionsort::Sort()
 {
-	
+	OnSimulationStart();
+
 	SingleIndex = 0;
 	PairIndex = 0;
 	SwapPairClear();
@@ -55,6 +56,7 @@ void Selectionsort::SelectElements()
 		//todo: reset values on beginning
 		SingleIndex = 0;
 		PairIndex = 0;
+		OnSimulationDone();
 		return;
 	}
 
