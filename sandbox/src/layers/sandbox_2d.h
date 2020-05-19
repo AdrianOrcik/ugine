@@ -18,7 +18,9 @@ public:
 
 private:
 	void SetObject(Ugine::Entity* entity, int index, int generatedValue);
-	void GeneratePooledObjects();
+	void GeneratePooledElements();
+
+	void GUI_GenerateElements();
 public:
 	Ugine::OrthographicCameraController cameraController_;
 	static bool OnNext;

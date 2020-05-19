@@ -55,7 +55,7 @@ void Sandbox2D::OnAttach()
 	// ------------
 	cameraController_.SetCameraPosition({ 0.0f, 1.0f,0.0f });
 	cameraController_.SetZoomLevel(1.0f);
-	GeneratePooledObjects();
+	GeneratePooledElements();
 
 	LOG_INFO("gameObjects_ Count: {0}", gameObjects_.size());
 	LOG_INFO("elements_ Count: {0}", elements_.size());
@@ -86,23 +86,12 @@ void Sandbox2D::OnImGuiRender()
 		ImGui::SliderInt("Count", &elementCount_, 4, 20);
 		if (tmpCount != elementCount_)
 		{
-			if (elementCount_ <= 10)
-			{
-				cameraController_.SetCameraPosition({ 0.0f, 1.0f,0.0f });
-				cameraController_.SetZoomLevel(1.0f);
-			}
-			else if (elementCount_ <= 15)
-			{
-				cameraController_.SetCameraPosition({ 0.0f, 1.5f,0.0f });
-				cameraController_.SetZoomLevel(1.5f);
-			}
-			else if (elementCount_ <= 20)
-			{
-				cameraController_.SetCameraPosition({ 0.0f, 2.0f,0.0f });
-				cameraController_.SetZoomLevel(2.0f);
-			}
-
-			GeneratePooledObjects();
+			GUI_GenerateElements();
+		}
+		
+		if (ImGui::Button("Generate Elements"))
+		{
+			GUI_GenerateElements();
 		}
 
 		if(ImGui::Button("Bubble Sort"))
@@ -125,12 +114,34 @@ void Sandbox2D::OnImGuiRender()
 		if (ImGui::Button("Reset Simulation"))
 		{
 			Ugine::RoutineManager::DeleteRoutines();
-			GeneratePooledObjects();
+			GeneratePooledElements();
 			sortingManager->StopSimulation();
 		}
 	}
 	ImGui::End();
 }
+
+void Sandbox2D::GUI_GenerateElements()
+{
+	if (elementCount_ <= 10)
+	{
+		cameraController_.SetCameraPosition({ 0.0f, 1.0f,0.0f });
+		cameraController_.SetZoomLevel(1.0f);
+	}
+	else if (elementCount_ <= 15)
+	{
+		cameraController_.SetCameraPosition({ 0.0f, 1.5f,0.0f });
+		cameraController_.SetZoomLevel(1.5f);
+	}
+	else if (elementCount_ <= 20)
+	{
+		cameraController_.SetCameraPosition({ 0.0f, 2.0f,0.0f });
+		cameraController_.SetZoomLevel(2.0f);
+	}
+
+	GeneratePooledElements();
+}
+
 
 void Sandbox2D::OnEvent(Ugine::Event & e)
 {
@@ -162,7 +173,7 @@ void Sandbox2D::SetObject(Ugine::Entity* entity, int spawnPosition, int generate
 	elements_.push_back(element);
 }
 
-void Sandbox2D::GeneratePooledObjects()
+void Sandbox2D::GeneratePooledElements()
 {
 	//remove old game elements if exist
 	for (auto gameObject : gameObjects_)
@@ -188,3 +199,4 @@ void Sandbox2D::GeneratePooledObjects()
 
 	sortingManager->SetElements(elements_);
 }
+
