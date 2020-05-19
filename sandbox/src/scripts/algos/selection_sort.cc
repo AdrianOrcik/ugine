@@ -13,7 +13,7 @@ Selectionsort::~Selectionsort()
 void Selectionsort::Sort()
 {
 	OnSimulationStart();
-
+	//TODO: automatic function add into base.sort()
 	SingleIndex = 0;
 	PairIndex = 0;
 	SwapPairClear();

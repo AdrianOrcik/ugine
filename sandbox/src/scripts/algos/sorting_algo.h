@@ -23,6 +23,8 @@ public:
 	
 	int SingleIndex = 0;
 	std::vector<SortingSingleElement*> SelectSingle;
+	//TODO: fix for selection sort
+	//SingleIndex < SelectSingle.size()
 	bool HasMoreSingle() { return PairIndex < SwapPair.size(); }
 
 	std::function<void()> OnSimulationStart;

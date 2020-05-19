@@ -14,4 +14,11 @@ public:
 
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
+
+private:
+	void SelectElements();
+	void SwapElements();
+
+	//nonsorted base array
+	std::vector<SortingElement*> BaseElements;
 };
