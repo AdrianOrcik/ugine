@@ -35,6 +35,7 @@
     </ClInclude>
     <ClInclude Include="src\scripts\algos\selection_sort.h" />
     <ClInclude Include="src\scripts\algos\insertion_sort.h" />
+    <ClInclude Include="src\scripts\routines\swap_routine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -49,5 +50,6 @@
     </ClCompile>
     <ClCompile Include="src\scripts\algos\selection_sort.cc" />
     <ClCompile Include="src\scripts\algos\insertion_sort.cc" />
+    <ClCompile Include="src\scripts\routines\swap_routine.cc" />
   </ItemGroup>
 </Project>

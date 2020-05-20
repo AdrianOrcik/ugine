@@ -1302,9 +1302,6 @@
     <ClInclude Include="src\ugine\coroutines\routines\movement.h">
       <Filter>src\ugine\coroutines\routines</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h">
-      <Filter>src\ugine\coroutines\routines</Filter>
-    </ClInclude>
     <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h">
       <Filter>src\ugine\coroutines\routines</Filter>
     </ClInclude>
@@ -1452,9 +1449,6 @@
       <Filter>src\ugine\coroutines</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\coroutines\routines\movement.cc">
-      <Filter>src\ugine\coroutines\routines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc">
       <Filter>src\ugine\coroutines\routines</Filter>
     </ClCompile>
     <ClCompile Include="src\ugine\coroutines\routines\wait_seconds.cc">

@@ -504,7 +504,6 @@
     <ClInclude Include="src\ugine\coroutines\coroutines.h" />
     <ClInclude Include="src\ugine\coroutines\routine_manager.h" />
     <ClInclude Include="src\ugine\coroutines\routines\movement.h" />
-    <ClInclude Include="src\ugine\coroutines\routines\swap_routine.h" />
     <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h" />
     <ClInclude Include="src\ugine\ecs\component.h" />
     <ClInclude Include="src\ugine\ecs\components\renderer_component.h" />
@@ -557,7 +556,6 @@
     <ClCompile Include="src\ugine\camera\ortho_camera_controller.cc" />
     <ClCompile Include="src\ugine\coroutines\routine_manager.cc" />
     <ClCompile Include="src\ugine\coroutines\routines\movement.cc" />
-    <ClCompile Include="src\ugine\coroutines\routines\swap_routine.cc" />
     <ClCompile Include="src\ugine\coroutines\routines\wait_seconds.cc" />
     <ClCompile Include="src\ugine\ecs\ecs.cc" />
     <ClCompile Include="src\ugine\ecs\entity.cc" />

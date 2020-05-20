@@ -97,6 +97,7 @@
     <ClInclude Include="src\scripts\algos\insertion_sort.h" />
     <ClInclude Include="src\scripts\algos\selection_sort.h" />
     <ClInclude Include="src\scripts\algos\sorting_algo.h" />
+    <ClInclude Include="src\scripts\routines\swap_routine.h" />
     <ClInclude Include="src\scripts\sorting_element.h" />
     <ClInclude Include="src\scripts\sorting_element_data.h" />
     <ClInclude Include="src\scripts\sorting_manager.h" />
@@ -108,6 +109,7 @@
     <ClCompile Include="src\scripts\algos\bubble_sort.cc" />
     <ClCompile Include="src\scripts\algos\insertion_sort.cc" />
     <ClCompile Include="src\scripts\algos\selection_sort.cc" />
+    <ClCompile Include="src\scripts\routines\swap_routine.cc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ugine\ugine.vcxproj">

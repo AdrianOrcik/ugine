@@ -1,5 +1,11 @@
 #include "insertion_sort.h"
 
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+
+
 InsertionSort::InsertionSort()
 {
 }
@@ -17,27 +23,53 @@ void InsertionSort::Sort()
 	SetElementCurrentPosition();
 
 	BaseElements = Elements;
-	for (int i = 0; i < Elements.size() - 1; i++) 
+
+	for (int i = 0; i < Elements.size() - 1; i++)
 	{
-		Select(BaseElements[i],true, false);
+		steps.push_back(SimulationStep(this,StepData(i), SimulationStepType::Pivot));
 		int j = i + 1;
 		SortingElement* tmp = Elements[j];
-		Select(BaseElements[i], false, false);
+		int tmp_int = j;
+		steps.push_back(SimulationStep(this, StepData(j), SimulationStepType::Select));
 		while (j > 0 && tmp->Value < Elements[j - 1]->Value) {
 			Elements[j] = Elements[j - 1];
+			steps.push_back(SimulationStep(this, StepData(j-1), SimulationStepType::Select));
 			j--;
 		}
+
+		if(j != tmp_int)
+			steps.push_back(SimulationStep(this, StepData(j,tmp_int), SimulationStepType::Insert));
+		
 		Elements[j] = tmp;
-		Swap(Elements[j], tmp, true);
 	}
 
-	SetElementSortedPosition();
+	//SetElementSortedPosition();
 	//OnSimulationDone();
 	
 	//Debug
 	//SetElementsTransform();
 	//SwapElements();
+
+	//simulation
+	//SelectElements();
+	
+	Run();
 }
+
+int index_ = 0;
+void InsertionSort::Run()
+{
+	if (index_ >= steps.size())
+	{
+		LOG_ERROR("Done!");
+		return;
+	}
+
+	steps[index_].OnCompleted = std::bind(&InsertionSort::Run, this);
+	steps[index_].Execute();
+	index_++;
+}
+
 
 void InsertionSort::SelectElements()
 {
