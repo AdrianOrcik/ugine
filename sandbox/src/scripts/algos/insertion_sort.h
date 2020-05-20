@@ -6,6 +6,7 @@
 
 #include "ugine/coroutines/routine_manager.h"
 #include "../routines/swap_routine.h"
+#include "../routines/insert_routine.h"
 #include "ugine/coroutines/routines/wait_seconds.h"
 
 struct Step {
@@ -25,8 +26,11 @@ public:
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
 
+	//std::vector<SortingElement*> BaseElements;
 	std::vector<SortingElement*> BaseElements;
-
+	int index_ = 0;
+	int arrayIndex = 0;
+	std::vector< std::vector<SortingElement*> > StepArrays;
 private:
 	void SelectElements();
 	void SwapElements();
@@ -37,7 +41,7 @@ private:
 	//void Insert(int num1, int num2);
 
 	//nonsorted base array
-	//std::vector<SortingElement*> BaseElements;
+
 
 	std::vector<SimulationStep> steps;
 
@@ -89,12 +93,12 @@ public:
 		}
 		else 
 		{
-			
-			Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(sort->BaseElements[data.pos1]->GetTransform(), sort->BaseElements[data.pos2]->GetTransform(), 5.0f);
-			swapRoutine->SetOnCompleted(std::bind(&SimulationStep::Complet, this));
-			Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)swapRoutine);
+			InsertRoutine* insertRoutine = DBG_NEW InsertRoutine(data.pos1, data.pos2, sort->StepArrays[sort->arrayIndex], 5.0f);
+			sort->arrayIndex++;
+			insertRoutine->SetOnCompleted(std::bind(&SimulationStep::Complet, this));
+
+			Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)insertRoutine);
 			std::cout << "Insert from " << data.pos1 << " to " << data.pos2 << std::endl;
-			//TODO: implement new routine for insertion
 		}
 	}
 

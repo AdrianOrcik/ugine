@@ -14,8 +14,6 @@ namespace Ugine
 	class SwapRoutine : public IEnumerator<void>
 	{
 	public:
-
-
 		SwapRoutine(TransformComponent* transformA, TransformComponent* transformB, float time);
 		~SwapRoutine();
 		

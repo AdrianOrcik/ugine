@@ -22,25 +22,35 @@ void InsertionSort::Sort()
 	SelectSingleClear();
 	SetElementCurrentPosition();
 
-	BaseElements = Elements;
+	index_ = 0;
+	arrayIndex = 0;
 
+	BaseElements = Elements;
+	StepArrays.push_back(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
-		steps.push_back(SimulationStep(this,StepData(i), SimulationStepType::Pivot));
+		steps.push_back(SimulationStep(this, StepData(i), SimulationStepType::Pivot));
 		int j = i + 1;
 		SortingElement* tmp = Elements[j];
 		int tmp_int = j;
 		steps.push_back(SimulationStep(this, StepData(j), SimulationStepType::Select));
 		while (j > 0 && tmp->Value < Elements[j - 1]->Value) {
 			Elements[j] = Elements[j - 1];
-			steps.push_back(SimulationStep(this, StepData(j-1), SimulationStepType::Select));
+			steps.push_back(SimulationStep(this, StepData(j - 1), SimulationStepType::Select));
 			j--;
 		}
 
-		if(j != tmp_int)
-			steps.push_back(SimulationStep(this, StepData(j,tmp_int), SimulationStepType::Insert));
+		if (j != tmp_int) {
+			steps.push_back(SimulationStep(this, StepData(j, tmp_int), SimulationStepType::Insert));
+			Elements[j] = tmp;
+			StepArrays.push_back(Elements);
+		}
+		else {
+			Elements[j] = tmp;
+		}
+
 		
-		Elements[j] = tmp;
+		
 	}
 
 	//SetElementSortedPosition();
@@ -56,7 +66,7 @@ void InsertionSort::Sort()
 	Run();
 }
 
-int index_ = 0;
+
 void InsertionSort::Run()
 {
 	if (index_ >= steps.size())
