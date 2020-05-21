@@ -71,6 +71,7 @@ void InsertionSort::Run()
 {
 	if (index_ >= steps.size())
 	{
+		SetElementsColor(Ugine::Color::Yellow());
 		LOG_ERROR("Done!");
 		return;
 	}

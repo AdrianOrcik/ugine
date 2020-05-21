@@ -77,23 +77,24 @@ public:
 
 		if (stepType == SimulationStepType::Select)
 		{
-			Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.5f);
+			Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 			Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 			std::cout << "Select " << data.pos1 << std::endl;
-			sort->BaseElements[data.pos1]->GetRenderer()->SetColor(Ugine::Color::Red());
+			sort->StepArrays[sort->arrayIndex][data.pos1]->GetRenderer()->SetColor(Ugine::Color::Red());
 			waitfor->SetOnCompleted(std::bind(&SimulationStep::Complet, this));
 		}
 		else if (stepType == SimulationStepType::Pivot)
 		{
-			Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.5f);
+			Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 			Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 			std::cout << "Pivot " << data.pos1 << std::endl;
-			sort->BaseElements[data.pos1]->GetRenderer()->SetColor(Ugine::Color::Blue());
+			sort->SetElementsColor(Ugine::Color::White());
+			sort->StepArrays[sort->arrayIndex][data.pos1]->GetRenderer()->SetColor(Ugine::Color::Blue());
 			waitfor->SetOnCompleted(std::bind(&SimulationStep::Complet, this));
 		}
 		else 
 		{
-			InsertRoutine* insertRoutine = DBG_NEW InsertRoutine(data.pos1, data.pos2, sort->StepArrays[sort->arrayIndex], 5.0f);
+			InsertRoutine* insertRoutine = DBG_NEW InsertRoutine(data.pos1, data.pos2, sort->StepArrays[sort->arrayIndex], 10.0f);
 			sort->arrayIndex++;
 			insertRoutine->SetOnCompleted(std::bind(&SimulationStep::Complet, this));
 
