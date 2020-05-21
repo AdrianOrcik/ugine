@@ -31,7 +31,6 @@ private:
 	glm::vec2 insert;
 	std::vector<std::pair<float, float>> positions;
 
-
 	///speed is from 1 to infinity
 	float speed_ = 0;
 	float currentTime_ = 0;

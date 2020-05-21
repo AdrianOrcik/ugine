@@ -1,7 +1,6 @@
-#pragma
+#pragma once
 
 #include "../algos/sorting_algo.h"
-
 #include <functional>
 
 struct StepData
@@ -9,7 +8,10 @@ struct StepData
 	int positionA;
 	int positionB;
 
-	StepData() {}
+	StepData() 
+		:positionA(-1), positionB(-1)
+	{}
+
 	StepData(int posA, int posB = -1)
 		:positionA(posA), positionB(posB)
 	{}

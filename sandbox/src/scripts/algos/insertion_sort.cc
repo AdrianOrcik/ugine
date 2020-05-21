@@ -1,11 +1,5 @@
 #include "insertion_sort.h"
 
-#include <iostream>
-#include <chrono>
-#include <thread>
-
-
-
 InsertionSort::InsertionSort()
 {
 }
@@ -17,35 +11,35 @@ InsertionSort::~InsertionSort()
 void InsertionSort::Sort()
 {
 	OnSimulationStart();
-	SingleIndex = 0;
-	PairIndex = 0;
-	SelectSingleClear();
+	//SingleIndex = 0;
+	//PairIndex = 0;
+	//SelectSingleClear();
 	SetElementCurrentPosition();
 
 	index_ = 0;
 	arrayIndex = 0;
 
-	StepArrays.push_back(Elements);
+	AddStepArray(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
-		AddStep(StepData(i), InsertionStepType::PivotSelection);
+		AddStep(StepData(i), InsertionStepType::SelectPivot);
 
 		int j = i + 1;
 		SortingElement* tmp = Elements[j];
 		int tmp_position = j;
 		
-		AddStep(StepData(j), InsertionStepType::ElementSelection);
+		AddStep(StepData(j), InsertionStepType::SelectElement);
 		while (j > 0 && tmp->Value < Elements[j - 1]->Value) {
 			Elements[j] = Elements[j - 1];
-			AddStep(StepData(j-1), InsertionStepType::ElementSelection);
+			AddStep(StepData(j-1), InsertionStepType::SelectElement);
 			j--;
 		}
 
 		if (j != tmp_position) 
 		{
-			AddStep(StepData(j, tmp_position), InsertionStepType::Insertion);
+			AddStep(StepData(j, tmp_position), InsertionStepType::Insert);
 			Elements[j] = tmp;
-			StepArrays.push_back(Elements);
+			AddStepArray(Elements);
 		}
 		else 
 		{

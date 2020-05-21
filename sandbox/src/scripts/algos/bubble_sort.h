@@ -2,8 +2,10 @@
 #include "sorting_algo.h"
 
 #include "ugine/coroutines/routine_manager.h"
-#include "../routines/swap_routine.h"
 #include "ugine/coroutines/routines/wait_seconds.h"
+
+#include "../routines/swap_routine.h"
+#include "../simulation/simulation_step_bubble.h"
 
 class BubbleSort : public SortingAlgo
 {
@@ -15,7 +17,11 @@ public:
 	virtual void Sort() override;
 
 private:
-	void SelectElements();
-	void SwapElements();
-	void UnselectElements();
+	void Run();
+	//void SelectElements();
+	//void SwapElements();
+	//void UnselectElements();
+
+	void AddStep(StepData data, BubbleStepType stepType);
+	std::vector<BubbleStep> simulationSteps_;
 };

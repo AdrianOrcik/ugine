@@ -15,19 +15,19 @@ void InsertionStep::Execute()
 {
 	switch (stepType_)
 	{
-		case InsertionStepType::ElementSelection:
-			ElementSelection();
+		case InsertionStepType::SelectElement:
+			ElementSelect();
 		break;
-		case InsertionStepType::PivotSelection:
-			PivotSelection();
+		case InsertionStepType::SelectPivot:
+			PivotSelect();
 			break;
-		case InsertionStepType::Insertion:
+		case InsertionStepType::Insert:
 			Insertion();
 			break;
 	}
 }
 
-void InsertionStep::PivotSelection()
+void InsertionStep::PivotSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
@@ -38,7 +38,7 @@ void InsertionStep::PivotSelection()
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
 
-void InsertionStep::ElementSelection()
+void InsertionStep::ElementSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 

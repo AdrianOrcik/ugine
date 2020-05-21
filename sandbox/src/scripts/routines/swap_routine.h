@@ -6,6 +6,8 @@
 #include "ugine/ecs/components/transform_component.h"
 #include "ugine/coroutines/routine_manager.h"
 
+#include "../sorting_element.h"
+
 #include <functional>
 
 namespace Ugine
@@ -14,7 +16,7 @@ namespace Ugine
 	class SwapRoutine : public IEnumerator<void>
 	{
 	public:
-		SwapRoutine(TransformComponent* transformA, TransformComponent* transformB, float time);
+		SwapRoutine(int originPosition, int insertPosition, std::vector<SortingElement*> Elements, float speed);
 		~SwapRoutine();
 		
 		void SetOnCompleted(std::function<void()>f){ onCompleted = f; }
@@ -29,14 +31,16 @@ namespace Ugine
 		float MapValue(float x, float in_min, float in_max, float out_min, float out_max);
 
 	private:
-		TransformComponent* transformA_ = nullptr;
 		glm::vec2 startValueA_ = { 0.0f,0.0f };
 		glm::vec2 endValueA_ = { 0.0f,0.0f };
 
-		TransformComponent* transformB_ = nullptr;
 		glm::vec2 startValueB_ = { 0.0f,0.0f };
 		glm::vec2 endValueB_ = { 0.0f,0.0f };
 		
+
+		int positionA_ = 0;
+		int positionB_ = 0;
+		std::vector<SortingElement*> elements_;
 		///speed is from 1 to infinity
 		float speed_ = 0;
 		float currentTime_ = 0;

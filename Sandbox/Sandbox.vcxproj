@@ -100,6 +100,7 @@
     <ClInclude Include="src\scripts\routines\insert_routine.h" />
     <ClInclude Include="src\scripts\routines\swap_routine.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_bubble.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_insertion.h" />
     <ClInclude Include="src\scripts\sorting_element.h" />
     <ClInclude Include="src\scripts\sorting_element_data.h" />
@@ -114,6 +115,7 @@
     <ClCompile Include="src\scripts\algos\selection_sort.cc" />
     <ClCompile Include="src\scripts\routines\insert_routine.cpp" />
     <ClCompile Include="src\scripts\routines\swap_routine.cc" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_bubble.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_insertion.cc" />
   </ItemGroup>
   <ItemGroup>

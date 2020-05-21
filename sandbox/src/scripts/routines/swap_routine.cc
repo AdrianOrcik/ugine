@@ -3,14 +3,14 @@
 
 namespace Ugine
 {
-	Ugine::SwapRoutine::SwapRoutine(TransformComponent * transformA, TransformComponent * transformB, float speed)
-		:transformA_(transformA), transformB_(transformB), speed_(speed)
+	Ugine::SwapRoutine::SwapRoutine(int positionA, int positionB, std::vector<SortingElement*> Elements, float speed)
+		: positionA_(positionA), positionB_(positionB), elements_(Elements), speed_(speed)
 	{
-		startValueA_ = transformA_->GetLocalPosition();
-		endValueA_ = transformB_->GetLocalPosition();
+		startValueA_ = elements_[positionA_]->GetTransform()->GetLocalPosition();
+		endValueA_ = elements_[positionB_]->GetTransform()->GetLocalPosition();
 
-		startValueB_ = transformB_->GetLocalPosition();
-		endValueB_ = transformA_->GetLocalPosition();
+		startValueB_ = elements_[positionB_]->GetTransform()->GetLocalPosition();
+		endValueB_ = elements_[positionA_]->GetTransform()->GetLocalPosition();
 	}
 	SwapRoutine::~SwapRoutine()
 	{
@@ -40,10 +40,10 @@ namespace Ugine
 		float value = currentTime_ > 1.0f ? 1.0f : currentTime_;
 
 		float xA = GetInterpolation2(startValueA_.x, endValueA_.x, value);
-		transformA_->SetLocalX(xA);
+		elements_[positionA_]->GetTransform()->SetLocalX(xA);
 
 		float xB = GetInterpolation2(startValueB_.x, endValueB_.x, value);
-		transformB_->SetLocalX(xB);
+		elements_[positionB_]->GetTransform()->SetLocalX(xB);
 	}
 
 	float SwapRoutine::MapValue(float x, float in_min, float in_max, float out_min, float out_max)

@@ -39,6 +39,7 @@
     <ClInclude Include="src\scripts\routines\insert_routine.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_insertion.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_bubble.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -56,5 +57,6 @@
     <ClCompile Include="src\scripts\routines\swap_routine.cc" />
     <ClCompile Include="src\scripts\routines\insert_routine.cpp" />
     <ClCompile Include="src\scripts\simulation\simulation_step_insertion.cc" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_bubble.cc" />
   </ItemGroup>
 </Project>

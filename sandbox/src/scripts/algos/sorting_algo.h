@@ -35,10 +35,25 @@ public:
 	int arrayIndex = 0;
 	std::vector< std::vector<SortingElement*> > StepArrays;
 
+	std::vector< std::vector<SortingElement> > StepArraysCopy;
+
+	void AddStepArray(std::vector<SortingElement*> data)
+	{
+		std::vector<SortingElement> arr;
+		for (auto d : data)
+		{
+			arr.push_back(*d);
+		}
+
+		StepArrays.push_back(data);
+		StepArraysCopy.push_back(arr);
+	}
+
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{
-		if (isSwaped) {
+		if (isSwaped) 
+		{
 			SortingElement temp = *elementA;
 			*elementA = *elementB;
 			*elementB = temp;
