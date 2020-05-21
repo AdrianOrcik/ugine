@@ -31,6 +31,11 @@ public:
 	std::function<void()> OnSimulationDone;
 	std::function<void()> OnSimulationInterrupt;
 
+	int index_ = 0;
+	int arrayIndex = 0;
+	std::vector< std::vector<SortingElement*> > StepArrays;
+
+
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{
 		if (isSwaped) {

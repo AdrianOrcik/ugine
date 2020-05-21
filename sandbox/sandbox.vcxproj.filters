@@ -37,6 +37,8 @@
     <ClInclude Include="src\scripts\algos\insertion_sort.h" />
     <ClInclude Include="src\scripts\routines\swap_routine.h" />
     <ClInclude Include="src\scripts\routines\insert_routine.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_insertion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -53,5 +55,6 @@
     <ClCompile Include="src\scripts\algos\insertion_sort.cc" />
     <ClCompile Include="src\scripts\routines\swap_routine.cc" />
     <ClCompile Include="src\scripts\routines\insert_routine.cpp" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_insertion.cc" />
   </ItemGroup>
 </Project>
