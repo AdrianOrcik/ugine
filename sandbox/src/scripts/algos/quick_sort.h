@@ -5,8 +5,9 @@
 #include "ugine/coroutines/routines/wait_seconds.h"
 
 #include "../routines/swap_routine.h"
-#include "../simulation/simulation_step_bubble.h"
+#include "../simulation/simulation_step_quick.h"
 
+//TODO: polish, coloring simulation
 class Quicksort : public SortingAlgo
 {
 public:
@@ -18,8 +19,8 @@ public:
 
 private:
 	void Run();
-	void Quick(std::vector<SortingElement*>  elements, int left, int right);
+	void Quick(int left, int right);
 	
-	void AddStep(StepData data, BubbleStepType stepType);
-	std::vector<BubbleStep> simulationSteps_;
+	void AddStep(StepData data, QuickStep::Type stepType);
+	std::vector<QuickStep> simulationSteps_;
 };

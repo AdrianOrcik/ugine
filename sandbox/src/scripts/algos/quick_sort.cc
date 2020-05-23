@@ -11,14 +11,16 @@ Quicksort::~Quicksort()
 void Quicksort::Sort()
 {
 	//OnSimulationStart();
-	//index_ = 0;
-	//arrayIndex = 0;
+	index_ = 0;
+	arrayIndex = 0;
 	//SetElementCurrentPosition();
 	//AddStepArray(Elements);
 
-	Quick(Elements, 0, Elements.size());
+	AddStepArray(Elements);
+	Quick(0, Elements.size());
 
-	SetElementsTransform();
+	//SetElementsTransform();
+	Run();
 }
 
 void Quicksort::Run()
@@ -36,33 +38,57 @@ void Quicksort::Run()
 	index_++;
 }
 
-void Quicksort::Quick(std::vector<SortingElement*>  elements, int left, int right)
+void Quicksort::Quick( int left, int right)
 {
 	if (left < right) {
+		if(left != right -1){
+			AddStep(StepData(left,right-1), QuickStep::Type::SelectRange);
+		}
+		else
+		{
+			AddStep(StepData(left), QuickStep::Type::SelectRange);
+		}
+
 		int boundary = left;
 		for (int i = left + 1; i < right; i++) {
-			if (elements[i]->Value < elements[left]->Value) 
+			//AddStep(StepData(boundary), QuickStep::Type::SelectPivot);
+			AddStep(StepData(i, left), QuickStep::Type::SelectElement);
+			if (Elements[i]->Value > Elements[left]->Value) 
 			{
-				Swap(Elements[i], Elements[++boundary],true);
-		
-				//swap(array, i, ++boundary);
-				//SortingElement* tmp = Elements[i];
-				//Elements[i] = Elements[boundary+1];
-				//Elements[boundary+1] = tmp;
+				if(i != boundary){
+					AddStep(StepData(i, ++boundary), QuickStep::Type::BeforeSwap);
+					AddStep(StepData(i, boundary), QuickStep::Type::Swap);
+					AddStep(StepData(i, boundary), QuickStep::Type::AfterSwap);
+
+					//Swap(Elements[i], Elements[boundary], true);
+					SortingElement* tmp = Elements[i];
+					Elements[i] = Elements[boundary];
+					Elements[boundary] = tmp;
+
+					AddStepArray(Elements);
+				}
 			}
 		}
-		//swap(array, left, boundary);
-		Swap(Elements[left], Elements[boundary], true);
 
-		//SortingElement* tmp = Elements[left];
-		//Elements[left] = Elements[boundary];
-		//Elements[boundary] = tmp;
-		Quick(elements, left, boundary);
-		Quick(elements, boundary + 1, right);
+		if(left != boundary) {
+			AddStep(StepData(left, boundary), QuickStep::Type::BeforeSwap);
+			AddStep(StepData(left, boundary), QuickStep::Type::Swap);
+			AddStep(StepData(left, boundary), QuickStep::Type::AfterSwap);
+		
+			//Swap(Elements[left], Elements[boundary], true);
+
+			SortingElement* tmp = Elements[left];
+			Elements[left] = Elements[boundary];
+			Elements[boundary] = tmp;
+			AddStepArray(Elements);
+		}
+
+		Quick(left, boundary);
+		Quick(boundary + 1, right);
 	}
 }
 
-void Quicksort::AddStep(StepData data, BubbleStepType stepType)
+void Quicksort::AddStep(StepData data, QuickStep::Type stepType)
 {
-	simulationSteps_.push_back(BubbleStep(this, data, stepType));
+	simulationSteps_.push_back(QuickStep(this, data, stepType));
 }

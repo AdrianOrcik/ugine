@@ -187,7 +187,9 @@ void Sandbox2D::GeneratePooledElements()
 	gameObjects_.clear();
 	elements_.clear();
 
+	//int arr[7] = { 13,5,5,1,7,13,5 };
 	//generation of new vector of objects
+	//elementCount_ = 7;
 	for (int i = 0; i < elementCount_; i++)
 	{
 		int generatedValue = rand() % elementCount_ * 2 + 1;

@@ -95,6 +95,7 @@
     <ClInclude Include="src\layers\sandbox_2d.h" />
     <ClInclude Include="src\scripts\algos\bubble_sort.h" />
     <ClInclude Include="src\scripts\algos\insertion_sort.h" />
+    <ClInclude Include="src\scripts\algos\quick_sort.h" />
     <ClInclude Include="src\scripts\algos\selection_sort.h" />
     <ClInclude Include="src\scripts\algos\sorting_algo.h" />
     <ClInclude Include="src\scripts\routines\insert_routine.h" />
@@ -102,6 +103,8 @@
     <ClInclude Include="src\scripts\simulation\simulation_step.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_bubble.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_insertion.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_quick.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_selection.h" />
     <ClInclude Include="src\scripts\sorting_element.h" />
     <ClInclude Include="src\scripts\sorting_element_data.h" />
     <ClInclude Include="src\scripts\sorting_manager.h" />
@@ -112,11 +115,14 @@
     <ClCompile Include="src\sandbox_app.cc" />
     <ClCompile Include="src\scripts\algos\bubble_sort.cc" />
     <ClCompile Include="src\scripts\algos\insertion_sort.cc" />
+    <ClCompile Include="src\scripts\algos\quick_sort.cc" />
     <ClCompile Include="src\scripts\algos\selection_sort.cc" />
     <ClCompile Include="src\scripts\routines\insert_routine.cpp" />
     <ClCompile Include="src\scripts\routines\swap_routine.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_bubble.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_insertion.cc" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_quick.cc" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_selection.cc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ugine\ugine.vcxproj">
