@@ -113,6 +113,11 @@ void Sandbox2D::OnImGuiRender()
 		{
 			sortingManager->SortBy(SortingManager::SortingType::Quick);
 		}
+
+		if (ImGui::Button("Heap Sort"))
+		{
+			sortingManager->SortBy(SortingManager::SortingType::Heap);
+		}
 	}
 	else 
 	{
@@ -187,12 +192,12 @@ void Sandbox2D::GeneratePooledElements()
 	gameObjects_.clear();
 	elements_.clear();
 
-	//int arr[7] = { 13,5,5,1,7,13,5 };
+	int arr[5] = { 4,10,3,5,1 };
 	//generation of new vector of objects
-	//elementCount_ = 7;
+	elementCount_ = 5;
 	for (int i = 0; i < elementCount_; i++)
 	{
-		int generatedValue = rand() % elementCount_ * 2 + 1;
+		int generatedValue = arr[i]; //rand() % elementCount_ * 2 + 1;
 		//int spawnPosition = i - (elementCount_ / 2.0f);
 		SetObject(pooler->GetPooledObj("entities"), i, generatedValue);
 	}

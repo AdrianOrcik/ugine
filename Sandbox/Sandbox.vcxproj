@@ -94,6 +94,7 @@
     <ClInclude Include="src\layers\example_layer.h" />
     <ClInclude Include="src\layers\sandbox_2d.h" />
     <ClInclude Include="src\scripts\algos\bubble_sort.h" />
+    <ClInclude Include="src\scripts\algos\heap_sort.h" />
     <ClInclude Include="src\scripts\algos\insertion_sort.h" />
     <ClInclude Include="src\scripts\algos\quick_sort.h" />
     <ClInclude Include="src\scripts\algos\selection_sort.h" />
@@ -114,6 +115,7 @@
     <ClCompile Include="src\layers\sandbox_2d.cc" />
     <ClCompile Include="src\sandbox_app.cc" />
     <ClCompile Include="src\scripts\algos\bubble_sort.cc" />
+    <ClCompile Include="src\scripts\algos\heap_sort.cc" />
     <ClCompile Include="src\scripts\algos\insertion_sort.cc" />
     <ClCompile Include="src\scripts\algos\quick_sort.cc" />
     <ClCompile Include="src\scripts\algos\selection_sort.cc" />

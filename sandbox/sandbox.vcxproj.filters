@@ -43,6 +43,7 @@
     <ClInclude Include="src\scripts\simulation\simulation_step_selection.h" />
     <ClInclude Include="src\scripts\algos\quick_sort.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_quick.h" />
+    <ClInclude Include="src\scripts\algos\heap_sort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -64,5 +65,6 @@
     <ClCompile Include="src\scripts\simulation\simulation_step_selection.cc" />
     <ClCompile Include="src\scripts\algos\quick_sort.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_quick.cc" />
+    <ClCompile Include="src\scripts\algos\heap_sort.cc" />
   </ItemGroup>
 </Project>

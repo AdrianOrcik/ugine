@@ -7,18 +7,19 @@
 #include "../routines/swap_routine.h"
 #include "../simulation/simulation_step_bubble.h"
 
-class BubbleSort : public SortingAlgo
+class HeapSort : public SortingAlgo
 {
 public:
-	BubbleSort();
-	~BubbleSort();
+	HeapSort();
+	~HeapSort();
 
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
 
 private:
 	void Run();
-
+	void Heap(int size);
+	void Heapify(int bottom, int topIndex);
 	void AddStep(StepData data, BubbleStepType stepType);
 	std::vector<BubbleStep> simulationSteps_;
 };

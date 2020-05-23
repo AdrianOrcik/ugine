@@ -15,6 +15,7 @@ public:
 	virtual void Sort() = 0;
 
 	std::vector<SortingElement*> Elements;
+	std::vector<SortingElement*>* ElementsPtr;
 	void SetElements(std::vector<SortingElement*> elements) { Elements = elements; }
 
 	int PairIndex = 0;
