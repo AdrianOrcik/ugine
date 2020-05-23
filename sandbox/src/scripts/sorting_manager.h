@@ -7,6 +7,7 @@
 #include "../scripts/algos/bubble_sort.h"
 #include "../scripts/algos/selection_sort.h"
 #include "../scripts/algos/insertion_sort.h"
+#include "../scripts/algos/quick_sort.h"
 #include "../scripts/algos/sorting_algo.h"
 
 #include <functional>
@@ -18,7 +19,7 @@ class SortingManager : public Ugine::ScriptComponent
 {
 
 public:
-	enum SortingType {Unset, Bubble, Selection, Insertion };
+	enum SortingType {Unset, Bubble, Selection, Insertion, Quick };
 
 	SortingManager()
 		:isRunning(false)
@@ -59,6 +60,9 @@ public:
 			break;
 		case SortingType::Insertion:
 			sortAlgorhitm_ = DBG_NEW InsertionSort();
+			break;
+		case SortingType::Quick:
+			sortAlgorhitm_ = DBG_NEW Quicksort();
 			break;
 		}
 

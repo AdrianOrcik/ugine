@@ -108,6 +108,11 @@ void Sandbox2D::OnImGuiRender()
 		{
 			sortingManager->SortBy(SortingManager::SortingType::Insertion);
 		}
+
+		if (ImGui::Button("Quick Sort"))
+		{
+			sortingManager->SortBy(SortingManager::SortingType::Quick);
+		}
 	}
 	else 
 	{

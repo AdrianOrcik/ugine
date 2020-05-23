@@ -59,7 +59,7 @@ public:
 			*elementB = temp;
 		}
 
-		SwapPair.push_back(DBG_NEW SortingPairElement(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
+		//SwapPair.push_back(DBG_NEW SortingPairElement(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
 	}
 
 	void Select(SortingElement * element, bool isSelected, bool isLastElement)
