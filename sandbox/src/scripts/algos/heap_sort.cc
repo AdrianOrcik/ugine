@@ -13,7 +13,9 @@ void HeapSort::Sort()
 	//SetElementCurrentPosition();
 	Heap(Elements.size());
 	//SetElementSortedPosition();
-	SetElementsTransform();
+	//SetElementsTransform();
+
+	Run();
 }
 
 void HeapSort::Heap(int size)
@@ -26,10 +28,15 @@ void HeapSort::Heap(int size)
 	{
 		//Swap(Elements[0], Elements[i], true);
 
+		AddStep(StepData(0, i), HeapStep::Type::BeforeSwap);
+		AddStep(StepData(0, i), HeapStep::Type::Swap);
+		AddStep(StepData(0, i), HeapStep::Type::AfterSwap);
+
 		SortingElement* tmp = Elements[0];
 		Elements[0] = Elements[i];
 		Elements[i] = tmp;
 
+		AddStepArray(Elements);
 		Heapify(i, 0);
 	}
 }
@@ -50,9 +57,14 @@ void HeapSort::Heapify(int n, int i)
 	{
 		//Swap(Elements[0], Elements[i], true);
 
+		AddStep(StepData(i, largest), HeapStep::Type::BeforeSwap);
+		AddStep(StepData(i, largest), HeapStep::Type::Swap);
+		AddStep(StepData(i, largest), HeapStep::Type::AfterSwap);
+
 		SortingElement* tmp = Elements[i];
 		Elements[i] = Elements[largest];
 		Elements[largest] = tmp;
+		AddStepArray(Elements);
 
 		Heapify(n, largest);
 	}
@@ -73,7 +85,7 @@ void HeapSort::Run()
 	index_++;
 }
 
-void HeapSort::AddStep(StepData data, BubbleStepType stepType)
+void HeapSort::AddStep(StepData data, HeapStep::Type stepType)
 {
-	simulationSteps_.push_back(BubbleStep(this, data, stepType));
+	simulationSteps_.push_back(HeapStep(this, data, stepType));
 }

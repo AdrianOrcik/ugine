@@ -103,6 +103,7 @@
     <ClInclude Include="src\scripts\routines\swap_routine.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_bubble.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_heap.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_insertion.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_quick.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_selection.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="src\scripts\routines\insert_routine.cpp" />
     <ClCompile Include="src\scripts\routines\swap_routine.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_bubble.cc" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_heap.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_insertion.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_quick.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_selection.cc" />
