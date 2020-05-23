@@ -7,10 +7,10 @@
 
 enum BubbleStepType
 {
-	Select,
-	BeforeSwap,
-	Swap,
-	AfterSwap
+	S_Select,
+	S_BeforeSwap,
+	S_Swap,
+	S_AfterSwap
 };
 
 class BubbleStep : public SimulationStep

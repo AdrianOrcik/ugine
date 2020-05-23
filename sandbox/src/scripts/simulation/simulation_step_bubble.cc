@@ -15,16 +15,16 @@ void BubbleStep::Execute()
 {
 	switch (stepType_)
 	{
-	case BubbleStepType::Select:
+	case BubbleStepType::S_Select:
 		ElementSelect();
 		break;
-	case BubbleStepType::BeforeSwap:
+	case BubbleStepType::S_BeforeSwap:
 		BeforeSwap();
 		break;
-	case BubbleStepType::Swap:
+	case BubbleStepType::S_Swap:
 		Swap();
 		break;
-	case BubbleStepType::AfterSwap:
+	case BubbleStepType::S_AfterSwap:
 		AfterSwap();
 		break;
 	}
@@ -32,7 +32,7 @@ void BubbleStep::Execute()
 
 void BubbleStep::ElementSelect()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.5f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->StepArraysCopy[sortingAlgo_->arrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Blue());
@@ -50,7 +50,7 @@ void BubbleStep::BeforeSwap()
 void BubbleStep::Swap()
 {
 	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data_.positionA, data_.positionB,
-		sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex], 5.0f);
+		sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex], 10.0f);
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->StepArraysCopy[sortingAlgo_->arrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
@@ -62,7 +62,7 @@ void BubbleStep::Swap()
 
 void BubbleStep::AfterSwap()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.5f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	waitfor->SetOnCompleted(std::bind(&BubbleStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
