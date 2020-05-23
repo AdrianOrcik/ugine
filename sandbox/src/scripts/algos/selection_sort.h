@@ -1,27 +1,34 @@
 #pragma once
+
 #include "sorting_algo.h"
 
 #include "ugine/coroutines/routine_manager.h"
-#include "../routines/swap_routine.h"
 #include "ugine/coroutines/routines/wait_seconds.h"
 
-class Selectionsort : public SortingAlgo
+#include "../routines/swap_routine.h"
+#include "../simulation/simulation_step_selection.h"
+
+class SelectionSort : public SortingAlgo
 {
 public:
-	Selectionsort();
-	~Selectionsort();
+	SelectionSort();
+	~SelectionSort();
 
 	// Inherited via SortingAlgo
 	virtual void Sort() override;
 
 private:
-	void SelectElements();
-	void BeforeFindNewSelection();
-	void SwapElements();
-	void AfterSwapElements();
-	void DelaySelection();
 
-	//TODO: refactor
-	int firstElementIndex_ = 0;
-	bool newIteration = false;
+	void Run();
+	//void SelectElements();
+	//void BeforeFindNewSelection();
+	//void SwapElements();
+	//void AfterSwapElements();
+	//void DelaySelection();
+
+	////TODO: refactor
+	//int firstElementIndex_ = 0;
+	//bool newIteration = false;
+	void AddStep(StepData data, SelectionStep::Type stepType);
+	std::vector<SelectionStep> simulationSteps_;
 };

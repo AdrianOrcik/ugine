@@ -55,7 +55,7 @@ public:
 			sortAlgorhitm_ = DBG_NEW BubbleSort();
 			break;
 		case SortingType::Selection:
-			sortAlgorhitm_ = DBG_NEW Selectionsort();
+			sortAlgorhitm_ = DBG_NEW SelectionSort();
 			break;
 		case SortingType::Insertion:
 			sortAlgorhitm_ = DBG_NEW InsertionSort();
