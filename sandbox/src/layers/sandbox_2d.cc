@@ -118,6 +118,11 @@ void Sandbox2D::OnImGuiRender()
 		{
 			sortingManager->SortBy(SortingManager::SortingType::Heap);
 		}
+
+		if (ImGui::Button("Merge Sort"))
+		{
+			sortingManager->SortBy(SortingManager::SortingType::Merge);
+		}
 	}
 	else 
 	{

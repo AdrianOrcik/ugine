@@ -9,6 +9,7 @@
 #include "../scripts/algos/insertion_sort.h"
 #include "../scripts/algos/quick_sort.h"
 #include "../scripts/algos/heap_sort.h"
+#include "../scripts/algos/merge_sort.h"
 #include "../scripts/algos/sorting_algo.h"
 
 #include <functional>
@@ -20,7 +21,7 @@ class SortingManager : public Ugine::ScriptComponent
 {
 
 public:
-	enum SortingType {Unset, Bubble, Selection, Insertion, Quick, Heap };
+	enum SortingType {Unset, Bubble, Selection, Insertion, Quick, Heap, Merge };
 
 	SortingManager()
 		:isRunning(false)
@@ -67,6 +68,9 @@ public:
 			break;
 		case SortingType::Heap:
 			sortAlgorhitm_ = DBG_NEW HeapSort();
+			break;
+		case SortingType::Merge:
+			sortAlgorhitm_ = DBG_NEW MergeSort();
 			break;
 		}
 

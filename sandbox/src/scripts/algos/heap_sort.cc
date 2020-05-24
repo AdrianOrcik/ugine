@@ -11,6 +11,9 @@ HeapSort::~HeapSort()
 void HeapSort::Sort()
 {
 	//SetElementCurrentPosition();
+	index_ = 0;
+	arrayIndex = 0;
+
 	Heap(Elements.size());
 	//SetElementSortedPosition();
 	//SetElementsTransform();
