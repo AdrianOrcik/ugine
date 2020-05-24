@@ -197,11 +197,12 @@ void Sandbox2D::GeneratePooledElements()
 	gameObjects_.clear();
 	elements_.clear();
 
-	//int arr[5] = { 4,10,3,5,1 };
+	int arr[5] = { 4,10,3,5,1 };
 	//generation of new vector of objects
+	//elementCount_ = 5;
 	for (int i = 0; i < elementCount_; i++)
 	{
-		int generatedValue = rand() % elementCount_ * 2 + 1;
+		int generatedValue = rand() % elementCount_ * 2 + 1; //arr[i]; //
 		//int spawnPosition = i - (elementCount_ / 2.0f);
 		SetObject(pooler->GetPooledObj("entities"), i, generatedValue);
 	}

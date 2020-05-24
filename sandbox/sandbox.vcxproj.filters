@@ -46,6 +46,7 @@
     <ClInclude Include="src\scripts\algos\heap_sort.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_heap.h" />
     <ClInclude Include="src\scripts\algos\merge_sort.h" />
+    <ClInclude Include="src\scripts\simulation\simulation_step_merge.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">
@@ -70,5 +71,6 @@
     <ClCompile Include="src\scripts\algos\heap_sort.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_heap.cc" />
     <ClCompile Include="src\scripts\algos\merge_sort.cc" />
+    <ClCompile Include="src\scripts\simulation\simulation_step_merge.cc" />
   </ItemGroup>
 </Project>
