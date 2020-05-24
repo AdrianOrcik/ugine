@@ -202,7 +202,7 @@ void Sandbox2D::GeneratePooledElements()
 	//elementCount_ = 5;
 	for (int i = 0; i < elementCount_; i++)
 	{
-		int generatedValue = rand() % elementCount_ * 2 + 1; //arr[i]; //
+		int generatedValue = rand() % elementCount_ * 2 + 1; // arr[i]
 		//int spawnPosition = i - (elementCount_ / 2.0f);
 		SetObject(pooler->GetPooledObj("entities"), i, generatedValue);
 	}

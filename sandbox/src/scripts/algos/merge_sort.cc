@@ -14,6 +14,7 @@ void MergeSort::Sort()
 {
 	index_ = 0;
 	arrayIndex = 0;
+	OnSimulationStart();
 
 	AddStepArray(Elements);
 	Merge(0, Elements.size() - 1);
@@ -44,8 +45,6 @@ void MergeSort::Merge(int low, int high)
 	{
 		// find middle of the array
 		int mid = (low + high) / 2;
-
-		AddStep(StepData(low, mid), MergeStep::Type::SelectRange);
 
 		// sort first half
 		Merge(low, mid);
@@ -104,17 +103,13 @@ void MergeSort::MergeHelper(int low, int high, int mid)
 	for (i = low; i < k; i++)
 	{
 		// final array movement
-		AddStep(StepData(i, c[i]->Value), MergeStep::Type::OverrideValue);
-		Elements[i] = c[i];
-		//AddStepArray(Elements);
+		AddStep(StepData(low, k-1), MergeStep::Type::SelectRange);
 
-		//std::vector<SortingElement*>::iterator it = std::find(Elements.begin(), Elements.end(), c[i]);
-		//int index = std::distance(Elements.begin(), it);
-		//if(index != i){
-		//	AddStep(StepData(i, index), MergeStep::Type::Move);
-		//	Elements[i] = c[i];
-		//	AddStepArray(Elements);
-		//}
+		AddStep(StepData(i), MergeStep::Type::BeforeOverride);
+		AddStep(StepData(i, c[i]->Value), MergeStep::Type::OverrideValue);
+		AddStep(StepData(i), MergeStep::Type::AfterOverride);
+		
+		Elements[i] = c[i];
 	}
 }
 

@@ -13,7 +13,7 @@ void HeapSort::Sort()
 	//SetElementCurrentPosition();
 	index_ = 0;
 	arrayIndex = 0;
-
+	OnSimulationStart();
 	Heap(Elements.size());
 	//SetElementSortedPosition();
 	//SetElementsTransform();
