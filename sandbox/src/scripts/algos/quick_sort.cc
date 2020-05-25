@@ -10,26 +10,24 @@ Quicksort::~Quicksort()
 
 void Quicksort::Sort()
 {
-	//OnSimulationStart();
+	OnSimulationStart();
+
 	StepIndex = 0;
 	ArrayIndex = 0;
-	//SetElementCurrentPosition();
-	//AddStepArray(Elements);
 
 	AddStepArray(Elements);
 	Quick(0, Elements.size());
 
-	//SetElementsTransform();
 	Run();
 }
 
 void Quicksort::Run()
 {
+	//TODO: make check function in base class
 	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
-		LOG_ERROR("Done!");
 		return;
 	}
 
@@ -50,17 +48,16 @@ void Quicksort::Quick( int left, int right)
 		}
 
 		int boundary = left;
-		for (int i = left + 1; i < right; i++) {
-			//AddStep(StepData(boundary), QuickStep::Type::SelectPivot);
+		for (int i = left + 1; i < right; i++) 
+		{
 			AddStep(StepData(i, left), QuickStep::Type::SelectElement);
-			if (Elements[i]->Value > Elements[left]->Value) 
+			if (Elements[i]->Value < Elements[left]->Value) 
 			{
 				if(i != boundary){
 					AddStep(StepData(i, ++boundary), QuickStep::Type::BeforeSwap);
 					AddStep(StepData(i, boundary), QuickStep::Type::Swap);
 					AddStep(StepData(i, boundary), QuickStep::Type::AfterSwap);
 
-					//Swap(Elements[i], Elements[boundary], true);
 					SortingElement* tmp = Elements[i];
 					Elements[i] = Elements[boundary];
 					Elements[boundary] = tmp;
@@ -74,8 +71,6 @@ void Quicksort::Quick( int left, int right)
 			AddStep(StepData(left, boundary), QuickStep::Type::BeforeSwap);
 			AddStep(StepData(left, boundary), QuickStep::Type::Swap);
 			AddStep(StepData(left, boundary), QuickStep::Type::AfterSwap);
-		
-			//Swap(Elements[left], Elements[boundary], true);
 
 			SortingElement* tmp = Elements[left];
 			Elements[left] = Elements[boundary];

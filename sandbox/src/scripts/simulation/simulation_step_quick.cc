@@ -61,12 +61,10 @@ void QuickStep::OnSelectElement()
 
 void QuickStep::OnSelectRange()
 {
-	LOG_INFO("OnSelectRange");
-	LOG_INFO("RANGE: {0} - {1}", data_.positionA, data_.positionB);
-
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
+	
 	if(data_.positionB != -1)
 	{
 		sortingAlgo_->StepArraysCopy[sortingAlgo_->ArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Green());
@@ -76,6 +74,7 @@ void QuickStep::OnSelectRange()
 	{
 		sortingAlgo_->StepArraysCopy[sortingAlgo_->ArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Green());
 	}
+
 	waitfor->SetOnCompleted(std::bind(&QuickStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
