@@ -57,7 +57,7 @@ void MergeStep::OnOverrideValue()
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.1f);
 
 	float value = ((float)(data_.positionB / 10.0f));
-	sortingAlgo_->ElementsCopy[data_.positionA].GetTransform()->SetScale(glm::vec2(0.05f, value));
+	sortingAlgo_->ElementsCopy[data_.positionA].GetTransform()->SetScaleY(value);
 	sortingAlgo_->StepArrayIndex++;
 
 	waitfor->SetOnCompleted(std::bind(&MergeStep::OnCompleted, this));

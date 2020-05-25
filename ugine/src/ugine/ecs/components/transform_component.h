@@ -42,6 +42,8 @@ namespace Ugine
 		void SetOffsetPosition(glm::vec2 positionOffset) { positionOffset_ = positionOffset; }
 		void SetRotation( glm::vec2 rotation) { rotation_ = rotation; }
 		void SetScale( glm::vec2 scale) { scale_ = scale; }
+		void SetScaleX(float scaleX) { scale_.x = scaleX; }
+		void SetScaleY(float scaleY) { scale_.y = scaleY; }
 
 		glm::vec2 GetLocalPosition() { return position_; }
 		glm::vec2 GetWorldPosition() { return (position_ + pivotOffset_ + positionOffset_); }

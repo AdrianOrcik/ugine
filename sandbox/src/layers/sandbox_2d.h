@@ -20,7 +20,6 @@ private:
 	void SetObject(Ugine::Entity* entity, int index, int generatedValue);
 	void GeneratePooledElements();
 
-	void GUI_GenerateElements();
 public:
 	Ugine::OrthographicCameraController cameraController_;
 	static bool OnNext;
@@ -28,5 +27,5 @@ private:
 
 	std::vector<Ugine::Entity*> gameObjects_;
 	std::vector<SortingElement*> elements_;
-	int elementCount_ = 4;
+	int elementCount_ = 60;
 };
