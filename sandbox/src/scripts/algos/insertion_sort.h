@@ -25,7 +25,7 @@ public:
 
 private:
 	void Run();
-	void AddStep(StepData data, InsertionStepType stepType);
+	void AddStep(StepData data, InsertionStep::Type stepType);
 	std::vector<InsertionStep> simulationSteps_;
 
 };

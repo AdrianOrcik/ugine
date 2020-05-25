@@ -1,6 +1,6 @@
 #include "simulation_step_insertion.h"
 
-InsertionStep::InsertionStep(SortingAlgo * algo, StepData data, InsertionStepType stepType)
+InsertionStep::InsertionStep(SortingAlgo * algo, StepData data, Type stepType)
 {
 	sortingAlgo_ = algo;
 	data_ = data;
@@ -15,19 +15,19 @@ void InsertionStep::Execute()
 {
 	switch (stepType_)
 	{
-		case InsertionStepType::SelectElement:
-			ElementSelect();
+		case Type::SelectElement:
+			OnElementSelect();
 		break;
-		case InsertionStepType::SelectPivot:
-			PivotSelect();
+		case Type::SelectPivot:
+			OnPivotSelect();
 			break;
-		case InsertionStepType::Insert:
-			Insertion();
+		case Type::Insert:
+			OnInsert();
 			break;
 	}
 }
 
-void InsertionStep::PivotSelect()
+void InsertionStep::OnPivotSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
@@ -38,7 +38,7 @@ void InsertionStep::PivotSelect()
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
 
-void InsertionStep::ElementSelect()
+void InsertionStep::OnElementSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
@@ -48,7 +48,7 @@ void InsertionStep::ElementSelect()
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
 
-void InsertionStep::Insertion()
+void InsertionStep::OnInsert()
 {
 	InsertRoutine* insertRoutine = DBG_NEW InsertRoutine(data_.positionA, data_.positionB, 
 		sortingAlgo_->StepArrays[sortingAlgo_->ArrayIndex], 10.0f);
