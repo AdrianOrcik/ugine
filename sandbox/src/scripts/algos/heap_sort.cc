@@ -10,13 +10,11 @@ HeapSort::~HeapSort()
 
 void HeapSort::Sort()
 {
-	//SetElementCurrentPosition();
 	StepIndex = 0;
 	ArrayIndex = 0;
+
 	OnSimulationStart();
 	Heap(Elements.size());
-	//SetElementSortedPosition();
-	//SetElementsTransform();
 
 	Run();
 }
@@ -29,7 +27,6 @@ void HeapSort::Heap(int size)
 
 	for (int i = size - 1; i >= 0; i--)
 	{
-		//Swap(Elements[0], Elements[i], true);
 
 		AddStep(StepData(0, i), HeapStep::Type::BeforeSwap);
 		AddStep(StepData(0, i), HeapStep::Type::Swap);
@@ -58,8 +55,6 @@ void HeapSort::Heapify(int n, int i)
 
 	if (largest != i)
 	{
-		//Swap(Elements[0], Elements[i], true);
-
 		AddStep(StepData(i, largest), HeapStep::Type::BeforeSwap);
 		AddStep(StepData(i, largest), HeapStep::Type::Swap);
 		AddStep(StepData(i, largest), HeapStep::Type::AfterSwap);
@@ -79,7 +74,6 @@ void HeapSort::Run()
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
-		LOG_ERROR("Done!");
 		return;
 	}
 
