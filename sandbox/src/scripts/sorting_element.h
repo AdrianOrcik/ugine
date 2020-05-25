@@ -34,6 +34,8 @@ public:
 
 public:
 	int Value = 0;
+
+	//DEBUG
 	int CurrentPosition = 0;
 	int SortedPosition = 0;
 };

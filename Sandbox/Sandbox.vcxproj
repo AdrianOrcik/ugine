@@ -110,7 +110,6 @@
     <ClInclude Include="src\scripts\simulation\simulation_step_quick.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_selection.h" />
     <ClInclude Include="src\scripts\sorting_element.h" />
-    <ClInclude Include="src\scripts\sorting_element_data.h" />
     <ClInclude Include="src\scripts\sorting_manager.h" />
   </ItemGroup>
   <ItemGroup>

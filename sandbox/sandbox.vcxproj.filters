@@ -27,9 +27,6 @@
     <ClInclude Include="src\scripts\sorting_element.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\sorting_element_data.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="src\scripts\sorting_manager.h">
       <Filter>scripts</Filter>
     </ClInclude>

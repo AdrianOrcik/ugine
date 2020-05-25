@@ -11,8 +11,6 @@ InsertionSort::~InsertionSort()
 void InsertionSort::Sort()
 {
 	OnSimulationStart();
-	StepIndex = 0;
-	ArrayIndex = 0;
 
 	AddStepArray(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
@@ -52,7 +50,6 @@ void InsertionSort::AddStep(StepData data, InsertionStep::Type stepType)
 
 void InsertionSort::Run()
 {
-	//TODO: make check function in base class
 	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());

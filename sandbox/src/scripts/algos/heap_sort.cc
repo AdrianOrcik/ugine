@@ -10,10 +10,9 @@ HeapSort::~HeapSort()
 
 void HeapSort::Sort()
 {
-	StepIndex = 0;
-	ArrayIndex = 0;
 
 	OnSimulationStart();
+
 	Heap(Elements.size());
 
 	Run();

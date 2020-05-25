@@ -12,9 +12,6 @@ void Quicksort::Sort()
 {
 	OnSimulationStart();
 
-	StepIndex = 0;
-	ArrayIndex = 0;
-
 	AddStepArray(Elements);
 	Quick(0, Elements.size());
 
@@ -23,7 +20,6 @@ void Quicksort::Sort()
 
 void Quicksort::Run()
 {
-	//TODO: make check function in base class
 	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());

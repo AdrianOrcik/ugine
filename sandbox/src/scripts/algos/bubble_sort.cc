@@ -10,10 +10,6 @@ void BubbleSort::Sort()
 {
 	OnSimulationStart();
 
-	//TODO: make as default settings
-	StepIndex = 0;
-	ArrayIndex = 0;
-
 	AddStepArray(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
@@ -27,7 +23,8 @@ void BubbleSort::Sort()
 
 				SortingElement* tmp = Elements[j];
 				Elements[j] = Elements[j + 1];
-				Elements[j + 1] = tmp;				
+				Elements[j + 1] = tmp;
+
 				AddStepArray(Elements);
 			}
 			else 
@@ -42,7 +39,6 @@ void BubbleSort::Sort()
 
 void BubbleSort::Run()
 {
-	//TODO: make check function in base class
 	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());

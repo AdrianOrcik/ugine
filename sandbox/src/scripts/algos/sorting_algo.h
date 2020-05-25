@@ -4,7 +4,6 @@
 #include <glm/glm.hpp>
 
 #include "../sorting_element.h"
-#include "../sorting_element_data.h"
 #include "ugine/ecs/components/transform_component.h"
 
 
@@ -13,13 +12,19 @@ class SortingAlgo
 {
 public:
 	virtual void Sort() = 0;
-	//TODO: make default settings during thesort begin 
 
 	std::vector<SortingElement*> Elements;
 	std::vector<SortingElement> ElementsCopy;
 
 	std::vector< std::vector<SortingElement*> > StepArrays;
 	std::vector< std::vector<SortingElement> > StepArraysCopy;
+
+	std::function<void()> OnSimulationStart;
+	std::function<void()> OnSimulationDone;
+	std::function<void()> OnSimulationInterrupt;
+
+	int StepIndex = 0;
+	int StepArrayIndex = 0;
 
 	void SetElements(std::vector<SortingElement*> elements) 
 	{ 
@@ -29,13 +34,6 @@ public:
 			ElementsCopy.push_back(*e);
 		}
 	}
-
-	std::function<void()> OnSimulationStart;
-	std::function<void()> OnSimulationDone;
-	std::function<void()> OnSimulationInterrupt;
-
-	int StepIndex = 0;
-	int ArrayIndex = 0;
 
 	void AddStepArray(std::vector<SortingElement*> data)
 	{
@@ -47,14 +45,6 @@ public:
 
 		StepArrays.push_back(data);
 		StepArraysCopy.push_back(arr);
-	}
-
-
-	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
-	{
-		SortingElement temp = *elementA;
-		*elementA = *elementB;
-		*elementB = temp;
 	}
 
 	void SetElementsColor(glm::vec4 color)

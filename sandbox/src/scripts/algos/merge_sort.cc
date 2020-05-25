@@ -1,6 +1,4 @@
 #include "merge_sort.h"
-//
-//#include <algorithm>
 
 MergeSort::MergeSort()
 {
@@ -13,9 +11,6 @@ MergeSort::~MergeSort()
 void MergeSort::Sort()
 {
 	OnSimulationStart();
-
-	StepIndex = 0;
-	ArrayIndex = 0;
 
 	AddStepArray(Elements);
 	Merge(0, Elements.size() - 1);
