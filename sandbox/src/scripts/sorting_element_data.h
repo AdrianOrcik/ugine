@@ -2,6 +2,7 @@
 #include "ugine.h"
 #include "../scripts/sorting_element.h"
 
+//TODO: REMOVE!
 struct SortingPairElement
 {
 	Ugine::Entity* ElementA;

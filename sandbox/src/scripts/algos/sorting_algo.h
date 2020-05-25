@@ -16,19 +16,19 @@ public:
 	//TODO: make default settings during thesort begin 
 
 	std::vector<SortingElement*> Elements;
-	std::vector<SortingElement*>* ElementsPtr; //TODO: need it??
-	void SetElements(std::vector<SortingElement*> elements) { Elements = elements; }
+	std::vector<SortingElement> ElementsCopy;
 
-	//int PairIndex = 0;
-	//std::vector<SortingPairElement*> SwapPair;
-	//bool HasMorePair() { return PairIndex < SwapPair.size(); }
-	//
-	//int SingleIndex = 0;
-	//std::vector<SortingSingleElement*> SelectSingle;
+	std::vector< std::vector<SortingElement*> > StepArrays;
+	std::vector< std::vector<SortingElement> > StepArraysCopy;
 
-	//TODO: fix for selection sort
-	//SingleIndex < SelectSingle.size()
-	//bool HasMoreSingle() { return PairIndex < SwapPair.size(); }
+	void SetElements(std::vector<SortingElement*> elements) 
+	{ 
+		Elements = elements;
+		for (auto e : Elements)
+		{
+			ElementsCopy.push_back(*e);
+		}
+	}
 
 	std::function<void()> OnSimulationStart;
 	std::function<void()> OnSimulationDone;
@@ -36,10 +36,6 @@ public:
 
 	int StepIndex = 0;
 	int ArrayIndex = 0;
-
-	//todo: need both?
-	std::vector< std::vector<SortingElement*> > StepArrays;
-	std::vector< std::vector<SortingElement> > StepArraysCopy;
 
 	void AddStepArray(std::vector<SortingElement*> data)
 	{
@@ -56,58 +52,10 @@ public:
 
 	void Swap(SortingElement * elementA, SortingElement * elementB, bool isSwaped)
 	{
-		if (isSwaped) 
-		{
-			SortingElement temp = *elementA;
-			*elementA = *elementB;
-			*elementB = temp;
-		}
-
-		//SwapPair.push_back(DBG_NEW SortingPairElement(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
+		SortingElement temp = *elementA;
+		*elementA = *elementB;
+		*elementB = temp;
 	}
-
-	//void Select(SortingElement * element, bool isSelected, bool isLastElement)
-	//{
-	//	SelectSingle.push_back(DBG_NEW SortingSingleElement(element->GetEntity(), isSelected, isLastElement));
-	//}
-
-	//DEBUG
-	void SetElementSortedPosition()
-	{
-		for (int i = 0; i < Elements.size(); i++)
-		{
-			Elements[i]->SortedPosition = i;
-		}
-	}
-
-	//DEBUG
-	void SetElementCurrentPosition()
-	{
-		for (int i = 0; i < Elements.size(); i++)
-		{
-			Elements[i]->CurrentPosition = i;
-		}
-	}
-
-	//void SwapPairClear()
-	//{
-	//	for (auto pair : SwapPair)
-	//	{
-	//		delete pair;
-	//	}
-
-	//	SwapPair.clear();
-	//}
-
-	//void SelectSingleClear()
-	//{
-	//	for (auto single : SelectSingle)
-	//	{
-	//		delete single;
-	//	}
-
-	//	SelectSingle.clear();
-	//}
 
 	void SetElementsColor(glm::vec4 color)
 	{
@@ -135,5 +83,24 @@ public:
 			transform->SetLocalPosition(glm::vec2((float)i / 10.0f , 0.0f));
 		}
 	}
+
+	//DEBUG
+	void SetElementSortedPosition()
+	{
+		for (int i = 0; i < Elements.size(); i++)
+		{
+			Elements[i]->SortedPosition = i;
+		}
+	}
+
+	//DEBUG
+	void SetElementCurrentPosition()
+	{
+		for (int i = 0; i < Elements.size(); i++)
+		{
+			Elements[i]->CurrentPosition = i;
+		}
+	}
+
 
 };
