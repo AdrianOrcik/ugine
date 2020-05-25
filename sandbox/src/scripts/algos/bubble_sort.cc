@@ -10,6 +10,7 @@ void BubbleSort::Sort()
 {
 	OnSimulationStart();
 
+	//TODO: make as default settings
 	index_ = 0;
 	arrayIndex = 0;
 
@@ -21,9 +22,9 @@ void BubbleSort::Sort()
 		{
 			if (Elements[j]->Value > Elements[j + 1]->Value)
 			{
-				AddStep(StepData(j, j + 1), BubbleStepType::S_BeforeSwap);
-				AddStep(StepData(j, j + 1), BubbleStepType::S_Swap);
-				AddStep(StepData(), BubbleStepType::S_AfterSwap);
+				AddStep(StepData(j, j + 1), BubbleStep::Type::BeforeSwap);
+				AddStep(StepData(j, j + 1), BubbleStep::Type::Swap);
+				AddStep(StepData(), BubbleStep::Type::AfterSwap);
 
 				SortingElement* tmp = Elements[j];
 				Elements[j] = Elements[j + 1];
@@ -32,7 +33,7 @@ void BubbleSort::Sort()
 			}
 			else 
 			{
-				AddStep(StepData(j, j + 1), BubbleStepType::S_Select);
+				AddStep(StepData(j, j + 1), BubbleStep::Type::Select);
 			}
 		}
 	}
@@ -46,7 +47,6 @@ void BubbleSort::Run()
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
-		LOG_ERROR("Done!");
 		return;
 	}
 
@@ -55,7 +55,7 @@ void BubbleSort::Run()
 	index_++;
 }
 
-void BubbleSort::AddStep(StepData data, BubbleStepType stepType)
+void BubbleSort::AddStep(StepData data, BubbleStep::Type stepType)
 {
 	simulationSteps_.push_back(BubbleStep(this, data, stepType));
 }

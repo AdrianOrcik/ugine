@@ -5,28 +5,30 @@
 #include "../simulation/simulation_step.h"
 #include "../routines/swap_routine.h"
 
-enum BubbleStepType
-{
-	S_Select,
-	S_BeforeSwap,
-	S_Swap,
-	S_AfterSwap
-};
+
 
 class BubbleStep : public SimulationStep
 {
 public:
-	BubbleStep(SortingAlgo* algo, StepData data, BubbleStepType stepType);
+	enum Type
+	{
+		Select,
+		BeforeSwap,
+		Swap,
+		AfterSwap
+	};
+
+	BubbleStep(SortingAlgo* algo, StepData data, BubbleStep::Type stepType);
 	~BubbleStep();
 
 	// Inherited via SimulationStep
 	virtual void Execute() override;
 
 private:
-	BubbleStepType stepType_;
+	Type stepType_;
 
-	void ElementSelect();
-	void BeforeSwap();
-	void Swap();
-	void AfterSwap();
+	void OnSelect();
+	void OnBeforeSwap();
+	void OnSwap();
+	void OnAfterSwap();
 };

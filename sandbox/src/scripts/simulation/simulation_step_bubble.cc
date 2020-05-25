@@ -1,6 +1,6 @@
 #include "simulation_step_bubble.h"
 
-BubbleStep::BubbleStep(SortingAlgo * algo, StepData data, BubbleStepType stepType)
+BubbleStep::BubbleStep(SortingAlgo * algo, StepData data, BubbleStep::Type stepType)
 {
 	sortingAlgo_ = algo;
 	data_ = data;
@@ -15,22 +15,22 @@ void BubbleStep::Execute()
 {
 	switch (stepType_)
 	{
-	case BubbleStepType::S_Select:
-		ElementSelect();
+	case Type::Select:
+		OnSelect();
 		break;
-	case BubbleStepType::S_BeforeSwap:
-		BeforeSwap();
+	case Type::BeforeSwap:
+		OnBeforeSwap();
 		break;
-	case BubbleStepType::S_Swap:
-		Swap();
+	case Type::Swap:
+		OnSwap();
 		break;
-	case BubbleStepType::S_AfterSwap:
-		AfterSwap();
+	case Type::AfterSwap:
+		OnAfterSwap();
 		break;
 	}
 }
 
-void BubbleStep::ElementSelect()
+void BubbleStep::OnSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
@@ -42,12 +42,12 @@ void BubbleStep::ElementSelect()
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
 
-void BubbleStep::BeforeSwap()
+void BubbleStep::OnBeforeSwap()
 {
-	ElementSelect();
+	OnSelect();
 }
 
-void BubbleStep::Swap()
+void BubbleStep::OnSwap()
 {
 	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data_.positionA, data_.positionB,
 		sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex], 10.0f);
@@ -60,7 +60,7 @@ void BubbleStep::Swap()
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)swapRoutine);
 }
 
-void BubbleStep::AfterSwap()
+void BubbleStep::OnAfterSwap()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());

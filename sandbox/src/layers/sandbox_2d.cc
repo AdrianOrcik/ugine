@@ -57,8 +57,8 @@ void Sandbox2D::OnAttach()
 	cameraController_.SetZoomLevel(1.0f);
 	GeneratePooledElements();
 
-	LOG_INFO("gameObjects_ Count: {0}", gameObjects_.size());
-	LOG_INFO("elements_ Count: {0}", elements_.size());
+	//LOG_INFO("gameObjects_ Count: {0}", gameObjects_.size());
+	//LOG_INFO("elements_ Count: {0}", elements_.size());
 }
 
 void Sandbox2D::OnDetach()
@@ -138,6 +138,7 @@ void Sandbox2D::OnImGuiRender()
 
 void Sandbox2D::GUI_GenerateElements()
 {
+	//TODO: implement camera behaviour
 	if (elementCount_ <= 10)
 	{
 		cameraController_.SetCameraPosition({ 0.0f, 1.0f,0.0f });
@@ -157,7 +158,6 @@ void Sandbox2D::GUI_GenerateElements()
 	GeneratePooledElements();
 }
 
-
 void Sandbox2D::OnEvent(Ugine::Event & e)
 {
 	cameraController_.OnEvent(e);
@@ -166,6 +166,7 @@ void Sandbox2D::OnEvent(Ugine::Event & e)
 void Sandbox2D::SetObject(Ugine::Entity* entity, int spawnPosition, int generatedValue)
 {
 	entity->SetActive(true);
+
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)entity->GetComponent<Ugine::TransformComponent>();
 	transform->SetLocalPosition(glm::vec2((float)spawnPosition / 10.0f, 0.0f));
@@ -203,15 +204,7 @@ void Sandbox2D::GeneratePooledElements()
 	for (int i = 0; i < elementCount_; i++)
 	{
 		int generatedValue = rand() % elementCount_ * 2 + 1; // arr[i]
-		//int spawnPosition = i - (elementCount_ / 2.0f);
 		SetObject(pooler->GetPooledObj("entities"), i, generatedValue);
-	}
-
-	//update new elements for sort
-	for (auto e : elements_)
-	{
-		if (!e->owner->IsActive())
-			LOG_ERROR("Sandbox: DISABLED!");
 	}
 
 	sortingManager->SetElements(elements_);

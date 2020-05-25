@@ -13,20 +13,22 @@ class SortingAlgo
 {
 public:
 	virtual void Sort() = 0;
+	//TODO: make default settings during thesort begin 
 
 	std::vector<SortingElement*> Elements;
-	std::vector<SortingElement*>* ElementsPtr;
+	std::vector<SortingElement*>* ElementsPtr; //TODO: need it??
 	void SetElements(std::vector<SortingElement*> elements) { Elements = elements; }
 
-	int PairIndex = 0;
-	std::vector<SortingPairElement*> SwapPair;
-	bool HasMorePair() { return PairIndex < SwapPair.size(); }
-	
-	int SingleIndex = 0;
-	std::vector<SortingSingleElement*> SelectSingle;
+	//int PairIndex = 0;
+	//std::vector<SortingPairElement*> SwapPair;
+	//bool HasMorePair() { return PairIndex < SwapPair.size(); }
+	//
+	//int SingleIndex = 0;
+	//std::vector<SortingSingleElement*> SelectSingle;
+
 	//TODO: fix for selection sort
 	//SingleIndex < SelectSingle.size()
-	bool HasMoreSingle() { return PairIndex < SwapPair.size(); }
+	//bool HasMoreSingle() { return PairIndex < SwapPair.size(); }
 
 	std::function<void()> OnSimulationStart;
 	std::function<void()> OnSimulationDone;
@@ -34,8 +36,9 @@ public:
 
 	int index_ = 0;
 	int arrayIndex = 0;
-	std::vector< std::vector<SortingElement*> > StepArrays;
 
+	//todo: need both?
+	std::vector< std::vector<SortingElement*> > StepArrays;
 	std::vector< std::vector<SortingElement> > StepArraysCopy;
 
 	void AddStepArray(std::vector<SortingElement*> data)
@@ -63,10 +66,10 @@ public:
 		//SwapPair.push_back(DBG_NEW SortingPairElement(elementA->GetEntity(), elementB->GetEntity(), isSwaped));
 	}
 
-	void Select(SortingElement * element, bool isSelected, bool isLastElement)
-	{
-		SelectSingle.push_back(DBG_NEW SortingSingleElement(element->GetEntity(), isSelected, isLastElement));
-	}
+	//void Select(SortingElement * element, bool isSelected, bool isLastElement)
+	//{
+	//	SelectSingle.push_back(DBG_NEW SortingSingleElement(element->GetEntity(), isSelected, isLastElement));
+	//}
 
 	void SetElementSortedPosition()
 	{
@@ -84,25 +87,25 @@ public:
 		}
 	}
 
-	void SwapPairClear()
-	{
-		for (auto pair : SwapPair)
-		{
-			delete pair;
-		}
+	//void SwapPairClear()
+	//{
+	//	for (auto pair : SwapPair)
+	//	{
+	//		delete pair;
+	//	}
 
-		SwapPair.clear();
-	}
+	//	SwapPair.clear();
+	//}
 
-	void SelectSingleClear()
-	{
-		for (auto single : SelectSingle)
-		{
-			delete single;
-		}
+	//void SelectSingleClear()
+	//{
+	//	for (auto single : SelectSingle)
+	//	{
+	//		delete single;
+	//	}
 
-		SelectSingle.clear();
-	}
+	//	SelectSingle.clear();
+	//}
 
 	void SetElementsColor(glm::vec4 color)
 	{

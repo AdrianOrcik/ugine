@@ -19,6 +19,6 @@ public:
 private:
 	void Run();
 
-	void AddStep(StepData data, BubbleStepType stepType);
+	void AddStep(StepData data, BubbleStep::Type stepType);
 	std::vector<BubbleStep> simulationSteps_;
 };

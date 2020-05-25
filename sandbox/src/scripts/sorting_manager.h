@@ -93,6 +93,7 @@ public:
 
 	virtual void OnDeactive() override
 	{}
+
 private:
 	void SetStartRunning() {isRunning = true;}
 	void SetStopRunning() { StopSimulation(); }
@@ -100,7 +101,7 @@ private:
 private:
 	SortingAlgo* sortAlgorhitm_ = nullptr;
 	SortingType sortAlgorhitmType_ = SortingType::Unset;
+
 	std::vector<SortingElement*> Elements;
 	bool isRunning = false;
-
 };
