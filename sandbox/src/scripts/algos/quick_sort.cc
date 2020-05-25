@@ -11,8 +11,8 @@ Quicksort::~Quicksort()
 void Quicksort::Sort()
 {
 	//OnSimulationStart();
-	index_ = 0;
-	arrayIndex = 0;
+	StepIndex = 0;
+	ArrayIndex = 0;
 	//SetElementCurrentPosition();
 	//AddStepArray(Elements);
 
@@ -25,7 +25,7 @@ void Quicksort::Sort()
 
 void Quicksort::Run()
 {
-	if (index_ >= simulationSteps_.size())
+	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
@@ -33,9 +33,9 @@ void Quicksort::Run()
 		return;
 	}
 
-	simulationSteps_[index_].OnCompletedCallback = std::bind(&Quicksort::Run, this);
-	simulationSteps_[index_].Execute();
-	index_++;
+	simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&Quicksort::Run, this);
+	simulationSteps_[StepIndex].Execute();
+	StepIndex++;
 }
 
 void Quicksort::Quick( int left, int right)

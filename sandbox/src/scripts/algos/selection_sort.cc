@@ -14,10 +14,10 @@ void SelectionSort::Sort()
 
 	OnSimulationStart();
 
-	index_ = 0;
-	arrayIndex = 0;
+	//TODO: make as default settings
+	StepIndex = 0;
+	ArrayIndex = 0;
 
-	SetElementCurrentPosition();
 	AddStepArray(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
@@ -40,6 +40,7 @@ void SelectionSort::Sort()
 		AddStep(StepData(i, minIndex), SelectionStep::Type::BeforeSwap);
 		AddStep(StepData(i, minIndex), SelectionStep::Type::Swap);
 		
+		//TODO: add as swap function
 		SortingElement* tmp = Elements[i];
 		Elements[i] = Elements[minIndex];
 		Elements[minIndex] = tmp;
@@ -47,7 +48,6 @@ void SelectionSort::Sort()
 		AddStep(StepData(i, minIndex), SelectionStep::Type::AfterSwap);
 		AddStepArray(Elements);
 	}
-	SetElementSortedPosition();
 
 	Run();
 }
@@ -59,15 +59,15 @@ void SelectionSort::AddStep(StepData data, SelectionStep::Type stepType)
 
 void SelectionSort::Run()
 {
-	if (index_ >= simulationSteps_.size())
+	//TODO: make check function in base class
+	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
-		LOG_ERROR("Done!");
 		return;
 	}
 
-	simulationSteps_[index_].OnCompletedCallback = std::bind(&SelectionSort::Run, this);
-	simulationSteps_[index_].Execute();
-	index_++;
+	simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&SelectionSort::Run, this);
+	simulationSteps_[StepIndex].Execute();
+	StepIndex++;
 }

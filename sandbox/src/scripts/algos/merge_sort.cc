@@ -12,8 +12,8 @@ MergeSort::~MergeSort()
 
 void MergeSort::Sort()
 {
-	index_ = 0;
-	arrayIndex = 0;
+	StepIndex = 0;
+	ArrayIndex = 0;
 	OnSimulationStart();
 
 	AddStepArray(Elements);
@@ -25,7 +25,7 @@ void MergeSort::Sort()
 
 void MergeSort::Run()
 {
-	if (index_ >= simulationSteps_.size())
+	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
@@ -33,9 +33,9 @@ void MergeSort::Run()
 		return;
 	}
 
-	simulationSteps_[index_].OnCompletedCallback = std::bind(&MergeSort::Run, this);
-	simulationSteps_[index_].Execute();
-	index_++;
+	simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&MergeSort::Run, this);
+	simulationSteps_[StepIndex].Execute();
+	StepIndex++;
 }
 
 void MergeSort::Merge(int low, int high)

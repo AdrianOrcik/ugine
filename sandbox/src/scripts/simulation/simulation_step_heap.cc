@@ -33,8 +33,8 @@ void HeapStep::OnBeforeSwap()
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.5f);
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->arrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->arrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::Red());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->ArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->ArrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::Red());
 
 	waitfor->SetOnCompleted(std::bind(&HeapStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -44,12 +44,12 @@ void HeapStep::OnSwap()
 {
 	std::cout << "Swap" << std::endl;
 	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data_.positionA, data_.positionB,
-		sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex], 5.0f);
+		sortingAlgo_->StepArrays[sortingAlgo_->ArrayIndex], 5.0f);
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->arrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Purple());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->arrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::Purple());
-	sortingAlgo_->arrayIndex++;
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->ArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Purple());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->ArrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::Purple());
+	sortingAlgo_->ArrayIndex++;
 	swapRoutine->SetOnCompleted(std::bind(&HeapStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)swapRoutine);
 }

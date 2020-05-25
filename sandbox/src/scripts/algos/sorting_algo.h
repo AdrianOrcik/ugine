@@ -34,8 +34,8 @@ public:
 	std::function<void()> OnSimulationDone;
 	std::function<void()> OnSimulationInterrupt;
 
-	int index_ = 0;
-	int arrayIndex = 0;
+	int StepIndex = 0;
+	int ArrayIndex = 0;
 
 	//todo: need both?
 	std::vector< std::vector<SortingElement*> > StepArrays;
@@ -71,6 +71,7 @@ public:
 	//	SelectSingle.push_back(DBG_NEW SortingSingleElement(element->GetEntity(), isSelected, isLastElement));
 	//}
 
+	//DEBUG
 	void SetElementSortedPosition()
 	{
 		for (int i = 0; i < Elements.size(); i++)
@@ -79,6 +80,7 @@ public:
 		}
 	}
 
+	//DEBUG
 	void SetElementCurrentPosition()
 	{
 		for (int i = 0; i < Elements.size(); i++)

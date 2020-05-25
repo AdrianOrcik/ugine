@@ -65,7 +65,7 @@ void MergeStep::OnOverrideValue()
 	//need to setup which value where 
 	float value = ((float)(data_.positionB / 10.0f));
 	sortingAlgo_->StepArraysCopy[0][data_.positionA].GetTransform()->SetScale(glm::vec2(0.05f, value));
-	sortingAlgo_->arrayIndex++;
+	sortingAlgo_->ArrayIndex++;
 
 	waitfor->SetOnCompleted(std::bind(&MergeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);

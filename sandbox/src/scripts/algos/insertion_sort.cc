@@ -16,8 +16,8 @@ void InsertionSort::Sort()
 	//SelectSingleClear();
 	SetElementCurrentPosition();
 
-	index_ = 0;
-	arrayIndex = 0;
+	StepIndex = 0;
+	ArrayIndex = 0;
 
 	AddStepArray(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
@@ -67,7 +67,7 @@ void InsertionSort::AddStep(StepData data, InsertionStepType stepType)
 
 void InsertionSort::Run()
 {
-	if (index_ >= simulationSteps_.size())
+	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
@@ -75,7 +75,7 @@ void InsertionSort::Run()
 		return;
 	}
 
-	simulationSteps_[index_].OnCompletedCallback = std::bind(&InsertionSort::Run, this);
-	simulationSteps_[index_].Execute();
-	index_++;
+	simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&InsertionSort::Run, this);
+	simulationSteps_[StepIndex].Execute();
+	StepIndex++;
 }

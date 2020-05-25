@@ -11,10 +11,9 @@ void BubbleSort::Sort()
 	OnSimulationStart();
 
 	//TODO: make as default settings
-	index_ = 0;
-	arrayIndex = 0;
+	StepIndex = 0;
+	ArrayIndex = 0;
 
-	SetElementCurrentPosition();
 	AddStepArray(Elements);
 	for (int i = 0; i < Elements.size() - 1; i++)
 	{
@@ -43,16 +42,17 @@ void BubbleSort::Sort()
 
 void BubbleSort::Run()
 {
-	if (index_ >= simulationSteps_.size())
+	//TODO: make check function in base class
+	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
 		return;
 	}
 
-	simulationSteps_[index_].OnCompletedCallback = std::bind(&BubbleSort::Run, this);
-	simulationSteps_[index_].Execute();
-	index_++;
+	simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&BubbleSort::Run, this);
+	simulationSteps_[StepIndex].Execute();
+	StepIndex++;
 }
 
 void BubbleSort::AddStep(StepData data, BubbleStep::Type stepType)

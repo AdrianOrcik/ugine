@@ -32,7 +32,7 @@ void InsertionStep::PivotSelect()
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::Blue());
+	sortingAlgo_->StepArrays[sortingAlgo_->ArrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::Blue());
 
 	waitfor->SetOnCompleted(std::bind(&InsertionStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -42,7 +42,7 @@ void InsertionStep::ElementSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
 
-	sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::Red());
+	sortingAlgo_->StepArrays[sortingAlgo_->ArrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::Red());
 	waitfor->SetOnCompleted(std::bind(&InsertionStep::OnCompleted, this));
 
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -51,9 +51,9 @@ void InsertionStep::ElementSelect()
 void InsertionStep::Insertion()
 {
 	InsertRoutine* insertRoutine = DBG_NEW InsertRoutine(data_.positionA, data_.positionB, 
-		sortingAlgo_->StepArrays[sortingAlgo_->arrayIndex], 10.0f);
+		sortingAlgo_->StepArrays[sortingAlgo_->ArrayIndex], 10.0f);
 
-	sortingAlgo_->arrayIndex++;
+	sortingAlgo_->ArrayIndex++;
 	insertRoutine->SetOnCompleted(std::bind(&InsertionStep::OnCompleted, this));
 
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)insertRoutine);

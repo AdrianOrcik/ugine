@@ -11,8 +11,8 @@ HeapSort::~HeapSort()
 void HeapSort::Sort()
 {
 	//SetElementCurrentPosition();
-	index_ = 0;
-	arrayIndex = 0;
+	StepIndex = 0;
+	ArrayIndex = 0;
 	OnSimulationStart();
 	Heap(Elements.size());
 	//SetElementSortedPosition();
@@ -75,7 +75,7 @@ void HeapSort::Heapify(int n, int i)
 
 void HeapSort::Run()
 {
-	if (index_ >= simulationSteps_.size())
+	if (StepIndex >= simulationSteps_.size())
 	{
 		SetElementsColor(Ugine::Color::Yellow());
 		OnSimulationDone();
@@ -83,9 +83,9 @@ void HeapSort::Run()
 		return;
 	}
 
-	simulationSteps_[index_].OnCompletedCallback = std::bind(&HeapSort::Run, this);
-	simulationSteps_[index_].Execute();
-	index_++;
+	simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&HeapSort::Run, this);
+	simulationSteps_[StepIndex].Execute();
+	StepIndex++;
 }
 
 void HeapSort::AddStep(StepData data, HeapStep::Type stepType)
