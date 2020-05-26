@@ -70,5 +70,6 @@
     <ClCompile Include="src\scripts\simulation\simulation_step_heap.cc" />
     <ClCompile Include="src\scripts\algos\merge_sort.cc" />
     <ClCompile Include="src\scripts\simulation\simulation_step_merge.cc" />
+    <ClCompile Include="src\scripts\formulas.cc" />
   </ItemGroup>
 </Project>

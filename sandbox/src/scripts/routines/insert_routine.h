@@ -11,7 +11,6 @@ class TransformComponent;
 class InsertRoutine : public Ugine::IEnumerator<void>
 {
 public:
-
 	InsertRoutine(int originPosition, int insertPosition, std::vector<SortingElement*> Elements, float time);
 	~InsertRoutine();
 
@@ -26,7 +25,6 @@ private:
 	float GetInterpolation2(float a, float b, float t);
 
 private:
-
 	glm::vec2 origin;
 	glm::vec2 insert;
 	std::vector<std::pair<float, float>> positions;
@@ -40,5 +38,4 @@ private:
 	std::vector<SortingElement*> elements_;
 
 	std::function<void()> onCompleted = NULL;
-
 };

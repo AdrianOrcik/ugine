@@ -28,6 +28,6 @@ private:
 
 	std::vector<Ugine::Entity*> gameObjects_;
 	std::vector<SortingElement*> elements_;
-	int elementCount_ = 60;
-	float speed_ = 1;
+	int elementCount_ = 30;
+	float speed_ = 0.5f;
 };

@@ -49,7 +49,7 @@ void InsertRoutine::Next(float Timestep)
 			float x = GetInterpolation2(positions[positionIndex].first,positions[positionIndex].second, clampValue);
 			elements_[i]->GetTransform()->SetLocalX(x);
 			positionIndex++;
-		}		
+		}
 	}
 
 	float x = GetInterpolation2(origin.x,insert.x, clampValue);
