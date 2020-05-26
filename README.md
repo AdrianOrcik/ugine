@@ -6,7 +6,7 @@ Ugine is primarily an early-stage interactive application and rendering tiny lib
 
 :package: Getting Started
 ---------
-Visual Studio 2017 or 2019 is recommended, Hazel is officially untested on other development environments whilst we focus on a Windows build.
+Visual Studio 2017 or 2019 is recommended. <br>
 
 You can clone the repository to a local destination using git:
 git clone --recursive https://github.com/AdrianOrcik/ugine
