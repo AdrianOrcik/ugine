@@ -27,6 +27,7 @@ Make sure that you do a --recursive clone to fetch all of the submodules!
 * Window ImGUILayers
 * Build system
 * Reflection (rttr)
+* LUA as scriptable language
 
 :card_file_box: Resources
 ---------
