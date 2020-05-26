@@ -5,8 +5,6 @@
 #include "../simulation/simulation_step.h"
 #include "../routines/swap_routine.h"
 
-
-
 class BubbleStep : public SimulationStep
 {
 public:

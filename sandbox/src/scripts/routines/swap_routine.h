@@ -16,7 +16,7 @@ namespace Ugine
 	class SwapRoutine : public IEnumerator<void>
 	{
 	public:
-		SwapRoutine(int originPosition, int insertPosition, std::vector<SortingElement*> Elements, float speed);
+		SwapRoutine(int originPosition, int insertPosition, std::vector<SortingElement*> Elements, float time);
 		~SwapRoutine();
 		
 		void SetOnCompleted(std::function<void()>f){ onCompleted = f; }
@@ -41,8 +41,9 @@ namespace Ugine
 		int positionA_ = 0;
 		int positionB_ = 0;
 		std::vector<SortingElement*> elements_;
-		///speed is from 1 to infinity
-		float speed_ = 0;
+
+		float time_ = 0;
+		float frameTime_ = 0;
 		float currentTime_ = 0;
 
 		std::function<void()> onCompleted = NULL;

@@ -32,7 +32,7 @@ void MergeStep::Execute()
 
 void MergeStep::OnSelectRange()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.1f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
@@ -44,7 +44,7 @@ void MergeStep::OnSelectRange()
 
 void MergeStep::OnBeforeOverride()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.1f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::Green());
 
@@ -54,7 +54,7 @@ void MergeStep::OnBeforeOverride()
 
 void MergeStep::OnOverrideValue()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.1f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	float value = ((float)(data_.positionB / 10.0f));
 	sortingAlgo_->ElementsCopy[data_.positionA].GetTransform()->SetScaleY(value);
@@ -66,7 +66,7 @@ void MergeStep::OnOverrideValue()
 
 void MergeStep::OnAfterOverride()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.1f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::White());
 

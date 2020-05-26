@@ -83,6 +83,9 @@ void Sandbox2D::OnImGuiRender()
 	{
 		int tmpCount = elementCount_;
 		ImGui::SliderInt("Count", &elementCount_, 4, 60);
+		//ImGui::SliderFloat("Speed", &speed_, 0.1f, 1.0f);
+		//Formulas::SetSortSpeed(speed_);
+	
 		if (tmpCount != elementCount_)
 		{
 			GeneratePooledElements();

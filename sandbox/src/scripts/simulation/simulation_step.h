@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../algos/sorting_algo.h"
+#include "../formulas.h"
 #include <functional>
 
 struct StepData

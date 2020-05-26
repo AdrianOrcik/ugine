@@ -1,7 +1,7 @@
 #include "insert_routine.h"
 
-InsertRoutine::InsertRoutine(int insertPosition, int originPosition, std::vector<SortingElement*> Elements, float speed)
-	: originPosition_(originPosition), insertPosition_(insertPosition), elements_(Elements), speed_(speed)
+InsertRoutine::InsertRoutine(int insertPosition, int originPosition, std::vector<SortingElement*> Elements, float time)
+	: originPosition_(originPosition), insertPosition_(insertPosition), elements_(Elements), time_(time)
 {
 	origin = elements_[originPosition_]->GetTransform()->GetLocalPosition();
 	insert = elements_[insertPosition_]->GetTransform()->GetLocalPosition();
@@ -35,23 +35,24 @@ bool InsertRoutine::HasMore()
 
 void InsertRoutine::Next(float Timestep)
 {
-	currentTime_ += Timestep * speed_;
+	frameTime_ += Timestep;
+	
+	//NOTE: calculation of duration into range 0 - 1 for interpolation 
+	currentTime_ = (frameTime_ / time_);
+	float clampValue = currentTime_ > 1.0f ? 1.0f : currentTime_;
 
-	//todo: (math) define as maximum and minimum
-	float value = currentTime_ > 1.0f ? 1.0f : currentTime_;
-	LOG_INFO("Value: {0}", value);
 	int positionIndex = 0;
 	for (int i = insertPosition_; i < elements_.size(); i++)
 	{
 		if(positionIndex <= positions.size()-1)
 		{
-			float x = GetInterpolation2(positions[positionIndex].first,positions[positionIndex].second, value);
+			float x = GetInterpolation2(positions[positionIndex].first,positions[positionIndex].second, clampValue);
 			elements_[i]->GetTransform()->SetLocalX(x);
 			positionIndex++;
 		}		
 	}
 
-	float x = GetInterpolation2(origin.x,insert.x, value);
+	float x = GetInterpolation2(origin.x,insert.x, clampValue);
 	elements_[originPosition_]->GetTransform()->SetLocalX(x);
 }
 

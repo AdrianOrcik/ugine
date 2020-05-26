@@ -35,7 +35,7 @@ void SelectionStep::Execute()
 
 void SelectionStep::OnSelectPivot()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
@@ -46,7 +46,7 @@ void SelectionStep::OnSelectPivot()
 
 void SelectionStep::OnSelect()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
@@ -58,7 +58,7 @@ void SelectionStep::OnSelect()
 
 void SelectionStep::OnBeforeSwap()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
@@ -71,7 +71,7 @@ void SelectionStep::OnBeforeSwap()
 void SelectionStep::OnSwap()
 {
 	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data_.positionA, data_.positionB,
-		sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex], 10.0f);
+		sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex], Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Purple());
@@ -84,7 +84,7 @@ void SelectionStep::OnSwap()
 
 void SelectionStep::OnAfterSwap()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.2f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
 	sortingAlgo_->SetElementsColor(Ugine::Color::White());
 	

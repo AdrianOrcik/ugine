@@ -1,6 +1,7 @@
 #pragma once
 #include "ugine.h"
 #include "../scripts/sorting_element.h"
+#include "../scripts/formulas.h"
 
 class SortingElement;
 class Sandbox2D : public Ugine::Layer
@@ -22,10 +23,11 @@ private:
 
 public:
 	Ugine::OrthographicCameraController cameraController_;
-	static bool OnNext;
+	int GetElementCount() { return elementCount_; };
 private:
 
 	std::vector<Ugine::Entity*> gameObjects_;
 	std::vector<SortingElement*> elements_;
 	int elementCount_ = 60;
+	float speed_ = 1;
 };

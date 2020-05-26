@@ -100,6 +100,7 @@
     <ClInclude Include="src\scripts\algos\quick_sort.h" />
     <ClInclude Include="src\scripts\algos\selection_sort.h" />
     <ClInclude Include="src\scripts\algos\sorting_algo.h" />
+    <ClInclude Include="src\scripts\formulas.h" />
     <ClInclude Include="src\scripts\routines\insert_routine.h" />
     <ClInclude Include="src\scripts\routines\swap_routine.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step.h" />

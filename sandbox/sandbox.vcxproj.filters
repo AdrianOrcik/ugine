@@ -44,6 +44,7 @@
     <ClInclude Include="src\scripts\simulation\simulation_step_heap.h" />
     <ClInclude Include="src\scripts\algos\merge_sort.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step_merge.h" />
+    <ClInclude Include="src\scripts\formulas.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\example_layer.cc">

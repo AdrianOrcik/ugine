@@ -12,7 +12,7 @@ class InsertRoutine : public Ugine::IEnumerator<void>
 {
 public:
 
-	InsertRoutine(int originPosition, int insertPosition, std::vector<SortingElement*> Elements, float speed);
+	InsertRoutine(int originPosition, int insertPosition, std::vector<SortingElement*> Elements, float time);
 	~InsertRoutine();
 
 	void SetOnCompleted(std::function<void()>f) { onCompleted = f; }
@@ -31,8 +31,8 @@ private:
 	glm::vec2 insert;
 	std::vector<std::pair<float, float>> positions;
 
-	///speed is from 1 to infinity
-	float speed_ = 0;
+	float time_ = 0;
+	float frameTime_ = 0;
 	float currentTime_ = 0;
 
 	int originPosition_ = 0;
