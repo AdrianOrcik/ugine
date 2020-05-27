@@ -12,64 +12,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\layers\example_layer.h">
-      <Filter>layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\layers\sandbox_2d.h">
-      <Filter>layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scripts\algos\bubble_sort.h">
-      <Filter>scripts\algos</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scripts\algos\sorting_algo.h">
-      <Filter>scripts\algos</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scripts\sorting_element.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scripts\sorting_manager.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scripts\algos\selection_sort.h" />
-    <ClInclude Include="src\scripts\algos\insertion_sort.h" />
-    <ClInclude Include="src\scripts\routines\swap_routine.h" />
-    <ClInclude Include="src\scripts\routines\insert_routine.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step_insertion.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step_bubble.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step_selection.h" />
-    <ClInclude Include="src\scripts\algos\quick_sort.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step_quick.h" />
-    <ClInclude Include="src\scripts\algos\heap_sort.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step_heap.h" />
-    <ClInclude Include="src\scripts\algos\merge_sort.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step_merge.h" />
-    <ClInclude Include="src\scripts\formulas.h" />
+    <ClInclude Include="src\layers\pathfind_2d.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\layers\example_layer.cc">
-      <Filter>layers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\layers\sandbox_2d.cc">
-      <Filter>layers</Filter>
-    </ClCompile>
     <ClCompile Include="src\sandbox_app.cc" />
-    <ClCompile Include="src\scripts\algos\bubble_sort.cc">
-      <Filter>scripts\algos</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scripts\algos\selection_sort.cc" />
-    <ClCompile Include="src\scripts\algos\insertion_sort.cc" />
-    <ClCompile Include="src\scripts\routines\swap_routine.cc" />
-    <ClCompile Include="src\scripts\routines\insert_routine.cpp" />
-    <ClCompile Include="src\scripts\simulation\simulation_step_insertion.cc" />
-    <ClCompile Include="src\scripts\simulation\simulation_step_bubble.cc" />
-    <ClCompile Include="src\scripts\simulation\simulation_step_selection.cc" />
-    <ClCompile Include="src\scripts\algos\quick_sort.cc" />
-    <ClCompile Include="src\scripts\simulation\simulation_step_quick.cc" />
-    <ClCompile Include="src\scripts\algos\heap_sort.cc" />
-    <ClCompile Include="src\scripts\simulation\simulation_step_heap.cc" />
-    <ClCompile Include="src\scripts\algos\merge_sort.cc" />
-    <ClCompile Include="src\scripts\simulation\simulation_step_merge.cc" />
-    <ClCompile Include="src\scripts\formulas.cc" />
+    <ClCompile Include="src\layers\pathfind_2d.cc" />
   </ItemGroup>
 </Project>
