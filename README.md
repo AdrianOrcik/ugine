@@ -7,10 +7,9 @@ Ugine is primarily an early-stage interactive application and rendering tiny lib
 :package: Getting Started
 ---------
 Visual Studio 2017 or 2019 is recommended. <br>
-
-You can clone the repository to a local destination using git:
+```python
 git clone --recursive https://github.com/AdrianOrcik/ugine
-Make sure that you do a --recursive clone to fetch all of the submodules!
+```
 
 :page_facing_up: Feature List
 ---------
