@@ -14,7 +14,7 @@ namespace Ugine
 		//static glm::vec4 Yellow() { return { 0.9f, 1.0f, 0.2f, 1.0f }; }
 		//static glm::vec4 Purple() { return { 1.0f, 0.121f, 0.917f, 1.0f }; }
 
-		static glm::vec4 Background() { return { 0.192f,0.223f,0.235f, 1.0f };}
+		static glm::vec4 Background() { return { 0.090f, 0.215f, 0.325f, 1.0f };}
 		static glm::vec4 DefaultElement() { return { 0.2f,0.631f,0.992f, 1.0f }; }
 		static glm::vec4 SelectElement() { return { 0.239f,0.980f,1.0f, 1.0f }; }
 		static glm::vec4 MoveElement() { return { 0.992f,0.792f,0.250f, 1.0f }; }
