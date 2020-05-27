@@ -71,7 +71,7 @@ void Sandbox2D::OnUpdate(Ugine::Timestep ts)
 	cameraController_.OnUpdate(ts);
 
 	// render
-	Ugine::RenderCommand::SetClearColor({ 0.1f,0.1f,0.1f,1 });
+	Ugine::RenderCommand::SetClearColor(Ugine::Color::Background());
 	Ugine::RenderCommand::Clear();
 }
 
@@ -168,7 +168,7 @@ void Sandbox2D::SetObject(Ugine::Entity* entity, int positionIndex, int generate
 
 	Ugine::RendererComponent* renderer =
 		(Ugine::RendererComponent*)entity->GetComponent<Ugine::RendererComponent>();
-	renderer->SetColor(Ugine::Color::White());
+	renderer->SetColor(Ugine::Color::DefaultElement());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
 	SortingElement* element;

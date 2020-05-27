@@ -31,8 +31,8 @@ void InsertionStep::OnPivotSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::Blue());
+	sortingAlgo_->SetElementsColor(Ugine::Color::DefaultElement());
+	sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::SelectElement());
 
 	waitfor->SetOnCompleted(std::bind(&InsertionStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -42,7 +42,7 @@ void InsertionStep::OnElementSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::Red());
+	sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex][data_.positionA]->GetRenderer()->SetColor(Ugine::Color::MoveElement());
 	waitfor->SetOnCompleted(std::bind(&InsertionStep::OnCompleted, this));
 
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);

@@ -34,9 +34,9 @@ void BubbleStep::OnSelect()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Blue());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::Blue());
+	sortingAlgo_->SetElementsColor(Ugine::Color::DefaultElement());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::SelectElement());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::SelectElement());
 
 	waitfor->SetOnCompleted(std::bind(&BubbleStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -52,9 +52,9 @@ void BubbleStep::OnSwap()
 	Ugine::SwapRoutine* swapRoutine = DBG_NEW Ugine::SwapRoutine(data_.positionA, data_.positionB,
 		sortingAlgo_->StepArrays[sortingAlgo_->StepArrayIndex], Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
-	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::Red());
+	sortingAlgo_->SetElementsColor(Ugine::Color::DefaultElement());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionA].GetRenderer()->SetColor(Ugine::Color::MoveElement());
+	sortingAlgo_->StepArraysCopy[sortingAlgo_->StepArrayIndex][data_.positionB].GetRenderer()->SetColor(Ugine::Color::MoveElement());
 	sortingAlgo_->StepArrayIndex++;
 	swapRoutine->SetOnCompleted(std::bind(&BubbleStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)swapRoutine);
@@ -63,7 +63,7 @@ void BubbleStep::OnSwap()
 void BubbleStep::OnAfterSwap()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
-	sortingAlgo_->SetElementsColor(Ugine::Color::White());
+	sortingAlgo_->SetElementsColor(Ugine::Color::DefaultElement());
 	waitfor->SetOnCompleted(std::bind(&BubbleStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }

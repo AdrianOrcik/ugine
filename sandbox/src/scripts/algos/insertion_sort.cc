@@ -52,7 +52,7 @@ void InsertionSort::Run()
 {
 	if (StepIndex >= simulationSteps_.size())
 	{
-		SetElementsColor(Ugine::Color::Yellow());
+		SetElementsColor(Ugine::Color::SortedElement());
 		OnSimulationDone();
 		return;
 	}

@@ -34,9 +34,9 @@ void MergeStep::OnSelectRange()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->SetElementsColor(Ugine::Color::White());
-	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::Red());
-	sortingAlgo_->ElementsCopy[data_.positionB].GetRenderer()->SetColor(Ugine::Color::Red());
+	sortingAlgo_->SetElementsColor(Ugine::Color::DefaultElement());
+	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::MoveElement());
+	sortingAlgo_->ElementsCopy[data_.positionB].GetRenderer()->SetColor(Ugine::Color::MoveElement());
 
 	waitfor->SetOnCompleted(std::bind(&MergeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -46,7 +46,7 @@ void MergeStep::OnBeforeOverride()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::Green());
+	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::SelectRange());
 
 	waitfor->SetOnCompleted(std::bind(&MergeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
@@ -68,7 +68,7 @@ void MergeStep::OnAfterOverride()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(Formulas::GetRoutineWaitTime());
 
-	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::White());
+	sortingAlgo_->ElementsCopy[data_.positionA].GetRenderer()->SetColor(Ugine::Color::DefaultElement());
 
 	waitfor->SetOnCompleted(std::bind(&MergeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
