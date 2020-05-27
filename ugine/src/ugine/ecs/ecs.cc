@@ -7,8 +7,6 @@ namespace Ugine
 	EntityManager* ECS::entityManager_ = DBG_NEW EntityManager();
 	Entity* ECS::CreateEntity(const std::string name)
 	{
-		//TODO: memory leak
-		LOG_INFO("Entity - Create entity obj");
 		Entity* entity = DBG_NEW Ugine::Entity(name);
 		entityManager_->AddEntity(entity);
 		return entity;
@@ -16,8 +14,6 @@ namespace Ugine
 
 	Entity* ECS::CreateCopy(Entity& entity)
 	{
-		//TODO: memory leak?
-		LOG_INFO("Entity - Create copy");
 		Entity* copiedEntity = DBG_NEW Ugine::Entity(entity);
 		entityManager_->AddEntity(copiedEntity);
 		return copiedEntity;
@@ -25,8 +21,6 @@ namespace Ugine
 
 	Entity * ECS::CreatePrefab(const std::string name)
 	{
-		//TODO: memory leak?
-		LOG_INFO("Entity - Create prefab obj");
 		Entity* entity = DBG_NEW Ugine::Entity(name);
 		return entity;
 	}

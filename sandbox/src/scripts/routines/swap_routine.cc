@@ -12,9 +12,9 @@ namespace Ugine
 		startValueB_ = elements_[positionB_]->GetTransform()->GetLocalPosition();
 		endValueB_ = elements_[positionA_]->GetTransform()->GetLocalPosition();
 	}
+
 	SwapRoutine::~SwapRoutine()
 	{
-		LOG_INFO("Routine Delete");
 	}
 
 	//todo: define as utility (math)

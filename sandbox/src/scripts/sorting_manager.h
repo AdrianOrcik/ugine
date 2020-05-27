@@ -30,7 +30,6 @@ public:
 
 	~SortingManager()
 	{
-		LOG_INFO("Delete SortingManager - ScriptComponent");
 		StopSimulation();
 	}
 

@@ -33,7 +33,6 @@ namespace Ugine
 
 		~TransformComponent()
 		{
-			LOG_INFO("Delete Transform");
 		}
 
 		void SetLocalX(float x) { position_.x = x; }

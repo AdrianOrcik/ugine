@@ -15,7 +15,6 @@ InsertRoutine::InsertRoutine(int insertPosition, int originPosition, std::vector
 
 InsertRoutine::~InsertRoutine()
 {
-	LOG_INFO("Routine Delete");
 }
 
 //todo: define as utility (math)

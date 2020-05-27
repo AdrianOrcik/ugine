@@ -35,7 +35,6 @@ namespace Ugine
 		~RendererComponent() {
 			delete rendererStaticData_;
 			delete rendererDynamicData_;
-			LOG_INFO("Delete RendererComponent");
 		}
 
 		void SetPrimitive(PrimitiveType type) 

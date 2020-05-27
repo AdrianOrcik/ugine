@@ -27,7 +27,6 @@ namespace Ugine
 
 	void Movement::Next(float Timestep)
 	{
-		LOG_INFO("Next");
 		float x = GetInterpolation2(startValue_.x, endValue_.x, (float)currentTime_);
 		transform_->SetLocalX(x);
 		currentTime_ += Timestep * 1.0f;

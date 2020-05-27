@@ -48,8 +48,6 @@ public:
 
 		ccrBegin(foo);
 		for (foo->i = 0; foo->i < 5; foo->i++) {
-			//std::cout << foo->i << std::endl;
-			LOG_INFO("Routine: {0}", foo->i);
 			ccrReturnV;
 		}
 		ccrFinishV;
