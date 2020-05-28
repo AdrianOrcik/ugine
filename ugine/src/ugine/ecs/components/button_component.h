@@ -30,8 +30,8 @@ namespace Ugine
 		}
 		virtual void Update(float Timestep) override
 		{
-			OnHoverTrigger();
-			OnClickTrigger();
+			//OnHoverTrigger();
+			//OnClickTrigger();
 		}
 
 		virtual void OnActive() override
@@ -75,8 +75,8 @@ namespace Ugine
 			float unit = 360.0f;
 			float halfUnit = 180.0f;
 
-			glm::vec2 unitArea = glm::vec2(transformComponent_->GetScale().x * halfUnit, transformComponent_->GetScale().x * halfUnit);
-			glm::vec2 totalArea = unitArea + transformComponent_->GetLocalPosition();
+			glm::vec2 unitArea = glm::vec2(transformComponent_->GetScale().x * halfUnit, transformComponent_->GetScale().y * halfUnit);
+			glm::vec2 totalArea = unitArea + (transformComponent_->GetLocalPosition() * 10.0f);
 
 			//LOG_INFO("Height: {0}",Input::GetWindowHeight());
 			//LOG_INFO("Width: {0}", Input::GetWindowWidth());
@@ -85,14 +85,14 @@ namespace Ugine
 			//int height = Application::Get().GetWindow().GetHeight();
 
 			std::pair<float, float> mousePosition = Input::GetMousePosition();
-			float xPosition = mousePosition.first - (Input::GetWindowWidth() / 2);
-			float yPosition = ((mousePosition.second - (Input::GetWindowHeight() / 2)) + unitArea.y) * -1;
+			//float xPosition = mousePosition.first - (Input::GetWindowWidth() / 2);
+			//float yPosition = (mousePosition.second - (Input::GetWindowHeight() / 2)) - (unitArea.y * transformComponent_->GetLocalPosition().y);
 
 			float objectPositionX = transformComponent_->GetLocalPosition().x * unit + (Input::GetWindowWidth() / 2);
 			float objectPositionY = transformComponent_->GetLocalPosition().y * unit + (Input::GetWindowHeight() / 2);
 
 			float DistanceX = objectPositionX - mousePosition.first;
-			float DistanceY = objectPositionY - (mousePosition.second + totalArea.y);
+			float DistanceY = objectPositionY - mousePosition.second;// -totalArea.y - (totalArea.y * (transformComponent_->GetLocalPosition().y * 10.0f * 4));
 
 			if (abs(DistanceX) <  totalArea.x && abs(DistanceY) < totalArea.y)
 			{
@@ -112,7 +112,6 @@ namespace Ugine
 			//LOG_INFO("RawPosition: [{0}, {1}]", mousePosition.first, mousePosition.second);
 			//LOG_INFO("Position: [{0}, {1}]", xPosition, yPosition);
 			//LOG_INFO("{0} - WindowPositon: [{1}, {2}]",owner->GetName(), objectPositionX, objectPositionY);
-			//LOG_INFO("Distance [{0}, {1}]", DistanceX, DistanceY);
 
 			//int height = Application::s
 			//int height = (int)WindowsWindow::GetHeight();

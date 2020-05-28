@@ -2,7 +2,7 @@
 #include "imgui/imgui.h"
 
 Pathfind_2d::Pathfind_2d()
-	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, true, true, true)
+	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, true, false, false)
 {
 }
 
@@ -10,56 +10,60 @@ Pathfind_2d::~Pathfind_2d()
 {
 }
 
-Ugine::Entity* box;
-Ugine::Entity* box2;
 void Pathfind_2d::OnAttach()
 {
-	box = Ugine::ECS::CreateEntity("Box");
+	cameraController_.SetCameraPosition(glm::vec3(-0.5f, -0.4f, 0.0f));
+	GridGenerator();
+}
+
+void Pathfind_2d::ClickTest()
+{
+	LOG_INFO("External Click");
+}
+
+void Pathfind_2d::GridGenerator()
+{
+	//int index = 0;
+	//whole grid 35x20
+	int gridX = 5;
+	int gridY = 5;
+	//for (int i = 0; i < gridX; i++)
+	//{
+	//	for (int j = 0; j < gridY; j++)
+	//	{
+	//		BoxGenerator(0, glm::vec2((float)((i - (gridX / 2.0f))), (float)((j - (gridY / 2.0f)))));
+	//		//index++;
+	//	}
+	//}
+
+	BoxGenerator(0, glm::vec2((float)(5), (float)(5)));
+	//BoxGenerator(0, glm::vec2((float)(0.1f), (float)(0.1f)));
+	//BoxGenerator(0, glm::vec2((float)(0 / 10.0f), (float)(1 / 10.0f)));
+	//BoxGenerator(0, glm::vec2((float)(1 / 10.0f), (float)(1 / 10.0f)));
+}
+
+void Pathfind_2d::BoxGenerator(int index, glm::vec2 position)
+{
+	Ugine::Entity* box = Ugine::ECS::CreateEntity("Box_" + index);
 	box->AddComponent<Ugine::TransformComponent>();
 	box->AddComponent<Ugine::RendererComponent>();
 	box->AddComponent<Ugine::ButtonComponent>();
 
-	Ugine::TransformComponent* transform = 
+	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)box->GetComponent<Ugine::TransformComponent>();
-	transform->SetLocalPosition(glm::vec2(0.0f, 0.0f));
-	transform->SetOffsetPosition(glm::vec2(0.0f, 0.0f));
-	transform->SetScale(glm::vec2(0.1f, 0.1f));
+	transform->SetLocalPosition(position);
+	//transform->SetOffsetPosition(glm::vec2(0.0f, 0.0f));
+	transform->SetScale(glm::vec2(0.9f, 0.9f));
 
 	Ugine::RendererComponent* renderer =
 		(Ugine::RendererComponent*)box->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::White());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
-	Ugine::ButtonComponent* button = 
+	Ugine::ButtonComponent* button =
 		(Ugine::ButtonComponent*)box->GetComponent<Ugine::ButtonComponent>();
 	button->OnClickCallback.push_back(std::bind(&Pathfind_2d::ClickTest, this));
 	box->SetActive(true);
-
-	box2 = Ugine::ECS::CreateEntity("Box2");
-	box2->AddComponent<Ugine::TransformComponent>();
-	box2->AddComponent<Ugine::RendererComponent>();
-	box2->AddComponent<Ugine::ButtonComponent>();
-
-	Ugine::TransformComponent* transform2 =
-		(Ugine::TransformComponent*)box2->GetComponent<Ugine::TransformComponent>();
-	transform2->SetLocalPosition(glm::vec2(1.0f, 0.0f));
-	transform2->SetOffsetPosition(glm::vec2(0.0f, 0.0f));
-	transform2->SetScale(glm::vec2(0.1f, 0.1f));
-
-	Ugine::RendererComponent* renderer2 =
-		(Ugine::RendererComponent*)box2->GetComponent<Ugine::RendererComponent>();
-	renderer2->SetColor(Ugine::Color::White());
-	renderer2->SetCamera(&cameraController_.GetCamera());
-
-	Ugine::ButtonComponent* button2 =
-		(Ugine::ButtonComponent*)box2->GetComponent<Ugine::ButtonComponent>();
-	button2->OnClickCallback.push_back(std::bind(&Pathfind_2d::ClickTest, this));
-	box2->SetActive(true);
-}
-
-void Pathfind_2d::ClickTest()
-{
-	LOG_INFO("External Click");
 }
 
 
@@ -69,6 +73,8 @@ void Pathfind_2d::OnDetach()
 
 void Pathfind_2d::OnUpdate(Ugine::Timestep ts)
 {
+	//LOG_INFO("[{0},{1}]", cameraController_.GetCameraPosition().x, cameraController_.GetCameraPosition().y);
+
 	// camera update
 	cameraController_.OnUpdate(ts);
 

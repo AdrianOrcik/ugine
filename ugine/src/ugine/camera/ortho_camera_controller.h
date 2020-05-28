@@ -31,7 +31,7 @@ namespace Ugine {
 
 	private:
 		float aspectRatio_;
-		float zoomLevel_ = 1.0f;
+		float zoomLevel_ = 10.0f;
 		OrthographicCamera camera_;
 
 		bool isMovementEnabled_;

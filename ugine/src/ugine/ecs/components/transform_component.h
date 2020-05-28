@@ -38,14 +38,14 @@ namespace Ugine
 		void SetLocalX(float x) { position_.x = x; }
 		void SetLocalY(float y) { position_.y = y; }
 		void SetLocalPosition( glm::vec2 position) { position_ = position; }
-		void SetOffsetPosition(glm::vec2 positionOffset) { positionOffset_ = positionOffset; }
+		//void SetOffsetPosition(glm::vec2 positionOffset) { positionOffset_ = positionOffset; }
 		void SetRotation( glm::vec2 rotation) { rotation_ = rotation; }
 		void SetScale( glm::vec2 scale) { scale_ = scale; }
 		void SetScaleX(float scaleX) { scale_.x = scaleX; }
 		void SetScaleY(float scaleY) { scale_.y = scaleY; }
 
 		glm::vec2 GetLocalPosition() { return position_; }
-		glm::vec2 GetWorldPosition() { return (position_ + pivotOffset_ + positionOffset_); }
+		//glm::vec2 GetWorldPosition() { return (position_ + pivotOffset_ + positionOffset_); }
 		glm::vec2 GetRotation() { return rotation_; }
 		glm::vec2 GetScale() { return scale_; }
 		Movement* move;
@@ -56,7 +56,7 @@ namespace Ugine
 
 		virtual void Update(float Timestep) override
 		{
-			PivotCalculation();
+			//PivotCalculation();
 		}
 
 		virtual void OnActive() override

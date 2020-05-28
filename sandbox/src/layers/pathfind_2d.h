@@ -14,8 +14,10 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Ugine::Event& e) override;
 
+private:
 	void ClickTest();
-
+	void GridGenerator();
+	void BoxGenerator(int index, glm::vec2 position);
 public:
 	Ugine::OrthographicCameraController cameraController_;
 
