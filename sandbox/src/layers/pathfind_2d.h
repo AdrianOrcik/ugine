@@ -14,6 +14,8 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Ugine::Event& e) override;
 
+	void ClickTest();
+
 public:
 	Ugine::OrthographicCameraController cameraController_;
 

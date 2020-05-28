@@ -25,7 +25,6 @@ namespace Ugine
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
-
 	}
 
 	std::pair<float, float> Ugine::WindowsInput::GetMousePositionImpl()
@@ -52,6 +51,16 @@ namespace Ugine
 	bool WindowsInput::IsExitButtonPressedImpl()
 	{
 		return Input::IsKeyPressed(INPUT_KEY_ESCAPE);
+	}
+
+	int WindowsInput::GetWindowWidthImpl()
+	{
+		return Application::Get().GetWindow().GetWidth();
+	}
+
+	int WindowsInput::GetWindowHeightImpl()
+	{
+		return Application::Get().GetWindow().GetHeight();
 	}
 
 }

@@ -17,6 +17,8 @@ namespace Ugine
 		inline static std::pair<float, float> GetMousePosition() {return sInstance_->GetMousePositionImpl(); }
 		inline static float GetMouseX() { return sInstance_->GetMouseXImpl(); }
 		inline static float GetMouseY() { return sInstance_->GetMouseYImpl(); }
+		inline static int GetWindowWidth() { return sInstance_->GetWindowWidthImpl(); }
+		inline static int GetWindowHeight() { return sInstance_->GetWindowHeightImpl(); }
 
 	protected:
 		virtual bool IsKeyPressedImpl(int keycode) = 0;
@@ -25,6 +27,8 @@ namespace Ugine
 		virtual std::pair<float, float> GetMousePositionImpl() = 0;
 		virtual float GetMouseXImpl() = 0;
 		virtual float GetMouseYImpl() = 0;
+		virtual int GetWindowWidthImpl() = 0;
+		virtual int GetWindowHeightImpl() = 0;
 
 	private:
 		static Input* sInstance_;

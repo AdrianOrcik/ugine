@@ -57,6 +57,11 @@ namespace Ugine
 			rendererDynamicData_->color = color;
 		}
 
+		glm::vec4 GetColor()
+		{
+			return rendererDynamicData_->color;
+		}
+
 		void SetCamera(const OrthographicCamera* camera)	
 		{
 			rendererDynamicData_->camera = camera; 
@@ -71,7 +76,6 @@ namespace Ugine
 
 		virtual void Update(float Timestep) override
 		{
-			//LOG_INFO("Renderer");
 			Renderer2D::OnBegin(rendererStaticData_->renderer2DStorage, *rendererDynamicData_->camera);
 			Ugine::Renderer2D::Draw(rendererStaticData_->renderer2DStorage, transformComponent_->GetWorldPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
 		}

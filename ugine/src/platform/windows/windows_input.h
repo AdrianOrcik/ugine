@@ -14,6 +14,8 @@ namespace Ugine
 		virtual float GetMouseXImpl() override;
 		virtual float GetMouseYImpl() override;
 		virtual bool IsExitButtonPressedImpl() override;
+		virtual int GetWindowWidthImpl() override;
+		virtual int GetWindowHeightImpl() override;
 	};
 
 }
