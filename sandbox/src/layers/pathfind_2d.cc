@@ -1,48 +1,58 @@
 #include "pathfind_2d.h"
 #include "imgui/imgui.h"
 
+#include "../pf_scripts/pathfinding_manager.h"
+
+
+PathfindingManager* pfManager;
 Pathfind_2d::Pathfind_2d()
 	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, false, false, false)
 {
+
 }
 
 Pathfind_2d::~Pathfind_2d()
 {
+
 }
 
 void Pathfind_2d::OnAttach()
 {
 	cameraController_.SetCameraPosition(glm::vec3(-0.5f, -0.4f, 0.0f));
-	GridGenerator();
-}
 
-void Pathfind_2d::ClickTest()
-{
-	LOG_INFO("External Click");
+	Ugine::Entity* pfEntity = Ugine::ECS::CreateEntity("PathfindingManager");
+	pfManager = (PathfindingManager*)pfEntity->AddComponent<PathfindingManager>();
+	pfEntity->SetActive(true);
+
+	GridGenerator();
 }
 
 void Pathfind_2d::GridGenerator()
 {
-	//whole grid 35x20
+	//NOTE: grid 35x20
+	//NOTE: [0,0] right bottom
 	int gridX = 35;
 	int gridY = 20;
 	int index = 0;
+
 	for (int i = 0; i < gridX; i++)
 	{
 		for (int j = 0; j < gridY; j++)
 		{
-			BoxGenerator(0, glm::vec2((float)((i - (gridX / 2.0f))), (float)((j - (gridY / 2.0f)))));
+			NodeElement* node = 
+				BoxGenerator(index, glm::vec2((float)((i - (gridX / 2.0f))), (float)((j - (gridY / 2.0f)))));
+			grid_[i][j] = *node;
 			index++;
 		}
 	}
-
 }
 
-void Pathfind_2d::BoxGenerator(int index, glm::vec2 position)
+NodeElement* Pathfind_2d::BoxGenerator(int index, glm::vec2 position)
 {
 	Ugine::Entity* box = Ugine::ECS::CreateEntity("Box_" + index);
 	box->AddComponent<Ugine::TransformComponent>();
 	box->AddComponent<Ugine::RendererComponent>();
+	box->AddComponent<NodeElement>();
 
 	Ugine::TransformComponent* transform =
 		(Ugine::TransformComponent*)box->GetComponent<Ugine::TransformComponent>();
@@ -54,12 +64,16 @@ void Pathfind_2d::BoxGenerator(int index, glm::vec2 position)
 	renderer->SetColor(Ugine::Color::White());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
-	box->SetActive(true);
-}
+	NodeElement* node =
+		(NodeElement*)box->GetComponent<NodeElement>();
 
+	box->SetActive(true);
+	return node;
+}
 
 void Pathfind_2d::OnDetach()
 {
+
 }
 
 void Pathfind_2d::OnUpdate(Ugine::Timestep ts)
@@ -77,7 +91,10 @@ void Pathfind_2d::OnUpdate(Ugine::Timestep ts)
 void Pathfind_2d::OnImGuiRender()
 {
 	ImGui::Begin("Settings Panel");
-	
+	if (ImGui::Button("Find"))
+	{
+		pfManager->Find(grid_);
+	}
 	ImGui::End();
 }
 

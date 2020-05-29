@@ -1,5 +1,6 @@
 #pragma once
 #include "ugine.h"
+#include "../pf_scripts/node_element.h"
 
 class Pathfind_2d : public Ugine::Layer
 {
@@ -15,10 +16,10 @@ public:
 	void OnEvent(Ugine::Event& e) override;
 
 private:
-	void ClickTest();
 	void GridGenerator();
-	void BoxGenerator(int index, glm::vec2 position);
+	NodeElement* BoxGenerator(int index, glm::vec2 position);
+
 public:
 	Ugine::OrthographicCameraController cameraController_;
-
+	NodeElement grid_[35][20];
 };
