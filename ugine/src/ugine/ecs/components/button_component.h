@@ -14,12 +14,12 @@ namespace Ugine
 	public:
 		ButtonComponent()
 		{
-			LOG_INFO("ButtonComponent Init");
+			//LOG_INFO("ButtonComponent Init");
 		}
 
 		~ButtonComponent()
 		{
-			LOG_INFO("ButtonComponent Deleted");
+			//LOG_INFO("ButtonComponent Deleted");
 		}
 
 		// Inherited via Component
@@ -30,6 +30,9 @@ namespace Ugine
 		}
 		virtual void Update(float Timestep) override
 		{
+			std::pair<float, float> mousePosition = Input::GetMousePosition();
+			//LOG_INFO("RawPosition: [{0}, {1}]", mousePosition.first, mousePosition.second);
+
 			//OnHoverTrigger();
 			//OnClickTrigger();
 		}
@@ -44,7 +47,7 @@ namespace Ugine
 
 		void TestOnClickCallback()
 		{
-			LOG_INFO("CLICK EVENT! - {0}", owner->GetName());
+			//LOG_INFO("CLICK EVENT! - {0}", owner->GetName());
 		}
 
 		void OnClickTrigger()
@@ -85,6 +88,7 @@ namespace Ugine
 			//int height = Application::Get().GetWindow().GetHeight();
 
 			std::pair<float, float> mousePosition = Input::GetMousePosition();
+		/*	LOG_INFO("RawPosition: [{0}, {1}]", mousePosition.first, mousePosition.second);*/
 			//float xPosition = mousePosition.first - (Input::GetWindowWidth() / 2);
 			//float yPosition = (mousePosition.second - (Input::GetWindowHeight() / 2)) - (unitArea.y * transformComponent_->GetLocalPosition().y);
 
@@ -92,7 +96,7 @@ namespace Ugine
 			float objectPositionY = transformComponent_->GetLocalPosition().y * unit + (Input::GetWindowHeight() / 2);
 
 			float DistanceX = objectPositionX - mousePosition.first;
-			float DistanceY = objectPositionY - mousePosition.second;// -totalArea.y - (totalArea.y * (transformComponent_->GetLocalPosition().y * 10.0f * 4));
+			float DistanceY = objectPositionY - mousePosition.second; // -totalArea.y - (totalArea.y * (transformComponent_->GetLocalPosition().y * 10.0f * 4));
 
 			if (abs(DistanceX) <  totalArea.x && abs(DistanceY) < totalArea.y)
 			{
@@ -109,7 +113,7 @@ namespace Ugine
 
 			//LOG_INFO("Size [{0}, {1}]", width, height);
 			//LOG_INFO("Distance: [{0}, {1}]", DistanceX, DistanceY);
-			//LOG_INFO("RawPosition: [{0}, {1}]", mousePosition.first, mousePosition.second);
+	
 			//LOG_INFO("Position: [{0}, {1}]", xPosition, yPosition);
 			//LOG_INFO("{0} - WindowPositon: [{1}, {2}]",owner->GetName(), objectPositionX, objectPositionY);
 

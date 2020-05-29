@@ -486,7 +486,6 @@
     <ClInclude Include="external_src\tweeny\include\tweeny\tweenpoint.h" />
     <ClInclude Include="external_src\tweeny\include\tweeny\tweentraits.h" />
     <ClInclude Include="external_src\tweeny\include\tweeny\tweeny.h" />
-    <ClInclude Include="src\ugine\ecs\components\button_component.h" />
     <ClInclude Include="src\ugine\pooling\object_pooling.h" />
     <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
