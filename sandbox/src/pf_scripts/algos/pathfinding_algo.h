@@ -2,12 +2,12 @@
 
 class PathfindingAlgo
 {
-public:
-	PathfindingAlgo()
-	{}
-
-	~PathfindingAlgo()
-	{}
-
-	virtual void Find() = 0;
+//public:
+//	PathfindingAlgo()
+//	{}
+//
+//	~PathfindingAlgo()
+//	{}
+//
+//	virtual void Find() = 0;
 };

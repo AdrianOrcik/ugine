@@ -31,9 +31,9 @@ void Pathfind_2d::GridGenerator()
 {
 	//NOTE: grid 35x20
 	//NOTE: [0,0] right bottom
-	int gridX = 35;
-	int gridY = 20;
-	int index = 0;
+	int gridX = 3;
+	int gridY = 3;
+	int index = 1;
 
 	for (int i = 0; i < gridX; i++)
 	{
@@ -66,6 +66,7 @@ NodeElement* Pathfind_2d::BoxGenerator(int index, glm::vec2 position)
 
 	NodeElement* node =
 		(NodeElement*)box->GetComponent<NodeElement>();
+	node->Value = index;
 
 	box->SetActive(true);
 	return node;

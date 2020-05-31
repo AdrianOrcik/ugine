@@ -21,5 +21,5 @@ private:
 
 public:
 	Ugine::OrthographicCameraController cameraController_;
-	NodeElement grid_[35][20];
+	NodeElement grid_[3][3];
 };

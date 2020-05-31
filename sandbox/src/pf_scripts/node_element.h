@@ -22,4 +22,6 @@ public:
 	{}
 	virtual void OnDeactive() override
 	{}
+
+	int Value;
 };
