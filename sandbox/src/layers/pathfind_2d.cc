@@ -45,6 +45,15 @@ void Pathfind_2d::GridGenerator()
 			index++;
 		}
 	}
+
+	grid_[0][1].IsWall = true;
+	Ugine::RendererComponent* r = 
+		(Ugine::RendererComponent*)grid_[0][1].owner->GetComponent<Ugine::RendererComponent>();
+	r->SetColor(Ugine::Color::Red());
+
+	grid_[1][1].IsWall = true;
+	r =	(Ugine::RendererComponent*)grid_[1][1].owner->GetComponent<Ugine::RendererComponent>();
+	r->SetColor(Ugine::Color::Red());
 }
 
 NodeElement* Pathfind_2d::BoxGenerator(int index, glm::vec2 position)

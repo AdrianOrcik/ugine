@@ -24,4 +24,5 @@ public:
 	{}
 
 	int Value;
+	bool IsWall = false;
 };

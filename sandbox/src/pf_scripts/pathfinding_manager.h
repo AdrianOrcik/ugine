@@ -63,8 +63,8 @@ public:
 		{
 			for (int j = 0; j < 3; j++)
 			{
-
-				AssignNeighbourgs(board, arr, i, j);
+				if(!arr[i][j].IsWall)
+					AssignNeighbourgs(board, arr, i, j);
 			}
 		}
 
@@ -75,7 +75,7 @@ public:
 
 		pfAlgo = DBG_NEW Dijkstra();
 		pfAlgo->SetCostMatrix(board);
-		pfAlgo->SetDestination(8);
+		pfAlgo->SetDestination(2);
 		pfAlgo->SetSrc(0);
 		std::vector<int>* parent = new std::vector<int>();
 		pfAlgo->Find(parent);
@@ -86,10 +86,16 @@ public:
 			{
 				bool isOnPath = std::find(parent->begin(), parent->end(), nodeIndex) != parent->end();
 				if (nodeIndex == pfAlgo->src_ ||
-					nodeIndex == pfAlgo->destination_ ||
-					isOnPath)
+					nodeIndex == pfAlgo->destination_)
 				{
 					Ugine::RendererComponent* renderer = 
+						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
+					renderer->SetColor(Ugine::Color::Yellow());
+				}
+
+				if (isOnPath)
+				{
+					Ugine::RendererComponent* renderer =
 						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
 					renderer->SetColor(Ugine::Color::Yellow());
 				}
