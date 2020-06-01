@@ -10,21 +10,6 @@
 
 namespace Ugine
 {
-	
-	//struct RendererStaticData
-	//{
-	//	std::string shaderPath;
-	//	std::string texturePath;
-	//	struct PrimitiveData* primitiveData;
-	//	struct Renderer2DStorage* renderer2DStorage;
-
-	//	~RendererStaticData()
-	//	{
-	//		delete primitiveData;
-	//		delete renderer2DStorage;
-	//	}
-	//};
-
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> VertexArray;
@@ -32,13 +17,6 @@ namespace Ugine
 		Ref<Texture2D> WhiteTexture;
 	};
 
-	//struct RendererDynamicData
-	//{
-	//	glm::vec4 color;
-	//	const OrthographicCamera* camera;
-	//};
-
-	class Renderer2DStorage;
 	class Renderer2D
 	{
 	public:

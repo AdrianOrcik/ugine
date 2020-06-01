@@ -529,7 +529,6 @@
     <ClInclude Include="src\ugine\renderer\color.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
-    <ClInclude Include="src\ugine\renderer\primitives.h" />
     <ClInclude Include="src\ugine\renderer\render_command.h" />
     <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\renderer_2d.h" />

@@ -11,55 +11,15 @@ namespace Ugine
 	public:
 		RendererComponent( )
 		{
-			//rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
-			//rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
-			//
-			//SetPrimitive(PrimitiveType::Square);
-			//SetShader("assets/shaders/Texture.glsl");
-			//SetTexture("");
-			//SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		RendererComponent(RendererComponent& renderer)
 		{
-			//rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
-			//rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
-			//
-			//SetPrimitive(PrimitiveType::Square);
-			//SetShader("assets/shaders/Texture.glsl");
-			//SetTexture("");
-			//SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
-		~RendererComponent() {
-			//delete rendererStaticData_;
-			//delete rendererDynamicData_;
-		}
-
-		/*void SetPrimitive(PrimitiveType type) 
+		~RendererComponent() 
 		{
-			rendererStaticData_->primitiveData = Primitives::Generate(type);
 		}
-
-		void SetShader(const std::string path)				
-		{
-			rendererStaticData_->shaderPath = path;
-		}
-
-		void SetTexture(const std::string path)				
-		{ 
-			rendererStaticData_->texturePath = path;
-		}
-
-		void SetColor(glm::vec4 color)						
-		{ 
-			rendererDynamicData_->color = color;
-		}
-
-		glm::vec4 GetColor()
-		{
-			return rendererDynamicData_->color;
-		}*/
 
 		void SetColor(glm::vec4 color)
 		{
@@ -75,6 +35,7 @@ namespace Ugine
 		virtual void Init() override
 		{
 			transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
+
 			if(Renderer2D::Data == nullptr)
 				Renderer2D::Init();
 		}
@@ -92,10 +53,10 @@ namespace Ugine
 		{}
 
 	private:
-		//RendererStaticData* rendererStaticData_	= nullptr;
-		//RendererDynamicData* rendererDynamicData_	= nullptr;
 		TransformComponent* transformComponent_	= nullptr;
 		const OrthographicCamera* camera_;
+
+		//todo: add more data
 		glm::vec4 color_;
 	};
 }

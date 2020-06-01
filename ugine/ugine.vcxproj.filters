@@ -1377,9 +1377,6 @@
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\renderer\primitives.h">
-      <Filter>src\ugine\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\ugine\renderer\render_command.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
