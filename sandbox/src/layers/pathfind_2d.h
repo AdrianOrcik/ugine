@@ -17,7 +17,7 @@ public:
 
 private:
 	void GridGenerator();
-	NodeElement* BoxGenerator(int index, glm::vec2 position);
+	NodeElement* NodeGenerator(int index, glm::vec2 position);
 
 public:
 	Ugine::OrthographicCameraController cameraController_;

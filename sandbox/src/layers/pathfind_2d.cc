@@ -5,6 +5,10 @@
 
 
 PathfindingManager* pfManager;
+
+Ugine::Entity* prefab;
+Ugine::ObjectPooler* pooler;
+
 Pathfind_2d::Pathfind_2d()
 	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, true, true, true)
 {
@@ -24,6 +28,13 @@ void Pathfind_2d::OnAttach()
 	pfManager = (PathfindingManager*)pfEntity->AddComponent<PathfindingManager>();
 	pfEntity->SetActive(true);
 
+	prefab = Ugine::ECS::CreatePrefab("Node");
+	prefab->AddComponent<Ugine::TransformComponent>();
+	prefab->AddComponent<Ugine::RendererComponent>();
+
+	pooler = new Ugine::ObjectPooler();
+	pooler->CreatePool("Grid", *prefab, 1000);
+
 	GridGenerator();
 }
 
@@ -37,7 +48,7 @@ void Pathfind_2d::GridGenerator()
 		for (int j = 0; j < gridY_; j++)
 		{
 			NodeElement* node = 
-				BoxGenerator(index++, glm::vec2((float)((i - (gridX_ / 2.0f))), (float)((j - (gridY_ / 2.0f)))));
+				NodeGenerator(index++, glm::vec2((float)((i - (gridX_ / 2.0f))), (float)((j - (gridY_ / 2.0f)))));
 			grid_[i][j] = *node;
 		}
 	}
@@ -52,29 +63,29 @@ void Pathfind_2d::GridGenerator()
 	r->SetColor(Ugine::Color::Red());
 }
 
-NodeElement* Pathfind_2d::BoxGenerator(int index, glm::vec2 position)
+NodeElement* Pathfind_2d::NodeGenerator(int index, glm::vec2 position)
 {
-	Ugine::Entity* box = Ugine::ECS::CreateEntity("Box_" + index);
-	box->AddComponent<Ugine::TransformComponent>();
-	box->AddComponent<Ugine::RendererComponent>();
-	box->AddComponent<NodeElement>();
+	Ugine::Entity* node = pooler->GetPooledObj("Grid");
 
 	Ugine::TransformComponent* transform =
-		(Ugine::TransformComponent*)box->GetComponent<Ugine::TransformComponent>();
+		(Ugine::TransformComponent*)node->GetComponent<Ugine::TransformComponent>();
 	transform->SetLocalPosition(position);
 	transform->SetScale(glm::vec2(0.9f, 0.9f));
 
 	Ugine::RendererComponent* renderer =
-		(Ugine::RendererComponent*)box->GetComponent<Ugine::RendererComponent>();
+		(Ugine::RendererComponent*)node->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::White());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
-	NodeElement* node =
-		(NodeElement*)box->GetComponent<NodeElement>();
-	node->Value = index;
+	if (node->HasComponent<NodeElement>())
+		node->DestroyComponent<NodeElement>();
 
-	box->SetActive(true);
-	return node;
+	NodeElement* element =
+		(NodeElement*)node->AddComponent<NodeElement>();
+	element->Value = index;
+
+	node->SetActive(true);
+	return element;
 }
 
 void Pathfind_2d::OnDetach()
