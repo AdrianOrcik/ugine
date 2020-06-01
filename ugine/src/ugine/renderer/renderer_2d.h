@@ -1,12 +1,10 @@
 #pragma once
-#pragma once 
 
 #include "orthographic_camera.h"
 
 #include "vertex_array.h"
 #include "shader.h"
 #include "texture.h"
-#include "ugine/renderer/primitives.h"
 
 namespace Ugine
 {
