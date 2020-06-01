@@ -50,13 +50,13 @@ void Sandbox2D::OnAttach()
 
 	//TODO: add prefab pooler into coroutine
 	pooler = new Ugine::ObjectPooler();
-	pooler->CreatePool("entities", *prefab, 60);
+	pooler->CreatePool("entities", *prefab, 1000);
 
 	// gameobjects
 	// ------------
 	cameraController_.SetCameraPosition({ -0.1f, 3.5f,0.0f });
 	cameraController_.SetZoomLevel(3.25f);
-	GeneratePooledElements();
+	//GeneratePooledElements();
 
 }
 

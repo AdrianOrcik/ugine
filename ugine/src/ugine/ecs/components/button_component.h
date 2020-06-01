@@ -56,7 +56,7 @@ namespace Ugine
 				&& Input::IsMouseButtonPressed(0))
 			{
 				isPressed_ = true;
-				rendererComponent_->SetColor(Color::Red());
+				//rendererComponent_->SetColor(Color::Red());
 
 				//TODO: OnClick Callback
 				for (auto& f : OnClickCallback)
@@ -69,7 +69,7 @@ namespace Ugine
 				isPressed_ = false;
 				glm::vec4 color = Color::White();
 				color.a = 0.5f;
-				rendererComponent_->SetColor(color);
+				//rendererComponent_->SetColor(color);
 			}
 		}
 
@@ -100,14 +100,14 @@ namespace Ugine
 
 			if (abs(DistanceX) <  totalArea.x && abs(DistanceY) < totalArea.y)
 			{
-				glm::vec4 color = rendererComponent_->GetColor();
-				color.a = 0.5f;
-				rendererComponent_->SetColor(color);
+				//glm::vec4 color = rendererComponent_->GetColor();
+				//color.a = 0.5f;
+				//rendererComponent_->SetColor(color);
 				isHover_ = true;
 			}
 			else 
 			{
-				rendererComponent_->SetColor(Color::White());
+				//rendererComponent_->SetColor(Color::White());
 				isHover_ = false;
 			}
 

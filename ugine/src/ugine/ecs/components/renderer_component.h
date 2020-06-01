@@ -6,38 +6,37 @@
 
 namespace Ugine 
 {	
-
 	class RendererComponent : public Component
 	{
 	public:
 		RendererComponent( )
 		{
-			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
-			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
-			
-			SetPrimitive(PrimitiveType::Square);
-			SetShader("assets/shaders/Texture.glsl");
-			SetTexture("");
-			SetColor({ 1.0,1.0,1.0,1.0 });
+			//rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
+			//rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
+			//
+			//SetPrimitive(PrimitiveType::Square);
+			//SetShader("assets/shaders/Texture.glsl");
+			//SetTexture("");
+			//SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		RendererComponent(RendererComponent& renderer)
 		{
-			rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
-			rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
-			
-			SetPrimitive(PrimitiveType::Square);
-			SetShader("assets/shaders/Texture.glsl");
-			SetTexture("");
-			SetColor({ 1.0,1.0,1.0,1.0 });
+			//rendererStaticData_ = DBG_NEW RendererStaticData();		//TODO: memory leak
+			//rendererDynamicData_ = DBG_NEW RendererDynamicData();	//TODO: memory leak
+			//
+			//SetPrimitive(PrimitiveType::Square);
+			//SetShader("assets/shaders/Texture.glsl");
+			//SetTexture("");
+			//SetColor({ 1.0,1.0,1.0,1.0 });
 		}
 
 		~RendererComponent() {
-			delete rendererStaticData_;
-			delete rendererDynamicData_;
+			//delete rendererStaticData_;
+			//delete rendererDynamicData_;
 		}
 
-		void SetPrimitive(PrimitiveType type) 
+		/*void SetPrimitive(PrimitiveType type) 
 		{
 			rendererStaticData_->primitiveData = Primitives::Generate(type);
 		}
@@ -60,24 +59,30 @@ namespace Ugine
 		glm::vec4 GetColor()
 		{
 			return rendererDynamicData_->color;
+		}*/
+
+		void SetColor(glm::vec4 color)
+		{
+			color_ = color;
 		}
 
 		void SetCamera(const OrthographicCamera* camera)	
 		{
-			rendererDynamicData_->camera = camera; 
+			camera_ = camera;
 		}
 
 		// Inherited via Component
 		virtual void Init() override
 		{
 			transformComponent_ = (TransformComponent*)owner->GetComponent<TransformComponent>();
-			Renderer2D::Init(rendererStaticData_);
+			if(Renderer2D::Data == nullptr)
+				Renderer2D::Init();
 		}
 
 		virtual void Update(float Timestep) override
 		{
-			Renderer2D::OnBegin(rendererStaticData_->renderer2DStorage, *rendererDynamicData_->camera);
-			Ugine::Renderer2D::Draw(rendererStaticData_->renderer2DStorage, transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), rendererDynamicData_->color);
+			Renderer2D::OnBegin(*camera_);
+			Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), color_);
 		}
 
 		virtual void OnActive() override
@@ -87,8 +92,10 @@ namespace Ugine
 		{}
 
 	private:
-		RendererStaticData* rendererStaticData_	= nullptr;
-		RendererDynamicData* rendererDynamicData_	= nullptr;
+		//RendererStaticData* rendererStaticData_	= nullptr;
+		//RendererDynamicData* rendererDynamicData_	= nullptr;
 		TransformComponent* transformComponent_	= nullptr;
+		const OrthographicCamera* camera_;
+		glm::vec4 color_;
 	};
 }

@@ -6,7 +6,7 @@
 
 PathfindingManager* pfManager;
 Pathfind_2d::Pathfind_2d()
-	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, false, false, false)
+	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, true, true, true)
 {
 
 }
@@ -31,8 +31,8 @@ void Pathfind_2d::GridGenerator()
 {
 	//NOTE: grid 35x20
 	//NOTE: [0,0] right bottom
-	int gridX = 3;
-	int gridY = 3;
+	int gridX = 100;
+	int gridY = 100;
 	int index = 1;
 
 	for (int i = 0; i < gridX; i++)
@@ -103,7 +103,7 @@ void Pathfind_2d::OnImGuiRender()
 	ImGui::Begin("Settings Panel");
 	if (ImGui::Button("Find"))
 	{
-		pfManager->Find(grid_);
+		//pfManager->Find(grid_);
 	}
 	ImGui::End();
 }

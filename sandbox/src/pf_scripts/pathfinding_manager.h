@@ -90,14 +90,14 @@ public:
 				{
 					Ugine::RendererComponent* renderer = 
 						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
-					renderer->SetColor(Ugine::Color::Yellow());
+					//renderer->SetColor(Ugine::Color::Yellow());
 				}
 
 				if (isOnPath)
 				{
 					Ugine::RendererComponent* renderer =
 						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
-					renderer->SetColor(Ugine::Color::Yellow());
+					//renderer->SetColor(Ugine::Color::Yellow());
 				}
 
 				nodeIndex++;
