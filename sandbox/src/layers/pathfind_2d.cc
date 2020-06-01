@@ -31,18 +31,14 @@ void Pathfind_2d::GridGenerator()
 {
 	//NOTE: grid 35x20
 	//NOTE: [0,0] right bottom
-	int gridX = 100;
-	int gridY = 100;
 	int index = 1;
-
-	for (int i = 0; i < gridX; i++)
+	for (int i = 0; i < gridX_; i++)
 	{
-		for (int j = 0; j < gridY; j++)
+		for (int j = 0; j < gridY_; j++)
 		{
 			NodeElement* node = 
-				BoxGenerator(index, glm::vec2((float)((i - (gridX / 2.0f))), (float)((j - (gridY / 2.0f)))));
+				BoxGenerator(index++, glm::vec2((float)((i - (gridX_ / 2.0f))), (float)((j - (gridY_ / 2.0f)))));
 			grid_[i][j] = *node;
-			index++;
 		}
 	}
 
@@ -103,7 +99,7 @@ void Pathfind_2d::OnImGuiRender()
 	ImGui::Begin("Settings Panel");
 	if (ImGui::Button("Find"))
 	{
-		//pfManager->Find(grid_);
+		pfManager->Find(grid_, gridX_, gridY_);
 	}
 	ImGui::End();
 }

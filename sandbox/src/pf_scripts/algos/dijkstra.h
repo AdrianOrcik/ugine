@@ -11,52 +11,34 @@ public:
 	~Dijkstra()
 	{}
 
-	int src_ = 0;
-	int destination_ = 0;
-	int** cost_;
-	int dist[100];
-	bool visited[100] = { 0 };
-	int parent[100];
-	int NodeCount = 9;
-
 	void SetCostMatrix(int** board)
 	{
-		cost_ = board;
-	}
-
-	void SetSrc(int src)
-	{
-		src_ = src;
-	}
-
-	void SetDestination(int destination)
-	{
-		destination_ = destination;
+		valueMatrix_ = board;
 	}
 
 	void Init()
 	{
-		for (int i = 0; i < NodeCount; i++)
+		for (int i = 0; i < nodeCount_; i++)
 		{
-			parent[i] = i;
-			dist[i] = INT_MAX;
+			path_[i] = i;
+			distanceArr_[i] = INT_MAX;
 		}
-		dist[src_] = 0;
+		distanceArr_[SourceNode] = 0;
 	}
 
 	void DijkstraAlgo()
 	{
-		for (int i = 0; i < NodeCount; i++)
+		for (int i = 0; i < nodeCount_; i++)
 		{
 			int nearest = GetNearst();
-			visited[nearest] = true;
-			for (int adj = 0; adj < NodeCount; adj++)
+			isVisitedNodes[nearest] = true;
+			for (int adj = 0; adj < nodeCount_; adj++)
 			{
-				if (cost_[nearest][adj] != INT_MAX &&
-					dist[adj] > (dist[nearest] + cost_[nearest][adj]))
+				if (valueMatrix_[nearest][adj] != INT_MAX &&
+					distanceArr_[adj] > (distanceArr_[nearest] + valueMatrix_[nearest][adj]))
 				{
-					dist[adj] = dist[nearest] + cost_[nearest][adj];
-					parent[adj] = nearest;
+					distanceArr_[adj] = distanceArr_[nearest] + valueMatrix_[nearest][adj];
+					path_[adj] = nearest;
 				}
 			}
 		}
@@ -66,11 +48,11 @@ public:
 	{
 		int minValue = INT_MAX;
 		int minNode = 0;
-		for (int i = 0; i < NodeCount; i++)
+		for (int i = 0; i < nodeCount_; i++)
 		{
-			if (!visited[i] && dist[i] < minValue)
+			if (!isVisitedNodes[i] && distanceArr_[i] < minValue)
 			{
-				minValue = dist[i];
+				minValue = distanceArr_[i];
 				minNode = i;
 			}
 		}
@@ -78,25 +60,26 @@ public:
 		return minNode;
 	}
 
+	//Debug
 	void display(std::vector<int>* parents)
 	{
 		std::cout << "Node:\t\t\tCost:\t\t\tPath:";
 		std::cout << std::endl;
-		for (int i = 0; i < NodeCount; i++)
+		for (int i = 0; i < nodeCount_; i++)
 		{
-			std::cout << i << "\t\t\t" << dist[i] << "\t\t\t" << " ";
+			std::cout << i << "\t\t\t" << distanceArr_[i] << "\t\t\t" << " ";
 			std::cout << i << " ";
-			int parnode = parent[i];
+			int parnode = path_[i];
 			
-			while (parnode != src_)
+			while (parnode != SourceNode)
 			{
-				if (i == destination_)
+				if (i == DestinationNode)
 				{
 					parents->push_back(parnode);
 				}
 
 				std::cout << " <- " << parnode << " ";
-				parnode = parent[parnode];
+				parnode = path_[parnode];
 			}
 			std::cout << std::endl;
 		}
@@ -110,6 +93,18 @@ public:
 		DijkstraAlgo();
 		display(parent);
 	}
+
+public:
+	int SourceNode = 0;
+	int DestinationNode = 0;
+
+private:
+
+	int** valueMatrix_;
+	int distanceArr_[700];
+	bool isVisitedNodes[700] = { 0 };
+	int path_[700];
+	int nodeCount_ = 700;
 
 
 

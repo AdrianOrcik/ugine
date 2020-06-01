@@ -19,7 +19,7 @@ public:
 	~PathfindingManager() 
 	{}
 
-	void AssignNeighbourgs(int** board, NodeElement grid[3][3], int i, int j)
+	void AssignNeighbourgs(int** board, NodeElement grid[35][20], int i, int j)
 	{
 		std::vector<std::pair<int, int>> distances;
 		distances.emplace_back(std::make_pair(1, 0));
@@ -30,8 +30,8 @@ public:
 		for (int distIndex = 0; distIndex < 4; distIndex++)
 		{
 			std::pair<int, int> distance = distances[distIndex];
-			bool iCorrect = i + distance.first >= 0 && i + distance.first < 3;
-			bool jCorrect = j + distance.second >= 0 && j + distance.second < 3;
+			bool iCorrect = i + distance.first >= 0 && i + distance.first < gridX_;
+			bool jCorrect = j + distance.second >= 0 && j + distance.second < gridY_;
 
 			if (iCorrect && jCorrect)
 			{
@@ -42,16 +42,20 @@ public:
 		}
 	}
 
-	void Find(NodeElement arr[3][3])
+	void Find(NodeElement arr[35][20], int gridX, int gridY)
 	{
-		int *board[9];
-		for (int i = 0; i < 9; ++i) {
-			board[i] = new int[9];
+		gridX_ = gridX;
+		gridY_ = gridY;
+		valueMatrixSize_ = gridX * gridY;
+		int *board[700];
+		for (int i = 0; i < valueMatrixSize_; ++i) {
+			board[i] = new int[700];
 		}
 
-		for (int i = 0; i < 9; i++)
+		// Fill valueMatrix
+		for (int i = 0; i < valueMatrixSize_; i++)
 		{
-			for (int j = 0; j < 9; j++)
+			for (int j = 0; j < valueMatrixSize_; j++)
 			{
 				board[i][j] = INT_MAX;
 				if (i == j)
@@ -59,9 +63,9 @@ public:
 			}
 		}
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < gridX_; i++)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int j = 0; j < gridY_; j++)
 			{
 				if(!arr[i][j].IsWall)
 					AssignNeighbourgs(board, arr, i, j);
@@ -75,29 +79,29 @@ public:
 
 		pfAlgo = DBG_NEW Dijkstra();
 		pfAlgo->SetCostMatrix(board);
-		pfAlgo->SetDestination(2);
-		pfAlgo->SetSrc(0);
+		pfAlgo->DestinationNode = 24;
+		pfAlgo->SourceNode = 0;
 		std::vector<int>* parent = new std::vector<int>();
 		pfAlgo->Find(parent);
 
 		int nodeIndex = 0;
-		for(int i = 0; i< 3; i++){
-			for (int j = 0; j < 3; j++)
+		for(int i = 0; i< gridX_; i++){
+			for (int j = 0; j < gridY_; j++)
 			{
 				bool isOnPath = std::find(parent->begin(), parent->end(), nodeIndex) != parent->end();
-				if (nodeIndex == pfAlgo->src_ ||
-					nodeIndex == pfAlgo->destination_)
+				if (nodeIndex == pfAlgo->SourceNode ||
+					nodeIndex == pfAlgo->DestinationNode)
 				{
 					Ugine::RendererComponent* renderer = 
 						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
-					//renderer->SetColor(Ugine::Color::Yellow());
+					renderer->SetColor(Ugine::Color::Yellow());
 				}
 
 				if (isOnPath)
 				{
 					Ugine::RendererComponent* renderer =
 						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
-					//renderer->SetColor(Ugine::Color::Yellow());
+					renderer->SetColor(Ugine::Color::Yellow());
 				}
 
 				nodeIndex++;
@@ -121,5 +125,8 @@ public:
 
 private:
 	Dijkstra* pfAlgo = nullptr;
-	NodeElement grid_[3][3];
+	int gridX_;
+	int gridY_;
+	int valueMatrixSize_;
+	NodeElement grid_[35][20];
 };

@@ -21,5 +21,7 @@ private:
 
 public:
 	Ugine::OrthographicCameraController cameraController_;
-	NodeElement grid_[100][100];
+	const int gridX_ = 35;
+	const int gridY_ = 20;
+	NodeElement grid_[35][20];
 };
