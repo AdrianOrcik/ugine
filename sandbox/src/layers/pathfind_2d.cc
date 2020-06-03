@@ -1,7 +1,7 @@
 #include "pathfind_2d.h"
 #include "imgui/imgui.h"
 
-#include "../pf_scripts/pathfinding_manager.h"
+#include "../pathfinding_scripts/pathfinding_manager.h"
 
 
 PathfindingManager* pfManager;

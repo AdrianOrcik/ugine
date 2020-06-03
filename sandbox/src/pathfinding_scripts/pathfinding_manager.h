@@ -1,10 +1,10 @@
 #pragma once
 #include "ugine.h"
 
-#include "../pf_scripts/algos/pathfinding_algo.h"
-#include "../pf_scripts/node_element.h"
+#include "../pathfinding_scripts/algos/pathfinding_algo.h"
+#include "../pathfinding_scripts/node_element.h"
 
-#include "../pf_scripts/algos/dijkstra.h"
+#include "../pathfinding_scripts/algos/dijkstra.h"
 
 #include <iostream>
 #include <vector>
@@ -79,6 +79,7 @@ public:
 
 		pfAlgo = DBG_NEW Dijkstra();
 		pfAlgo->SetCostMatrix(board);
+		pfAlgo->SetNodeArr(arr);
 		pfAlgo->DestinationNode = 24;
 		pfAlgo->SourceNode = 0;
 		std::vector<int>* parent = new std::vector<int>();

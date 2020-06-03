@@ -13,13 +13,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\layers\pathfind_2d.h" />
-    <ClInclude Include="src\pf_scripts\node_element.h" />
-    <ClInclude Include="src\pf_scripts\pathfinding_manager.h" />
-    <ClInclude Include="src\pf_scripts\algos\dijkstra.h" />
-    <ClInclude Include="src\pf_scripts\algos\pathfinding_algo.h" />
+    <ClInclude Include="src\pathfinding_scripts\algos\dijkstra.h" />
+    <ClInclude Include="src\pathfinding_scripts\algos\pathfinding_algo.h" />
+    <ClInclude Include="src\pathfinding_scripts\node_element.h" />
+    <ClInclude Include="src\pathfinding_scripts\pathfinding_manager.h" />
+    <ClInclude Include="src\pathfinding_scripts\simulation\simulation_step.h" />
+    <ClInclude Include="src\pathfinding_scripts\simulation\dijkstra_step.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sandbox_app.cc" />
     <ClCompile Include="src\layers\pathfind_2d.cc" />
+    <ClCompile Include="src\pathfinding_scripts\simulation\dijkstra_step.cc" />
   </ItemGroup>
 </Project>
