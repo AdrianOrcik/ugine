@@ -19,7 +19,7 @@ public:
 	~PathfindingManager() 
 	{}
 
-	void AssignNeighbourgs(int** board, NodeElement grid[3][3], int i, int j)
+	void AssignNeighbourgs(int** board, NodeElement grid[5][5], int i, int j)
 	{
 		std::vector<std::pair<int, int>> distances;
 		distances.emplace_back(std::make_pair(1, 0));
@@ -42,15 +42,15 @@ public:
 		}
 	}
 
-	void Find(NodeElement arr[3][3], int gridX, int gridY)
+	void Find(NodeElement arr[5][5], int gridX, int gridY)
 	{
 		gridX_ = gridX;
 		gridY_ = gridY;
 		valueMatrixSize_ = gridX_ * gridY_;
 
-		int *valueBoard[9];
+		int *valueBoard[25];
 		for (int i = 0; i < valueMatrixSize_; ++i) {
-			valueBoard[i] = new int[9];
+			valueBoard[i] = new int[25];
 		}
 
 		// Fill valueMatrix
@@ -81,35 +81,35 @@ public:
 		pfAlgo = DBG_NEW Dijkstra();
 		pfAlgo->SetCostMatrix(valueBoard);
 		pfAlgo->SetNodeArr(arr);
-		//pfAlgo->DestinationNode = 8;
-		//pfAlgo->SourceNode = 0;
+		pfAlgo->DestinationNode = 7;
+		pfAlgo->SourceNode = 0;
 
 		std::vector<int>* parent = new std::vector<int>();
 		pfAlgo->Find(parent);
 
-		/*int nodeIndex = 0;
-		for(int i = 0; i< gridX_; i++){
-			for (int j = 0; j < gridY_; j++)
-			{
-				bool isOnPath = std::find(parent->begin(), parent->end(), nodeIndex) != parent->end();
-				if (nodeIndex == pfAlgo->SourceNode ||
-					nodeIndex == pfAlgo->DestinationNode)
-				{
-					Ugine::RendererComponent* renderer = 
-						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
-					renderer->SetColor(Ugine::Color::Yellow());
-				}
+		//int nodeIndex = 0;
+		//for(int i = 0; i< gridX_; i++){
+		//	for (int j = 0; j < gridY_; j++)
+		//	{
+		//		bool isOnPath = std::find(parent->begin(), parent->end(), nodeIndex) != parent->end();
+		//		if (nodeIndex == pfAlgo->SourceNode ||
+		//			nodeIndex == pfAlgo->DestinationNode)
+		//		{
+		//			Ugine::RendererComponent* renderer = 
+		//				(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
+		//			renderer->SetColor(Ugine::Color::Yellow());
+		//		}
 
-				if (isOnPath)
-				{
-					Ugine::RendererComponent* renderer =
-						(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
-					renderer->SetColor(Ugine::Color::Yellow());
-				}
+		//		if (isOnPath)
+		//		{
+		//			Ugine::RendererComponent* renderer =
+		//				(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
+		//			renderer->SetColor(Ugine::Color::Yellow());
+		//		}
 
-				nodeIndex++;
-			}
-		}*/
+		//		nodeIndex++;
+		//	}
+		//}
 
 
 #pragma region sort1

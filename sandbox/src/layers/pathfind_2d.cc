@@ -53,6 +53,8 @@ void Pathfind_2d::GridGenerator()
 		}
 	}
 
+	//grid_[2][1].owner->SetActive(false);
+
 	//grid_[0][1].IsWall = true;
 	//Ugine::RendererComponent* r = 
 	//	(Ugine::RendererComponent*)grid_[0][1].owner->GetComponent<Ugine::RendererComponent>();

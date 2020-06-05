@@ -1,6 +1,6 @@
 #include "dijkstra_step.h"
 
-DijkstraStep::DijkstraStep(NodeElement grid[3][3], StepData data, DijkstraStep::Type stepType)
+DijkstraStep::DijkstraStep(NodeElement grid[5][5], StepData data, DijkstraStep::Type stepType)
 {
 	CopyToGrid(grid);
 	data_ = data;
@@ -25,7 +25,11 @@ void DijkstraStep::OnColoring()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.05f);
 	
-	auto renderer = (Ugine::RendererComponent*)grid_[data_.positionX][data_.positionY].owner->GetComponent<Ugine::RendererComponent>();
+
+	int x = data_.nodePosition / 5;
+	int y = data_.nodePosition % 5;
+
+	auto renderer = (Ugine::RendererComponent*)grid_[x][y].owner->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::Blue());
 
 	waitfor->SetOnCompleted(std::bind(&DijkstraStep::OnCompleted, this));

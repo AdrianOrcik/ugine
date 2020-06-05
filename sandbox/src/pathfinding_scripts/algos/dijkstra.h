@@ -14,17 +14,20 @@ public:
 	~Dijkstra()
 	{}
 
+	int x = 5;
+	int y = 5;
+	int xy = 25;
 	void SetCostMatrix(int** board)
 	{
 		valueMatrix_ = board;
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < xy; i++)
 		{
 			//todo: add default settings
 			//default settings 
 			visited[i] = 0;
 			preD[i] = 0;
 
-			for (int j = 0; j < 9; j++)
+			for (int j = 0; j < xy; j++)
 			{
 				std::cout << valueMatrix_[i][j] << " ";
 			}
@@ -32,12 +35,12 @@ public:
 		}
 	}
 
-	void SetNodeArr(NodeElement grid[3][3])
+	void SetNodeArr(NodeElement grid[5][5])
 	{
 		//transform data grid into sorting data array
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < x; i++)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int j = 0; j < y; j++)
 			{
 				arr[i][j] = grid[i][j];
 			}
@@ -47,13 +50,26 @@ public:
 	void DijkstraAlgo()
 	{
 		// prechadzam tabulku od vrchu na dol
-		for (int matrixRowX = 0; matrixRowX < 9; matrixRowX++)
+		for (int matrixRowX = 0; matrixRowX < xy; matrixRowX++)
 		{
 			min = 999;
 
 			//prechadzam tabulku z lava do prava a hladam najkratsiu cestu
-			for (int matrixRowY = 0; matrixRowY < 9; matrixRowY++)
+			for (int matrixRowY = 0; matrixRowY < xy; matrixRowY++)
 			{
+	/*			if(valueMatrix_[matrixRowX][matrixRowY] < 999)
+				{
+					int value = valueMatrix_[matrixRowX][matrixRowY];
+					AddStep(StepData(matrixRowX, matrixRowY, matrixRowY), DijkstraStep::Type::Coloring);
+					std::cout << "NodeNumber: " << matrixRowY << std::endl;
+				}*/
+
+				//AddStep(StepData(matrixRowX, matrixRowY, matrixRowY), DijkstraStep::Type::Coloring);
+
+				if(valueMatrix_[matrixRowX][matrixRowY] == 1){
+					std::cout << "NodeNumber: " << matrixRowY << std::endl;
+					AddStep(StepData(matrixRowX, matrixRowY, matrixRowY), DijkstraStep::Type::Coloring);
+				}
 				// ak som nasiel najkratsiu cestu a este nebol na tom node tak si ho oznacim
 				if (min > distance[matrixRowY] && visited[matrixRowY] != 1)
 				{
@@ -67,7 +83,7 @@ public:
 			visited[nextNode] = 1;
 
 			//dijkstra 
-			for (int i = 0; i < 9; i++)
+			for (int i = 0; i < xy; i++)
 			{
 				//hladam medzi nodami ktore som este nepozrel
 				if (visited[i] != 1)
@@ -90,7 +106,7 @@ public:
 	{
 		//default settings
 		//zobratie distance prvy riadok
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < xy; i++)
 		{
 			distance[i] = valueMatrix_[0][i];
 		}
@@ -104,24 +120,33 @@ public:
 	void Output()
 	{
 		// output
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < xy; i++)
 		{
 			std::cout << "|" << distance[i];
 		}
 		std::cout << "|" << std::endl;
 
 		int j = 0;
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < xy; i++)
 		{
 			if (i != 0)
 			{
-				std::cout << "Path: " << i + 1;
+				std::cout << "DestinationNode: " << i;
 				j = i;
-				do
+				//if (arr[i][j].IsWall)
+				//{
+				//	std::cout << " WALL " << std::endl;
+				//	continue;
+				//}
+				//else
 				{
-					j = preD[j];
-					std::cout << " <- " << j + 1;
-				} while (j != 0);
+					do
+					{
+						j = preD[j];
+						std::cout << " <- " << j;
+					} while (j != 0);
+				}
+
 			}
 
 			std::cout << std::endl;
@@ -136,27 +161,39 @@ public:
 		Init();
 		DijkstraAlgo();
 		Output();
+
+		int j = DestinationNode;
+		do
+		{
+			j = preD[j];
+			std::cout << " <- " << j;
+			
+			if(j!= SourceNode)
+				parent->push_back(j);
+
+		} while (j != 0 );
+
 		//display(parent);
-		//Run();
+		Run();
 	}
 
-//public:
-//	int SourceNode = 0;
-//	int DestinationNode = 0;
+public:
+	int SourceNode = 0;
+	int DestinationNode = 0;
 
 private:
 
 	//distance matrix
 	int** valueMatrix_;
 	int min = 999;
-	int visited[9];
-	int distance[9];
+	int visited[25];
+	int distance[25];
 
 	int nextNode = 0;
-	int preD[9];
+	int preD[25];
 
 	//elements arr
-	NodeElement arr[3][3];
+	NodeElement arr[5][5];
 
 	void Run() 
 	{
