@@ -19,7 +19,7 @@ public:
 	~PathfindingManager() 
 	{}
 
-	void AssignNeighbourgs(int** board, NodeElement grid[35][20], int i, int j)
+	void AssignNeighbourgs(int** board, NodeElement grid[3][3], int i, int j)
 	{
 		std::vector<std::pair<int, int>> distances;
 		distances.emplace_back(std::make_pair(1, 0));
@@ -42,14 +42,15 @@ public:
 		}
 	}
 
-	void Find(NodeElement arr[35][20], int gridX, int gridY)
+	void Find(NodeElement arr[3][3], int gridX, int gridY)
 	{
 		gridX_ = gridX;
 		gridY_ = gridY;
-		valueMatrixSize_ = gridX * gridY;
-		int *board[700];
+		valueMatrixSize_ = gridX_ * gridY_;
+
+		int *valueBoard[9];
 		for (int i = 0; i < valueMatrixSize_; ++i) {
-			board[i] = new int[700];
+			valueBoard[i] = new int[9];
 		}
 
 		// Fill valueMatrix
@@ -57,9 +58,9 @@ public:
 		{
 			for (int j = 0; j < valueMatrixSize_; j++)
 			{
-				board[i][j] = INT_MAX;
+				valueBoard[i][j] = 999;
 				if (i == j)
-					board[i][j] = 0;
+					valueBoard[i][j] = 999;
 			}
 		}
 
@@ -68,7 +69,7 @@ public:
 			for (int j = 0; j < gridY_; j++)
 			{
 				if(!arr[i][j].IsWall)
-					AssignNeighbourgs(board, arr, i, j);
+					AssignNeighbourgs(valueBoard, arr, i, j);
 			}
 		}
 
@@ -78,14 +79,15 @@ public:
 		}
 
 		pfAlgo = DBG_NEW Dijkstra();
-		pfAlgo->SetCostMatrix(board);
+		pfAlgo->SetCostMatrix(valueBoard);
 		pfAlgo->SetNodeArr(arr);
-		pfAlgo->DestinationNode = 24;
-		pfAlgo->SourceNode = 0;
+		//pfAlgo->DestinationNode = 8;
+		//pfAlgo->SourceNode = 0;
+
 		std::vector<int>* parent = new std::vector<int>();
 		pfAlgo->Find(parent);
 
-		int nodeIndex = 0;
+		/*int nodeIndex = 0;
 		for(int i = 0; i< gridX_; i++){
 			for (int j = 0; j < gridY_; j++)
 			{
@@ -107,7 +109,76 @@ public:
 
 				nodeIndex++;
 			}
-		}
+		}*/
+
+
+#pragma region sort1
+		//gridX_ = gridX;
+		//gridY_ = gridY;
+		//valueMatrixSize_ = gridX * gridY;
+		//int *board[700];
+		//for (int i = 0; i < valueMatrixSize_; ++i) {
+		//	board[i] = new int[700];
+		//}
+
+		//// Fill valueMatrix
+		//for (int i = 0; i < valueMatrixSize_; i++)
+		//{
+		//	for (int j = 0; j < valueMatrixSize_; j++)
+		//	{
+		//		board[i][j] = INT_MAX;
+		//		if (i == j)
+		//			board[i][j] = 0;
+		//	}
+		//}
+
+		//for (int i = 0; i < gridX_; i++)
+		//{
+		//	for (int j = 0; j < gridY_; j++)
+		//	{
+		//		if(!arr[i][j].IsWall)
+		//			AssignNeighbourgs(board, arr, i, j);
+		//	}
+		//}
+
+		//if (pfAlgo != nullptr) {
+		//	delete pfAlgo;
+		//	pfAlgo = nullptr;
+		//}
+
+		//pfAlgo = DBG_NEW Dijkstra();
+		//pfAlgo->SetCostMatrix(board);
+		//pfAlgo->SetNodeArr(arr);
+		//pfAlgo->DestinationNode = 24;
+		//pfAlgo->SourceNode = 0;
+		//std::vector<int>* parent = new std::vector<int>();
+		//pfAlgo->Find(parent);
+
+		//int nodeIndex = 0;
+		//for(int i = 0; i< gridX_; i++){
+		//	for (int j = 0; j < gridY_; j++)
+		//	{
+		//		bool isOnPath = std::find(parent->begin(), parent->end(), nodeIndex) != parent->end();
+		//		if (nodeIndex == pfAlgo->SourceNode ||
+		//			nodeIndex == pfAlgo->DestinationNode)
+		//		{
+		//			Ugine::RendererComponent* renderer = 
+		//				(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
+		//			renderer->SetColor(Ugine::Color::Yellow());
+		//		}
+
+		//		if (isOnPath)
+		//		{
+		//			Ugine::RendererComponent* renderer =
+		//				(Ugine::RendererComponent*)arr[i][j].owner->GetComponent<Ugine::RendererComponent>();
+		//			renderer->SetColor(Ugine::Color::Yellow());
+		//		}
+
+		//		nodeIndex++;
+		//	}
+		//}
+
+#pragma endregion sort1
 
 	}
 
@@ -129,5 +200,5 @@ private:
 	int gridX_;
 	int gridY_;
 	int valueMatrixSize_;
-	NodeElement grid_[35][20];
+	NodeElement grid_[3][3];
 };

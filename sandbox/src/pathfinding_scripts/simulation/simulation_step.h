@@ -32,11 +32,11 @@ protected:
 		OnCompletedCallback();
 	}
 
-	void CopyToGrid(NodeElement grid[35][20])
+	void CopyToGrid(NodeElement grid[3][3])
 	{
-		for (int i = 0; i < 35; i++)
+		for (int i = 0; i < 3; i++)
 		{
-			for (int j = 0; j < 20; j++)
+			for (int j = 0; j < 3; j++)
 			{
 				grid_[i][j] = grid[i][j];
 			}
