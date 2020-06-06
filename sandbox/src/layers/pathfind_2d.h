@@ -24,7 +24,7 @@ public:
 	//const int gridX_ = 5;
 	//const int gridY_ = 5;
 	//NodeElement grid_[5][5];
-	const int rowSize_ = 5;
-	const int colSize_ = 5;
+	const int rowSize_ = 20;
+	const int colSize_ = 35;
 	std::vector<std::vector<NodeElement*>> grid_;
 };

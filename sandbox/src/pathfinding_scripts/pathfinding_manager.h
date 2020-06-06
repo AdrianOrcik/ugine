@@ -51,7 +51,7 @@ public:
 		}
 
 		pfAlgo = DBG_NEW DijkstraSimulation();
-		pfAlgo->startNode = grid[2][2];
+		pfAlgo->startNode = grid[15][10];
 		pfAlgo->finalNode = grid[4][4];
 		pfAlgo->grid = grid;
 		pfAlgo->RunDijkstra();

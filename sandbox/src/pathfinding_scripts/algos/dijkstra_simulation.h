@@ -22,8 +22,8 @@ public:
 	NodeElement* startNode;
 	NodeElement* finalNode;
 	std::vector<std::vector<NodeElement*>> grid;
-	const int rowSize_ = 5;
-	const int colSize_ = 5;
+	const int rowSize_ = 20;
+	const int colSize_ = 35;
 
 	void RunDijkstra()
 	{
@@ -32,7 +32,7 @@ public:
 
 		for (auto v : visitedNodesInOrder)
 		{
-			std::cout << v->Index + 1 << std::endl;
+			//std::cout << v->Index + 1 << std::endl;
 			AddStep(StepData(v), DijkstraStep::Type::Coloring);
 		}
 
@@ -53,14 +53,14 @@ public:
 			//if its there wall we will skip
 			if (closestNode->IsWall)continue;
 
-			//if (closestNode->Distance == 999)
-			//	return visitedNodesInOrder;
+			if (closestNode->Distance == 999)
+				return visitedNodesInOrder;
 			
 			closestNode->IsVisited = true;
 			visitedNodesInOrder.push_back(closestNode);
 
-			//if (closestNode->Index == finalNode->Index)
-			//	return visitedNodesInOrder;
+			if (closestNode->Index == finalNode->Index)
+				return visitedNodesInOrder;
 
 			updateUnvisitedNeighbors(closestNode, grid);
 		}
@@ -102,17 +102,36 @@ public:
 	void  sortNodesByDistance(std::vector<NodeElement*>* nodes)
 	{
 		//TODO: need fix to be sorting by distance!
-		std::sort(nodes->begin(), nodes->end());
+		//std::sort(nodes->begin(), nodes->end());
+
+
 		//std::sort(nodes->begin(), nodes->end(), compareByDistance);
-		//std::sort(nodes->begin(), nodes->end(), [](NodeElement* a, NodeElement* b) {
-		//	return a->Distance > b->Distance;
-		//});
+		std::sort(nodes->begin(), nodes->end(), [](NodeElement* a, NodeElement* b) 
+		{
+
+			glm::vec2 vectorOrigin = glm::vec2(10, 15);
+			glm::vec2 vectorA = glm::vec2(a->Col, a->Row);
+			glm::vec2 vectorB = glm::vec2(b->Col, b->Row);
+
+			glm::vec2 originToA = abs(vectorOrigin - vectorA);
+			glm::vec2 originToB = abs(vectorOrigin - vectorB);
+
+			float lengthA = sqrt(pow(originToA.x, 2) + pow(originToA.y, 2));
+			float lengthB = sqrt(pow(originToB.x, 2) + pow(originToB.y, 2));
+
+			return lengthA < lengthB;
+		});
 	}
 
-	//bool compareByDistance(const NodeElement& a, const NodeElement& b)
-	//{
-	//	return a.Distance < b.Distance;
-	//}
+	bool compareByDistance(const NodeElement& a, const NodeElement& b)
+	{
+		glm::vec2 vectorOrigin = glm::vec2(startNode->Col, startNode->Row);
+		glm::vec2 vectorA = glm::vec2(a.Col, a.Row);
+		glm::vec2 vectorB = glm::vec2(b.Col, b.Row);
+
+
+		return a.Distance < b.Distance;
+	}
 
 	std::vector<NodeElement*> getAllNodes(std::vector<std::vector<NodeElement*>> grid)
 	{

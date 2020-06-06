@@ -89,7 +89,7 @@ void Pathfind_2d::GridGenerator()
 	//grid_[4][4]->owner->SetActive(false);
 	//grid_[4][0]->owner->SetActive(false);
 
-	auto startNode = (Ugine::RendererComponent*)grid_[2][2]->owner->GetComponent<Ugine::RendererComponent>();
+	auto startNode = (Ugine::RendererComponent*)grid_[15][10]->owner->GetComponent<Ugine::RendererComponent>();
 	startNode->SetColor(Ugine::Color::Yellow());
 
 	auto finalNode = (Ugine::RendererComponent*)grid_[4][4]->owner->GetComponent<Ugine::RendererComponent>();

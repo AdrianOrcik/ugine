@@ -22,7 +22,7 @@ void DijkstraStep::Execute()
 
 void DijkstraStep::OnColoring()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.5f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.05f);
 	
 	auto renderer = (Ugine::RendererComponent*)data_.Node->owner->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::Blue());

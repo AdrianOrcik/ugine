@@ -19,6 +19,11 @@ public:
 	~NodeElement()
 	{}
 
+	int operator<(const NodeElement& node) const
+	{
+		return Distance - node.Distance;
+	}
+
 	// Inherited via ScriptComponent
 	virtual void OnInit() override
 	{}
