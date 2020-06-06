@@ -3,25 +3,20 @@
 #include "../node_element.h"
 struct StepData
 {
-	int positionX;
-	int positionY;
-	int nodePosition;
+	NodeElement* Node;
 
-	StepData() 
-		:positionX(0), positionY(0)
-	{}
-
-	StepData(int posX, int posY, int nodePosition)
-		:positionX(posX), positionY(posY), nodePosition(nodePosition)
-	{}
+	StepData(){}
+	StepData(NodeElement* node)
+	{
+		Node = node;
+	}
 };
 
 class SimulationStep
 {
 public:
-	SimulationStep() {}
+	SimulationStep(){}
 	~SimulationStep() {}
-
 	virtual void Execute() = 0;
 
 public:
@@ -33,18 +28,6 @@ protected:
 		OnCompletedCallback();
 	}
 
-	void CopyToGrid(NodeElement grid[5][5])
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 5; j++)
-			{
-				grid_[i][j] = grid[i][j];
-			}
-		}
-	}
-
 public:
 	StepData data_;
-	NodeElement grid_[5][5];
 };

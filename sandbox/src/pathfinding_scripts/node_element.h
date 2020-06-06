@@ -10,6 +10,12 @@ public:
 	NodeElement()
 	{}
 
+	NodeElement(int col, int row, int index)
+		: Col(col), Row(row), Index(index)
+	{
+		Value = index + 1;
+	}
+
 	~NodeElement()
 	{}
 
@@ -24,5 +30,13 @@ public:
 	{}
 
 	int Value;
+	int Index;
+	int Row;
+	int Col;
+	int Distance = 999;
+
+	bool IsVisited = false;
 	bool IsWall = false;
+	
+	NodeElement* PreviousNode;
 };

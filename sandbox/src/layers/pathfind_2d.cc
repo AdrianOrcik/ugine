@@ -42,7 +42,7 @@ void Pathfind_2d::GridGenerator()
 {
 	//NOTE: grid 35x20
 	//NOTE: [0,0] right bottom
-	int index = 1;
+	/*int index = 1;
 	for (int i = 0; i < gridX_; i++)
 	{
 		for (int j = 0; j < gridY_; j++)
@@ -51,7 +51,7 @@ void Pathfind_2d::GridGenerator()
 				NodeGenerator(index++, glm::vec2((float)((i - (gridX_ / 2.0f))), (float)((j - (gridY_ / 2.0f)))));
 			grid_[i][j] = *node;
 		}
-	}
+	}*/
 
 	//grid_[2][1].owner->SetActive(false);
 
@@ -63,6 +63,37 @@ void Pathfind_2d::GridGenerator()
 	//grid_[1][1].IsWall = true;
 	//r =	(Ugine::RendererComponent*)grid_[1][1].owner->GetComponent<Ugine::RendererComponent>();
 	//r->SetColor(Ugine::Color::Red());
+
+	int index = 0;
+	for (int row = 0; row < rowSize_; row++)
+	{
+		std::vector<NodeElement*> currentRow;
+		for (int col = 0; col < colSize_; col++)
+		{
+			currentRow.push_back(NodeGenerator(index, glm::vec2(col,row)));
+			index++;
+		}
+
+		grid_.push_back(currentRow);
+	}
+
+	/*
+	7 8 9
+	4 5 6
+	1 2 3
+	*/
+
+	//grid_[0][0]->owner->SetActive(false);
+	//grid_[0][4]->owner->SetActive(false);
+
+	//grid_[4][4]->owner->SetActive(false);
+	//grid_[4][0]->owner->SetActive(false);
+
+	auto startNode = (Ugine::RendererComponent*)grid_[2][2]->owner->GetComponent<Ugine::RendererComponent>();
+	startNode->SetColor(Ugine::Color::Yellow());
+
+	auto finalNode = (Ugine::RendererComponent*)grid_[4][4]->owner->GetComponent<Ugine::RendererComponent>();
+	finalNode->SetColor(Ugine::Color::Purple());
 }
 
 NodeElement* Pathfind_2d::NodeGenerator(int index, glm::vec2 position)
@@ -83,8 +114,7 @@ NodeElement* Pathfind_2d::NodeGenerator(int index, glm::vec2 position)
 		node->DestroyComponent<NodeElement>();
 
 	NodeElement* element =
-		(NodeElement*)node->AddComponent<NodeElement>();
-	element->Value = index;
+		(NodeElement*)node->AddComponent<NodeElement>(position.x, position.y, index);
 
 	node->SetActive(true);
 	return element;
@@ -112,7 +142,8 @@ void Pathfind_2d::OnImGuiRender()
 	ImGui::Begin("Settings Panel");
 	if (ImGui::Button("Find"))
 	{
-		pfManager->Find(grid_, gridX_, gridY_);
+		//pfManager->Sorting(grid_, gridX_, gridY_);
+		pfManager->Sorting(grid_);
 	}
 	ImGui::End();
 }

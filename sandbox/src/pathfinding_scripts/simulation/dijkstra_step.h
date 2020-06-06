@@ -14,8 +14,7 @@ public:
 	{
 		Coloring,
 	};
-
-	DijkstraStep(NodeElement grid[5][5], StepData data, DijkstraStep::Type stepType);
+	DijkstraStep(StepData data, DijkstraStep::Type stepType);
 	~DijkstraStep();
 
 	// Inherited via SimulationStep
@@ -23,6 +22,5 @@ public:
 
 private:
 	Type stepType_;
-
 	void OnColoring();
 };

@@ -68,7 +68,7 @@ public:
 
 				if(valueMatrix_[matrixRowX][matrixRowY] == 1){
 					std::cout << "NodeNumber: " << matrixRowY << std::endl;
-					AddStep(StepData(matrixRowX, matrixRowY, matrixRowY), DijkstraStep::Type::Coloring);
+					//AddStep(StepData(matrixRowX, matrixRowY, matrixRowY), DijkstraStep::Type::Coloring);
 				}
 				// ak som nasiel najkratsiu cestu a este nebol na tom node tak si ho oznacim
 				if (min > distance[matrixRowY] && visited[matrixRowY] != 1)
@@ -197,26 +197,26 @@ private:
 
 	void Run() 
 	{
-		if (StepIndex >= simulationSteps_.size())
-		{
-			LOG_INFO("Done");
-			//SetElementsColor(Ugine::Color::SortedElement());
-			//OnSimulationDone();
-			return;
-		}
+		//if (StepIndex >= simulationSteps_.size())
+		//{
+		//	LOG_INFO("Done");
+		//	//SetElementsColor(Ugine::Color::SortedElement());
+		//	//OnSimulationDone();
+		//	return;
+		//}
 
-		simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&Dijkstra::Run, this);
-		simulationSteps_[StepIndex].Execute();
-		StepIndex++;
+		//simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&Dijkstra::Run, this);
+		//simulationSteps_[StepIndex].Execute();
+		//StepIndex++;
 	}
 
 	void AddStep(StepData data, DijkstraStep::Type stepType)
 	{
-		simulationSteps_.push_back(DijkstraStep(arr, data, stepType));
+		//simulationSteps_.push_back(DijkstraStep(arr, data, stepType));
 	}
 
 	int StepIndex = 0;
-	std::vector<DijkstraStep> simulationSteps_;
+	//std::vector<DijkstraStep> simulationSteps_;
 
 
 };

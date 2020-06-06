@@ -5,6 +5,7 @@
 #include "../pathfinding_scripts/node_element.h"
 
 #include "../pathfinding_scripts/algos/dijkstra.h"
+#include "../pathfinding_scripts/algos/dijkstra_simulation.h"
 
 #include <iostream>
 #include <vector>
@@ -42,50 +43,65 @@ public:
 		}
 	}
 
-	void Find(NodeElement arr[5][5], int gridX, int gridY)
+	void Sorting(std::vector<std::vector<NodeElement*>> grid)
 	{
-		gridX_ = gridX;
-		gridY_ = gridY;
-		valueMatrixSize_ = gridX_ * gridY_;
-
-		int *valueBoard[25];
-		for (int i = 0; i < valueMatrixSize_; ++i) {
-			valueBoard[i] = new int[25];
-		}
-
-		// Fill valueMatrix
-		for (int i = 0; i < valueMatrixSize_; i++)
-		{
-			for (int j = 0; j < valueMatrixSize_; j++)
-			{
-				valueBoard[i][j] = 999;
-				if (i == j)
-					valueBoard[i][j] = 999;
-			}
-		}
-
-		for (int i = 0; i < gridX_; i++)
-		{
-			for (int j = 0; j < gridY_; j++)
-			{
-				if(!arr[i][j].IsWall)
-					AssignNeighbourgs(valueBoard, arr, i, j);
-			}
-		}
-
 		if (pfAlgo != nullptr) {
 			delete pfAlgo;
 			pfAlgo = nullptr;
 		}
 
-		pfAlgo = DBG_NEW Dijkstra();
-		pfAlgo->SetCostMatrix(valueBoard);
-		pfAlgo->SetNodeArr(arr);
-		pfAlgo->DestinationNode = 7;
-		pfAlgo->SourceNode = 0;
+		pfAlgo = DBG_NEW DijkstraSimulation();
+		pfAlgo->startNode = grid[2][2];
+		pfAlgo->finalNode = grid[4][4];
+		pfAlgo->grid = grid;
+		pfAlgo->RunDijkstra();
 
-		std::vector<int>* parent = new std::vector<int>();
-		pfAlgo->Find(parent);
+	}
+
+	void Find(NodeElement arr[5][5], int gridX, int gridY)
+	{
+		//gridX_ = gridX;
+		//gridY_ = gridY;
+		//valueMatrixSize_ = gridX_ * gridY_;
+
+		//int *valueBoard[25];
+		//for (int i = 0; i < valueMatrixSize_; ++i) {
+		//	valueBoard[i] = new int[25];
+		//}
+
+		//// Fill valueMatrix
+		//for (int i = 0; i < valueMatrixSize_; i++)
+		//{
+		//	for (int j = 0; j < valueMatrixSize_; j++)
+		//	{
+		//		valueBoard[i][j] = 999;
+		//		if (i == j)
+		//			valueBoard[i][j] = 999;
+		//	}
+		//}
+
+		//for (int i = 0; i < gridX_; i++)
+		//{
+		//	for (int j = 0; j < gridY_; j++)
+		//	{
+		//		if(!arr[i][j].IsWall)
+		//			AssignNeighbourgs(valueBoard, arr, i, j);
+		//	}
+		//}
+
+		//if (pfAlgo != nullptr) {
+		//	delete pfAlgo;
+		//	pfAlgo = nullptr;
+		//}
+
+		//pfAlgo = DBG_NEW Dijkstra();
+		//pfAlgo->SetCostMatrix(valueBoard);
+		//pfAlgo->SetNodeArr(arr);
+		//pfAlgo->DestinationNode = 7;
+		//pfAlgo->SourceNode = 0;
+
+		//std::vector<int>* parent = new std::vector<int>();
+		//pfAlgo->Find(parent);
 
 		//int nodeIndex = 0;
 		//for(int i = 0; i< gridX_; i++){
@@ -196,7 +212,7 @@ public:
 	{}
 
 private:
-	Dijkstra* pfAlgo = nullptr;
+	DijkstraSimulation* pfAlgo = nullptr;
 	int gridX_;
 	int gridY_;
 	int valueMatrixSize_;
