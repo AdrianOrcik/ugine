@@ -33,7 +33,16 @@ public:
 		for (auto v : visitedNodesInOrder)
 		{
 			//std::cout << v->Index + 1 << std::endl;
-			AddStep(StepData(v), DijkstraStep::Type::Coloring);
+			if(v != startNode && v != finalNode)
+				AddStep(StepData(v), DijkstraStep::Type::SelectNode);
+		}
+
+		std::vector<NodeElement*> nodesInShortestPathOrder = getNodesInShortestPathOrder();
+
+		for (auto n : nodesInShortestPathOrder)
+		{
+			//std::cout << v->Index + 1 << std::endl;
+			AddStep(StepData(n), DijkstraStep::Type::FinalRoute);
 		}
 
 		Run();
@@ -154,6 +163,18 @@ public:
 		return nodes;
 	}
 
+	std::vector<NodeElement*> getNodesInShortestPathOrder()
+	{
+		std::vector<NodeElement*> nodesInShortestPathOrder;
+		NodeElement* currentNode = finalNode;
+		while (currentNode != nullptr) {
+			nodesInShortestPathOrder.push_back(currentNode);
+			currentNode = currentNode->PreviousNode;
+		}
+
+		return nodesInShortestPathOrder;
+	}
+
 	void Run()
 	{
 		if (StepIndex >= simulationSteps_.size())
@@ -166,7 +187,7 @@ public:
 			renderer->SetColor(Ugine::Color::Yellow());
 
 			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
-			renderer2->SetColor(Ugine::Color::Purple());
+			renderer2->SetColor(Ugine::Color::Yellow());
 
 			return;
 		}

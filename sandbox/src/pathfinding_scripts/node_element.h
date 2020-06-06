@@ -34,14 +34,14 @@ public:
 	virtual void OnDeactive() override
 	{}
 
-	int Value;
-	int Index;
-	int Row;
-	int Col;
+	int Value = 0;
+	int Index = 0;
+	int Row = 0;
+	int Col = 0;
 	int Distance = 999;
 
 	bool IsVisited = false;
 	bool IsWall = false;
 	
-	NodeElement* PreviousNode;
+	NodeElement* PreviousNode = nullptr;
 };

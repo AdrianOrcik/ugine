@@ -12,7 +12,8 @@ class DijkstraStep : public SimulationStep
 public:
 	enum Type
 	{
-		Coloring,
+		SelectNode,
+		FinalRoute,
 	};
 	DijkstraStep(StepData data, DijkstraStep::Type stepType);
 	~DijkstraStep();
@@ -22,5 +23,6 @@ public:
 
 private:
 	Type stepType_;
-	void OnColoring();
+	void OnSelectNode();
+	void OnDrawFinalRoute();
 };
