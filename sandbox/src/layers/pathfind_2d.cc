@@ -94,6 +94,14 @@ void Pathfind_2d::GridGenerator()
 
 	auto finalNode = (Ugine::RendererComponent*)grid_[4][4]->owner->GetComponent<Ugine::RendererComponent>();
 	finalNode->SetColor(Ugine::Color::Purple());
+
+	for (int i = 5; i < 20; i++)
+	{
+		grid_[8][i]->IsWall = true;
+		auto wall = (Ugine::RendererComponent*)grid_[8][i]->owner->GetComponent<Ugine::RendererComponent>();
+		wall->SetColor(Ugine::Color::Red());
+	}
+
 }
 
 NodeElement* Pathfind_2d::NodeGenerator(int index, glm::vec2 position)

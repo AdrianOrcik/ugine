@@ -32,16 +32,14 @@ public:
 
 		for (auto v : visitedNodesInOrder)
 		{
-			//std::cout << v->Index + 1 << std::endl;
 			if(v != startNode && v != finalNode)
 				AddStep(StepData(v), DijkstraStep::Type::SelectNode);
 		}
 
 		std::vector<NodeElement*> nodesInShortestPathOrder = getNodesInShortestPathOrder();
-
 		for (auto n : nodesInShortestPathOrder)
 		{
-			//std::cout << v->Index + 1 << std::endl;
+
 			AddStep(StepData(n), DijkstraStep::Type::FinalRoute);
 		}
 
@@ -53,17 +51,18 @@ public:
 		std::vector<NodeElement*> visitedNodesInOrder;
 		startNode->Distance = 0;
 		std::vector<NodeElement*> unvisitedNodes = getAllNodes(grid);
-		for (int i = 0; i < unvisitedNodes.size(); i++)
-		//while(!unvisitedNodes.size())
+		//for (int i = 0; i < unvisitedNodes.size(); i++)
+		while(unvisitedNodes.size() > 0)
 		{
 			sortNodesByDistance(&unvisitedNodes);
-			NodeElement* closestNode = unvisitedNodes[i];
+			NodeElement* closestNode = unvisitedNodes[0];
+			unvisitedNodes.erase(unvisitedNodes.begin());
 
 			//if its there wall we will skip
 			if (closestNode->IsWall)continue;
 
 			if (closestNode->Distance == 999)
-				return visitedNodesInOrder;
+				continue;
 			
 			closestNode->IsVisited = true;
 			visitedNodesInOrder.push_back(closestNode);
@@ -74,7 +73,7 @@ public:
 			updateUnvisitedNeighbors(closestNode, grid);
 		}
 
-		return visitedNodesInOrder;
+		//return visitedNodesInOrder;
 	}
 
 	void updateUnvisitedNeighbors(NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
@@ -82,6 +81,7 @@ public:
 		std::vector<NodeElement*> unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
 		for (auto neighbor : unvisitedNeighbors)
 		{
+			if (neighbor->IsWall)continue;
 			neighbor->Distance = node->Distance + 1;
 			neighbor->PreviousNode = node;
 		}
@@ -108,8 +108,9 @@ public:
 		return filteredNeighbors;
 	}
 
-	void  sortNodesByDistance(std::vector<NodeElement*>* nodes)
+	void sortNodesByDistance(std::vector<NodeElement*>* nodes)
 	{
+		//result->erase(result->begin(), result->end());
 		//TODO: need fix to be sorting by distance!
 		//std::sort(nodes->begin(), nodes->end());
 
@@ -117,19 +118,22 @@ public:
 		//std::sort(nodes->begin(), nodes->end(), compareByDistance);
 		std::sort(nodes->begin(), nodes->end(), [](NodeElement* a, NodeElement* b) 
 		{
+			//NOTE: sorting by vector length distance
+			//glm::vec2 vectorOrigin = glm::vec2(10, 15);
+			//glm::vec2 vectorA = glm::vec2(a->Col, a->Row);
+			//glm::vec2 vectorB = glm::vec2(b->Col, b->Row);
 
-			glm::vec2 vectorOrigin = glm::vec2(10, 15);
-			glm::vec2 vectorA = glm::vec2(a->Col, a->Row);
-			glm::vec2 vectorB = glm::vec2(b->Col, b->Row);
+			//glm::vec2 originToA = abs(vectorOrigin - vectorA);
+			//glm::vec2 originToB = abs(vectorOrigin - vectorB);
 
-			glm::vec2 originToA = abs(vectorOrigin - vectorA);
-			glm::vec2 originToB = abs(vectorOrigin - vectorB);
+			//float lengthA = sqrt(pow(originToA.x, 2) + pow(originToA.y, 2));
+			//float lengthB = sqrt(pow(originToB.x, 2) + pow(originToB.y, 2));
 
-			float lengthA = sqrt(pow(originToA.x, 2) + pow(originToA.y, 2));
-			float lengthB = sqrt(pow(originToB.x, 2) + pow(originToB.y, 2));
+			//return lengthA < lengthB;
 
-			return lengthA < lengthB;
+			return a->Distance < b->Distance;
 		});
+
 	}
 
 	bool compareByDistance(const NodeElement& a, const NodeElement& b)
