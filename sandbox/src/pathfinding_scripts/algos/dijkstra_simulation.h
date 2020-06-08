@@ -19,39 +19,41 @@ public:
 
 	}
 
-	NodeElement* startNode;
-	NodeElement* finalNode;
-	std::vector<std::vector<NodeElement*>> grid;
-	const int rowSize_ = 20;
-	const int colSize_ = 35;
+	void SetStartNode(NodeElement* node){startNode_ = node;}
+	void SetFinalNode(NodeElement* node){finalNode_ = node;}
+	void SetGrid(std::vector<std::vector<NodeElement*>> grid){grid_ = grid;}
 
 	void RunDijkstra()
 	{
-		std::vector<NodeElement*> visitedNodesInOrder = Dijkstra();
-		//from visited nodes make simulation
+		std::vector<NodeElement*>* visitedNodesInOrder = DBG_NEW std::vector<NodeElement*>();
+		dijkstra(visitedNodesInOrder);
 
-		for (auto v : visitedNodesInOrder)
+		// Add searching nodes int osteps
+		for (auto node : *visitedNodesInOrder)
 		{
-			if(v != startNode && v != finalNode)
-				AddStep(StepData(v), DijkstraStep::Type::SelectNode);
+			if(node != startNode_ && node != finalNode_)
+				AddStep(StepData(node), DijkstraStep::Type::SelectNode);
 		}
 
-		std::vector<NodeElement*> nodesInShortestPathOrder = getNodesInShortestPathOrder();
-		for (auto n : nodesInShortestPathOrder)
+		// Add shortest path into steps
+		std::vector<NodeElement*>* nodesInShortestPathOrder = DBG_NEW std::vector<NodeElement*>();
+		getNodesInShortestPathOrder(nodesInShortestPathOrder);
+		for (auto node : *nodesInShortestPathOrder)
 		{
-
-			AddStep(StepData(n), DijkstraStep::Type::FinalRoute);
+			AddStep(StepData(node), DijkstraStep::Type::FinalRoute);
 		}
 
-		Run();
+		delete visitedNodesInOrder;
+		delete nodesInShortestPathOrder;
+
+		RunSimulation();
 	}
 
-	std::vector<NodeElement*> Dijkstra()
+private:
+	void dijkstra(std::vector<NodeElement*>* visitedNodesInOrder)
 	{
-		std::vector<NodeElement*> visitedNodesInOrder;
-		startNode->Distance = 0;
-		std::vector<NodeElement*> unvisitedNodes = getAllNodes(grid);
-		//for (int i = 0; i < unvisitedNodes.size(); i++)
+		startNode_->Distance = 0;
+		std::vector<NodeElement*> unvisitedNodes = getAllNodes(grid_);
 		while(unvisitedNodes.size() > 0)
 		{
 			sortNodesByDistance(&unvisitedNodes);
@@ -65,29 +67,29 @@ public:
 				continue;
 			
 			closestNode->IsVisited = true;
-			visitedNodesInOrder.push_back(closestNode);
+			visitedNodesInOrder->push_back(closestNode);
 
-			if (closestNode->Index == finalNode->Index)
-				return visitedNodesInOrder;
+			if (closestNode->Index == finalNode_->Index)
+				return;
 
-			updateUnvisitedNeighbors(closestNode, grid);
+			updateUnvisitedNeighbors(closestNode, grid_);
 		}
-
-		//return visitedNodesInOrder;
 	}
 
 	void updateUnvisitedNeighbors(NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
 	{
-		std::vector<NodeElement*> unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
-		for (auto neighbor : unvisitedNeighbors)
+		std::vector<NodeElement*>* unvisitedNeighbors = DBG_NEW std::vector<NodeElement*>();
+		getUnvisitedNeighbors(unvisitedNeighbors, node, grid);
+		for (auto neighbor : *unvisitedNeighbors)
 		{
 			if (neighbor->IsWall)continue;
 			neighbor->Distance = node->Distance + 1;
 			neighbor->PreviousNode = node;
 		}
+		delete unvisitedNeighbors;
 	}
 
-	std::vector<NodeElement*> getUnvisitedNeighbors(NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
+	void getUnvisitedNeighbors(std::vector<NodeElement*>* unvisitedNeighboards, NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
 	{
 		std::vector<NodeElement*> neighbors;
 		int col = node->Col;
@@ -98,107 +100,65 @@ public:
 		if (col > 0)neighbors.push_back(grid[row][col - 1]);
 		if (col < grid[0].size() - 1)neighbors.push_back(grid[row][col + 1]);
 
-		std::vector<NodeElement*> filteredNeighbors;
 		for (const auto & n : neighbors) {
 			if (!n->IsVisited)
 			{
-				filteredNeighbors.push_back(n);
+				unvisitedNeighboards->push_back(n);
 			}
 		}
-		return filteredNeighbors;
 	}
 
 	void sortNodesByDistance(std::vector<NodeElement*>* nodes)
 	{
-		//result->erase(result->begin(), result->end());
-		//TODO: need fix to be sorting by distance!
-		//std::sort(nodes->begin(), nodes->end());
-
-
-		//std::sort(nodes->begin(), nodes->end(), compareByDistance);
 		std::sort(nodes->begin(), nodes->end(), [](NodeElement* a, NodeElement* b) 
 		{
-			//NOTE: sorting by vector length distance
-			//glm::vec2 vectorOrigin = glm::vec2(10, 15);
-			//glm::vec2 vectorA = glm::vec2(a->Col, a->Row);
-			//glm::vec2 vectorB = glm::vec2(b->Col, b->Row);
-
-			//glm::vec2 originToA = abs(vectorOrigin - vectorA);
-			//glm::vec2 originToB = abs(vectorOrigin - vectorB);
-
-			//float lengthA = sqrt(pow(originToA.x, 2) + pow(originToA.y, 2));
-			//float lengthB = sqrt(pow(originToB.x, 2) + pow(originToB.y, 2));
-
-			//return lengthA < lengthB;
-
 			return a->Distance < b->Distance;
 		});
-
-	}
-
-	bool compareByDistance(const NodeElement& a, const NodeElement& b)
-	{
-		glm::vec2 vectorOrigin = glm::vec2(startNode->Col, startNode->Row);
-		glm::vec2 vectorA = glm::vec2(a.Col, a.Row);
-		glm::vec2 vectorB = glm::vec2(b.Col, b.Row);
-
-
-		return a.Distance < b.Distance;
 	}
 
 	std::vector<NodeElement*> getAllNodes(std::vector<std::vector<NodeElement*>> grid)
 	{
 		std::vector<NodeElement*> nodes;
-		/*for (int i = 0; i < rowSize_; i++)
+		for (auto row : grid)
 		{
-			for (int j = 0; j < colSize_; j++)
+			for (auto column : row)
 			{
-				nodes.push_back(grid[j][i]);
-			}
-		}*/
-
-		for (auto r : grid)
-		{
-			for (auto n : r)
-			{
-				nodes.push_back(n);
+				nodes.push_back(column);
 			}
 		}
 		return nodes;
 	}
 
-	std::vector<NodeElement*> getNodesInShortestPathOrder()
+	void getNodesInShortestPathOrder(std::vector<NodeElement*>* nodesInShortestPathOrder)
 	{
-		std::vector<NodeElement*> nodesInShortestPathOrder;
-		NodeElement* currentNode = finalNode;
+		NodeElement* currentNode = finalNode_;
 		while (currentNode != nullptr) {
-			nodesInShortestPathOrder.push_back(currentNode);
+			nodesInShortestPathOrder->push_back(currentNode);
 			currentNode = currentNode->PreviousNode;
 		}
-
-		return nodesInShortestPathOrder;
 	}
 
-	void Run()
+	//Inherited via SortingAlgo
+	void RunSimulation()
 	{
-		if (StepIndex >= simulationSteps_.size())
+		if (stepIndex_ >= simulationSteps_.size())
 		{
 			LOG_INFO("Done");
 			//SetElementsColor(Ugine::Color::SortedElement());
 			//OnSimulationDone();
 
-			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer = (Ugine::RendererComponent*)startNode_->owner->GetComponent<Ugine::RendererComponent>();
 			renderer->SetColor(Ugine::Color::Yellow());
 
-			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer2 = (Ugine::RendererComponent*)finalNode_->owner->GetComponent<Ugine::RendererComponent>();
 			renderer2->SetColor(Ugine::Color::Yellow());
 
 			return;
 		}
 
-		simulationSteps_[StepIndex].OnCompletedCallback = std::bind(&DijkstraSimulation::Run, this);
-		simulationSteps_[StepIndex].Execute();
-		StepIndex++;
+		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&DijkstraSimulation::RunSimulation, this);
+		simulationSteps_[stepIndex_].Execute();
+		stepIndex_++;
 	}
 
 	void AddStep(StepData data, DijkstraStep::Type stepType)
@@ -206,6 +166,12 @@ public:
 		simulationSteps_.push_back(DijkstraStep(data, stepType));
 	}
 
-	int StepIndex = 0;
+private:
+	int stepIndex_ = 0;
 	std::vector<DijkstraStep> simulationSteps_;
+	NodeElement* startNode_;
+	NodeElement* finalNode_;
+	std::vector<std::vector<NodeElement*>> grid_;
+	const int rowSize_ = 20;
+	const int colSize_ = 35;
 };
