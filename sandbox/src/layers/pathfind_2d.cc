@@ -3,6 +3,9 @@
 
 #include "../pathfinding_scripts/pathfinding_manager.h"
 
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 PathfindingManager* pfManager;
 
@@ -12,7 +15,7 @@ Ugine::ObjectPooler* pooler;
 Pathfind_2d::Pathfind_2d()
 	:Layer("Pathfind"), cameraController_(1280.0f / 720.0f, true, true, true)
 {
-
+	srand(time(NULL));
 }
 
 Pathfind_2d::~Pathfind_2d()
@@ -37,7 +40,8 @@ void Pathfind_2d::OnAttach()
 
 	GridGenerator();
 }
-
+bool startNode = false;
+bool finalNode = false;
 void Pathfind_2d::GridGenerator()
 {
 	//NOTE: grid 35x20
@@ -64,6 +68,7 @@ void Pathfind_2d::GridGenerator()
 	//r =	(Ugine::RendererComponent*)grid_[1][1].owner->GetComponent<Ugine::RendererComponent>();
 	//r->SetColor(Ugine::Color::Red());
 
+
 	int index = 0;
 	for (int row = 0; row < rowSize_; row++)
 	{
@@ -77,6 +82,10 @@ void Pathfind_2d::GridGenerator()
 		grid_.push_back(currentRow);
 	}
 
+
+
+
+
 	/*
 	7 8 9
 	4 5 6
@@ -89,21 +98,22 @@ void Pathfind_2d::GridGenerator()
 	//grid_[4][4]->owner->SetActive(false);
 	//grid_[4][0]->owner->SetActive(false);
 
-	auto startNode = (Ugine::RendererComponent*)grid_[15][10]->owner->GetComponent<Ugine::RendererComponent>();
-	startNode->SetColor(Ugine::Color::Yellow());
+	//auto startNode = (Ugine::RendererComponent*)grid_[15][10]->owner->GetComponent<Ugine::RendererComponent>();
+	//startNode->SetColor(Ugine::Color::Yellow());
 
-	auto finalNode = (Ugine::RendererComponent*)grid_[4][4]->owner->GetComponent<Ugine::RendererComponent>();
-	finalNode->SetColor(Ugine::Color::Purple());
+	//auto finalNode = (Ugine::RendererComponent*)grid_[4][4]->owner->GetComponent<Ugine::RendererComponent>();
+	//finalNode->SetColor(Ugine::Color::Purple());
 
-	for (int i = 5; i < 20; i++)
-	{
-		grid_[8][i]->IsWall = true;
-		auto wall = (Ugine::RendererComponent*)grid_[8][i]->owner->GetComponent<Ugine::RendererComponent>();
-		wall->SetColor(Ugine::Color::Red());
-	}
+	//for (int i = 5; i < 20; i++)
+	//{
+	//	grid_[8][i]->IsWall = true;
+	//	auto wall = (Ugine::RendererComponent*)grid_[8][i]->owner->GetComponent<Ugine::RendererComponent>();
+	//	wall->SetColor(Ugine::Color::Red());
+	//}
 
 }
 
+int offset = 0;
 NodeElement* Pathfind_2d::NodeGenerator(int index, glm::vec2 position)
 {
 	Ugine::Entity* node = pooler->GetPooledObj("Grid");
@@ -121,8 +131,42 @@ NodeElement* Pathfind_2d::NodeGenerator(int index, glm::vec2 position)
 	if (node->HasComponent<NodeElement>())
 		node->DestroyComponent<NodeElement>();
 
+	//TODO: wall, regular, final, start 
+	
 	NodeElement* element =
 		(NodeElement*)node->AddComponent<NodeElement>(position.x, position.y, index);
+
+	int number = rand() % 4 + 1;
+	offset++;
+	switch (number)
+	{
+	case 1:
+		//regular
+		break;
+	case 2:
+		//wall
+		break;
+	case 3:
+		if (!startNode)
+		{
+			startNode = true;
+			startNode_ = element;
+		}
+		else number = 1;
+		break;
+	case 4:
+		if (!finalNode && offset > 100)
+		{
+			finalNode = true;
+			finalNode_ = element;
+		}
+		else number = 1;
+		break;
+	default:
+		break;
+	}
+
+	element->SetType(number);
 
 	node->SetActive(true);
 	return element;
@@ -151,7 +195,7 @@ void Pathfind_2d::OnImGuiRender()
 	if (ImGui::Button("Find"))
 	{
 		//pfManager->Sorting(grid_, gridX_, gridY_);
-		pfManager->Sorting(grid_);
+		pfManager->Sorting(grid_,startNode_, finalNode_);
 	}
 	ImGui::End();
 }

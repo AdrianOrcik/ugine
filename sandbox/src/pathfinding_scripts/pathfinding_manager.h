@@ -43,7 +43,7 @@ public:
 		}
 	}
 
-	void Sorting(std::vector<std::vector<NodeElement*>> grid)
+	void Sorting(std::vector<std::vector<NodeElement*>> grid, NodeElement* startNode, NodeElement* finalNode)
 	{
 		if (pfAlgo != nullptr) {
 			delete pfAlgo;
@@ -51,8 +51,8 @@ public:
 		}
 
 		pfAlgo = DBG_NEW DijkstraSimulation();
-		pfAlgo->SetStartNode(grid[15][10]);
-		pfAlgo->SetFinalNode(grid[4][4]);
+		pfAlgo->SetStartNode(startNode);
+		pfAlgo->SetFinalNode(finalNode);
 		pfAlgo->SetGrid(grid);
 		pfAlgo->RunDijkstra();
 

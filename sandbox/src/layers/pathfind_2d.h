@@ -2,6 +2,8 @@
 #include "ugine.h"
 #include "../pathfinding_scripts/node_element.h"
 
+enum NodeType { Regular, Wall, Start, Final };
+
 class Pathfind_2d : public Ugine::Layer
 {
 public:
@@ -18,7 +20,6 @@ public:
 private:
 	void GridGenerator();
 	NodeElement* NodeGenerator(int index, glm::vec2 position);
-
 public:
 	Ugine::OrthographicCameraController cameraController_;
 	//const int gridX_ = 5;
@@ -26,5 +27,7 @@ public:
 	//NodeElement grid_[5][5];
 	const int rowSize_ = 20;
 	const int colSize_ = 35;
+	NodeElement* startNode_;
+	NodeElement* finalNode_;
 	std::vector<std::vector<NodeElement*>> grid_;
 };
