@@ -20,6 +20,7 @@
     <ClInclude Include="src\pathfinding_scripts\simulation\dijkstra_step.h" />
     <ClInclude Include="src\pathfinding_scripts\algos\dijkstra_simulation.h" />
     <ClInclude Include="src\pathfinding_scripts\algos\dijkstra.h" />
+    <ClInclude Include="src\pathfinding_scripts\definition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sandbox_app.cc" />

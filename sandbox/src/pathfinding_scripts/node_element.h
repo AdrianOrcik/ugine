@@ -3,6 +3,15 @@
 #include "ugine.h"
 #include "../layers/sandbox_2d.h"
 class Sandbox2D;
+
+enum NodeFlag
+{
+	Regular,
+	Wall,
+	Start,
+	Target
+};
+
 class NodeElement : public Ugine::ScriptComponent
 {
 public:
@@ -23,23 +32,29 @@ public:
 		return Distance - node.Distance;
 	}
 
-	void SetType(int number)
+	bool IsWall() { return nodeType_ == NodeFlag::Wall; }
+	
+	void SetColor(glm::vec4 color)
 	{
-		auto renderer = (Ugine::RendererComponent*) owner->GetComponent<Ugine::RendererComponent>();
-		switch (number)
+		renderer_->SetColor(color);
+	}
+
+	void SetType(NodeFlag nodeType)
+	{
+		nodeType_ = nodeType;
+		switch (nodeType)
 		{
-		case 1:
-			renderer->SetColor(Ugine::Color::White());
+		case Regular:
+			SetColor(Ugine::Color::White());
 			break;
-		case 2:
-			renderer->SetColor(Ugine::Color::Red());
-			IsWall = true;
+		case Wall:
+			SetColor(Ugine::Color::Red());
 			break;
-		case 3:
-			renderer->SetColor(Ugine::Color::Yellow());
+		case Start:
+			SetColor(Ugine::Color::Yellow());
 			break;
-		case 4:
-			renderer->SetColor(Ugine::Color::Purple());
+		case Target:
+			SetColor(Ugine::Color::Purple());
 			break;
 		default:
 			break;
@@ -48,7 +63,10 @@ public:
 
 	// Inherited via ScriptComponent
 	virtual void OnInit() override
-	{}
+	{
+		renderer_ = (Ugine::RendererComponent*)owner->GetComponent<Ugine::RendererComponent>();
+	}
+	
 	virtual void OnUpdate(float Timestep) override
 	{}
 	virtual void OnActive() override
@@ -56,6 +74,7 @@ public:
 	virtual void OnDeactive() override
 	{}
 
+public:
 	int Value = 0;
 	int Index = 0;
 	int Row = 0;
@@ -63,7 +82,9 @@ public:
 	int Distance = 999;
 
 	bool IsVisited = false;
-	bool IsWall = false;
-	
 	NodeElement* PreviousNode = nullptr;
+
+private:
+	NodeFlag nodeType_ = NodeFlag::Regular;
+	Ugine::RendererComponent* renderer_ = nullptr;
 };

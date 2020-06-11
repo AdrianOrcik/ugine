@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../pathfinding_scripts/definition.h"
+//TODO: pouzit konstanty z definition header
+
 #include "../algos/pathfinding_algo.h"
 #include "../node_element.h"
 #include "../simulation/dijkstra_step.h"
@@ -61,7 +64,7 @@ private:
 			unvisitedNodes.erase(unvisitedNodes.begin());
 
 			//if its there wall we will skip
-			if (closestNode->IsWall)continue;
+			if (closestNode->IsWall())continue;
 
 			if (closestNode->Distance == 999)
 				continue;
@@ -82,7 +85,7 @@ private:
 		getUnvisitedNeighbors(unvisitedNeighbors, node, grid);
 		for (auto neighbor : *unvisitedNeighbors)
 		{
-			if (neighbor->IsWall)continue;
+			if (neighbor->IsWall())continue;
 			neighbor->Distance = node->Distance + 1;
 			neighbor->PreviousNode = node;
 		}
@@ -172,6 +175,4 @@ private:
 	NodeElement* startNode_;
 	NodeElement* finalNode_;
 	std::vector<std::vector<NodeElement*>> grid_;
-	const int rowSize_ = 20;
-	const int colSize_ = 35;
 };

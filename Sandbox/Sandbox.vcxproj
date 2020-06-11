@@ -95,6 +95,7 @@
     <ClInclude Include="src\pathfinding_scripts\algos\dijkstra.h" />
     <ClInclude Include="src\pathfinding_scripts\algos\dijkstra_simulation.h" />
     <ClInclude Include="src\pathfinding_scripts\algos\pathfinding_algo.h" />
+    <ClInclude Include="src\pathfinding_scripts\definition.h" />
     <ClInclude Include="src\pathfinding_scripts\node_element.h" />
     <ClInclude Include="src\pathfinding_scripts\pathfinding_manager.h" />
     <ClInclude Include="src\pathfinding_scripts\simulation\dijkstra_step.h" />
