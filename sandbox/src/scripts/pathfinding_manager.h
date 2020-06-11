@@ -1,9 +1,9 @@
 #pragma once
 #include "ugine.h"
 
-#include "../pathfinding_scripts/algos/pathfinding_algo.h"
-#include "../pathfinding_scripts/node_element.h"
-#include "../pathfinding_scripts/algos/dijkstra_simulation.h"
+#include "../scripts/algos/pathfinding_algo.h"
+#include "../scripts/node_element.h"
+#include "../scripts/algos/dijkstra.h"
 
 #include <iostream>
 #include <vector>
@@ -25,7 +25,7 @@ public:
 			pfAlgo = nullptr;
 		}
 
-		pfAlgo = DBG_NEW DijkstraSimulation();
+		pfAlgo = DBG_NEW Dijkstra();
 		pfAlgo->SetStartNode(startNode);
 		pfAlgo->SetFinalNode(finalNode);
 		pfAlgo->SetGrid(grid);
@@ -46,5 +46,5 @@ public:
 	{}
 
 private:
-	DijkstraSimulation* pfAlgo = nullptr;
+	Dijkstra* pfAlgo = nullptr;
 };

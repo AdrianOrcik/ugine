@@ -1,30 +1,22 @@
 #pragma once
-
-#include "../algos/sorting_algo.h"
-#include "../formulas.h"
 #include <functional>
-
+#include "../node_element.h"
 struct StepData
 {
-	int positionA;
-	int positionB;
+	NodeElement* Node;
 
-	StepData() 
-		:positionA(-1), positionB(-1)
-	{}
-
-	StepData(int posA, int posB = -1)
-		:positionA(posA), positionB(posB)
-	{}
+	StepData(){}
+	StepData(NodeElement* node)
+	{
+		Node = node;
+	}
 };
 
-class SortingAlgo;
 class SimulationStep
 {
 public:
-	SimulationStep() {}
+	SimulationStep(){}
 	~SimulationStep() {}
-
 	virtual void Execute() = 0;
 
 public:
@@ -36,8 +28,6 @@ protected:
 		OnCompletedCallback();
 	}
 
-protected:
-	SortingAlgo* sortingAlgo_;
+public:
 	StepData data_;
-
 };

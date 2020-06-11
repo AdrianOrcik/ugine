@@ -1,7 +1,7 @@
 #include "pathfind_2d.h"
 #include "imgui/imgui.h"
 
-#include "../pathfinding_scripts/pathfinding_manager.h"
+#include "../scripts/pathfinding_manager.h"
 
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */

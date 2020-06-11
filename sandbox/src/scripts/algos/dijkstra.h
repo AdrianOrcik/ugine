@@ -5,15 +5,15 @@
 
 #include <iostream>
 
-class DijkstraSimulation : public PathfindingAlgo
+class Dijkstra : public PathfindingAlgo
 {
 public:
-	DijkstraSimulation()
+	Dijkstra()
 	{
 
 	}
 
-	~DijkstraSimulation()
+	~Dijkstra()
 	{
 
 	}
@@ -154,7 +154,7 @@ private:
 			return;
 		}
 
-		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&DijkstraSimulation::RunSimulation, this);
+		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&Dijkstra::RunSimulation, this);
 		simulationSteps_[stepIndex_].Execute();
 		stepIndex_++;
 	}

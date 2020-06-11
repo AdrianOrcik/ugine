@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ugine.h"
-#include "../layers/sandbox_2d.h"
 class Sandbox2D;
 
 enum NodeFlag

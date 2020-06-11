@@ -1,7 +1,7 @@
 #pragma once
 #include "ugine.h"
-#include "../pathfinding_scripts/node_element.h"
-#include "../pathfinding_scripts/definition.h"
+#include "../scripts/node_element.h"
+#include "../scripts/definition.h"
 
 class Pathfind_2d : public Ugine::Layer
 {
