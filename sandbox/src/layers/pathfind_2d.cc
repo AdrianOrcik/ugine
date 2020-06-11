@@ -31,12 +31,12 @@ void Pathfind_2d::OnAttach()
 	cameraController_.SetZoomLevel(10.5f);
 
 	Ugine::Entity* pfEntity = Ugine::ECS::CreateEntity("PathfindingManager");
-	pfManager = (PathfindingManager*)pfEntity->AddComponent<PathfindingManager>();
+	pfManager = ECS_ADD_COMPONENT(pfEntity, PathfindingManager)
 	pfEntity->SetActive(true);
 
 	prefab = Ugine::ECS::CreatePrefab("Node");
-	prefab->AddComponent<Ugine::TransformComponent>();
-	prefab->AddComponent<Ugine::RendererComponent>();
+	ECS_ADD_COMPONENT(prefab, Ugine::TransformComponent)
+	ECS_ADD_COMPONENT(prefab, Ugine::RendererComponent)
 
 	pooler = new Ugine::ObjectPooler();
 	pooler->CreatePool("Grid", *prefab, 1000);
@@ -122,21 +122,18 @@ NodeElement* Pathfind_2d::CreateNode(int index, glm::vec2 position)
 {
 	Ugine::Entity* node = pooler->GetPooledObj("Grid");
 
-	Ugine::TransformComponent* transform =
-		(Ugine::TransformComponent*)node->GetComponent<Ugine::TransformComponent>();
+	auto transform = ECS_GET_COMPONENT(node, Ugine::TransformComponent)
 	transform->SetLocalPosition(position);
 	transform->SetScale(glm::vec2(0.9f, 0.9f));
 
-	Ugine::RendererComponent* renderer =
-		(Ugine::RendererComponent*)node->GetComponent<Ugine::RendererComponent>();
+	auto renderer = ECS_GET_COMPONENT(node, Ugine::RendererComponent)
 	renderer->SetColor(Ugine::Color::White());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
 	if (node->HasComponent<NodeElement>())
 		node->DestroyComponent<NodeElement>();
 
-	NodeElement* element =
-		(NodeElement*)node->AddComponent<NodeElement>(position.x, position.y, index);
+	auto element = ECS_ADD_COMPONENT(node,NodeElement, position.x, position.y, index)
 
 	element->SetType(IsWallNode(position) ? NodeFlag::Wall : NodeFlag::Regular);
 

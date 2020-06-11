@@ -25,7 +25,7 @@ void DijkstraStep::Execute()
 
 void DijkstraStep::OnSelectNode()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.005f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.02f);
 	
 	auto renderer = (Ugine::RendererComponent*)data_.Node->owner->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::Blue());
@@ -36,7 +36,7 @@ void DijkstraStep::OnSelectNode()
 
 void DijkstraStep::OnDrawFinalRoute()
 {
-	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.005f);
+	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.02f);
 
 	auto renderer = (Ugine::RendererComponent*)data_.Node->owner->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::Yellow());

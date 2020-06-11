@@ -1404,6 +1404,7 @@
     <ClInclude Include="src\ugine\pooling\object_pooling.h">
       <Filter>src\ugine\pooler</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\macros.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">

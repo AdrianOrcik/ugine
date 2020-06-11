@@ -51,3 +51,6 @@
 
 // object pooling
 #include "ugine/pooling/object_pooling.h"
+
+// macros
+#include "ugine/macros.h"

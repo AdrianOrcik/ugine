@@ -63,7 +63,7 @@ public:
 	// Inherited via ScriptComponent
 	virtual void OnInit() override
 	{
-		renderer_ = (Ugine::RendererComponent*)owner->GetComponent<Ugine::RendererComponent>();
+		renderer_ = ECS_GET_COMPONENT(owner, Ugine::RendererComponent)
 	}
 	
 	virtual void OnUpdate(float Timestep) override
