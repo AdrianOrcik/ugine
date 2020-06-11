@@ -20,7 +20,9 @@ Pathfind_2d::Pathfind_2d()
 
 Pathfind_2d::~Pathfind_2d()
 {
-
+	delete prefab;
+	delete pooler;
+	delete pfManager;
 }
 
 void Pathfind_2d::OnAttach()

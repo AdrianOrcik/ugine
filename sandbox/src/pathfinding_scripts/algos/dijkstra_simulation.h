@@ -1,8 +1,4 @@
 #pragma once
-
-#include "../pathfinding_scripts/definition.h"
-//TODO: pouzit konstanty z definition header
-
 #include "../algos/pathfinding_algo.h"
 #include "../node_element.h"
 #include "../simulation/dijkstra_step.h"
@@ -155,7 +151,6 @@ private:
 
 			auto renderer2 = (Ugine::RendererComponent*)finalNode_->owner->GetComponent<Ugine::RendererComponent>();
 			renderer2->SetColor(Ugine::Color::Yellow());
-
 			return;
 		}
 
@@ -171,8 +166,10 @@ private:
 
 private:
 	int stepIndex_ = 0;
-	std::vector<DijkstraStep> simulationSteps_;
+
 	NodeElement* startNode_;
 	NodeElement* finalNode_;
+
+	std::vector<DijkstraStep> simulationSteps_;
 	std::vector<std::vector<NodeElement*>> grid_;
 };
