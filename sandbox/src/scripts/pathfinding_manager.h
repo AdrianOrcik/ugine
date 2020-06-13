@@ -14,26 +14,47 @@
 class PathfindingManager : public Ugine::ScriptComponent
 {
 public:
+	enum Type { DijkstraType, AStarType, BFSType, DFSType };
 	PathfindingManager()
 	{}
 	
 	~PathfindingManager() 
 	{
-		delete pfAlgo;
+		StopSimulation();
 	}
 
-	void Sorting(std::vector<std::vector<NodeElement*>> grid, NodeElement* startNode, NodeElement* finalNode)
+	bool IsRunning() { return isRunning; }
+
+	void StopSimulation()
 	{
+		isRunning = false;
 		if (pfAlgo != nullptr) {
 			delete pfAlgo;
 			pfAlgo = nullptr;
 		}
+	}
 
-		pfAlgo = DBG_NEW BFS();
+	void Simulate(std::vector<std::vector<NodeElement*>> grid, NodeElement* startNode, NodeElement* finalNode, Type type)
+	{
+		switch (type)
+		{
+		case Type::DijkstraType:
+			pfAlgo = DBG_NEW Dijkstra();
+			break;
+		case Type::AStarType:
+			pfAlgo = DBG_NEW AStar();
+			break;
+		case Type::BFSType:
+			pfAlgo = DBG_NEW BFS();
+			break;
+		}
+
 		pfAlgo->SetStartNode(startNode);
 		pfAlgo->SetFinalNode(finalNode);
+		pfAlgo->OnSimulationStart = std::bind(&PathfindingManager::SetStartRunning, this);
+		pfAlgo->OnSimulationDone = std::bind(&PathfindingManager::SetStopRunning, this);
 		pfAlgo->SetGrid(grid);
-		pfAlgo->RunBFS();
+		pfAlgo->Run();
 	}
 
 	// Inherited via ScriptComponent
@@ -50,5 +71,10 @@ public:
 	{}
 
 private:
-	BFS* pfAlgo = nullptr;
+	void SetStartRunning() { isRunning = true; }
+	void SetStopRunning() { StopSimulation(); }
+
+private:
+	PathfindingAlgo* pfAlgo = nullptr;
+	bool isRunning = false;
 };

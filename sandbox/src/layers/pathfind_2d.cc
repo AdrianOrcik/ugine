@@ -66,17 +66,39 @@ void Pathfind_2d::OnUpdate(Ugine::Timestep ts)
 void Pathfind_2d::OnImGuiRender()
 {
 	ImGui::Begin("Settings Panel");
-
-	if (ImGui::Button("Regenerate Grid"))
+	if(!pfManager->IsRunning())
 	{
-		RegenerateGrid();
-	}
+		if (ImGui::Button("Regenerate Grid"))
+		{
+			RegenerateGrid();
+		}
 
-	if (ImGui::Button("Run Dijkstra"))
+		if (ImGui::Button("Dijkstra"))
+		{
+			pfManager->Simulate(grid_,startNode_, finalNode_, PathfindingManager::Type::DijkstraType);
+		}
+
+		if (ImGui::Button("A*"))
+		{
+			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::AStarType);
+		}
+
+		if (ImGui::Button("Breath Fist Search"))
+		{
+			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::BFSType);
+		}
+	}
+	else 
 	{
-		pfManager->Sorting(grid_,startNode_, finalNode_);
+		//TODO: ked resetnem simulaciu musim nastavit default stav pre NodeElementy
+		//hlavne previous nody atd
+		if (ImGui::Button("Reset Simulation"))
+		{
+			Ugine::RoutineManager::DeleteRoutines();
+			RegenerateGrid();
+			pfManager->StopSimulation();
+		}
 	}
-
 	ImGui::End();
 }
 

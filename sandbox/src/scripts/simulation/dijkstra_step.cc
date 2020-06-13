@@ -1,16 +1,16 @@
 #include "dijkstra_step.h"
 
-DijkstraStep::DijkstraStep(StepData data, DijkstraStep::Type stepType)
+NodeStep::NodeStep(StepData data, NodeStep::Type stepType)
 {
 	data_ = data;
 	stepType_ = stepType;
 }
 
-DijkstraStep::~DijkstraStep()
+NodeStep::~NodeStep()
 {
 }
 
-void DijkstraStep::Execute()
+void NodeStep::Execute()
 {
 	switch (stepType_)
 	{
@@ -23,25 +23,25 @@ void DijkstraStep::Execute()
 	}
 }
 
-void DijkstraStep::OnSelectNode()
+void NodeStep::OnSelectNode()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.02f);
 	
 	auto renderer = (Ugine::RendererComponent*)data_.Node->owner->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::Blue());
 
-	waitfor->SetOnCompleted(std::bind(&DijkstraStep::OnCompleted, this));
+	waitfor->SetOnCompleted(std::bind(&NodeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
 
-void DijkstraStep::OnDrawFinalRoute()
+void NodeStep::OnDrawFinalRoute()
 {
 	Ugine::WaitSeconds* waitfor = DBG_NEW Ugine::WaitSeconds(0.02f);
 
 	auto renderer = (Ugine::RendererComponent*)data_.Node->owner->GetComponent<Ugine::RendererComponent>();
 	renderer->SetColor(Ugine::Color::Yellow());
 
-	waitfor->SetOnCompleted(std::bind(&DijkstraStep::OnCompleted, this));
+	waitfor->SetOnCompleted(std::bind(&NodeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 }
 

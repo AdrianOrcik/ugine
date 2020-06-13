@@ -16,46 +16,44 @@ public:
 	~Dijkstra()
 	{
 
+		delete visitedNodesInOrder;
+		delete nodesInShortestPathOrder;
 	}
 
-	void SetStartNode(NodeElement* node){startNode_ = node;}
-	void SetFinalNode(NodeElement* node){finalNode_ = node;}
-	void SetGrid(std::vector<std::vector<NodeElement*>> grid){grid_ = grid;}
-
-	void RunDijkstra()
+	// Inherited via PathfindingAlgo
+	virtual void Run() override
 	{
-		std::vector<NodeElement*>* visitedNodesInOrder = DBG_NEW std::vector<NodeElement*>();
-		dijkstra(visitedNodesInOrder);
+		OnSimulationStart();
+
+		visitedNodesInOrder = DBG_NEW std::vector<NodeElement*>();
+		Solve_Dijkstra(visitedNodesInOrder);
 
 		// Add searching nodes int osteps
 		for (auto node : *visitedNodesInOrder)
 		{
-			if(node != startNode_ && node != finalNode_)
-				AddStep(StepData(node), DijkstraStep::Type::SelectNode);
+			if(node != startNode && node != finalNode)
+				AddStep(StepData(node), NodeStep::Type::SelectNode);
 		}
 
 		// Add shortest path into steps
-		std::vector<NodeElement*>* nodesInShortestPathOrder = DBG_NEW std::vector<NodeElement*>();
-		getNodesInShortestPathOrder(nodesInShortestPathOrder);
+		nodesInShortestPathOrder = DBG_NEW std::vector<NodeElement*>();
+		GetNodesInShortestPathOrder(nodesInShortestPathOrder);
 		for (auto node : *nodesInShortestPathOrder)
 		{
-			AddStep(StepData(node), DijkstraStep::Type::FinalRoute);
+			AddStep(StepData(node), NodeStep::Type::FinalRoute);
 		}
-
-		delete visitedNodesInOrder;
-		delete nodesInShortestPathOrder;
 
 		RunSimulation();
 	}
 
 private:
-	void dijkstra(std::vector<NodeElement*>* visitedNodesInOrder)
+	void Solve_Dijkstra(std::vector<NodeElement*>* visitedNodesInOrder)
 	{
-		startNode_->Distance = 0;
-		std::vector<NodeElement*> unvisitedNodes = getAllNodes(grid_);
+		startNode->Distance = 0;
+		std::vector<NodeElement*> unvisitedNodes = GetAllNodes(grid);
 		while(unvisitedNodes.size() > 0)
 		{
-			sortNodesByDistance(&unvisitedNodes);
+			SortNodesByDistance(&unvisitedNodes);
 			NodeElement* closestNode = unvisitedNodes[0];
 			unvisitedNodes.erase(unvisitedNodes.begin());
 
@@ -68,17 +66,17 @@ private:
 			closestNode->IsVisited = true;
 			visitedNodesInOrder->push_back(closestNode);
 
-			if (closestNode->Index == finalNode_->Index)
+			if (closestNode->Index == finalNode->Index)
 				return;
 
-			updateUnvisitedNeighbors(closestNode, grid_);
+			UpdateUnvisitedNeighbors(closestNode, grid);
 		}
 	}
 
-	void updateUnvisitedNeighbors(NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
+	void UpdateUnvisitedNeighbors(NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
 	{
 		std::vector<NodeElement*>* unvisitedNeighbors = DBG_NEW std::vector<NodeElement*>();
-		getUnvisitedNeighbors(unvisitedNeighbors, node, grid);
+		GetUnvisitedNeighbors(unvisitedNeighbors, node, grid);
 		for (auto neighbor : *unvisitedNeighbors)
 		{
 			if (neighbor->IsWall())continue;
@@ -88,7 +86,7 @@ private:
 		delete unvisitedNeighbors;
 	}
 
-	void getUnvisitedNeighbors(std::vector<NodeElement*>* unvisitedNeighboards, NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
+	void GetUnvisitedNeighbors(std::vector<NodeElement*>* unvisitedNeighboards, NodeElement* node, std::vector<std::vector<NodeElement*>> grid)
 	{
 		std::vector<NodeElement*> neighbors;
 		int col = node->Col;
@@ -107,7 +105,7 @@ private:
 		}
 	}
 
-	void sortNodesByDistance(std::vector<NodeElement*>* nodes)
+	void SortNodesByDistance(std::vector<NodeElement*>* nodes)
 	{
 		std::sort(nodes->begin(), nodes->end(), [](NodeElement* a, NodeElement* b) 
 		{
@@ -115,7 +113,7 @@ private:
 		});
 	}
 
-	std::vector<NodeElement*> getAllNodes(std::vector<std::vector<NodeElement*>> grid)
+	std::vector<NodeElement*> GetAllNodes(std::vector<std::vector<NodeElement*>> grid)
 	{
 		std::vector<NodeElement*> nodes;
 		for (auto row : grid)
@@ -128,9 +126,9 @@ private:
 		return nodes;
 	}
 
-	void getNodesInShortestPathOrder(std::vector<NodeElement*>* nodesInShortestPathOrder)
+	void GetNodesInShortestPathOrder(std::vector<NodeElement*>* nodesInShortestPathOrder)
 	{
-		NodeElement* currentNode = finalNode_;
+		NodeElement* currentNode = finalNode;
 		while (currentNode != nullptr) {
 			nodesInShortestPathOrder->push_back(currentNode);
 			currentNode = currentNode->PreviousNode;
@@ -143,14 +141,13 @@ private:
 		if (stepIndex_ >= simulationSteps_.size())
 		{
 			LOG_INFO("Done");
-			//SetElementsColor(Ugine::Color::SortedElement());
-			//OnSimulationDone();
-
-			auto renderer = (Ugine::RendererComponent*)startNode_->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer->SetColor(Ugine::Color::Yellow());
 
-			auto renderer2 = (Ugine::RendererComponent*)finalNode_->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer2->SetColor(Ugine::Color::Yellow());
+			
+			OnSimulationDone();
 			return;
 		}
 
@@ -159,17 +156,14 @@ private:
 		stepIndex_++;
 	}
 
-	void AddStep(StepData data, DijkstraStep::Type stepType)
+	void AddStep(StepData data, NodeStep::Type stepType)
 	{
-		simulationSteps_.push_back(DijkstraStep(data, stepType));
+		simulationSteps_.push_back(NodeStep(data, stepType));
 	}
 
 private:
 	int stepIndex_ = 0;
-
-	NodeElement* startNode_;
-	NodeElement* finalNode_;
-
-	std::vector<DijkstraStep> simulationSteps_;
-	std::vector<std::vector<NodeElement*>> grid_;
+	std::vector<NodeStep> simulationSteps_;
+	std::vector<NodeElement*>* visitedNodesInOrder = nullptr;
+	std::vector<NodeElement*>* nodesInShortestPathOrder = nullptr;
 };

@@ -3,11 +3,10 @@
 #include "ugine.h"
 
 #include "ugine/coroutines/routines/wait_seconds.h"
-
 #include "../simulation/simulation_step.h"
 #include "../node_element.h"
 
-class DijkstraStep : public SimulationStep
+class NodeStep : public SimulationStep
 {
 public:
 	enum Type
@@ -15,8 +14,8 @@ public:
 		SelectNode,
 		FinalRoute,
 	};
-	DijkstraStep(StepData data, DijkstraStep::Type stepType);
-	~DijkstraStep();
+	NodeStep(StepData data, NodeStep::Type stepType);
+	~NodeStep();
 
 	// Inherited via SimulationStep
 	virtual void Execute() override;

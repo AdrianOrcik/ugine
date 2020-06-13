@@ -16,14 +16,20 @@ public:
 	~BFS()
 	{}
 
-	void SetStartNode(NodeElement* node) { startNode_ = node; }
-	void SetFinalNode(NodeElement* node) { finalNode_ = node; }
-	void SetGrid(std::vector<std::vector<NodeElement*>> grid) { grid_ = grid; }
-
-	void InitData()
+	void Run() override
 	{
-		int rowSize = grid_.size();
-		int colSize = grid_[0].size();
+		OnSimulationStart();
+		Init();
+		Solve_BFS();
+		SetShortPath();
+		RunSimulation();
+	}
+
+private:
+	void Init()
+	{
+		int rowSize = grid.size();
+		int colSize = grid[0].size();
 
 		for (int x = 0; x < colSize; x++)
 		{
@@ -31,66 +37,59 @@ public:
 			{
 				//down
 				if (y > 0)
-					grid_[y][x]->Neighbours.push_back(grid_[y - 1][x + 0]);
+					grid[y][x]->Neighbours.push_back(grid[y - 1][x + 0]);
 
 				//up
 				if (y < rowSize - 1)
-					grid_[y][x]->Neighbours.push_back(grid_[y + 1][x + 0]);
+					grid[y][x]->Neighbours.push_back(grid[y + 1][x + 0]);
 
 				//left
 				if (x > 0)
-					grid_[y][x]->Neighbours.push_back(grid_[y + 0][x - 1]);
+					grid[y][x]->Neighbours.push_back(grid[y + 0][x - 1]);
 
 				//right
 				if (x < colSize - 1)
-					grid_[y][x]->Neighbours.push_back(grid_[y + 0][x + 1]);
+					grid[y][x]->Neighbours.push_back(grid[y + 0][x + 1]);
 			}
 		}
 	}
 
-	void Solve()
+	void Solve_BFS()
 	{
-		std::queue<NodeElement*> q;
+		std::queue<NodeElement*> queue;
 
-		q.push(startNode_);
-		startNode_->IsVisited = true;
+		queue.push(startNode);
+		startNode->IsVisited = true;
 
-		while (!q.empty())
+		while (!queue.empty())
 		{
-			NodeElement* node = q.front();
-			q.pop();
-			std::vector<NodeElement*> neighbours = node->Neighbours;
+			NodeElement* node = queue.front();
+			queue.pop();
 
+			std::vector<NodeElement*> neighbours = node->Neighbours;
 			for (auto neighbor : neighbours)
 			{
 				if (!neighbor->IsVisited && !neighbor->IsWall())
 				{
-					q.push(neighbor);
-					//neighbor->Distance = node->Distance + 1;
-					AddStep(StepData(neighbor), DijkstraStep::Type::SelectNode);
+					queue.push(neighbor);
+					AddStep(StepData(neighbor), NodeStep::Type::SelectNode);
 					neighbor->PreviousNode = node;
 					neighbor->IsVisited = true;
 				}
 			}
 
-			if (node == finalNode_)
+			if (node == finalNode)
 				return;
 		}
 	}
 
-	void RunBFS()
+	void SetShortPath()
 	{
-		InitData();
-		Solve();
-
-		NodeElement* currentNode = finalNode_;
+		NodeElement* currentNode = finalNode;
 		while (currentNode != nullptr) {
-			//nodesInShortestPathOrder->push_back(currentNode);
-			AddStep(StepData(currentNode), DijkstraStep::Type::FinalRoute);
+			AddStep(StepData(currentNode), NodeStep::Type::FinalRoute);
 			currentNode = currentNode->PreviousNode;
 		}
-
-		RunSimulation();
 	}
 
 	//Inherited via SortingAlgo
@@ -99,14 +98,14 @@ public:
 		if (stepIndex_ >= simulationSteps_.size())
 		{
 			LOG_INFO("Done");
-			//SetElementsColor(Ugine::Color::SortedElement());
-			//OnSimulationDone();
 
-			auto renderer = (Ugine::RendererComponent*)startNode_->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer->SetColor(Ugine::Color::Yellow());
 
-			auto renderer2 = (Ugine::RendererComponent*)finalNode_->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer2->SetColor(Ugine::Color::Yellow());
+			
+			OnSimulationDone();
 			return;
 		}
 
@@ -115,17 +114,12 @@ public:
 		stepIndex_++;
 	}
 
-	void AddStep(StepData data, DijkstraStep::Type stepType)
+	void AddStep(StepData data, NodeStep::Type stepType)
 	{
-		simulationSteps_.push_back(DijkstraStep(data, stepType));
+		simulationSteps_.push_back(NodeStep(data, stepType));
 	}
 
 private:
 	int stepIndex_ = 0;
-
-	NodeElement* startNode_;
-	NodeElement* finalNode_;
-
-	std::vector<DijkstraStep> simulationSteps_;
-	std::vector<std::vector<NodeElement*>> grid_;
+	std::vector<NodeStep> simulationSteps_;
 };

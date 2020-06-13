@@ -16,15 +16,20 @@ public:
 	{
 	}
 
-
-	void SetStartNode(NodeElement* node) { startNode_ = node; }
-	void SetFinalNode(NodeElement* node) { finalNode_ = node; }
-	void SetGrid(std::vector<std::vector<NodeElement*>> grid) { grid_ = grid; }
-
-	void InitData()
+	void Run() override
 	{
-		int rowSize = grid_.size();
-		int colSize = grid_[0].size();
+		OnSimulationStart();
+		Init();
+		Solve_AStar();
+		SetShortPath();
+		RunSimulation();
+	}
+
+private:
+	void Init()
+	{
+		int rowSize = grid.size();
+		int colSize = grid[0].size();
 
 		for (int x = 0; x < colSize; x++)
 		{
@@ -32,25 +37,24 @@ public:
 			{
 				//down
 				if (y > 0)
-					grid_[y][x]->Neighbours.push_back(grid_[y - 1][x + 0]);
+					grid[y][x]->Neighbours.push_back(grid[y - 1][x + 0]);
 
 				//up
 				if (y < rowSize - 1)
-					grid_[y][x]->Neighbours.push_back(grid_[y + 1][x + 0]);
+					grid[y][x]->Neighbours.push_back(grid[y + 1][x + 0]);
 
 				//left
 				if (x > 0)
-					grid_[y][x]->Neighbours.push_back(grid_[y + 0][x - 1]);
+					grid[y][x]->Neighbours.push_back(grid[y + 0][x - 1]);
 
 				//right
 				if (x < colSize - 1)
-					grid_[y][x]->Neighbours.push_back(grid_[y + 0][x + 1]);
+					grid[y][x]->Neighbours.push_back(grid[y + 0][x + 1]);
 			}
 		}
 	}
 
-
-	void SolveAStar()
+	void Solve_AStar()
 	{
 		//TODO: check calculation
 		auto distance = [](NodeElement* a, NodeElement* b) // For convenience
@@ -64,18 +68,18 @@ public:
 		};
 
 		//setup starting condition
-		NodeElement* currentNode = startNode_;
-		startNode_->LocalDistance = 0;
-		startNode_->GlobalDistance = heuristic(startNode_, finalNode_);
+		NodeElement* currentNode = startNode;
+		startNode->LocalDistance = 0;
+		startNode->GlobalDistance = heuristic(startNode, finalNode);
 
-		AddStep(StepData(startNode_), DijkstraStep::Type::SelectNode);
+		AddStep(StepData(startNode), NodeStep::Type::SelectNode);
 
 		//add start node to not tested list yet
 		std::vector<NodeElement*>* listNotTestedNodes = new std::vector<NodeElement*>();
-		listNotTestedNodes->push_back(startNode_);
+		listNotTestedNodes->push_back(startNode);
 
 		//pokial mam nejake objavene a netestovane nody v liste, je sanca ze existuje este kratsia cesta
-		while (!listNotTestedNodes->empty() && currentNode != finalNode_) // Find absolutely shortest path // && currentNode != finalNode_
+		while (!listNotTestedNodes->empty() && currentNode != finalNode) // Find absolutely shortest path // && currentNode != finalNode_
 		{
 			//sort untested notes by global distance
 			std::sort(listNotTestedNodes->begin(), listNotTestedNodes->end(), [](NodeElement* a, NodeElement*b)
@@ -105,7 +109,7 @@ public:
 				//ak sused este neni navstiveny a neni ani obstacle 
 				if (!neighbour->IsWall() && !neighbour->IsVisited)
 				{
-					AddStep(StepData(neighbour), DijkstraStep::Type::SelectNode);
+					AddStep(StepData(neighbour), NodeStep::Type::SelectNode);
 					listNotTestedNodes->push_back(neighbour);
 				}
 
@@ -120,25 +124,20 @@ public:
 					neighbour->LocalDistance = possiblyLowerDistance;
 
 					//prepocita sa najkratsia cesta k cielu
-					neighbour->GlobalDistance = neighbour->LocalDistance + heuristic(neighbour, finalNode_);
+					neighbour->GlobalDistance = neighbour->LocalDistance + heuristic(neighbour, finalNode);
 				}
 			}
 		}
 	}
 
-	void RunAstar()
+	void SetShortPath()
 	{
-		InitData();
-		SolveAStar();
-
-		NodeElement* currNode = finalNode_;
-		while(currNode != startNode_)
+		NodeElement* currNode = finalNode;
+		while (currNode != startNode)
 		{
-			AddStep(StepData(currNode), DijkstraStep::Type::FinalRoute);
+			AddStep(StepData(currNode), NodeStep::Type::FinalRoute);
 			currNode = currNode->parent;
 		}
-
-		RunSimulation();
 	}
 
 	//Inherited via SortingAlgo
@@ -147,14 +146,14 @@ public:
 		if (stepIndex_ >= simulationSteps_.size())
 		{
 			LOG_INFO("Done");
-			//SetElementsColor(Ugine::Color::SortedElement());
-			//OnSimulationDone();
 
-			auto renderer = (Ugine::RendererComponent*)startNode_->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer->SetColor(Ugine::Color::Yellow());
 
-			auto renderer2 = (Ugine::RendererComponent*)finalNode_->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer2->SetColor(Ugine::Color::Yellow());
+			
+			OnSimulationDone();
 			return;
 		}
 
@@ -163,19 +162,13 @@ public:
 		stepIndex_++;
 	}
 
-	void AddStep(StepData data, DijkstraStep::Type stepType)
+	void AddStep(StepData data, NodeStep::Type stepType)
 	{
-		simulationSteps_.push_back(DijkstraStep(data, stepType));
+		simulationSteps_.push_back(NodeStep(data, stepType));
 	}
-
 
 private:
 	int stepIndex_ = 0;
 
-	NodeElement* startNode_ = nullptr;
-	NodeElement* finalNode_ = nullptr;
-	std::vector<std::vector<NodeElement*>> grid_;
-
-
-	std::vector<DijkstraStep> simulationSteps_;
+	std::vector<NodeStep> simulationSteps_;
 };
