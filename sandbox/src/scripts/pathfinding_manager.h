@@ -4,6 +4,7 @@
 #include "../scripts/algos/pathfinding_algo.h"
 #include "../scripts/node_element.h"
 #include "../scripts/algos/dijkstra.h"
+#include "../scripts/algos/a_star.h"
 
 #include <iostream>
 #include <vector>
@@ -16,7 +17,9 @@ public:
 	{}
 	
 	~PathfindingManager() 
-	{}
+	{
+		delete pfAlgo;
+	}
 
 	void Sorting(std::vector<std::vector<NodeElement*>> grid, NodeElement* startNode, NodeElement* finalNode)
 	{
@@ -25,11 +28,11 @@ public:
 			pfAlgo = nullptr;
 		}
 
-		pfAlgo = DBG_NEW Dijkstra();
+		pfAlgo = DBG_NEW AStar();
 		pfAlgo->SetStartNode(startNode);
 		pfAlgo->SetFinalNode(finalNode);
 		pfAlgo->SetGrid(grid);
-		pfAlgo->RunDijkstra();
+		pfAlgo->RunAstar();
 	}
 
 	// Inherited via ScriptComponent
@@ -46,5 +49,5 @@ public:
 	{}
 
 private:
-	Dijkstra* pfAlgo = nullptr;
+	AStar* pfAlgo = nullptr;
 };

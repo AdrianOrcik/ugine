@@ -92,6 +92,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\layers\pathfind_2d.h" />
+    <ClInclude Include="src\scripts\algos\a_star.h" />
     <ClInclude Include="src\scripts\algos\dijkstra.h" />
     <ClInclude Include="src\scripts\algos\pathfinding_algo.h" />
     <ClInclude Include="src\scripts\definition.h" />

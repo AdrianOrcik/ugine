@@ -80,6 +80,11 @@ public:
 	int Col = 0;
 	int Distance = 999;
 
+	float GlobalDistance = 999;
+	float LocalDistance = 999;
+	std::vector<NodeElement*> Neighbours;
+	NodeElement* parent = nullptr;
+
 	bool IsVisited = false;
 	NodeElement* PreviousNode = nullptr;
 
