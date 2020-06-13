@@ -21,6 +21,7 @@
     <ClInclude Include="src\scripts\pathfinding_manager.h" />
     <ClInclude Include="src\scripts\algos\dijkstra.h" />
     <ClInclude Include="src\scripts\algos\a_star.h" />
+    <ClInclude Include="src\scripts\algos\bfs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sandbox_app.cc" />

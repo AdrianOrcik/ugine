@@ -5,6 +5,7 @@
 #include "../scripts/node_element.h"
 #include "../scripts/algos/dijkstra.h"
 #include "../scripts/algos/a_star.h"
+#include "../scripts/algos/bfs.h"
 
 #include <iostream>
 #include <vector>
@@ -28,11 +29,11 @@ public:
 			pfAlgo = nullptr;
 		}
 
-		pfAlgo = DBG_NEW AStar();
+		pfAlgo = DBG_NEW BFS();
 		pfAlgo->SetStartNode(startNode);
 		pfAlgo->SetFinalNode(finalNode);
 		pfAlgo->SetGrid(grid);
-		pfAlgo->RunAstar();
+		pfAlgo->RunBFS();
 	}
 
 	// Inherited via ScriptComponent
@@ -49,5 +50,5 @@ public:
 	{}
 
 private:
-	AStar* pfAlgo = nullptr;
+	BFS* pfAlgo = nullptr;
 };
