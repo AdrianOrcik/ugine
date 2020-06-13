@@ -67,6 +67,7 @@ public:
 				{
 					q.push(neighbor);
 					//neighbor->Distance = node->Distance + 1;
+					AddStep(StepData(neighbor), DijkstraStep::Type::SelectNode);
 					neighbor->PreviousNode = node;
 					neighbor->IsVisited = true;
 				}
