@@ -1,4 +1,5 @@
 #pragma once
+#include "../simulation/dijkstra_step.h"
 
 class PathfindingAlgo
 {
@@ -14,9 +15,40 @@ public:
 	std::function<void()> OnSimulationDone;
 	std::function<void()> OnSimulationInterrupt;
 
+
+
 	virtual void Run() = 0;
 
 protected:
+	void RunSimulation()
+	{
+		if (stepIndex_ >= simulationSteps_.size())
+		{
+			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
+			renderer->SetColor(Ugine::Color::Yellow());
+
+			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
+			renderer2->SetColor(Ugine::Color::Yellow());
+
+			OnSimulationDone();
+			return;
+		}
+
+		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&PathfindingAlgo::RunSimulation, this);
+		simulationSteps_[stepIndex_].Execute();
+		stepIndex_++;
+	}
+
+	void AddStep(StepData data, NodeStep::Type stepType)
+	{
+		if (data.Node->IsStartOrEnd())return;
+		simulationSteps_.push_back(NodeStep(data, stepType));
+	}
+
+protected:
+	int stepIndex_ = 0;
+	std::vector<NodeStep> simulationSteps_;
+
 	NodeElement* startNode = nullptr;
 	NodeElement* finalNode = nullptr;
 	std::vector<std::vector<NodeElement*>> grid;

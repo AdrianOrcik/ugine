@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ugine.h"
+#include "definition.h"
+
 class Sandbox2D;
 
 enum NodeFlag
@@ -26,13 +28,28 @@ public:
 	~NodeElement()
 	{}
 
+	void DefaultState()
+	{
+		IsVisited = false;
+		Distance = INFINITY;
+		GlobalDistance = INFINITY;
+		LocalDistance = INFINITY;
+		Neighbours.clear();
+		Parent = nullptr;
+		PreviousNode = nullptr;
+		nodeType_ = NodeFlag::Regular;
+	}
+
 	int operator<(const NodeElement& node) const
 	{
 		return Distance - node.Distance;
 	}
 
 	bool IsWall() { return nodeType_ == NodeFlag::Wall; }
-	
+	bool IsStart() { return nodeType_ == NodeFlag::Start; }
+	bool IsEnd() { return nodeType_ == NodeFlag::Target; }
+	bool IsStartOrEnd() { return IsStart() || IsEnd(); }
+
 	void SetColor(glm::vec4 color)
 	{
 		renderer_->SetColor(color);
@@ -50,7 +67,7 @@ public:
 			SetColor(Ugine::Color::Red());
 			break;
 		case Start:
-			SetColor(Ugine::Color::Yellow());
+			SetColor(Ugine::Color::Green());
 			break;
 		case Target:
 			SetColor(Ugine::Color::Purple());
@@ -83,7 +100,7 @@ public:
 	float GlobalDistance = 999;
 	float LocalDistance = 999;
 	std::vector<NodeElement*> Neighbours;
-	NodeElement* parent = nullptr;
+	NodeElement* Parent = nullptr;
 
 	bool IsVisited = false;
 	NodeElement* PreviousNode = nullptr;

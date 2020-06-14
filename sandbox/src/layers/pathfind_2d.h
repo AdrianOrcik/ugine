@@ -21,6 +21,7 @@ private:
 	
 	bool IsWallNode(glm::vec2 position);
 
+	void ResetGridStates();
 	void RegenerateGrid();
 	void GenerateGrid();
 	void GenerateStartEndNode();

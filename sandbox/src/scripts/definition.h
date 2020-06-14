@@ -4,3 +4,5 @@
 
 #define ROW_MIDDLE 11
 #define COL_MIDDLE 18
+
+#define INFINITY 999

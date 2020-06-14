@@ -1,7 +1,6 @@
 #pragma once
 #include "../algos/pathfinding_algo.h"
 #include "../node_element.h"
-#include "../simulation/dijkstra_step.h"
 
 #include <iostream>
 
@@ -120,7 +119,7 @@ private:
 				//ako je localdistance a globalDistance
 				if (possiblyLowerDistance < neighbour->LocalDistance)
 				{
-					neighbour->parent = currentNode;
+					neighbour->Parent = currentNode;
 					neighbour->LocalDistance = possiblyLowerDistance;
 
 					//prepocita sa najkratsia cesta k cielu
@@ -133,42 +132,10 @@ private:
 	void SetShortPath()
 	{
 		NodeElement* currNode = finalNode;
-		while (currNode != startNode)
+		while (currNode != startNode) 
 		{
 			AddStep(StepData(currNode), NodeStep::Type::FinalRoute);
-			currNode = currNode->parent;
+			currNode = currNode->Parent;
 		}
 	}
-
-	//Inherited via SortingAlgo
-	void RunSimulation()
-	{
-		if (stepIndex_ >= simulationSteps_.size())
-		{
-			LOG_INFO("Done");
-
-			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
-			renderer->SetColor(Ugine::Color::Yellow());
-
-			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
-			renderer2->SetColor(Ugine::Color::Yellow());
-			
-			OnSimulationDone();
-			return;
-		}
-
-		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&AStar::RunSimulation, this);
-		simulationSteps_[stepIndex_].Execute();
-		stepIndex_++;
-	}
-
-	void AddStep(StepData data, NodeStep::Type stepType)
-	{
-		simulationSteps_.push_back(NodeStep(data, stepType));
-	}
-
-private:
-	int stepIndex_ = 0;
-
-	std::vector<NodeStep> simulationSteps_;
 };

@@ -95,13 +95,11 @@ void Pathfind_2d::OnImGuiRender()
 	}
 	else 
 	{
-		//TODO: ked resetnem simulaciu musim nastavit default stav pre NodeElementy
-		//hlavne previous nody atd
 		if (ImGui::Button("Reset Simulation"))
 		{
 			Ugine::RoutineManager::DeleteRoutines();
-			RegenerateGrid();
 			pfManager->StopSimulation();
+			RegenerateGrid();
 		}
 	}
 	ImGui::End();
@@ -130,8 +128,16 @@ void Pathfind_2d::GenerateGrid()
 	GenerateStartEndNode();
 }
 
+void Pathfind_2d::ResetGridStates()
+{
+	for (auto row : grid_)
+		for (auto col : row)
+			col->DefaultState();
+}
+
 void Pathfind_2d::RegenerateGrid()
 {
+	ResetGridStates();
 	for (int row = 0; row < ROW_SIZE; row++)
 	{
 		for (int col = 0; col < COL_SIZE; col++)
