@@ -8,6 +8,7 @@
 
 namespace Ugine
 {
+	//TODO: refactor on new version
 	class TransformComponent;
 	class Movement : public IEnumerator<void>
 	{

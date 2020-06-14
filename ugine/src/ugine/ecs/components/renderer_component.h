@@ -21,6 +21,7 @@ namespace Ugine
 		{
 		}
 
+		glm::vec4 GetColor() { return color_; }
 		void SetColor(glm::vec4 color)
 		{
 			color_ = color;

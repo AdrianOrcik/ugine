@@ -23,10 +23,12 @@
     <ClInclude Include="src\scripts\algos\bfs.h" />
     <ClInclude Include="src\scripts\algos\dfs.h" />
     <ClInclude Include="src\scripts\simulation\node_step.h" />
+    <ClInclude Include="src\scripts\routines\fade_to_color_routine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sandbox_app.cc" />
     <ClCompile Include="src\layers\pathfind_2d.cc" />
     <ClCompile Include="src\scripts\simulation\node_step.cc" />
+    <ClCompile Include="src\scripts\routines\fade_to_color_routine.cc" />
   </ItemGroup>
 </Project>

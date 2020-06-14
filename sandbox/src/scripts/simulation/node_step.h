@@ -3,6 +3,7 @@
 #include "ugine.h"
 
 #include "ugine/coroutines/routines/wait_seconds.h"
+#include "../routines/fade_to_color_routine.h"
 #include "../simulation/simulation_step.h"
 #include "../node_element.h"
 
