@@ -1,27 +1,26 @@
 #pragma once
-
 #include "../algos/pathfinding_algo.h"
 #include "../node_element.h"
 #include "../simulation/dijkstra_step.h"
 
-#include <iostream>
+#include <stack>
 
-class BFS : public PathfindingAlgo
+class DFS : public PathfindingAlgo
 {
 public:
-	BFS()
-	{
-	}
-
-	~BFS()
+	DFS()
 	{}
 
+	~DFS()
+	{}
+
+
 	// Inherited via PathfindingAlgo
-	void Run() override
+	virtual void Run() override
 	{
 		OnSimulationStart();
 		Init();
-		Solve_BFS();
+		Solve_DFS();
 		SetShortPath();
 		RunSimulation();
 	}
@@ -55,32 +54,29 @@ private:
 		}
 	}
 
-	void Solve_BFS()
+	void Solve_DFS()
 	{
-		std::queue<NodeElement*> queue;
-
-		queue.push(startNode);
-		startNode->IsVisited = true;
-
-		while (!queue.empty())
+		std::stack<NodeElement*> stack;
+		stack.push(startNode);
+		while (!stack.empty())
 		{
-			NodeElement* node = queue.front();
-			queue.pop();
+			NodeElement* node = stack.top();
+			node->IsVisited = true;
+			stack.pop();
 
-			std::vector<NodeElement*> neighbours = node->Neighbours;
-			for (auto neighbor : neighbours)
+			for (auto neighbor : node->Neighbours)
 			{
 				if (!neighbor->IsVisited && !neighbor->IsWall())
 				{
-					queue.push(neighbor);
+					stack.push(neighbor);
 					AddStep(StepData(neighbor), NodeStep::Type::SelectNode);
 					neighbor->PreviousNode = node;
-					neighbor->IsVisited = true;
+					if (node == finalNode)
+					{
+						return;
+					}
 				}
 			}
-
-			if (node == finalNode)
-				return;
 		}
 	}
 
@@ -105,12 +101,12 @@ private:
 
 			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
 			renderer2->SetColor(Ugine::Color::Yellow());
-			
+
 			OnSimulationDone();
 			return;
 		}
 
-		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&BFS::RunSimulation, this);
+		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&DFS::RunSimulation, this);
 		simulationSteps_[stepIndex_].Execute();
 		stepIndex_++;
 	}

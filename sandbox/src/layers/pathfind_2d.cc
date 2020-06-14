@@ -78,7 +78,7 @@ void Pathfind_2d::OnImGuiRender()
 			pfManager->Simulate(grid_,startNode_, finalNode_, PathfindingManager::Type::DijkstraType);
 		}
 
-		if (ImGui::Button("A*"))
+		if (ImGui::Button("A Star"))
 		{
 			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::AStarType);
 		}
@@ -86,6 +86,11 @@ void Pathfind_2d::OnImGuiRender()
 		if (ImGui::Button("Breath Fist Search"))
 		{
 			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::BFSType);
+		}
+
+		if (ImGui::Button("Depth Fist Search"))
+		{
+			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::DFSType);
 		}
 	}
 	else 

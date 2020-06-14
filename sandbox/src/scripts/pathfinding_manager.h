@@ -6,6 +6,7 @@
 #include "../scripts/algos/dijkstra.h"
 #include "../scripts/algos/a_star.h"
 #include "../scripts/algos/bfs.h"
+#include "../scripts/algos/dfs.h"
 
 #include <iostream>
 #include <vector>
@@ -46,6 +47,9 @@ public:
 			break;
 		case Type::BFSType:
 			pfAlgo = DBG_NEW BFS();
+			break;
+		case Type::DFSType:
+			pfAlgo = DBG_NEW DFS();
 			break;
 		}
 
