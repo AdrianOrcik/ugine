@@ -1,5 +1,6 @@
 #pragma once
-#include "../simulation/dijkstra_step.h"
+#include "ugine.h"
+#include "../simulation/node_step.h"
 
 class PathfindingAlgo
 {
@@ -15,8 +16,6 @@ public:
 	std::function<void()> OnSimulationDone;
 	std::function<void()> OnSimulationInterrupt;
 
-
-
 	virtual void Run() = 0;
 
 protected:
@@ -24,10 +23,11 @@ protected:
 	{
 		if (stepIndex_ >= simulationSteps_.size())
 		{
-			auto renderer = (Ugine::RendererComponent*)startNode->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer = ECS_GET_COMPONENT(startNode->owner, Ugine::RendererComponent)
+
 			renderer->SetColor(Ugine::Color::Yellow());
 
-			auto renderer2 = (Ugine::RendererComponent*)finalNode->owner->GetComponent<Ugine::RendererComponent>();
+			auto renderer2 = ECS_GET_COMPONENT(finalNode->owner, Ugine::RendererComponent)
 			renderer2->SetColor(Ugine::Color::Yellow());
 
 			OnSimulationDone();

@@ -31,23 +31,24 @@ private:
 		int rowSize = grid.size();
 		int colSize = grid[0].size();
 
+		// Iterate through neighbours and making connections
 		for (int x = 0; x < colSize; x++)
 		{
 			for (int y = 0; y < rowSize; y++)
 			{
-				//down
+				// Down
 				if (y > 0)
 					grid[y][x]->Neighbours.push_back(grid[y - 1][x + 0]);
 
-				//up
+				// Up
 				if (y < rowSize - 1)
 					grid[y][x]->Neighbours.push_back(grid[y + 1][x + 0]);
 
-				//left
+				//Left
 				if (x > 0)
 					grid[y][x]->Neighbours.push_back(grid[y + 0][x - 1]);
 
-				//right
+				//Right
 				if (x < colSize - 1)
 					grid[y][x]->Neighbours.push_back(grid[y + 0][x + 1]);
 			}
@@ -58,17 +59,26 @@ private:
 	{
 		std::queue<NodeElement*> queue;
 
+		// Push startNode into queue
 		queue.push(startNode);
 		startNode->IsVisited = true;
 
+		// Iterating until queue is empty
 		while (!queue.empty())
 		{
 			NodeElement* node = queue.front();
 			queue.pop();
 
+			// Take node from front and iterate throught neighbours
 			std::vector<NodeElement*> neighbours = node->Neighbours;
+
+			// If I found final node search is on end
+			if (node == finalNode)
+				return;
+
 			for (auto neighbor : neighbours)
 			{
+				// If I found non-visited node I am push into queue and update previous node
 				if (!neighbor->IsVisited && !neighbor->IsWall())
 				{
 					queue.push(neighbor);
@@ -77,9 +87,6 @@ private:
 					neighbor->IsVisited = true;
 				}
 			}
-
-			if (node == finalNode)
-				return;
 		}
 	}
 

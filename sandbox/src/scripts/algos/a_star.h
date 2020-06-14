@@ -66,63 +66,61 @@ private:
 			return distance(a, b);
 		};
 
-		//setup starting condition
+		// Setup start node
 		NodeElement* currentNode = startNode;
 		startNode->LocalDistance = 0;
 		startNode->GlobalDistance = heuristic(startNode, finalNode);
-
 		AddStep(StepData(startNode), NodeStep::Type::SelectNode);
 
-		//add start node to not tested list yet
+		//Add start node into list of not tested nodes
 		std::vector<NodeElement*>* listNotTestedNodes = new std::vector<NodeElement*>();
 		listNotTestedNodes->push_back(startNode);
 
-		//pokial mam nejake objavene a netestovane nody v liste, je sanca ze existuje este kratsia cesta
+		// If I have some other discovered but not tested nodes there is chance I can find shorter path
 		while (!listNotTestedNodes->empty() && currentNode != finalNode) // Find absolutely shortest path // && currentNode != finalNode_
 		{
-			//sort untested notes by global distance
+			// Sort untested nodes by global distance
 			std::sort(listNotTestedNodes->begin(), listNotTestedNodes->end(), [](NodeElement* a, NodeElement*b)
 			{
 				return a->GlobalDistance < b->GlobalDistance;
 			});
 
-			//na zaciatku listu je potencionalne s najkratsou vzdialenostou 
+			// On the beginning is nodes with shortest distance value
 			while (!listNotTestedNodes->empty() && listNotTestedNodes->front()->IsVisited)
 			{
-				//ak uz som navstivil node tak ho vyhodim z listu
+				// After I visited a node remove it
 				listNotTestedNodes->front() = std::move(listNotTestedNodes->back());
 				listNotTestedNodes->pop_back();
 			}
 
-			//ak neostal v liste ziaden node tak vyskocime z loopu
+			// If I dont have more nodes for testing break
 			if (listNotTestedNodes->empty())
 				break;
 
-			//ak nieco ostalo tak zoberem zo zaciatku a oznacim node ako navstiveny
+			// If I have some node so select and mark as visited
 			currentNode = listNotTestedNodes->front();
 			currentNode->IsVisited = true;
 
-			//pozrem kazdy susedny node
+			// Iterate through neighbours
 			for (auto neighbour : currentNode->Neighbours)
 			{
-				//ak sused este neni navstiveny a neni ani obstacle 
+				// If I found reguler node add to my not tested structure
 				if (!neighbour->IsWall() && !neighbour->IsVisited)
 				{
 					AddStep(StepData(neighbour), NodeStep::Type::SelectNode);
 					listNotTestedNodes->push_back(neighbour);
 				}
 
-				// kalkulacia susedov aby som nasiel potencionalne najkratsiu cestu
+				// Calculation of potential shortest path
 				float possiblyLowerDistance = currentNode->LocalDistance + distance(currentNode, neighbour);
 
-				//ak sme vybrali cestu s najkratsou vzdialenostou, suset nastavi hodnoty prepoctu 
-				//ako je localdistance a globalDistance
+				// If neighbour has higher distance we will calculate neighbour distance
 				if (possiblyLowerDistance < neighbour->LocalDistance)
 				{
 					neighbour->Parent = currentNode;
 					neighbour->LocalDistance = possiblyLowerDistance;
 
-					//prepocita sa najkratsia cesta k cielu
+					// Recalculation of shortest path into target node
 					neighbour->GlobalDistance = neighbour->LocalDistance + heuristic(neighbour, finalNode);
 				}
 			}

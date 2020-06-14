@@ -44,17 +44,13 @@ void Pathfind_2d::OnAttach()
 	GenerateGrid();
 }
 
-
 void Pathfind_2d::OnDetach()
 {
 
 }
 
 void Pathfind_2d::OnUpdate(Ugine::Timestep ts)
-{
-	//LOG_INFO("[{0},{1}]", cameraController_.GetCameraPosition().x, cameraController_.GetCameraPosition().y);
-	//LOG_INFO("[{0}]", cameraController_.GetZoomLevel());
-	
+{	
 	// camera update
 	cameraController_.OnUpdate(ts);
 
@@ -65,6 +61,7 @@ void Pathfind_2d::OnUpdate(Ugine::Timestep ts)
 
 void Pathfind_2d::OnImGuiRender()
 {
+	//TODO: after simulation is done, need regenerate grid
 	ImGui::Begin("Settings Panel");
 	if(!pfManager->IsRunning())
 	{

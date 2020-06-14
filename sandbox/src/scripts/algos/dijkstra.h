@@ -1,6 +1,7 @@
 #pragma once
 #include "../algos/pathfinding_algo.h"
 #include "../node_element.h"
+#include "../definition.h"
 
 #include <iostream>
 
@@ -14,7 +15,6 @@ public:
 
 	~Dijkstra()
 	{
-
 		delete visitedNodesInOrder;
 		delete nodesInShortestPathOrder;
 	}
@@ -27,7 +27,7 @@ public:
 		visitedNodesInOrder = DBG_NEW std::vector<NodeElement*>();
 		Solve_Dijkstra(visitedNodesInOrder);
 
-		// Add searching nodes int osteps
+		// Add searching nodes into steps
 		for (auto node : *visitedNodesInOrder)
 		{
 			if(node != startNode && node != finalNode)
@@ -56,18 +56,17 @@ private:
 			NodeElement* closestNode = unvisitedNodes[0];
 			unvisitedNodes.erase(unvisitedNodes.begin());
 
-			//if its there wall we will skip
-			if (closestNode->IsWall())continue;
-
-			if (closestNode->Distance == 999)
-				continue;
+			// If there is wall or no closer node continue
+			if (closestNode->IsWall() 
+				|| closestNode->Distance == INFINITY)continue;
 			
+			// Visit node and check if its final node
 			closestNode->IsVisited = true;
 			visitedNodesInOrder->push_back(closestNode);
-
 			if (closestNode->Index == finalNode->Index)
 				return;
 
+			// Update unvisited neighbours by distance
 			UpdateUnvisitedNeighbors(closestNode, grid);
 		}
 	}

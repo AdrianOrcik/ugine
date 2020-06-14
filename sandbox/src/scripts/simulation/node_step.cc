@@ -1,4 +1,4 @@
-#include "dijkstra_step.h"
+#include "node_step.h"
 
 NodeStep::NodeStep(StepData data, NodeStep::Type stepType)
 {

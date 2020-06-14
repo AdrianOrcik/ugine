@@ -14,7 +14,6 @@
   <ItemGroup>
     <ClInclude Include="src\layers\pathfind_2d.h" />
     <ClInclude Include="src\scripts\algos\pathfinding_algo.h" />
-    <ClInclude Include="src\scripts\simulation\dijkstra_step.h" />
     <ClInclude Include="src\scripts\simulation\simulation_step.h" />
     <ClInclude Include="src\scripts\definition.h" />
     <ClInclude Include="src\scripts\node_element.h" />
@@ -23,10 +22,11 @@
     <ClInclude Include="src\scripts\algos\a_star.h" />
     <ClInclude Include="src\scripts\algos\bfs.h" />
     <ClInclude Include="src\scripts\algos\dfs.h" />
+    <ClInclude Include="src\scripts\simulation\node_step.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sandbox_app.cc" />
     <ClCompile Include="src\layers\pathfind_2d.cc" />
-    <ClCompile Include="src\scripts\simulation\dijkstra_step.cc" />
+    <ClCompile Include="src\scripts\simulation\node_step.cc" />
   </ItemGroup>
 </Project>
