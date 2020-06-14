@@ -33,7 +33,7 @@ void NodeStep::OnSelectNode()
 	//waitfor->SetOnCompleted(std::bind(&NodeStep::OnCompleted, this));
 	//Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 
-	Ugine::FadeToColorRoutine* select = DBG_NEW Ugine::FadeToColorRoutine(data_.Node, 0.5f, Ugine::Color::Blue());
+	Ugine::FadeToColorRoutine* select = DBG_NEW Ugine::FadeToColorRoutine(data_.Node, 0.1f, Ugine::Color::Blue());
 	
 	//auto renderer = (Ugine::RendererComponent*)data_.Node->owner->GetComponent<Ugine::RendererComponent>();
 	//renderer->SetColor(Ugine::Color::Blue());
@@ -52,7 +52,7 @@ void NodeStep::OnDrawFinalRoute()
 	//waitfor->SetOnCompleted(std::bind(&NodeStep::OnCompleted, this));
 	//Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)waitfor);
 
-	Ugine::FadeToColorRoutine* select = DBG_NEW Ugine::FadeToColorRoutine(data_.Node, 0.5f, Ugine::Color::Yellow());
+	Ugine::FadeToColorRoutine* select = DBG_NEW Ugine::FadeToColorRoutine(data_.Node, 0.1f, Ugine::Color::Yellow());
 	select->SetOnCompleted(std::bind(&NodeStep::OnCompleted, this));
 	Ugine::RoutineManager::StartCoroutine((Ugine::IEnumerator<void>*)select);
 }

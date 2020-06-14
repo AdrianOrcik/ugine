@@ -157,7 +157,6 @@ NodeElement* Pathfind_2d::CreateNode(int index, glm::vec2 position)
 	transform->SetScale(glm::vec2(0.9f, 0.9f));
 
 	auto renderer = ECS_GET_COMPONENT(node, Ugine::RendererComponent)
-	renderer->SetColor(Ugine::Color::White());
 	renderer->SetCamera(&cameraController_.GetCamera());
 
 	if (node->HasComponent<NodeElement>())

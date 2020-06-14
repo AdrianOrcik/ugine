@@ -67,8 +67,8 @@ namespace Ugine
 
 			if (isHover_ && !Input::IsMouseButtonPressed(0)){
 				isPressed_ = false;
-				glm::vec4 color = Color::White();
-				color.a = 0.5f;
+				//glm::vec4 color = Color::White();
+				//color.a = 0.5f;
 				//rendererComponent_->SetColor(color);
 			}
 		}
