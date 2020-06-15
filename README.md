@@ -23,7 +23,7 @@ git clone --recursive https://github.com/AdrianOrcik/ugine
 :pencil: Upcoming features
 ---------
 * UI system
-* Window ImGUILayers
+* Windows ImGUILayers
 * Build system
 * Reflection (rttr)
 * LUA as scriptable language
