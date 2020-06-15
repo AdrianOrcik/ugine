@@ -32,8 +32,11 @@ public:
 	{
 		IsVisited = false;
 		Distance = INFINITY;
-		GlobalDistance = INFINITY;
-		LocalDistance = INFINITY;
+
+		GCost = INFINITY;
+		HCost = INFINITY;
+		FCost = INFINITY;
+
 		Neighbours.clear();
 		Parent = nullptr;
 		PreviousNode = nullptr;
@@ -95,16 +98,17 @@ public:
 	int Index = 0;
 	int Row = 0;
 	int Col = 0;
-	int Distance = 999;
+	int Distance = INFINITY;
 
-	float GlobalDistance = 999;
-	float LocalDistance = 999;
+	float GCost = INFINITY; // distance from starting node
+	float HCost = INFINITY; // distance from end node
+	float FCost = INFINITY; // GCost + HCost
+
 	std::vector<NodeElement*> Neighbours;
 	NodeElement* Parent = nullptr;
 
 	bool IsVisited = false;
 	NodeElement* PreviousNode = nullptr;
-
 private:
 	NodeFlag nodeType_ = NodeFlag::Regular;
 	Ugine::RendererComponent* renderer_ = nullptr;

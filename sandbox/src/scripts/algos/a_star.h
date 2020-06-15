@@ -19,7 +19,7 @@ public:
 	{
 		OnSimulationStart();
 		Init();
-		Solve_AStar();
+		AStar_Algo();
 		SetShortPath();
 		RunSimulation();
 	}
@@ -34,97 +34,85 @@ private:
 		{
 			for (int y = 0; y < rowSize; y++)
 			{
-				//down
+				// down
 				if (y > 0)
 					grid[y][x]->Neighbours.push_back(grid[y - 1][x + 0]);
 
-				//up
+				// up
 				if (y < rowSize - 1)
 					grid[y][x]->Neighbours.push_back(grid[y + 1][x + 0]);
 
-				//left
+				// left
 				if (x > 0)
 					grid[y][x]->Neighbours.push_back(grid[y + 0][x - 1]);
 
-				//right
+				// right
 				if (x < colSize - 1)
 					grid[y][x]->Neighbours.push_back(grid[y + 0][x + 1]);
 			}
 		}
 	}
 
-	void Solve_AStar()
+	void AStar_Algo()
 	{
-		//TODO: check calculation
-		auto distance = [](NodeElement* a, NodeElement* b) // For convenience
+	
+		auto distance = [](NodeElement* a, NodeElement* b) 
 		{
+			// pythagoras theorem
 			return sqrtf((a->Row - b->Row)*(a->Row - b->Row) + (a->Col - b->Col)*(a->Col - b->Col));
 		};
 
-		auto heuristic = [distance](NodeElement* a, NodeElement* b) // So we can experiment with heuristic
+		auto heuristic = [distance](NodeElement* a, NodeElement* b)
 		{
 			return distance(a, b);
 		};
 
-		// Setup start node
-		NodeElement* currentNode = startNode;
-		startNode->LocalDistance = 0;
-		startNode->GlobalDistance = heuristic(startNode, finalNode);
-		AddStep(StepData(startNode), NodeStep::Type::SelectNode);
+		startNode->FCost = 0.0f;
+		startNode->GCost = heuristic(startNode, finalNode);
 
-		//Add start node into list of not tested nodes
-		std::vector<NodeElement*>* listNotTestedNodes = new std::vector<NodeElement*>();
-		listNotTestedNodes->push_back(startNode);
+		std::vector<NodeElement*>* testingNodes = new std::vector<NodeElement*>();
+		testingNodes->push_back(startNode);
 
-		// If I have some other discovered but not tested nodes there is chance I can find shorter path
-		while (!listNotTestedNodes->empty() && currentNode != finalNode) // Find absolutely shortest path // && currentNode != finalNode_
+		// loop until testing nodes exist
+		while (testingNodes->size() > 0)
 		{
-			// Sort untested nodes by global distance
-			std::sort(listNotTestedNodes->begin(), listNotTestedNodes->end(), [](NodeElement* a, NodeElement*b)
-			{
-				return a->GlobalDistance < b->GlobalDistance;
-			});
+			NodeElement* current = *testingNodes->begin();
+			current->IsVisited = true;
 
-			// On the beginning is nodes with shortest distance value
-			while (!listNotTestedNodes->empty() && listNotTestedNodes->front()->IsVisited)
+			// choose new current node if you find closer node
+			for (auto testNode : *testingNodes)
 			{
-				// After I visited a node remove it
-				listNotTestedNodes->front() = std::move(listNotTestedNodes->back());
-				listNotTestedNodes->pop_back();
+				if (testNode->FCost <= current->FCost)
+				{
+					if (testNode->HCost < current->HCost)
+						current = testNode;
+				}
 			}
 
-			// If I dont have more nodes for testing break
-			if (listNotTestedNodes->empty())
-				break;
+			testingNodes->erase(testingNodes->begin());
+			if (current->IsEnd())return;
 
-			// If I have some node so select and mark as visited
-			currentNode = listNotTestedNodes->front();
-			currentNode->IsVisited = true;
-
-			// Iterate through neighbours
-			for (auto neighbour : currentNode->Neighbours)
+			// iterate throught neighbours by current node
+			for (auto neighbour : current->Neighbours)
 			{
-				// If I found reguler node add to my not tested structure
-				if (!neighbour->IsWall() && !neighbour->IsVisited)
+				if (neighbour->IsWall() || neighbour->IsVisited)
+					continue;
+
+				// recalculation of distance based on current node
+				int newCostToNeighbour = current->GCost + heuristic(current, neighbour);
+				if (newCostToNeighbour < neighbour->GCost)
 				{
+					neighbour->GCost = newCostToNeighbour;
+					neighbour->HCost = heuristic(neighbour, finalNode);
+					neighbour->Parent = current;
+
+					testingNodes->push_back(neighbour);
 					AddStep(StepData(neighbour), NodeStep::Type::SelectNode);
-					listNotTestedNodes->push_back(neighbour);
-				}
-
-				// Calculation of potential shortest path
-				float possiblyLowerDistance = currentNode->LocalDistance + distance(currentNode, neighbour);
-
-				// If neighbour has higher distance we will calculate neighbour distance
-				if (possiblyLowerDistance < neighbour->LocalDistance)
-				{
-					neighbour->Parent = currentNode;
-					neighbour->LocalDistance = possiblyLowerDistance;
-
-					// Recalculation of shortest path into target node
-					neighbour->GlobalDistance = neighbour->LocalDistance + heuristic(neighbour, finalNode);
 				}
 			}
 		}
+
+		delete testingNodes;
 	}
 
 	void SetShortPath()

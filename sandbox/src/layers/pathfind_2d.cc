@@ -27,7 +27,7 @@ Pathfind_2d::~Pathfind_2d()
 
 void Pathfind_2d::OnAttach()
 {
-	cameraController_.SetCameraPosition(glm::vec3(17.0f, 10.0f, 0.0f));
+	cameraController_.SetCameraPosition(glm::vec3(18.0f, 10.0f, 0.0f));
 	cameraController_.SetZoomLevel(10.5f);
 
 	Ugine::Entity* pfEntity = Ugine::ECS::CreateEntity("PathfindingManager");
