@@ -23,18 +23,9 @@ protected:
 	{
 		if (stepIndex_ >= simulationSteps_.size())
 		{
-			//auto renderer = ECS_GET_COMPONENT(startNode->owner, Ugine::RendererComponent)
-			//renderer->SetColor(Ugine::Color::Yellow());
-
-			////TODO: make it once
-			//auto renderer2 = ECS_GET_COMPONENT(finalNode->owner, Ugine::RendererComponent)
-			//renderer2->SetColor(Ugine::Color::Yellow());
-
 			OnSimulationDone();
 			return;
 		}
-
-
 
 		simulationSteps_[stepIndex_].OnCompletedCallback = std::bind(&PathfindingAlgo::RunSimulation, this);
 		simulationSteps_[stepIndex_].Execute();

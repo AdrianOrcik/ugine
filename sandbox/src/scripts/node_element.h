@@ -64,16 +64,16 @@ public:
 		switch (nodeType)
 		{
 		case Regular:
-			SetColor(Ugine::Color::White());
+			SetColor(Ugine::Color::RegularNode());
 			break;
 		case Wall:
-			SetColor(Ugine::Color::Red());
+			SetColor(Ugine::Color::WallNode());
 			break;
 		case Start:
-			SetColor(Ugine::Color::Green());
+			SetColor(Ugine::Color::PathNode());
 			break;
 		case Target:
-			SetColor(Ugine::Color::Purple());
+			SetColor(Ugine::Color::PathNode());
 			break;
 		default:
 			break;
