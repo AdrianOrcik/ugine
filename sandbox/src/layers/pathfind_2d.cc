@@ -80,7 +80,7 @@ void Pathfind_2d::OnImGuiRender()
 			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::AStarType);
 		}
 
-		if (ImGui::Button("Breath Fist Search"))
+		if (ImGui::Button("Breadth Fist Search"))
 		{
 			pfManager->Simulate(grid_, startNode_, finalNode_, PathfindingManager::Type::BFSType);
 		}
