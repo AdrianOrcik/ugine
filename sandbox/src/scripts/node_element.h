@@ -31,11 +31,11 @@ public:
 	void DefaultState()
 	{
 		IsVisited = false;
-		Distance = INFINITY;
+		Distance = MAX_DISTANCE;
 
-		GCost = INFINITY;
-		HCost = INFINITY;
-		FCost = INFINITY;
+		GCost = MAX_DISTANCE;
+		HCost = MAX_DISTANCE;
+		FCost = MAX_DISTANCE;
 
 		Neighbours.clear();
 		Parent = nullptr;
@@ -98,11 +98,11 @@ public:
 	int Index = 0;
 	int Row = 0;
 	int Col = 0;
-	int Distance = INFINITY;
+	int Distance = MAX_DISTANCE;
 
-	float GCost = INFINITY; // distance from starting node
-	float HCost = INFINITY; // distance from end node
-	float FCost = INFINITY; // GCost + HCost
+	float GCost = MAX_DISTANCE; // distance from starting node
+	float HCost = MAX_DISTANCE; // distance from end node
+	float FCost = MAX_DISTANCE; // GCost + HCost
 
 	std::vector<NodeElement*> Neighbours;
 	NodeElement* Parent = nullptr;

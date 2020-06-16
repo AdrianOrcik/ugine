@@ -4,3 +4,5 @@
 
 #define ROW_MIDDLE 11
 #define COL_MIDDLE 19
+
+#define MAX_DISTANCE 999

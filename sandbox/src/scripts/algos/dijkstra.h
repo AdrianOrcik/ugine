@@ -57,9 +57,8 @@ private:
 			unvisitedNodes.erase(unvisitedNodes.begin());
 
 			// If there is wall or no closer node continue
-			if (closestNode->IsWall() 
-				|| closestNode->Distance == INFINITY)continue;
-			
+			if (closestNode->IsWall() || closestNode->Distance == MAX_DISTANCE)continue;
+
 			// Visit node and check if its final node
 			closestNode->IsVisited = true;
 			visitedNodesInOrder->push_back(closestNode);
