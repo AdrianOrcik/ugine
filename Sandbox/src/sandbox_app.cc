@@ -1,14 +1,14 @@
 #include <ugine.h>
 #include <ugine/entry_point.h>
 
-#include "layers/pathfind_2d.h"
+#include "layers/sandbox2D.h"
 
 class Sandbox : public Ugine::Application
 {
 public:
 	Sandbox()
 	{	
-		PushLayer(DBG_NEW Pathfind_2d);
+		PushLayer(DBG_NEW Sandbox2D);
 	}
 
 	~Sandbox()
