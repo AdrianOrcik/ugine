@@ -11,9 +11,12 @@
 // 1. Texture is override other white textures
 // 2. Draw texture is draw even if is not binding texture there 
 
-Ugine::Entity* textureEntity;
+Ugine::Entity* containerEntity;
 Ugine::Entity* squareEntity;
-Ugine::Ref<Ugine::Texture2D> texture;
+Ugine::Entity* boxEntity;
+
+Ugine::Ref<Ugine::Texture2D> container;
+Ugine::Ref<Ugine::Texture2D> box;
 
 Sandbox2D::Sandbox2D()
 	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f, true, false, false)
@@ -36,20 +39,25 @@ void Sandbox2D::OnAttach()
 	cameraController_.SetCameraPosition({0.0f, 0.0f, 0.0f });
 	cameraController_.SetZoomLevel(1.0f);
 
-	texture = Ugine::Texture2D::Create("assets/textures/container.jpg");
-	
-	textureEntity = Ugine::ECS::CreateEntity("TextureObj");
-	ECS_ADD_COMPONENT(textureEntity, Ugine::TransformComponent)
-	ECS_ADD_COMPONENT(textureEntity, Ugine::RendererComponent)
+	//TODO: What is loaded later, this texture override everything
+	box = Ugine::Texture2D::Create("assets/textures/box.jpg");
+	container = Ugine::Texture2D::Create("assets/textures/container.jpg");
 
-	auto transformTextureEntity = ECS_GET_COMPONENT(textureEntity, Ugine::TransformComponent)
-	auto rendererTextureEntity = ECS_GET_COMPONENT(textureEntity,Ugine::RendererComponent)
+	// Texture - obj with container texture
+	containerEntity = Ugine::ECS::CreateEntity("TextureObj");
+	ECS_ADD_COMPONENT(containerEntity, Ugine::TransformComponent)
+	ECS_ADD_COMPONENT(containerEntity, Ugine::RendererComponent)
+
+	auto transformTextureEntity = ECS_GET_COMPONENT(containerEntity, Ugine::TransformComponent)
+	auto rendererTextureEntity = ECS_GET_COMPONENT(containerEntity,Ugine::RendererComponent)
 
 	rendererTextureEntity->SetCamera(&cameraController_.GetCamera());
 	rendererTextureEntity->SetColor(Ugine::Color::Red());
-	//rendererTextureEntity->SetTexture(texture);
-	textureEntity->SetActive(true);
+	rendererTextureEntity->SetTexture(container);
+	containerEntity->SetActive(true);
 
+
+	// Square - obj with runtime generated white texture
 	squareEntity = Ugine::ECS::CreateEntity("SquareObj");
 	ECS_ADD_COMPONENT(squareEntity, Ugine::TransformComponent)
 	ECS_ADD_COMPONENT(squareEntity, Ugine::RendererComponent)
@@ -60,8 +68,23 @@ void Sandbox2D::OnAttach()
 	transformSquareEntity->SetLocalPosition({ 1.0, 0.0 });
 	rendererSquareEntity->SetCamera(&cameraController_.GetCamera());
 	rendererSquareEntity->SetColor(Ugine::Color::Red());
-	rendererSquareEntity->SetTexture(texture);
+	rendererSquareEntity->SetTexture(container);
 	squareEntity->SetActive(true);
+
+
+	// Square - obj with runtime generated white texture
+	boxEntity = Ugine::ECS::CreateEntity("BoxObj");
+	ECS_ADD_COMPONENT(boxEntity, Ugine::TransformComponent)
+	ECS_ADD_COMPONENT(boxEntity, Ugine::RendererComponent)
+
+	auto transformBoxEntity = ECS_GET_COMPONENT(boxEntity, Ugine::TransformComponent)
+	auto rendererBoxEntity = ECS_GET_COMPONENT(boxEntity, Ugine::RendererComponent)
+
+	transformBoxEntity->SetLocalPosition({ 2.0, 0.0 });
+	rendererBoxEntity->SetCamera(&cameraController_.GetCamera());
+	rendererBoxEntity->SetColor(Ugine::Color::Yellow());
+	//rendererBoxEntity->SetTexture(container);
+	boxEntity->SetActive(true);
 
 }
 
