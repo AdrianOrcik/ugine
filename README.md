@@ -2,7 +2,7 @@
 
 ⚙️ Tiny Engine Lib
 ---------
-Ugine is primarily an early-stage interactive application and rendering tiny lib for Windows.
+Ugine is primarily an early-stage tiny engine lib for Windows.
 
 :package: Getting Started
 ---------
@@ -23,7 +23,7 @@ git clone --recursive https://github.com/AdrianOrcik/ugine
 :pencil: Upcoming features
 ---------
 * UI system
-* Windows ImGUILayers
+* ImGui Dockspace
 * Build system
 * Reflection (rttr)
 * LUA as scriptable language
