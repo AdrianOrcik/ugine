@@ -13,6 +13,7 @@ namespace Ugine
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		// this init moved into renderer component
 		//Renderer2D::Init();
 	}
 

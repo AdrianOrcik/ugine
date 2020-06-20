@@ -19,7 +19,7 @@ Ugine::Ref<Ugine::Texture2D> container;
 Ugine::Ref<Ugine::Texture2D> box;
 
 Sandbox2D::Sandbox2D()
-	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f, true, false, false)
+	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f, true, true, true)
 {
 
 }
@@ -52,7 +52,7 @@ void Sandbox2D::OnAttach()
 	auto rendererTextureEntity = ECS_GET_COMPONENT(containerEntity,Ugine::RendererComponent)
 
 	rendererTextureEntity->SetCamera(&cameraController_.GetCamera());
-	rendererTextureEntity->SetColor(Ugine::Color::Red());
+	rendererTextureEntity->SetColor(Ugine::Color::Green());
 	rendererTextureEntity->SetTexture(container);
 	containerEntity->SetActive(true);
 
@@ -68,7 +68,7 @@ void Sandbox2D::OnAttach()
 	transformSquareEntity->SetLocalPosition({ 1.0, 0.0 });
 	rendererSquareEntity->SetCamera(&cameraController_.GetCamera());
 	rendererSquareEntity->SetColor(Ugine::Color::Red());
-	rendererSquareEntity->SetTexture(container);
+	rendererSquareEntity->SetTexture(box);
 	squareEntity->SetActive(true);
 
 
