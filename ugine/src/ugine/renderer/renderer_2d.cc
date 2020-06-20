@@ -69,8 +69,8 @@ namespace Ugine
 
 	void Renderer2D::Draw(const glm::vec3 & position, const glm::vec2 & size, const glm::vec4 & color)
 	{
-		Data->TextureShader->SetFloat4("uColor", color);
 		Data->WhiteTexture->Bind();
+		Data->TextureShader->SetFloat4("uColor", color);
 	
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		Data->TextureShader->SetMat4("uTransform", transform);
@@ -86,15 +86,13 @@ namespace Ugine
 
 	void Renderer2D::Draw(const glm::vec3 & position, const glm::vec2 & size, const Ref<Texture2D> texture)
 	{
-
 		Data->TextureShader->SetFloat4("uColor", glm::vec4(1.0f));
-		Data->TextureShader->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		Data->TextureShader->SetMat4("uTransform", transform);
 		
-		texture->Bind();
-		
+		//TODO: work also if texture is not binded
+		texture->Bind();	
 		Data->VertexArray->Bind();
 		RenderCommand::DrawIndexed(Data->VertexArray);
 	}

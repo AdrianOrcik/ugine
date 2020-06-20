@@ -50,9 +50,9 @@ namespace Ugine
 		virtual void Update(float Timestep) override
 		{
 			Renderer2D::OnBegin(*camera_);
-			//if(texture_ == NULL)
-				//Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), color_);
-			//else 
+			if(texture_ == NULL)
+				Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), color_);
+			else 
 				Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), texture_);
 		}
 

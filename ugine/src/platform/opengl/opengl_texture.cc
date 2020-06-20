@@ -6,7 +6,7 @@
 
 #include <glad/glad.h>
 
-//todo: fix bug with texture creating
+//TODO: fix bug with texture creating
 //		currently last loaded texture is override other textures
 Ugine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 	: width_(width), heigth_(height)
@@ -41,7 +41,7 @@ Ugine::OpenGLTexture2D::OpenGLTexture2D(const std::string & path)
 		internalFormat = GL_RGBA8;
 		dataFormat = GL_RGBA;
 	}
-	else
+	else if (channels == 3)
 	{
 		internalFormat = GL_RGB8;
 		dataFormat = GL_RGB;
@@ -60,10 +60,10 @@ Ugine::OpenGLTexture2D::OpenGLTexture2D(const std::string & path)
 	glTextureParameteri(rendererID_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	// note: use for texture update
-	glTexSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, GL_RGB, GL_UNSIGNED_BYTE, data);
+	//glTexSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, GL_RGB, GL_UNSIGNED_BYTE, data);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, dataFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);
-	//glGenerateMipmap(GL_TEXTURE_2D);
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 	stbi_image_free(data);
 }
@@ -77,9 +77,9 @@ void Ugine::OpenGLTexture2D::SetData(void * data, uint32_t size)
 {
 	uint32_t bpp = dataFormat_ == GL_RGBA ? 4 : 3;
 	UE_CORE_ASSERT(size == width_ * heigth_ * bpp, "Data must be entire texture!");
-	//glTextureSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, dataFormat_, GL_UNSIGNED_BYTE, data);
+	glTextureSubImage2D(rendererID_, 0, 0, 0, width_, heigth_, dataFormat_, GL_UNSIGNED_BYTE, data);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, dataFormat_, width_, heigth_, 0, dataFormat_, GL_UNSIGNED_BYTE, data);
+	//glTexImage2D(GL_TEXTURE_2D, 0, dataFormat_, width_, heigth_, 0, dataFormat_, GL_UNSIGNED_BYTE, data);
 	//glGenerateMipmap(GL_TEXTURE_2D);
 }
 
