@@ -486,8 +486,6 @@
     <ClInclude Include="external_src\tweeny\include\tweeny\tweenpoint.h" />
     <ClInclude Include="external_src\tweeny\include\tweeny\tweentraits.h" />
     <ClInclude Include="external_src\tweeny\include\tweeny\tweeny.h" />
-    <ClInclude Include="src\ugine\macros.h" />
-    <ClInclude Include="src\ugine\pooling\object_pooling.h" />
     <ClInclude Include="src\platform\opengl\opengl_buffer.h" />
     <ClInclude Include="src\platform\opengl\opengl_context.h" />
     <ClInclude Include="src\platform\opengl\opengl_renderer_api.h" />
@@ -507,6 +505,7 @@
     <ClInclude Include="src\ugine\coroutines\routines\movement.h" />
     <ClInclude Include="src\ugine\coroutines\routines\wait_seconds.h" />
     <ClInclude Include="src\ugine\ecs\component.h" />
+    <ClInclude Include="src\ugine\ecs\components\button_component.h" />
     <ClInclude Include="src\ugine\ecs\components\renderer_component.h" />
     <ClInclude Include="src\ugine\ecs\components\script_component.h" />
     <ClInclude Include="src\ugine\ecs\components\transform_component.h" />
@@ -526,10 +525,13 @@
     <ClInclude Include="src\ugine\layer.h" />
     <ClInclude Include="src\ugine\layer_stack.h" />
     <ClInclude Include="src\ugine\log.h" />
+    <ClInclude Include="src\ugine\macros.h" />
+    <ClInclude Include="src\ugine\pooling\object_pooling.h" />
     <ClInclude Include="src\ugine\renderer\buffer.h" />
     <ClInclude Include="src\ugine\renderer\color.h" />
     <ClInclude Include="src\ugine\renderer\graphic_context.h" />
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h" />
+    <ClInclude Include="src\ugine\renderer\primitives.h" />
     <ClInclude Include="src\ugine\renderer\render_command.h" />
     <ClInclude Include="src\ugine\renderer\renderer.h" />
     <ClInclude Include="src\ugine\renderer\renderer_2d.h" />

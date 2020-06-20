@@ -76,11 +76,11 @@
     <Filter Include="src\ugine\input">
       <UniqueIdentifier>{D3C03DB6-3F4C-AB7A-485D-2E6FB467077B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ugine\pooling">
+      <UniqueIdentifier>{5BEBC659-C701-C5EF-1079-50117CCE9577}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\ugine\renderer">
       <UniqueIdentifier>{FA937966-E677-3ABC-4FD8-340F3BDB243E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\ugine\pooler">
-      <UniqueIdentifier>{f288a4dc-a71b-4234-b470-feb250ca2000}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1308,6 +1308,9 @@
     <ClInclude Include="src\ugine\ecs\component.h">
       <Filter>src\ugine\ecs</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\ecs\components\button_component.h">
+      <Filter>src\ugine\ecs\components</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\ecs\components\renderer_component.h">
       <Filter>src\ugine\ecs\components</Filter>
     </ClInclude>
@@ -1365,6 +1368,12 @@
     <ClInclude Include="src\ugine\log.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
+    <ClInclude Include="src\ugine\macros.h">
+      <Filter>src\ugine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\pooling\object_pooling.h">
+      <Filter>src\ugine\pooling</Filter>
+    </ClInclude>
     <ClInclude Include="src\ugine\renderer\buffer.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
@@ -1375,6 +1384,9 @@
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\renderer\orthographic_camera.h">
+      <Filter>src\ugine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ugine\renderer\primitives.h">
       <Filter>src\ugine\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ugine\renderer\render_command.h">
@@ -1401,10 +1413,6 @@
     <ClInclude Include="src\ugine\window.h">
       <Filter>src\ugine</Filter>
     </ClInclude>
-    <ClInclude Include="src\ugine\pooling\object_pooling.h">
-      <Filter>src\ugine\pooler</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ugine\macros.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external_src\stb_image\stb_image.cc">

@@ -27,6 +27,12 @@ namespace Ugine
 			color_ = color;
 		}
 
+		Ref<Texture2D> GetTexture() { return texture_; }
+		void SetTexture(Ref<Texture2D> texture)
+		{
+			texture_ = texture;
+		}
+
 		void SetCamera(const OrthographicCamera* camera)	
 		{
 			camera_ = camera;
@@ -44,7 +50,10 @@ namespace Ugine
 		virtual void Update(float Timestep) override
 		{
 			Renderer2D::OnBegin(*camera_);
-			Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), color_);
+			//if(texture_ == NULL)
+				//Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), color_);
+			//else 
+				Ugine::Renderer2D::Draw(transformComponent_->GetLocalPosition(), transformComponent_->GetScale(), texture_);
 		}
 
 		virtual void OnActive() override
@@ -59,5 +68,6 @@ namespace Ugine
 
 		//todo: add more data
 		glm::vec4 color_;
+		Ref<Texture2D> texture_ = NULL;
 	};
 }

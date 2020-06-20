@@ -9,9 +9,10 @@
 
 
 Ugine::Entity* square;
+Ugine::Ref<Ugine::Texture2D> texture;
 
 Sandbox2D::Sandbox2D()
-	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f, false, false, false)
+	:Layer("Sandbox2D"), cameraController_(1280.0f / 720.0f, true, false, false)
 {
 
 }
@@ -30,6 +31,8 @@ void Sandbox2D::OnAttach()
 	// ------------
 	cameraController_.SetCameraPosition({0.0f, 0.0f, 0.0f });
 	cameraController_.SetZoomLevel(1.0f);
+
+	texture = Ugine::Texture2D::Create("assets/textures/container.jpg");
 	
 
 	square = Ugine::ECS::CreateEntity("Square");
@@ -40,7 +43,8 @@ void Sandbox2D::OnAttach()
 	auto renderer = ECS_GET_COMPONENT(square,Ugine::RendererComponent)
 
 	renderer->SetCamera(&cameraController_.GetCamera());
-	renderer->SetColor(Ugine::Color::White());
+	//renderer->SetColor(Ugine::Color::White());
+	renderer->SetTexture(texture);
 	square->SetActive(true);
 
 }

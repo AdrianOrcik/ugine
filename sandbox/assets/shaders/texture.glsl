@@ -27,5 +27,5 @@ uniform vec4 uColor;
 
 void main()
 {
-	color = texture(uTexture, vTexCoord * 10.0) * uColor;
+	color = texture(uTexture, vTexCoord) * uColor;
 }

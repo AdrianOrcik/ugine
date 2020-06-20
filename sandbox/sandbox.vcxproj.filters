@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="_obsolete">
+      <UniqueIdentifier>{A1DFF728-0D4A-AC9F-5688-5D45C2318AF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_PathfindingSimulation">
+      <UniqueIdentifier>{7DF2D229-696F-C66C-92EC-C6807EC86200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_PathfindingSimulation\layers">
+      <UniqueIdentifier>{BC4EF165-288A-5129-317F-CEB89D39D659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_PathfindingSimulation\scripts">
+      <UniqueIdentifier>{D49E2043-C047-8872-E9DD-A3F1D5E5A2B3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_PathfindingSimulation\scripts\algos">
+      <UniqueIdentifier>{192A94C0-05D4-C9CF-EEA4-D1EADAED69BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_PathfindingSimulation\scripts\routines">
+      <UniqueIdentifier>{9C9176B7-0804-B9D3-5198-EE57BD4983CC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_PathfindingSimulation\scripts\simulation">
+      <UniqueIdentifier>{A84289A9-1400-32E0-9DCA-1D480987A434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_SortingSimulation">
+      <UniqueIdentifier>{D7AC28CF-C393-EAC6-6CE4-50E458AA632D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_SortingSimulation\layers">
+      <UniqueIdentifier>{D69F76FD-4205-0A84-CBDD-AB5C3742FFF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_SortingSimulation\scripts">
+      <UniqueIdentifier>{2E1350CB-1A26-5024-C30F-2D11AF01ED71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_SortingSimulation\scripts\algos">
+      <UniqueIdentifier>{F3F983E3-DF8D-798B-4852-D33F3405B47D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_SortingSimulation\scripts\routines">
+      <UniqueIdentifier>{368BFF19-A2A7-F10A-6B7F-5E78D75A5BCC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_obsolete\obsolete_SortingSimulation\scripts\simulation">
+      <UniqueIdentifier>{C20A37D2-2EF2-21C8-37E0-2344A346C58A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="layers">
       <UniqueIdentifier>{3588EB0A-212A-16E1-0AE5-2935F6259D31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="scripts">
-      <UniqueIdentifier>{6D076287-D9E6-E022-E2FE-6BF94E5D4784}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="scripts\algos">
-      <UniqueIdentifier>{72E1D11B-DEA1-4D52-A7DC-96CF135C922E}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\layers\pathfind_2d.h" />
-    <ClInclude Include="src\scripts\algos\pathfinding_algo.h" />
-    <ClInclude Include="src\scripts\simulation\simulation_step.h" />
-    <ClInclude Include="src\scripts\definition.h" />
-    <ClInclude Include="src\scripts\node_element.h" />
-    <ClInclude Include="src\scripts\pathfinding_manager.h" />
-    <ClInclude Include="src\scripts\algos\dijkstra.h" />
-    <ClInclude Include="src\scripts\algos\a_star.h" />
-    <ClInclude Include="src\scripts\algos\bfs.h" />
-    <ClInclude Include="src\scripts\algos\dfs.h" />
-    <ClInclude Include="src\scripts\simulation\node_step.h" />
-    <ClInclude Include="src\scripts\routines\fade_to_color_routine.h" />
+    <ClInclude Include="src\layers\sandbox2D.h">
+      <Filter>layers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\layers\sandbox2D.cc">
+      <Filter>layers</Filter>
+    </ClCompile>
     <ClCompile Include="src\sandbox_app.cc" />
-    <ClCompile Include="src\layers\pathfind_2d.cc" />
-    <ClCompile Include="src\scripts\simulation\node_step.cc" />
-    <ClCompile Include="src\scripts\routines\fade_to_color_routine.cc" />
   </ItemGroup>
 </Project>
